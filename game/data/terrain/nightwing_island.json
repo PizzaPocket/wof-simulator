@@ -1,0 +1,664 @@
+{
+  "id": "nightwing_island",
+  "name": "NightWing Island",
+  "map_size": [
+    1030,
+    660
+  ],
+  "width_m": 100000,
+  "coastlines": [
+    [
+      [
+        235,
+        308
+      ],
+      [
+        225,
+        292
+      ],
+      [
+        230,
+        274
+      ],
+      [
+        243,
+        256
+      ],
+      [
+        237,
+        237
+      ],
+      [
+        228,
+        222
+      ],
+      [
+        230,
+        200
+      ],
+      [
+        241,
+        179
+      ],
+      [
+        244,
+        162
+      ],
+      [
+        258,
+        150
+      ],
+      [
+        287,
+        146
+      ],
+      [
+        306,
+        132
+      ],
+      [
+        331,
+        128
+      ],
+      [
+        339,
+        112
+      ],
+      [
+        354,
+        113
+      ],
+      [
+        375,
+        121
+      ],
+      [
+        401,
+        123
+      ],
+      [
+        425,
+        121
+      ],
+      [
+        449,
+        120
+      ],
+      [
+        470,
+        128
+      ],
+      [
+        487,
+        140
+      ],
+      [
+        509,
+        151
+      ],
+      [
+        528,
+        150
+      ],
+      [
+        548,
+        138
+      ],
+      [
+        574,
+        131
+      ],
+      [
+        590,
+        126
+      ],
+      [
+        605,
+        114
+      ],
+      [
+        628,
+        110
+      ],
+      [
+        653,
+        99
+      ],
+      [
+        661,
+        84
+      ],
+      [
+        676,
+        73
+      ],
+      [
+        698,
+        74
+      ],
+      [
+        721,
+        79
+      ],
+      [
+        741,
+        78
+      ],
+      [
+        766,
+        74
+      ],
+      [
+        788,
+        76
+      ],
+      [
+        817,
+        71
+      ],
+      [
+        830,
+        77
+      ],
+      [
+        850,
+        71
+      ],
+      [
+        870,
+        73
+      ],
+      [
+        866,
+        82
+      ],
+      [
+        837,
+        88
+      ],
+      [
+        814,
+        97
+      ],
+      [
+        794,
+        107
+      ],
+      [
+        772,
+        116
+      ],
+      [
+        765,
+        133
+      ],
+      [
+        748,
+        152
+      ],
+      [
+        727,
+        161
+      ],
+      [
+        706,
+        166
+      ],
+      [
+        686,
+        171
+      ],
+      [
+        667,
+        182
+      ],
+      [
+        653,
+        194
+      ],
+      [
+        637,
+        206
+      ],
+      [
+        631,
+        224
+      ],
+      [
+        631,
+        242
+      ],
+      [
+        617,
+        268
+      ],
+      [
+        602,
+        285
+      ],
+      [
+        586,
+        301
+      ],
+      [
+        566,
+        310
+      ],
+      [
+        548,
+        321
+      ],
+      [
+        530,
+        327
+      ],
+      [
+        515,
+        338
+      ],
+      [
+        501,
+        360
+      ],
+      [
+        485,
+        373
+      ],
+      [
+        462,
+        387
+      ],
+      [
+        439,
+        394
+      ],
+      [
+        420,
+        406
+      ],
+      [
+        404,
+        420
+      ],
+      [
+        391,
+        437
+      ],
+      [
+        383,
+        460
+      ],
+      [
+        384,
+        481
+      ],
+      [
+        374,
+        506
+      ],
+      [
+        365,
+        530
+      ],
+      [
+        355,
+        548
+      ],
+      [
+        338,
+        560
+      ],
+      [
+        320,
+        560
+      ],
+      [
+        301,
+        570
+      ],
+      [
+        288,
+        584
+      ],
+      [
+        271,
+        599
+      ],
+      [
+        254,
+        602
+      ],
+      [
+        231,
+        599
+      ],
+      [
+        211,
+        612
+      ],
+      [
+        203,
+        606
+      ],
+      [
+        205,
+        590
+      ],
+      [
+        221,
+        575
+      ],
+      [
+        231,
+        555
+      ],
+      [
+        240,
+        535
+      ],
+      [
+        248,
+        524
+      ],
+      [
+        240,
+        512
+      ],
+      [
+        220,
+        500
+      ],
+      [
+        215,
+        482
+      ],
+      [
+        216,
+        462
+      ],
+      [
+        228,
+        440
+      ],
+      [
+        241,
+        423
+      ],
+      [
+        254,
+        412
+      ],
+      [
+        277,
+        408
+      ],
+      [
+        289,
+        398
+      ],
+      [
+        297,
+        380
+      ],
+      [
+        302,
+        358
+      ],
+      [
+        302,
+        340
+      ],
+      [
+        295,
+        325
+      ],
+      [
+        283,
+        312
+      ],
+      [
+        266,
+        305
+      ],
+      [
+        251,
+        304
+      ]
+    ],
+    [
+      [
+        180,
+        577
+      ],
+      [
+        188,
+        560
+      ],
+      [
+        197,
+        551
+      ],
+      [
+        203,
+        534
+      ],
+      [
+        215,
+        530
+      ],
+      [
+        220,
+        540
+      ],
+      [
+        216,
+        555
+      ],
+      [
+        203,
+        574
+      ],
+      [
+        191,
+        583
+      ]
+    ],
+    [
+      [
+        885,
+        69
+      ],
+      [
+        898,
+        65
+      ],
+      [
+        907,
+        71
+      ],
+      [
+        900,
+        80
+      ],
+      [
+        888,
+        84
+      ]
+    ],
+    [
+      [
+        834,
+        102
+      ],
+      [
+        848,
+        96
+      ],
+      [
+        855,
+        99
+      ],
+      [
+        847,
+        105
+      ]
+    ]
+  ],
+  "base_color": [
+    0.27,
+    0.29,
+    0.27
+  ],
+  "beach_color": [
+    0.19,
+    0.21,
+    0.21
+  ],
+  "source": "NightWing island (A Guide to the Dragon World), volcanic island map window",
+  "scale_note": "Streaming gameplay scale: ten times the original map width with source proportions preserved. Mountain/volcanic approaches broadened fourfold, heights retained. Physical size remains an authored approximation, not a canonical measurement.",
+  "world_offset_m": [
+    150000,
+    -180000
+  ],
+  "regions": [
+    {
+      "name": "Volcanic rock",
+      "polygon": [
+        [
+          0,
+          0
+        ],
+        [
+          1030,
+          0
+        ],
+        [
+          1030,
+          660
+        ],
+        [
+          0,
+          660
+        ]
+      ],
+      "color": [
+        0.3,
+        0.31,
+        0.28
+      ],
+      "base_m": 35,
+      "relief_m": 80,
+      "hills_m": 15
+    }
+  ],
+  "ridges": [
+    {
+      "points": [
+        [
+          440,
+          178
+        ],
+        [
+          513,
+          147
+        ],
+        [
+          608,
+          119
+        ],
+        [
+          691,
+          94
+        ]
+      ],
+      "height_m": 500,
+      "width_m": 1720
+    }
+  ],
+  "volcanoes": [
+    {
+      "center": [
+        382,
+        238
+      ],
+      "height_m": 1600,
+      "radius_m": 7400,
+      "crater_m": 1200
+    }
+  ],
+  "rivers": [],
+  "lakes": [],
+  "entries": [
+    {
+      "name": "Southern black beach",
+      "position": [
+        285,
+        542
+      ]
+    },
+    {
+      "name": "Volcano foothills",
+      "position": [
+        330,
+        345
+      ]
+    },
+    {
+      "name": "Eastern ridge",
+      "position": [
+        610,
+        130
+      ]
+    },
+    {
+      "name": "Crater rim",
+      "position": [
+        418,
+        238
+      ]
+    }
+  ],
+  "stream_pages": true,
+  "grid": [
+    2049,
+    1313
+  ],
+  "extent_m": [
+    100000,
+    64077.669902912625
+  ],
+  "height_file": "res://data/terrain/nightwing_island.height",
+  "color_file": "res://assets/terrain/nightwing_island_color.png",
+  "ocean_mask_file": "res://assets/terrain/nightwing_island_ocean.png",
+  "sample_spacing_m": [
+    48.828125,
+    48.839687426000474
+  ],
+  "elevation_range_m": [
+    -300.0,
+    1390.8699951171875
+  ],
+  "streaming": {
+    "version": 1,
+    "page_cells": 128,
+    "page_dir": "res://data/terrain/nightwing_island_pages",
+    "page_cache_limit": 4,
+    "overview_grid": [
+      257,
+      165
+    ],
+    "overview_height": "res://data/terrain/nightwing_island_overview.height",
+    "overview_color": "res://data/terrain/nightwing_island_overview.rgb",
+    "tile_size_m": 2048,
+    "near_subdivisions": 64,
+    "medium_subdivisions": 16,
+    "near_radius": 1,
+    "medium_radius": 3,
+    "lookahead_seconds": 8.0,
+    "max_jobs": 2,
+    "max_resident_tiles": 96,
+    "terrain_budget_bytes": 67108864,
+    "commit_budget_usec": 3000,
+    "local_relief_m": 1.4
+  }
+}

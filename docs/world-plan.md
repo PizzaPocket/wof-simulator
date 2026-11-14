@@ -1,6 +1,14 @@
 # World plan: Pyrrhia
 
-Status: draft for discussion. Nothing here is built yet.
+Status: the bare terrain foundation now covers **Pyrrhia, Pantala, the Forgotten
+Isles and NightWing Island** using native Godot meshes, simple biome colors,
+nearby collision and a floating origin. See [playable bare terrain](bare-terrain.md)
+for current scales, controls, architecture and verification, and
+[overworld map](overworld-map.md) for atlas/loading integration.
+
+The proposal below is retained as historical planning. Its Pyrrhia-only scope,
+Terrain3D dependency, finer resolutions and continuous-world ambitions are not
+the current implementation.
 
 ## Goals
 

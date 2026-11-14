@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Ice Kingdom",
+    "position": [
+      460.0,
+      325.0
+    ]
+  },
+  {
+    "name": "Sky Kingdom",
+    "position": [
+      917.5,
+      557.5
+    ]
+  },
+  {
+    "name": "Kingdom of the Sea",
+    "position": [
+      1807.5,
+      610.0
+    ]
+  },
+  {
+    "name": "Kingdom of Sand",
+    "position": [
+      485.0,
+      1010.0
+    ]
+  },
+  {
+    "name": "Mud Kingdom",
+    "position": [
+      1517.5,
+      980.0
+    ]
+  },
+  {
+    "name": "Jade Mountain",
+    "position": [
+      865.0,
+      1217.5
+    ]
+  },
+  {
+    "name": "Rainforest Kingdom",
+    "position": [
+      1440.0,
+      1300.0
+    ]
+  }
+]

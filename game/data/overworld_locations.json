@@ -1,0 +1,130 @@
+{
+  "coordinate_space": "Cropped PyrrhiaColored.png pixels, matching data/pyrrhia/map_annotations.json",
+  "map_size": [
+    2165,
+    1606
+  ],
+  "locations": [
+    {
+      "id": "mudwing_wetlands_01",
+      "name": "MudWing village",
+      "kingdom": "Mud Kingdom",
+      "position": [
+        1480,
+        1080
+      ],
+      "placement_note": "An authored village position south of the Mud Kingdom label; not a canonical settlement.",
+      "scene": "res://scenes/mudwing_wetlands.tscn",
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay\u2019s model and textures"
+        ],
+        [
+          "res://assets/dragons/moon.glb",
+          "Loading Moon\u2019s NightWing model"
+        ],
+        [
+          "res://assets/dragons/blue.glb",
+          "Loading Blue\u2019s SilkWing model"
+        ],
+        [
+          "res://assets/dragons/darkstalker.glb",
+          "Loading Darkstalker\u2019s ancient NightWing model"
+        ],
+        [
+          "res://assets/scavengers/kai.glb",
+          "Loading Kai"
+        ],
+        [
+          "res://assets/scavengers/camille.glb",
+          "Loading Camille"
+        ],
+        [
+          "res://assets/scavengers/corinne.glb",
+          "Loading Corinne"
+        ],
+        [
+          "res://assets/scavengers/umber_pouch.glb",
+          "Loading Umber\u2019s satchel"
+        ],
+        [
+          "res://assets/scavengers/wren.glb",
+          "Loading Wren\u2019s travel outfit and curls"
+        ]
+      ]
+    },
+    {
+      "id": "terrain_pyrrhia",
+      "name": "Explore Pyrrhia",
+      "kingdom": "Bare terrain",
+      "continent": "pyrrhia",
+      "position": [
+        650,
+        930
+      ],
+      "scene": "res://scenes/terrain_pyrrhia.tscn",
+      "terrain_entry": 2,
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
+    },
+    {
+      "id": "terrain_pantala",
+      "name": "Explore Pantala",
+      "kingdom": "Bare terrain",
+      "continent": "pantala",
+      "position": [
+        855,
+        560
+      ],
+      "scene": "res://scenes/terrain_pantala.tscn",
+      "terrain_entry": 0,
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
+    },
+    {
+      "id": "terrain_forgotten_isles",
+      "name": "Explore the Forgotten Isles",
+      "kingdom": "Bare terrain",
+      "continent": "forgotten_isles",
+      "position": [
+        330,
+        420
+      ],
+      "scene": "res://scenes/terrain_forgotten_isles.tscn",
+      "terrain_entry": 0,
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
+    },
+    {
+      "id": "terrain_nightwing_island",
+      "name": "Explore NightWing Island",
+      "kingdom": "Bare terrain",
+      "continent": "nightwing_island",
+      "position": [
+        285,
+        542
+      ],
+      "scene": "res://scenes/terrain_nightwing_island.tscn",
+      "terrain_entry": 0,
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
+    }
+  ]
+}
