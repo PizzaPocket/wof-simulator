@@ -47,11 +47,15 @@ def smoothstep_v(e0, e1, x):
 
 
 # ---------------------------------------------------------------- trunk
+def tail_end_s():
+    return TR["stations"][-1][0] - TR["tail"].get("terminal_trim_model", 0.0)
+
+
 def tail_vertebrae():
     """The s at each joint between caudal vertebrae: each a fixed fraction shorter than the one before,
     from first_length, filling the tail from from_s to its tip."""
     tl = TR["tail"]; n, a = tl["vertebrae"], tl["first_length"]
-    L = TR["stations"][-1][0] - tl["from_s"]
+    L = tail_end_s() - tl["from_s"]
     lo, hi = 0.5, 1.0
     for _ in range(60):  # the ratio that makes n vertebrae sum to the tail's length
         r = (lo + hi) / 2
@@ -73,7 +77,7 @@ def trunk_frames(step=0.01):
     along its heading from the hips and resting on the ground where it lies flat."""
     st = np.array(TR["stations"], float)
     tl = TR["tail"]; t0 = tl["from_s"]
-    s_all = np.arange(-TR["front_overlap"], st[-1, 0] + 1e-9, step)
+    s_all = np.arange(-TR["front_overlap"], tail_end_s() + 1e-9, step)
     # smooth curves through the measured stations (straight segments between them kinked the surface at each one):
     # a cubic spline for the spine, shape-preserving curves for the depths
     from scipy.interpolate import CubicSpline, PchipInterpolator
@@ -91,9 +95,13 @@ def trunk_frames(step=0.01):
         if sc > t0:  # a gecko's tail: fat at the root, tapering steadily all the way to a point
             r0 = (table(st, t0, 3) + table(st, t0, 4)) / 2
             r = r0 * max(0.0, (st[-1, 0] - sc) / (st[-1, 0] - t0)) ** tl["taper_power"] + 1e-3
-            # ending in a small rounded tip (tip_radius) rather than a point thinner than the mesh can hold
-            tr = tl["tip_radius"]; u = (sc - (st[-1, 0] - tr)) / tr
-            r = max(r, tr * math.sqrt(max(0.0, 1 - min(max(u, 0.0), 1.0) ** 2)))
+            # Close the shortened cone rather than retaining its needle end.
+            tr = tl["tip_radius"]
+            cap_start = tail_end_s() - tr
+            if sc > cap_start:
+                base = r0 * ((st[-1, 0] - cap_start) / (st[-1, 0] - t0)) ** tl["taper_power"] + 1e-3
+                u = (sc - cap_start) / tr
+                r = max(1e-3, base * math.sqrt(max(0.0, 1.0 - u * u)))
             k = smoothstep(t0, t0 + 0.4, sc)
             du, dv = du * (1 - k) + r * k, dv * (1 - k) + r * k
         P.append([0.0, y, z]); DU.append(du); DV.append(dv)
@@ -266,6 +274,13 @@ def head_weld():
 
     _SKIN["cheek_dz"] = cheek_dz
 
+    def junction_radius(X):
+        config = HW["junction_blend"]
+        a, b, c, d = config["height_band"]
+        gate = smoothstep_v(a, b, X[:, 1]) * (1 - smoothstep_v(c, d, X[:, 1]))
+        gate *= 1 - smoothstep_v(*config["forward_fade"], X[:, 2])
+        return HW["k"] + (config["radius"] - HW["k"]) * gate
+
     def clip(X, d, D, parts):
         """The skin keeps to the face and jaw (set in by inset) in front of the cheek line, and is let out from them
         gradually behind it (by rise * distance squared), so the neck's fillet swells out of the head's surface
@@ -275,8 +290,13 @@ def head_weld():
             return d
         dh = D[k[0]]
         for i in k[1:]:
-            dh = SK.smin(dh, D[i], parts[i].k)  # the face and jaw joined as the union joins them, filling between them
-        behind = np.maximum(-cheek_dz(X), 0.0)
+            dh = SK.smin(dh, D[i], parts[i].blend_radius(X) if getattr(parts[i], "blend_radius", None) else parts[i].k)  # the face and jaw joined as the union joins them, filling between them
+        # The retroarticular jaw rises inside the throat. Clipping the neck to
+        # the disjoint face/jaw sections here carved away its lateral bridge.
+        # Let the existing neck field reach forward under that junction.
+        fillet = HW.get("lateral_fillet_forward", 0.0)
+        gate = smoothstep_v(1.48, 1.54, X[:, 1]) * (1 - smoothstep_v(1.67, 1.73, X[:, 1]))
+        behind = np.maximum(-cheek_dz(X) + fillet * gate, 0.0)
         lim = dh - HW["rise"] * behind ** 2
         return np.where(dh < parts[k[0]].margin, -SK.smin(-d, -lim, HW["clip_k"]), d)
 
@@ -285,25 +305,122 @@ def head_weld():
     for sp in HW["parts"]:
         rows, contour = (H.UPPER, H.upper_contour) if sp["mesh"] == "Face" else (H.JAW, H.jaw_contour)
         zc = sp.get("zcut", HW["zcut"])  # the jaw reaches further forward (its underside meets the throat there)
-        zs = np.linspace(rows[-1, 0], zc + 0.03, 40)
+        zs = np.linspace(min(rows[-1, 0], sp.get("back_z", rows[-1, 0])), zc + 0.03, 48)
         secs = [(z, contour(z)[0]) for z in zs]
-        out.append(SK.SectionPiece(sp["mesh"], secs, sp["rig"], sp["zone"], HW["k"], HW["inset"], zc, inset_at=inset_at))
+        section = SK.SectionPiece(sp["mesh"], secs, sp["rig"], sp["zone"], HW["k"], HW["inset"], zc, inset_at=inset_at)
+        if sp["mesh"] == "Jaw": section.blend_radius = junction_radius
+        out.append(section)
     return out
 
 
 def trim_head(objs):
-    """Remove the face and jaw behind the cheek line: there the body's skin is the head's surface (head_weld)."""
-    import bmesh
+    """Clip the face/jaw exactly to the complete cheek-to-ear outline.
+
+    Deleting any face with an outside vertex erased the small rear hook and
+    left stair steps. Split crossing polygons at the cheek curve's height
+    knots, then clip each band to its linear boundary. Barycentric weights
+    carry every new vertex's skin weights, attributes and expression samples.
+    """
+    from scipy.sparse import csr_matrix
+    CL = np.array(B["anatomy"]["head_weld"]["cheek_line"]["zy"], float)
     for ob in objs:
         if ob.name not in [p["mesh"] for p in B["anatomy"]["head_weld"]["parts"]]:
             continue
-        bm = bmesh.new(); bm.from_mesh(ob.data)
-        co = np.array([v.co[:] for v in bm.verts]); M = np.stack([co[:, 0], co[:, 2], -co[:, 1]], 1)
-        behind = _SKIN["cheek_dz"](M) < 0
-        bm.verts.ensure_lookup_table()
-        bmesh.ops.delete(bm, geom=[f for f in bm.faces if any(behind[v.index] for v in f.verts)], context="FACES")
-        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
-        bm.to_mesh(ob.data); bm.free(); ob.data.update()
+        old = ob.data
+        coordinates = np.array([v.co[:] for v in old.vertices])
+        attributes = {}
+        for attr in old.attributes:
+            if attr.domain != "POINT" or attr.name == "position":
+                continue
+            if attr.data_type not in ("FLOAT", "FLOAT_VECTOR"):
+                continue
+            width = 3 if attr.data_type == "FLOAT_VECTOR" else 1
+            values = np.zeros(len(old.vertices)*width, np.float32)
+            attr.data.foreach_get("vector" if width == 3 else "value", values)
+            attributes[attr.name] = (attr.data_type, values.reshape(-1,width))
+        source = attributes.get("head_join_source")
+        M = source[1] if source is not None else np.column_stack([coordinates[:,0],coordinates[:,2],-coordinates[:,1]])
+        shape_keys = []
+        if old.shape_keys:
+            for key in old.shape_keys.key_blocks:
+                values = np.zeros(len(old.vertices)*3,np.float32)
+                key.data.foreach_get("co",values)
+                shape_keys.append((key.name,values.reshape(-1,3),key.value,key.slider_min,key.slider_max))
+        groups = {}
+        for group in ob.vertex_groups:
+            weights = np.zeros(len(old.vertices))
+            for vertex in old.vertices:
+                for entry in vertex.groups:
+                    if entry.group == group.index: weights[vertex.index] = entry.weight
+            groups[group.name] = weights
+        mixes, lookup, faces = [], {}, []
+        def point(weights):
+            return sum(M[i]*w for i,w in weights.items())
+        def clipped(poly, distance):
+            if not poly: return []
+            result=[]
+            a=poly[-1]; da=distance(point(a))
+            for b in poly:
+                db=distance(point(b))
+                if (da >= -1e-10) != (db >= -1e-10):
+                    t=da/(da-db)
+                    mixed={i:w*(1-t) for i,w in a.items()}
+                    for i,w in b.items(): mixed[i]=mixed.get(i,0)+w*t
+                    result.append({i:w for i,w in mixed.items() if w>1e-10})
+                if db >= -1e-10: result.append(b)
+                a,da=b,db
+            return result
+        def vertex_index(weights):
+            key=tuple(sorted((i,round(float(w),9)) for i,w in weights.items() if w>1e-9))
+            if key not in lookup:
+                lookup[key]=len(mixes);mixes.append(dict(key))
+            return lookup[key]
+        def emit(poly):
+            indices=[vertex_index(w) for w in poly]
+            indices=[i for k,i in enumerate(indices) if i != indices[k-1]]
+            if len(set(indices))>=3: faces.append(indices)
+        for polygon in old.polygons:
+            poly=[{i:1.0} for i in polygon.vertices]
+            q=M[list(polygon.vertices)];lo,hi=q[:,1].min(),q[:,1].max()
+            heights=np.r_[lo,CL[(CL[:,1]>lo)&(CL[:,1]<hi),1],hi]
+            boundary=np.interp(heights,CL[:,1],CL[:,0])
+            if q[:,2].min() >= boundary.max()-1e-10:
+                emit(poly);continue
+            if q[:,2].max() < boundary.min()-1e-10: continue
+            cuts=sorted(set([float(lo),*CL[(CL[:,1]>lo+1e-10)&(CL[:,1]<hi-1e-10),1].tolist(),float(hi)]))
+            if len(cuts)==1: cuts.append(cuts[0]+1e-9)
+            for low,high in zip(cuts,cuts[1:]):
+                band=clipped(clipped(poly,lambda p:p[1]-low),lambda p:high-p[1])
+                a,b=np.interp([low,high],CL[:,1],CL[:,0])
+                slope=(b-a)/max(high-low,1e-12)
+                band=clipped(band,lambda p:p[2]-(a+slope*(p[1]-low)))
+                emit(band)
+        rows,cols,values=[],[],[]
+        for row,mix in enumerate(mixes):
+            total=sum(mix.values())
+            for column,w in mix.items(): rows.append(row);cols.append(column);values.append(w/total)
+        transfer=csr_matrix((values,(rows,cols)),shape=(len(mixes),len(old.vertices)))
+        new=bpy.data.meshes.new(old.name+"_cheek_cut")
+        new.from_pydata((transfer@coordinates).tolist(),[],faces);new.update()
+        for mat in old.materials: new.materials.append(mat)
+        for polygon in new.polygons: polygon.use_smooth=True
+        for name,(kind,values) in attributes.items():
+            attr=new.attributes.new(name,kind,"POINT")
+            attr.data.foreach_set("vector" if kind=="FLOAT_VECTOR" else "value",(transfer@values).astype(np.float32).ravel())
+        ob.data=new
+        for name,weights in groups.items():
+            group=ob.vertex_groups.get(name) or ob.vertex_groups.new(name=name)
+            for index,w in enumerate(transfer@weights):
+                if w>1e-8: group.add([index],float(w),"REPLACE")
+        for name,values,value,low,high in shape_keys:
+            key=ob.shape_key_add(name=name,from_mix=False)
+            key.data.foreach_set("co",(transfer@values).astype(np.float32).ravel())
+            key.slider_min=low;key.slider_max=high;key.value=value
+        clipped_source=transfer@M
+        distance=clipped_source[:,2]-np.interp(clipped_source[:,1],CL[:,1],CL[:,0])
+        assert distance.min() > -2e-6, (ob.name,"outside cheek cut",distance.min())
+        assert np.max(abs(np.asarray(transfer.sum(axis=1)).ravel()-1)) < 1e-8
+        print("Exact cheek cut:",ob.name,len(coordinates),"->",len(new.vertices),"vertices; boundary minimum",distance.min(),flush=True)
 
 
 def head_weld_weights(V, W, parts):
@@ -385,6 +502,17 @@ def skin_parts(ranges, ear_pts=None):
     # ramp from dark to cream shows as an orange fringe along the shell's edge
     s_v = trunk.s[trunk.local(V)[0]]
     Z = list(np.where((s_v > TR["zones"]["tail_cream_from_s"]) & (np.asarray(Tr) > 0.6) & (np.asarray(Z) >= 0.25), 1.0, Z))
+    # As the final cone narrows, its dorsal/ventral vertices meet. Averaging the
+    # categorical zone used to erase the shell entirely. Wrap a small terminal
+    # cap around that cone, after smoothing, using the same skin topology/weights.
+    cap = TR["zones"]["tail_tip_cap"]
+    end = tail_end_s()
+    cap_blend = smoothstep_v(end - cap["blend_length"], end - cap["closed_length"], s_v)
+    local = trunk.local(V)
+    fraction = (1 - local[1] / np.maximum(np.hypot(local[1], local[2]), 1e-9)) / 2
+    cap_edge = table(TR["zones"]["rows"], end, 1) + 0.8 * cap_blend
+    cap_zone = smoothstep_v(cap_edge - 0.035, cap_edge + 0.035, fraction)
+    Z = list(np.where(cap_blend > 0, np.minimum(Z, cap_zone), Z))
     Tr = list(SK.smooth_on_mesh(V, F, Tr))
     # the distance round the trunk from the top of the spine (angle times the section's mean radius), for laying the
     # scales out in rows; carried in _PART's fraction (20 + around / 4, under 20.4, still part 20), as the other
@@ -410,6 +538,14 @@ def skin_parts(ranges, ear_pts=None):
     skin = H.add_part("Skin", V.tolist(), F.tolist(), {"_PART": list(part), "_A": A, "_B": Tr, "_ZONE": list(skin_zone)}, W)
     sh = B["shell"]
     S, SF, src, ink, tint = SK.shell(V, F, Z, sh, SK.smooth_normals(V, F), trunk.s[idx], np.array(Bf), band)
+    # Relief must shrink with the tip's radius rather than making a blunt knob.
+    radius = trunk.R[idx[src]].mean(axis=1)
+    displacement = S - V[src]
+    height = np.linalg.norm(displacement, axis=1)
+    relief = radius * cap["max_relief_radius_fraction"]
+    taper = np.minimum(1.0, relief / np.maximum(height, 1e-9))
+    taper = np.where(s_v[src] > end - cap["blend_length"], taper, 1.0)
+    S = V[src] + displacement * taper[:, None]
     if "cheek_dz" in _SKIN:  # the shell and its rim run out into the cheek line, where the head's surface takes over
         t = 1 - smoothstep_v(-B["anatomy"]["head_weld"]["shell_taper"], 0.0, _SKIN["cheek_dz"](S))
         joins = B["surface_joins"]
@@ -494,7 +630,7 @@ def claw_tube(base, direction, length, radius, hook_deg, down=np.array([0, -1.0,
 
 
 def toe_layout(kn, back, T):
-    """The toes on the left side: per toe its points (base, middle joint, tip) and the distal segment's
+    """The toes on the left side: per toe its base, interphalangeal joints, tip and distal segment's
     direction. kn: the knuckle line's centre, back: the point behind it (wrist or heel)."""
     fwd = H.norm(kn - back); fwd[1] = 0; fwd = H.norm(fwd)
     out = []
@@ -503,9 +639,10 @@ def toe_layout(kn, back, T):
         side = H.norm(np.cross(d, [0, 1.0, 0]))
         p = kn + np.array([T["base_offset_x"][k], 0, 0]) - fwd * 0.03
         pts, dd = [p], d
+        scale = T.get("length_scale", [1.0] * T["count"])[k]
         for j, sl in enumerate(T["segments"]):
             dd = H.rot(d, side, -math.radians(T["drop_deg"][j]))
-            p = p + dd * sl; pts.append(p)
+            p = p + dd * sl * scale; pts.append(p)
         out.append((pts, dd))
     return out
 
@@ -521,14 +658,30 @@ def thumb_layout(J, Th):
     return [base, p1, p1 + d2 * Th["segments"][1]], d2
 
 
-def digit_specs(pts, dd, radii, bn, blend):
-    """One toe, finger or thumb as skin pieces: a bone per segment and a pad under its tip."""
-    sb = [{"name": f"{bn} phalanx {j + 1}", "from": pts[j].tolist(), "to": pts[j + 1].tolist(), "r": [radii[j], radii[j] * 0.9],
-           "k": blend if j == 0 else 0.012, "rig": {bn: 1.0}, "zone": 0.5} for j in range(len(pts) - 1)]
+def digit_names(bn, count):
+    return [bn if j == 0 else f"{bn}_p{j + 1}" for j in range(count)]
+
+
+def ray_root(kn, back, base, config):
+    return back + (kn - back) * config["root_fraction"] + (base - kn) * config["root_lateral_fraction"]
+
+
+def digit_specs(pts, dd, radii, bn, blend, parent, config):
+    """One toe, finger or thumb: joint-weighted segment fields and a distal pad."""
+    names = digit_names(bn, len(pts) - 1)
+    sb = []
+    for j, name in enumerate(names):
+        joint = {"parent": names[j - 1] if j else parent, "bone": name,
+                 "fraction": config["joint_blend_fraction"]}
+        if j + 1 < len(names):
+            joint["next"] = names[j + 1]
+        sb.append({"name": f"{bn} phalanx {j + 1}", "from": pts[j].tolist(), "to": pts[j + 1].tolist(),
+                   "r": [radii[j], radii[j] * 0.9], "k": blend if j == 0 else 0.012,
+                   "rig": {name: 1.0}, "joint_rig": joint, "zone": 0.5})
     r = radii[-1]
     a, b = pts[-2] + np.array([0, -r * 0.4, 0]), pts[-1] + dd * r * 0.2 + np.array([0, -r * 0.35, 0])
     sm = [{"name": f"{bn} pad", "from": a.tolist(), "to": b.tolist(), "radii": [r * 0.75, r * 1.05], "hint": [0, -1.0, 0],
-           "k": 0.012, "rig": {bn: 1.0}, "zone": 0.8}]
+           "k": 0.012, "rig": {names[-1]: 1.0}, "joint_rig": sb[-1]["joint_rig"], "zone": 0.8}]
     return sb, sm
 
 
@@ -541,11 +694,16 @@ def toe_pieces(L, prefix):
     kn, back = (J["knuckles"], J["wrist"]) if "knuckles" in J else (J["ball"], J["heel"])
     T = L["toes"]; specs_b, specs_m = [], []
     for k, (pts, dd) in enumerate(toe_layout(kn, back, T)):
-        sb, sm = digit_specs(pts, dd, T["radius"], f"{prefix}{k + 1}", T["blend"])
+        meta = f"{'fmeta' if prefix == 'ftoe' else 'hmeta'}{k + 1}"
+        ray = T["rays"]
+        specs_b.append({"name": meta + " ray", "from": ray_root(kn, back, pts[0], ray).tolist(),
+                        "to": pts[0].tolist(), "r": ray["radius"], "k": ray["blend"],
+                        "rig": {meta: 1.0}, "zone": 0.5})
+        sb, sm = digit_specs(pts, dd, T["radius"], f"{prefix}{k + 1}", T["blend"], meta, T)
         specs_b += sb; specs_m += sm
     if "thumb" in L:
         pts, dd = thumb_layout(J, L["thumb"])
-        sb, sm = digit_specs(pts, dd, L["thumb"]["radius"], "fthumb", T["blend"])
+        sb, sm = digit_specs(pts, dd, L["thumb"]["radius"], "fthumb", T["blend"], "hand", L["thumb"])
         specs_b += sb; specs_m += sm
     return specs_b, specs_m
 
@@ -557,14 +715,17 @@ def toes(kn, back, T, sgn, parent, prefix, sd):
     up = np.array([0, 1.0, 0])
     for k, (pts, dd) in enumerate(toe_layout(kn, back, dict(T, spread_deg=[sgn * a for a in T["spread_deg"]],
                                                             base_offset_x=[sgn * a for a in T["base_offset_x"]]))):
-        bn = f"{prefix}{k + 1}.{sd}"
+        names = [f"{name}.{sd}" for name in digit_names(f"{prefix}{k + 1}", len(pts) - 1)]
+        meta = f"{'fmeta' if prefix == 'ftoe' else 'hmeta'}{k + 1}.{sd}"
+        bones.append((meta, tuple(ray_root(kn, back, pts[0], T["rays"])), tuple(pts[0]), parent))
+        for j, name in enumerate(names):
+            bones.append((name, tuple(pts[j]), tuple(pts[j + 1]), names[j - 1] if j else meta))
         cl = T["claw"]; r = T["radius"][-1]
         fwd = H.norm(np.array([dd[0], 0, dd[2]]))
         base = pts[-1] + fwd * r * 0.3 + up * r * 0.3
         d0 = H.norm(fwd * math.cos(math.radians(cl["pitch_deg"])) - up * math.sin(math.radians(cl["pitch_deg"])))
         v, f = claw_tube(base, d0, cl["length"], cl["radius"], cl["hook_deg"])
-        parts.append(H.add_part(f"{prefix}Claw{k}{sd}", v, f, {"_PART": [23] * len(v), "_A": [0] * len(v), "_B": [0] * len(v), "_ZONE": [0] * len(v)}, [[(bn, 1.0)]] * len(v)))
-        bones.append((bn, tuple(pts[0]), tuple(pts[-1]), parent))
+        parts.append(H.add_part(f"{prefix}Claw{k}{sd}", v, f, {"_PART": [23] * len(v), "_A": [0] * len(v), "_B": [0] * len(v), "_ZONE": [0] * len(v)}, [[(names[-1], 1.0)]] * len(v)))
     return parts, bones
 
 
@@ -574,18 +735,24 @@ def front_leg(sgn):
     J = {k: mirror(v, sgn) for k, v in L["joints"].items()}
     parts = []  # the leg itself is part of the skin (bones and muscles)
     bones = [(f"upperarm.{sd}", tuple(J["shoulder"]), tuple(J["elbow"]), "chest"),
+             (f"shoulder_soft.{sd}", tuple(J["shoulder"]), tuple(J["elbow"]), "chest"),
              (f"forearm.{sd}", tuple(J["elbow"]), tuple(J["wrist"]), f"upperarm.{sd}"),
-             (f"hand.{sd}", tuple(J["wrist"]), tuple(J["knuckles"]), f"forearm.{sd}")]
+             (f"forearm_twist.{sd}", tuple(J["elbow"]), tuple(J["wrist"]), f"forearm.{sd}"),
+             (f"wrist_arc1.{sd}", tuple(J["wrist"]), tuple(J["knuckles"]), f"forearm_twist.{sd}"),
+             (f"wrist_arc2.{sd}", tuple(J["wrist"]), tuple(J["knuckles"]), f"forearm_twist.{sd}"),
+             (f"hand.{sd}", tuple(J["wrist"]), tuple(J["knuckles"]), f"forearm_twist.{sd}")]
     tp, tb = toes(J["knuckles"], J["wrist"], L["toes"], sgn, f"hand.{sd}", "ftoe", sd)
     parts += tp; bones += tb
-    Th = L["thumb"]; bn = f"fthumb.{sd}"
+    Th = L["thumb"]
     pts, dd = thumb_layout({k: np.array(v, float) for k, v in L["joints"].items()}, Th)
     pts = [mirror(p, sgn) for p in pts]; dd = mirror(dd, sgn)
     cl, r = Th["claw"], Th["radius"][-1]
     # along the thumb's tip, hooking forward toward the fingers it opposes
     v, f = claw_tube(pts[-1] + dd * r * 0.3, dd, cl["length"], cl["radius"], cl["hook_deg"], down=np.array([0, 0, 1.0]))
-    parts.append(H.add_part(f"ThumbClaw{sd}", v, f, {"_PART": [23] * len(v), "_A": [0] * len(v), "_B": [0] * len(v), "_ZONE": [0] * len(v)}, [[(bn, 1.0)]] * len(v)))
-    bones.append((bn, tuple(pts[0]), tuple(pts[-1]), f"hand.{sd}"))
+    names = [f"{name}.{sd}" for name in digit_names("fthumb", len(pts) - 1)]
+    parts.append(H.add_part(f"ThumbClaw{sd}", v, f, {"_PART": [23] * len(v), "_A": [0] * len(v), "_B": [0] * len(v), "_ZONE": [0] * len(v)}, [[(names[-1], 1.0)]] * len(v)))
+    for j, name in enumerate(names):
+        bones.append((name, tuple(pts[j]), tuple(pts[j + 1]), names[j - 1] if j else f"hand.{sd}"))
     return parts, bones
 
 
@@ -596,6 +763,7 @@ def hind_leg(sgn):
     J = {k: mirror(v, sgn) for k, v in L["joints"].items()}
     parts = []
     bones = [(f"thigh.{sd}", tuple(J["hip"]), tuple(J["knee"]), "hips"),
+             (f"hip_soft.{sd}", tuple(J["hip"]), tuple(J["knee"]), "hips"),
              (f"shin.{sd}", tuple(J["knee"]), tuple(J["heel"]), f"thigh.{sd}"),
              (f"foot.{sd}", tuple(J["heel"]), tuple(J["ball"]), f"shin.{sd}")]
     tp, tb = toes(J["ball"], J["heel"], L["toes"], sgn, f"foot.{sd}", "htoe", sd)

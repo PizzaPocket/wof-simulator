@@ -6,9 +6,62 @@ description: Sculpt a creature model from reference art one element at a time (n
 
 # Creature sculpting
 
+A reference-fitted resting cloth surface cannot simply be inverse-skinned into
+the flight bind pose: that can preserve its outline at rest while creating huge
+balloon-like lobes in flight. Keep a shallow flight surface and fit intermediate
+cloth corrections in the actual posed frames. Preserve sampled support and arm
+boundaries in every correction; inspect spread, quarter, half and resting poses.
+Relax a compact cervical S by removing the centerline hump behind the occiput,
+while retaining neck depth and a continuous throat attachment behind the moving
+jaw. Slimming a muzzle requires adjusting the anterior dentary as well as the
+premaxilla; narrowing the whole braincase is not an equivalent change.
+An occipital/throat union must stop behind the rear oral lining throughout jaw
+opening. Closing a skull-to-neck gap can otherwise push external ventral scales
+into the mouth; inspect the open-mouth view after changing cervical geometry.
+Keep this transition shallow and inside the shared cervical envelope: an
+ellipsoid hanging below the ramus fills a gap but creates an unwanted jowl.
+Ventral jaw pigmentation should follow the surface sector, not an absolute
+depth threshold that removes its pale color when the dentary becomes thinner.
+
+For four wings, check fore/hind triangle intersections in the actual launch and
+cruise stroke poses. A neutral spread pose and separate lobe silhouettes can
+both pass while their body webs cross during an upstroke. Sweep deployed
+hindwings without changing the standing arm lengths/directions. Transport the
+resting lobe curve in the wing frame; keep the broad lobe weighted to its
+support, with body weights confined to the inner attachment web. Check outer
+arc length through the flap, not only attachment seams and finite coordinates.
+
+## Lessons from the NightWing study
+
+Construct the skull along its anatomical plane and the dentary along its own plane. Reference head tilt belongs in pose transforms, not in image-horizontal construction sections. Show a level head before matching the drawing's pose.
+
+Use the successful MudWing as the anatomical prototype: retain useful skeleton, musculature organization and proportional cranial breadth, then encode the other tribe's specific differences. Distinct tribes do not justify discarding all shared dragon anatomy. A narrower muzzle does not imply a paper-thin cranium. When Moon's art hides the front or top, seek official views of other NightWings (for example Starflight and Morrowseer) before declaring width or roof angles established. Keep character differences, age, perspective and artist style separate; graphic-novel snout compression must not silently replace Joy Ang's muzzle proportions.
+
+An outer jaw/cheek/throat contour and individual tooth tips are not a rigid dentary outline. Build the hidden ramus into a seated joint using the established prototype, and mark hidden forms as inference. Check a closed blink with mesh colors and ray intersections: subdivision over a deep socket cut can pull the host wall behind the globe. A socket needs sufficient local resolution and a fitted floor/host, not just a circular eye patch. Diagnostic materials must enable morph targets or the supposed closed-blink diagnostic will silently show the rest shape.
+
 ## Lessons from the rejected shoulder pass
 
-A connected mesh and normalized weights do not establish natural anatomy. Inspect the shoulder at intermediate folds in plain clay before accepting it. Reconstruct posed soft tissue in joint-local frames; do not stretch a chest strap into a humerus. Preserve angular fan order throughout retraction. Attach the wrist claw to the actual arm knuckle. Separate the visible lip drape from structural bite geometry, and shorten the head along its anatomical axis rather than world forward alone.
+A muzzle can taper correctly in profile and still have a flat nose in front or
+top view. Inspect both views. Round the anterior footprint separately from the
+cranial width, and give a nonlinearly curved nose cap interior topology: bending
+the perimeter of a single ngon does not sculpt its interior surface. Preserve
+the broad orbital foundation while shaping the beaked premaxilla.
+
+Keep the orbital rim separate from the cranial vault, and the tooth-bearing
+arcade separate from the visible lip contour. A wavy traced lip is not a wavy
+jaw bone. Fit both arcades in one smooth bite frame, then fit the lip drape and
+soft cheek commissure over them. Check open-mouth views for cervical skin
+showing through the pharyngeal wall. Fit the tongue to the actual oral trough.
+
+Retargeting named limb muscles alone does not retain the prototype's torso or
+cervical anatomy. Preserve section depths, keel, shoulder transitions and the
+curved attachment to the skull. Separate iris discs can stand above otherwise
+fitted lids: prefer pigments on one seated globe, and ray-check closed-lid
+coverage through the actual orbital host instead of counting morph targets.
+
+A connected mesh and normalized weights do not establish natural anatomy. Inspect the shoulder at intermediate folds in plain clay before accepting it. Reconstruct posed soft tissue in joint-local frames; do not stretch a chest strap into a humerus. Preserve anatomical fan order throughout retraction: the body-side digit stays
+closest to the flank and the outboard flight digit stays farthest out. Label
+them by anatomy; ambiguous array labels such as first/last can reverse the fold. Attach the wrist claw to the actual arm knuckle. Separate the visible lip drape from structural bite geometry, and shorten the head along its anatomical axis rather than world forward alone.
 
 
 Axial head shortening can make unchanged cheek width read as puffiness. Inspect and flatten the side cross-section between the lip and shield instead of repeatedly reducing small muscle brushes. Preserve the bite bed and lip profile while doing so.
@@ -282,6 +335,29 @@ Check: <what to compare; known differences>
 **Hands and feet**
 - The front hands are compact, with big hooked claws and a high dewclaw.
 - The hind feet are long and digitigrade, with a heel spur and studs along the top.
+- Verify the emitted rig, not only field-piece labels: three phalanx-shaped skin
+  pieces can still be weighted to one animation bone. Continue each outer digit
+  from its own metapodial ray inside the shared palm/foot mass; a central
+  ellipsoid can taper away before reaching the outer roots. Exercise joint-local
+  skin weights through the full body exporter, including fixed-weight head
+  sections, rather than checking only the limb-only weight path. Keep rigid claws
+  on the terminal phalanx and inspect their embedded roots during flexion.
+
+**Leg/arm dual use**
+- Raise the forelimb before accepting its standing sculpt. A broad field added
+  to fill an armpit can become a chest-to-elbow sail. Place pectoral/latissimus
+  insertions on the proximal humerus, retain the triceps' separate olecranon
+  insertion, and keep the medial upper-arm envelope with the moving humerus.
+  Inspect belly-to-tendon taper and the elbow/wrist/hock at multiple views.
+  Use a shared bend plane for adjoining links and distribute forearm rotation;
+  do not fake supination by twisting the wrist alone. Relaxed airborne asymmetry
+  should alter plausible bend and height, not force every link into a zigzag.
+- Do not reuse a walking rest-pole blindly for a forward/upward reaching hand:
+  projection can send the elbow above and far outside the shoulder. Diagnose
+  actual joint coordinates before sculpting tissue around a bad pose. At a large
+  wrist bend, use intermediate carpal deformation frames about the actual joint
+  center; a single forearm/hand weight blend can flatten the wrist despite a
+  connected skeleton. Keep paired forearm bone fields distinct beneath it.
 
 ### Nose placement and nostril coordinates
 Measure visible shield clearance relative to cap width before choosing setback.
@@ -364,3 +440,144 @@ After fixing an attachment gradient, check the joint at its largest swing and
 roll. Directly blending a fixed chest to a strongly rotated humerus can flatten
 the deltoid and its armor. Neighboring helper frames on the same socket's rotation
 arc preserve volume without adding anatomical joints or moving either endpoint.
+
+Thin tail ends can lose their shell when categorical color zones are averaged
+across a narrowing cone. Inspect terminal coverage after smoothing and taper
+shell relief with local radius. For small iris changes, preserve pupil/globe
+size and resolve the color boundary with adequate eye-only tessellation.
+
+
+After a head-proportion warp, classify mesh trimming in the original contour
+frame used by the body weld, not by comparing warped vertices with an old
+cheek line. Preserve temporary source coordinates through trimming and remove
+them before export. When thickening a jaw, preserve the approved underside
+silhouette and consider raising its rim beneath the upper lips; do not assume
+extra volume belongs below the chin.
+
+
+### One lip boundary, independent dentary
+Use the actual exterior lip endpoint for the oral closing surface; re-evaluating
+a corner lift from an old width creates a seam. Replace alternating corrective
+knots with one continuous lobe. Give a simplified lower jaw its own straight
+rim instead of inheriting the upper lip drape or stacking a max-depth correction
+on top. Build rigid tooth crowns after proportion warps, and size crown bases
+from row spacing rather than a clearance-capped height.
+
+After an axial proportion edit, author lip-lobe positions in the finished head
+frame and invert the warp to obtain construction stations. A smooth source
+profile can still place its arches too far forward. Distinguish the front-face
+arc, corner turn, anterior side lobe, intermediate crest and shallow posterior
+lobe. A boxy muzzle still carries an arched, tangent-continuous tooth/gum row.
+
+
+A contour's endpoint is anatomical: Clay's full upper-lip/cheek line ends at the
+ear root. Do not compress its arches into the oral opening alone. Its rear
+backward hook and forward S return belong to the cheek-to-neck seam. Move the
+closure with a raised outer border, and clip crossing polygons precisely;
+deleting whole faces blunts the hook and leaves stairs. Preserve attributes,
+weights and all expression samples with a common interpolation.
+
+
+Lip relief on a sloping skull is normal to that skull, not world Y. A shared
+frame must govern the external contour, palate, gum seats, tooth directions,
+lower rim and underside. A remapped outer line with the old bite plane creates
+a gap and a stepped jaw; a larger cheek web is not a substitute for fitting
+the jaws. Keep a shallow dip broad rather than converging to one pointed knot.
+
+
+An isolated jaw cannot validate the throat attachment. For a rounded section,
+the lateral underside is higher than its centre-lowest line; using the centre
+line for a side seam can clip away the bridge into the neck. Inspect the full
+assembly and probe the actual tissue field at any visible gap.
+
+
+A straight anterior tooth-bearing margin does not make the whole lower jaw a
+plane. Preserve the rear ramus/jowl upsweep. For a mouth-corner web, tangent
+continuity must be authored in the open pose, then inverted through skinning;
+arc-weighting alone can still produce a straight curtain between the jaws.
+
+
+A handful of interior field probes can miss a lateral opening higher on an
+ascending jaw. Sample the complete junction and inspect the assembled profile
+and three-quarter view. A clipping allowance cannot bridge a gap between two
+disjoint section fields; the local tissue union must span that separation too.
+
+
+### Transfer an approved anatomical system, not its old approximation
+When another character belongs to the same tribe, inherit the corrected complete
+construction and encode character differences as a profile. Do not keep the older
+low-fidelity tribe generator under a different character name. Separate normalized
+construction geometry, world scale, and camera framing; a giant cannot be validated
+from a fitted-to-screen portrait. Age does not define a linear height equation.
+
+A membrane seam needs identical boundary samples and bone weights on both sides,
+including the edge between the arm patagium and axillary web. Matching only corners
+leaves different subdivided curves during a bend. Check the exported skinned asset
+at intermediate folds, and multiply numerical seam error by world scale for giants.
+
+Keep official covers, official line art, edited extractions and fan recolor sheets
+separate in the reference record. A source called TopShot may be an oblique cover
+crop; a wingless juvenile illustration cannot establish adult folded wing anatomy.
+Normalize the skull's own longitudinal frame before measuring a downward-posed face.
+
+
+### Fitted corners do not establish a fitted surface
+Connecting individually ray-fitted scute corners can still cut chords through
+the host, especially where the connected trunk meets a shoulder or leg. Clip
+patches from actual host triangles with interpolated skin weights; test interior
+samples after offsetting them, and adaptively fit concave transitions. Check
+vertices and face interiors separately. Reset all non-Basis expression samples
+before export: animation initialization can conceal an asset that otherwise loads
+with every blink stage and mouth correction enabled simultaneously.
+
+
+### A closed seam can still attach to the wrong side
+A shoulder-to-wrist chord and an elbow fill triangle can stay numerically sealed
+yet create a membrane sail in front of the folded wing arm. Trace the actual
+trailing shoulder–elbow–wrist chain, seat its samples inside the arm tissue and
+release those joint weights smoothly into the posterior web. Verify the side of
+the attachment, not only the seam distance. Reuse this constraint for every new
+wing type; do not copy the NightWing outline as the SilkWing fan.
+
+
+### Transfer fidelity without transferring tribal identity
+Use the approved dragon skeleton, muscle origins, digit articulation, bite-seat
+construction and eyelid method as reusable anatomy. Author the new tribe's skull
+profile, anterior footprint, horns/antennae, wing support count, membrane outline
+and attachment topology explicitly. Blue has separate supported fore/hind wings,
+not extra NightWing fans or an oval wing card. Four-wing motion roles need an
+explicit anatomical side; a key such as fore.L is not the literal side L.
+
+Shared vertex-color materials require the same color attributes on every mesh
+using them, including axillary webs. Otherwise a properly colored flight panel
+can share a material with a white inner web. A Boolean-generated white-vertex
+cleanup must identify actual white, not classify every bright pigment as an
+artifact: a darkness threshold that worked for Moon erased Blue's violet head.
+Check those colors in the actual game renderer before presenting the rebuild.
+
+
+### Smooth SilkWing lobes and soft appendages
+Do not create a SilkWing by rounding the scallops of a NightWing fan. Use smooth
+curved support paths and one continuous outer contour through their endpoints.
+Panels must reach the same curve; hide the contraction support chain beneath
+continuous taper rather than sculpting visible joint swellings into each ray.
+
+Soft antennae stay anchored at the skull, with flexible weighting increasing
+toward the tip. A small damped spring can add idle flow and turn follow-through.
+Preserve the skeleton's actual resting local rotation when applying the bend;
+an absolute small quaternion can replace the bind orientation and flip the
+appendage. Validate the exported skinned root and tip, not just spring angles.
+
+When the imported game model disagrees with a directly decoded GLB, compare
+actual vertex counts/colors and regenerate only the affected generated scene
+cache. A new source checksum alone did not prove updated mesh subresources.
+
+
+### Count support roles, not evenly distributed spokes
+On the SilkWing side sheet, separate the clustered distal arches, free arm-bend
+hook, proximal/basal support, and unsupported membrane contour. A regular fan
+with a matching count of lines can still have the wrong anatomy. Trace each
+line to its origin before creating the rig: the small wing's short basal support
+must follow the proximal arm, not originate at the wrist like the long arch.
+Build the long lower banana lobe and the small wing's broad round lobe as their
+own boundary curves, not by spreading uniform radial fingers farther apart.

@@ -570,3 +570,136 @@ lay immediately over the rigid jaw floor but retained a partial head rotation.
 0.012 overlap to its actual host, and blends into the flexible wall by 0.035.
 The operation is confined between the oral floor and palate and inside the
 jaw margin. These lining vertices retain a continuous dark tissue mask.
+
+
+## Iris and runtime blink cleanup (2026-10-29)
+
+User requested a 10% larger iris diameter. `eye.iris_diameter_scale = 1.1`
+scales projected iris diameter using the sine of its angular radius; it does
+not scale the globe, pupil or eyelid opening. Eye-only tessellation now resolves
+the iris/pupil edges, which were blurred by the old 12-by-18 vertex grid.
+The appearance coordinate remaps the iris annulus so the web and Godot palettes
+share the revised boundary.
+
+The Godot blink uses the existing six absolute eyelid in-betweens, sampled
+adjacently rather than summed together. Both eyes close together. Timing is
+artist-directed: 75 ms closing, 25 ms closed, 160 ms reopening, randomized
+2.8–7 second intervals and occasional paired blinks. Full closure and
+intermediate poses are captured in the native renderer.
+
+
+## Shortened head: mouth and jaw cleanup (2026-10-29)
+
+The accepted muzzle length remains unchanged at the front. The compression
+transition now follows the anatomical muzzle axis rather than world z, with a
+positive axial derivative throughout (minimum 0.46 at the current scale).
+The full-body skin applies this change only in proportion to head/jaw influence,
+so forefeet are not inadvertently shortened with the low part of the jaw.
+
+A second defect was at the cheek seam: the already shortened Face/Jaw meshes
+were being trimmed against an unshortened cheek line. A temporary original-frame
+coordinate now follows those vertices until trimming. The body weld and trim
+therefore use the same frame; the temporary attribute is removed before export.
+
+The lower-jaw pass preserves the original chin/underside landmarks. User review
+rejected increasing volume downward. The dentary gains thickness by raising its
+upper rim beneath the overhanging upper lips, with a 0.09 minimum source-section
+depth along the exposed tooth row. Tooth roots follow the rebuilt mouth floor.
+The broad chin remains; the front section is rounder (superellipse 2.7 versus
+3.8), and the general U section is 2.3. Closed/open, side, front, three-quarter
+and underside views are checked in color and plain clay.
+
+
+## Mouth resculpt: continuous lip and independent dentary (2026-10-29)
+
+References: official How to Draw (`Clay_htd_png.png`), limited-edition cover
+(`Clay_TDPLE.jpg`) and the existing indexed mouth review. The front face bends
+into an anterior lip lobe, then rises to the rear run. Replaced the tiny competing
+profile dips with fewer PCHIP landmarks and reduced the extra corner lift.
+The inner lip closure shares the actual outer endpoint.
+
+The lower jaw is one uninterrupted U-shaped dentary: no waist behind the chin,
+no upper-lip-derived rim and no minimum-depth max correction. Its exposed top is
+a straight line in the anatomical frame; the hidden ramus rises into the hinge.
+Existing chin/underside landmarks are preserved. No extra front-corner seal lift.
+
+Dentition follows real monitor-lizard recurvature and embedded crowns, with a
+fuller oval section for Clay. Build enamel after the final head compaction, size
+its bases from tooth spacing, and seat both gum beds on the finished hosts.
+See `docs/clay-mouth-fire.md` for evidence, runtime articulation and review.
+
+User follow-up: the front corners must not notch upward. The first downward
+side lobe belongs farther behind the corner; the next upward arch retains its
+proportions, and the second shallow downward lobe belongs in the posterior half.
+Authored final-frame lobe minima are near z1.72 and z1.603, then inverse-mapped
+through premaxilla, snout turn and axial compaction. Front corner lift is only
+0.004; the front-face convexity fades to zero at the true lip boundary so its
+cap cannot leave a shelf/notch. The lower jaw narrows just enough to stay under
+the lip, with a gradual width progression. Gum beds turn through elliptical
+anterior arches; the paired corner crowns are 15% taller than regular maxima.
+
+
+## Full lip-to-ear outline and terminal hook (2026-10-30)
+
+The user's "back" is the ear's front attachment, not the upturn under/behind the
+eye. The former pass put both waves in the muzzle section and left an abrupt
+climb behind them. Read the entire orange/cream/neck outline in How to Draw and
+the limited-edition painting. The posterior lobe is a shallow deviation from
+that inclined line, not a second horizontal scallop beside the front lobe.
+
+The rear-most punctuation is a gentle backward cheek hook, then an S return
+forward into the ear base. It is not a separate horn. `full_line_landmarks` names
+the front corner, first lobe, middle arch, posterior lobe, rear hook and ear root.
+The terminal return belongs to the body's cheek trim, so the profile and the
+cheek-to-neck seam must change together. Rear hook z1.402/y1.66 returns through
+z1.49/y1.748 into the actual ear root at z1.47/y1.785. The cheek closure starts
+ahead of the newly raised outer arch so a closed jaw does not expose a slot.
+
+Whole-face deletion along the trim erased this small feature and left stairs.
+Clip crossing polygons at each segment of the measured cheek curve instead;
+interpolate skin weights, source coordinates and every expression sample with
+the same barycentric transfer. Verify that no resulting vertex is outside the
+trim and that interpolation weights sum to one.
+
+
+### Coordinated skull-frame mouth revision
+
+User feedback: a lip depression normal to world Y becomes a downward spike on
+this sloping skull. Define a shared mouth frame (forward y/z -0.6/0.8, normal
+0.8/0.6). First relief is a broad 0.010 depression along the negative normal;
+its low region spans 0.125-0.16 along the skull. The posterior relief is shallower.
+The profiles are remapped by `game/tools/remap_mouth_frame.py` through the inverse
+head proportion field into the construction stations.
+
+Resculpt the jaw as part of the same unit: its exposed upper rim is a single
+plane in this frame, not a flat front spliced onto a steep coronoid staircase.
+The underside follows a smoothly changing normal depth and a rounded, set-back
+chin. This deliberately supersedes the earlier instruction to preserve the old
+underside, following the user's request to reconsider its implications.
+
+The palate and oral floor use the same frame. Seat the gum arches against the
+finished surfaces along the skull normal, orient rigid crowns on that normal,
+and keep the front crowns behind the muzzle's front wall. Retain the gentle
+cheek hook and S return to the ear. Move the posterior fire source and oral void
+with the fitted mouth; an old lower source could otherwise sit below its floor.
+
+The full assembly, unlike the isolated head, revealed a gap under the posterior
+jaw: its centre-lowest underside had been used for the cheek cut. The lateral
+underside lies higher. A 0.055 forward fillet allowance and posterior section
+overlap preserve the throat bridge. The actual union-field distances at three
+former gap locations must stay negative (`check_throat_attachment.py`).
+
+
+Front-corner continuity follow-up: the first side depression now has 0.022
+normal relief with a broad bottom. The previous 0.010 relief vanished in the
+assembled silhouette. The front cap and side use a shared rounded annulus
+rather than a sharp planar join; validate the corner in plain clay as well as
+painted views. The front cap samples each inset from the original perimeter.
+
+
+## Rear jaw and cheek attachment revision
+
+The [jaw/cheek/gaze sheet](../../../docs/clay-jaw-cheek-gaze.md) records the
+restored rear ramus upsweep, jaw-tangent posed cheek correctives, calibrated
+upward gaze and separate five-degree breathing skull lift. The front bite margin
+and tooth layout remain. Full-model review checks the rebuilt neck junction.

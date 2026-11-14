@@ -4,8 +4,10 @@ The shoulder is a socket, the elbow a hinge and the wrist a shared carpal hub.
 The accessory elbow digit telescopes by the character's requested convention.
 """
 import math
+import json
+from pathlib import Path
 import numpy as np
-from mathutils import Matrix, Quaternion
+from scipy.spatial.transform import Rotation
 
 
 def unit(p):
@@ -22,28 +24,18 @@ def frame(direction, normal):
 
 
 def turn(R, amount):
-    return np.array(Quaternion((1, 0, 0, 0)).slerp(Matrix(R.tolist()).to_quaternion(), float(amount)).to_matrix(), float)
-
-
-def finger_ik(root, target, lengths, initial):
-    """Fold the three phalanges without changing their individual lengths."""
-    points = np.array(initial, float).copy(); goal = np.array(target, float)
-    reach = sum(lengths)
-    if np.linalg.norm(goal-root) >= reach:
-        d = unit(goal-root); return np.array([root+d*t for t in np.r_[0,np.cumsum(lengths)]])
-    for _ in range(24):
-        points[-1] = goal
-        for i in range(2,-1,-1):points[i] = points[i+1]+unit(points[i]-points[i+1])*lengths[i]
-        points[0] = root
-        for i in range(3):points[i+1] = points[i]+unit(points[i+1]-points[i])*lengths[i]
-        if np.linalg.norm(points[-1]-goal)<1e-6:break
-    return points
+    # Double precision avoids accumulating length drift down the FK chain.
+    return Rotation.from_rotvec(Rotation.from_matrix(R).as_rotvec() * float(amount)).as_matrix()
 
 
 class Rig:
     def __init__(self, B):
         self.B, self.H, self.SK = B, B.H, B.SK
-        self.D = B.B['wing']; self.C = self.D['canonical_fold']
+        self.D = B.B['wing']; self.C = dict(self.D['canonical_fold'])
+        self.motion = json.loads(Path(__file__).with_name('wing_motion.json').read_text())
+        self.C['pose_steps'] = int(self.motion['pose_steps'])
+        # The source viewer exports this in mesh extras; the JSON file stays unchanged.
+        self.D['canonical_fold']['pose_steps'] = self.C['pose_steps']
         j = self.D['joints']; self.S = np.array(j['shoulder'], float)
         ef, wf = np.array(j['elbow'], float), np.array(j['wrist'], float)
         self.h = unit(self.D['spread']['humerus_dir']); self.f = unit(self.D['spread']['forearm_dir'])
@@ -64,6 +56,7 @@ class Rig:
         self.knots=[0,self.D['finger']['knuckle_at'],self.D['finger']['knuckle2_at'],1]
         avg1=unit(sum(self.closed)); fan1=unit(np.cross(self.closed[0],self.closed[-1]))
         folded_carpal=frame(avg1,fan1)@frame(self.avg0,self.fan0).T
+        self.folded_carpal = folded_carpal
         wrist_px=np.array(self.C['folded_wrist_px']); pixels=self.C['reference_pixels_per_unit']
         for k,d in enumerate(self.digits):
             trace=np.array(self.C['folded_finger_paths_px'][k],float)
@@ -79,6 +72,17 @@ class Rig:
             for length,angle in zip(lengths,np.linspace(-1,1,3)*math.radians(self.D['finger']['bend_deg'])):
                 nodes.append(nodes[-1]+length*(d*math.cos(angle)+back*math.sin(angle)))
             self.curves.append(np.array(nodes))
+        # Joint-relative endpoint rotations make every intermediate centerline
+        # a forward-kinematic chain. No tip-target IK branch can flip a knuckle.
+        self.finger_rotations = []
+        for spread, folded in zip(self.curves, self.fold_nodes):
+            rotations = []
+            parent = self.folded_carpal
+            for a, b in zip(np.diff(spread, axis=0), np.diff(folded, axis=0)):
+                rotation = frame(b, self.dorsal1) @ frame(a, self.dorsal0).T
+                rotations.append(parent.T @ rotation)
+                parent = rotation
+            self.finger_rotations.append(rotations)
         self.acc0=unit(self.D['spread']['elbow_finger_dir']);self.acc1=unit(self.C['elbow_finger_dir'])
         self.accL=float(self.C['elbow_finger_length'])
         self.rest_claw=self.restW+self.f*self.C['wrist_claw_tip_offset']
@@ -99,36 +103,43 @@ class Rig:
 
     def add(self,name,a,b,parent):self.rest[name]=(np.array(a),np.array(b));self.parent[name]=parent
 
+    def progress(self, name, amount):
+        start, end = self.motion[name]
+        t = float(np.clip((amount-start)/(end-start), 0, 1))
+        return t*t*(3-2*t)
+
     def state(self,u):
         u=float(u)
         if u in self.states:return self.states[u]
-        rh,rf=turn(self.Rh,u),turn(self.Rf,u)
+        shoulder = self.progress('shoulder', u)
+        elbow = self.progress('elbow', u)
+        wrist = self.progress('wrist', u)
+        rh = turn(self.Rh, shoulder)
+        rf = rh @ turn(self.Rh.T @ self.Rf, elbow)
         E=self.S+rh@(self.restE-self.S);W=E+rf@(self.restW-self.restE)
-        dirs=[unit(turn(self.B.align(a,b),u)@a)for a,b in zip(self.digits,self.closed)]
-        fan=unit(np.cross(dirs[0],dirs[-1]));avg=unit(sum(dirs));rc=frame(avg,fan)@frame(self.avg0,self.fan0).T
+        rc = rf @ turn(self.Rf.T @ self.folded_carpal, wrist)
         data={'wing_humerus':(rh,self.S,1.),'wing_forearm':(rf,E,1.),'wing_carpal':(rc,W,1.)}
         for i in [1,2]:data['wing_socketBlend'+str(i)]=(turn(rh,i/3),self.S,1.)
-        claw_dir=unit(turn(self.B.align(self.rest_claw_dir,self.fold_claw_dir),u)@self.rest_claw_dir)
-        claw_R=frame(claw_dir,(1-u)*self.dorsal0+u*self.dorsal1)@frame(self.rest_claw_dir,self.dorsal0).T
+        claw_end=frame(self.fold_claw_dir,self.dorsal1)@frame(self.rest_claw_dir,self.dorsal0).T
+        claw_R=rf@turn(self.Rf.T@claw_end,wrist)
         data['wing_wrist_claw']=(claw_R,W+rf@(self.rest_claw-self.restW),1.)
-        ad=unit(turn(self.B.align(self.acc0,self.acc1),u)@self.acc0)
-        ra=frame(ad,np.cross(rh@self.h,rf@self.f))@frame(self.acc0,np.cross(self.h,self.f)).T
-        length_scale=1-u*(1-self.C['elbow_fold_length'])
+        accessory = self.progress('accessory', u)
+        acc_end=frame(self.acc1,np.cross(self.Rh@self.h,self.Rf@self.f))@frame(self.acc0,np.cross(self.h,self.f)).T
+        ra=rf@turn(self.Rf.T@acc_end,accessory)
+        ad=ra@self.acc0
+        length_scale=1-accessory*(1-self.C['elbow_fold_length'])
         data['wing_elbowfinger']=(ra,E,length_scale)
         data['wing_elbowclaw']=(ra,E+ad*self.accL*length_scale,1.)
-        for k,d in enumerate(dirs):
+        for k,curve in enumerate(self.curves):
             root=W+rc@(self.roots[k]-self.restW)
-            goal=W+(1-u)*(self.curves[k][-1]-self.restW)+u*self.fold_nodes[k][-1]
-            lengths=np.linalg.norm(np.diff(self.curves[k],axis=0),axis=1)
-            if u==0:
-                nodes=self.curves[k].copy()
-            else:
-                seed=W+(1-u)*(self.curves[k]-self.restW)+u*self.fold_nodes[k]
-                nodes=finger_ik(root,goal,lengths,seed)
+            parent = rc
+            head = root
             for i,suffix in enumerate(['','b','c']):
-                rest_axis=self.curves[k][i+1]-self.curves[k][i]
-                r=frame(nodes[i+1]-nodes[i],(1-u)*self.dorsal0+u*self.dorsal1)@frame(rest_axis,self.dorsal0).T
-                data['wing_finger'+str(k+1)+suffix]=(r,nodes[i],1.)
+                amount = self.progress(['finger_base','finger_middle','finger_tip'][i], u)
+                r = parent @ turn(self.finger_rotations[k][i], amount)
+                data['wing_finger'+str(k+1)+suffix]=(r,head.copy(),1.)
+                head = head + r @ (curve[i+1]-curve[i])
+                parent = r
         self.states[u]=data
         return data
 
@@ -160,7 +171,8 @@ class Rig:
         bone('humerus',self.S,E,[.060,.052],'wing_humerus')
         bone('forearm',E,W,[.055,.040],'wing_forearm')
         bone('carpal saddle',W+df*self.C['carpal_span'][0],W+df*self.C['carpal_span'][1],self.C['carpal_radii'],'wing_forearm',self.C['carpal_blend'])
-        anchor=self.S-dh*self.C['socket_half_span'][0];insertion=self.S+dh*self.C['socket_half_span'][1]
+        anchor=np.array(self.C.get('chest_attachment', self.S-self.h*self.C['socket_half_span'][0]), float)
+        insertion=self.S+dh*self.C['socket_half_span'][1]
         muscle('deltoid',insertion,anchor,self.C['shoulder_radii'],rh@self.dorsal0,{'wing_humerus.'+sd:.5,'chest':.5},.075,{'from':'wing_humerus.'+sd,'to':'chest'})
         muscle('humeral head',self.S-dh*.02,self.S+dh*.08,[.10,.095],rh@np.array([0,1,0]),{'wing_humerus.'+sd:1},.06)
         muscle('upper arm',self.S+dh*.08,E-dh*.055,[.115,.105],rh@np.array([0,1,0]),{'wing_humerus.'+sd:1})
@@ -309,7 +321,10 @@ def build(B,sgn):
                     return [(names[i],1-blend),(names[i+1],blend)]
             return names[0]if t<rig.knots[1]else(names[1]if t<rig.knots[2]else names[2])
         full=np.array([curve_at(curve,t)for t in np.linspace(0,1,16)])*m
-        tip=curve[-1]*m;direction=unit((curve[-1]-curve[-2])*m);c=rig.D['claw'];claw('WingClaw'+str(k)+sd,tip,direction,c['length'],c['radius'],c['hook_deg'],bn(1))
+        tip=curve[-1]*m;direction=unit((curve[-1]-curve[-2])*m);c=rig.D['claw']
+        # Embed a smaller keratin root in the terminal phalanx. A broad claw
+        # socket standing beyond the finger reads as a detached spike.
+        claw('WingClaw'+str(k)+sd,tip-direction*.012,direction,c['length']*.65,c['radius']*.58,c['hook_deg'],bn(1))
         spars.append((full,bn))
     body=np.array([rig.S*m]+B.membrane_body_line(sgn));line=np.array([rig.S,rig.restE,accessory[-1]])*m
     fa=rig.Lh/(rig.Lh+rig.accL)
@@ -337,6 +352,7 @@ def build(B,sgn):
                 posed.append(np.array(nodes)*m)
             if flank:pa,pb=np.array([S,E,acc_tip])*m,body
             else:pa,pb=posed[panel],posed[panel+1]
+            gather=rig.progress('membrane_gather',amount)
             result=[]
             for u,q in uv:
                 ue=u*(1-rig.D['membrane']['sag']*math.sin(math.pi*q))
@@ -345,7 +361,10 @@ def build(B,sgn):
                 # Sag is scaled by the available span; compressed panels gather in small outward pleats.
                 sag=rig.D['membrane']['sag']*span*math.sin(math.pi*q)*math.sin(math.pi*u)
                 p+=np.array([0,-1,0])*sag*(1-.7*amount)
-                billow=(rig.D['spread']['billow']*(1-amount)+rig.D['membrane']['pleats']['depth']*amount*math.cos(6*math.pi*q))*math.sin(math.pi*q)*math.sin(math.pi*u)
+                rest_span=np.linalg.norm(curve_at(PA,ue)-curve_at(PB,ue))
+                compression=1-min(1,span/max(rest_span,.001))
+                pleat=min(rig.D['membrane']['pleats']['depth']*gather*compression,span*.18)
+                billow=(rig.D['spread']['billow']*(1-gather)+pleat*math.cos(6*math.pi*q))*math.sin(math.pi*q)*math.sin(math.pi*u)
                 p+=np.array([sgn,0,0])*billow
                 result.append(p)
             return np.array(result)

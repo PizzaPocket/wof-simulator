@@ -1,7 +1,13 @@
 {
   "about": "Clay's head as fitted architectural pieces (see head_sheets.md): an orange face mass, a dark roof shell fitted over it whose back corners continue as the horns, a nose crest on the front of the roof, a hinged jaw, eyes with lids hinged on the canthal axis, and ear frills tucked under the horns. Model units: z = (700 - px) / 343, y = (830 - py) / 343, from the 1400 px side reference; x = Clay's left.",
   "upper_head": {
-    "columns": ["z", "top", "lower_edge", "half_width_top", "half_width_low"],
+    "columns": [
+      "z",
+      "top",
+      "lower_edge",
+      "half_width_top",
+      "half_width_low"
+    ],
     "top_note": "Between the brow (z 1.706) and where the nose begins (z 1.953) the top line is one smooth bend fitted to the traced points (each moved 0.022 at most): the trace stepped steep, flat, steep there, partly from the side sheet's head being turned a little toward the viewer.",
     "note": "The orange face mass under the roof. Upper lip line, traced on the side sheet (orange face over cream jaw) and the same in How to Draw and the flight render: from the bottom of the nose it slopes down and back, an overhanging lip that is lowest about a third of the way back (z 1.85); from there it rises in a long, slightly concave line to below the eye, then turns sharply up at the mouth corner (z 1.59) and runs back, gently rising, to the ear opening (z 1.41, y 1.656), where it curls up into the cheek's back edge (anatomy: back edge of the cheek). Traced on the centre of the drawn line. The muzzle hardly narrows toward the front and has near-vertical sides, but it has no flat front wall: its top comes down to meet the front of the upper jaw (the lip), so the roof runs all the way down to the front of the upper jaw, and the nose comes out of the roof's front.",
     "rows": [
@@ -37,13 +43,17 @@
       "note": "No narrowing toward the tip (the hammer's flare is in the rows); only the front corners are cut back: a chamfer over the last 0.035 to 0.84 of the width, softened at its ends, so the corners are angular but not a box's right angle.",
       "corner_shape": "chamfer"
     },
-    "ridge": [[2.017, 0.045], [1.6, 0.045], [1.42, 0.03]],
+    "ridge": [
+      [2.017, 0.045],
+      [1.6, 0.045],
+      [1.42, 0.03]
+    ],
     "ridge_note": "The roof is a gable: two mirrored slopes falling from a crisp ridge down its whole length; the ridge is on the measured top profile and the shoulders drop below it (rows: z, drop at the shoulders). The plates are mirrored pairs meeting at the ridge.",
     "front": {
       "note": "The front muzzle of the upper jaw, in front of the bite point (z 1.86): below the nose its front face is convex (the side sheet's notch at z 1.98 is the nose's underside, not a hollow in the face), then its underside sweeps back and down to the bite point, where it meets the lower jaw's front. That underside is skin, with no teeth. Its bottom corners pull up a little before angling round to the side muzzle. A small brown ridge (the roof's front edge) wraps across the top of the front face right under the nose. From above the front face is rounded across (convex: its middle 0.025 forward of its sides; the roof's front band follows the same curve, so the front ridge runs on from it flush) and bulges forward in side profile (0.01, side sheet front outline), and the front ridge's front edge follows that curve. Its bottom edge, the front lip edge, arcs down in the middle (0.03 lower than at the corners). Simplified: slightly convex, rounding forward (convex_side 0.016); its bottom corners lift only a little (0.012), so they meet the roof's level lower edge.",
       "concave": 0.0,
-      "corner_lift": 0.018,
-      "block_back_z": 1.93,
+      "corner_lift": 0.004,
+      "block_back_z": 1.96,
       "ridge": {
         "note": "The roof's front: the front band carries on down over the snout's front face as one smooth piece on the slightly convex front, to a level bottom edge at the overhang's lowest height (eave_y), right across to the front corners, rolling in to the orange muzzle in the same rounded edge the roof has all round (the user's reading). Simplified from an earlier version whose bottom edge rose at the corners and whose rows collapsed and folded (it looked crumpled).",
         "eave_y": 1.37,
@@ -63,27 +73,19 @@
       },
       "convex_side_note": "Front curvature is secondary to the plane relationship: convex_side 0.016 keeps a soft convex face, while premaxilla.crown_extension sets the near-right-angle turn from the shield to the lip. The lip edge and alveolar base are held, rather than tilting the lower jaw.",
       "convex_note": "The front still rounds across by 0.025, with subtle paired pads and a shallow philtrum. Do not restore the old 0.035 side bulge to correct the front angle: change the premaxilla frame and check both planes.",
-      "across_power": 2.5
+      "across_power": 2.5,
+      "u_front": 0.035
     },
     "cheek_plane": {
-      "from_z": [
-        1.48,
-        1.6
-      ],
-      "to_z": [
-        1.83,
-        1.9
-      ],
-      "upper_fade": [
-        0.64,
-        0.84
-      ],
+      "from_z": [1.48, 1.6],
+      "to_z": [1.83, 1.9],
+      "upper_fade": [0.64, 0.84],
       "rounding": 0.002,
       "why": "User: compact head now has puffy cheeks. Official How to Draw and limited-edition views show a comparatively flat lateral wall between the lip and cheekbone. Limit the middle cross-section to the plane between the lip width and shield-side width; retain rounded transitions, the lip silhouette, orbital rim and rear jaw attachment. Axial shortening alone had retained the original broad mid-cheek barrel."
     },
     "lip_tuck": {
       "from_z": [1.58, 1.63],
-      "to_z": [1.95, 1.99],
+      "to_z": [1.88, 2.017],
       "overhang": 0.012,
       "power": 1.15,
       "note": "User: the upper mouth looked puffed out, where the references show cheek flesh over the teeth and jaws. Measured on the build: the upper lip's edge stood 0.04-0.055 outside the lower jaw on each side along the whole mouth (wb 0.19-0.235 against the jaw's 0.14-0.18), a shelf overhanging the bite. Anatomy: the upper teeth sit just outside the lower ones and the lip skin lies over them, so the lip edge comes in to 0.012 outside the lower jaw, the cheek above curving in to it (power 2.5: the tuck is concentrated near the lip, the cheek's upper part is unchanged). Faded out at the mouth corner (z 1.58-1.63, the jowl over the jaw muscle) and in front of the bite (z 1.84-1.88, the front muzzle). The upper teeth follow the tucked edge."
@@ -93,222 +95,141 @@
   },
   "lip_line": {
     "profile_zy": [
-      [
-        2.017,
-        1.268
-      ],
-      [
-        2.006,
-        1.268
-      ],
-      [
-        1.988,
-        1.27
-      ],
-      [
-        1.972,
-        1.276
-      ],
-      [
-        1.953,
-        1.255
-      ],
-      [
-        1.94,
-        1.268
-      ],
-      [
-        1.93,
-        1.263
-      ],
-      [
-        1.918,
-        1.26
-      ],
-      [
-        1.902,
-        1.26
-      ],
-      [
-        1.89,
-        1.264
-      ],
-      [
-        1.88,
-        1.268
-      ],
-      [
-        1.86,
-        1.28
-      ],
-      [
-        1.848,
-        1.292
-      ],
-      [
-        1.813,
-        1.316
-      ],
-      [
-        1.778,
-        1.332
-      ],
-      [
-        1.743,
-        1.354
-      ],
-      [
-        1.706,
-        1.371
-      ],
-      [
-        1.673,
-        1.382
-      ],
-      [
-        1.65,
-        1.387
-      ],
-      [
-        1.633,
-        1.39
-      ],
-      [
-        1.62,
-        1.411
-      ],
-      [
-        1.61,
-        1.44
-      ],
-      [
-        1.6,
-        1.46
-      ],
-      [
-        1.58,
-        1.535
-      ],
-      [
-        1.545,
-        1.578
-      ],
-      [
-        1.487,
-        1.602
-      ],
-      [
-        1.44,
-        1.627
-      ],
-      [
-        1.414,
-        1.656
-      ],
-      [
-        1.4,
-        1.71
-      ],
-      [
-        1.36,
-        1.79
-      ]
+      [2.017, 1.2729177785028907],
+      [1.9870494, 1.2864235],
+      [1.9241287, 1.3209176],
+      [1.8490646, 1.3554353],
+      [1.7920211, 1.3791176],
+      [1.74, 1.4108],
+      [1.6957412, 1.4556941],
+      [1.6211921, 1.5278559],
+      [1.5782, 1.5576],
+      [1.5254, 1.5872],
+      [1.4922, 1.6096],
+      [1.4552, 1.6436],
+      [1.402, 1.66],
+      [1.39, 1.72],
+      [1.36, 1.79]
     ],
-    "height_fade": 0.36,
+    "height_fade": 0.48,
     "palate_edge_fraction": 0.94,
-    "why": "How to Draw and limited-edition art: shallow down-arc across front, lifted corner, anterior side lobe dipping over the lower jaw, then a smooth rise and flatter rear run into the angular cheek return. This is soft lip tissue around an unchanged structural bite bed.",
+    "why": "Shared skull-frame contour: a broad rounded first depression of 0.022 normal to the skull, a gentle middle rise, a shallower posterior depression, then the rear cheek hook and forward return into the ear. Both jaw beds and teeth use the same frame.",
     "reference_landmarks": {
       "how_to_draw_side_lobe": [
-        [
-          892,
-          488
-        ],
-        [
-          862,
-          509
-        ],
-        [
-          820,
-          528
-        ],
-        [
-          780,
-          539
-        ],
-        [
-          758,
-          535
-        ],
-        [
-          718,
-          512
-        ],
-        [
-          688,
-          504
-        ],
-        [
-          660,
-          502
-        ],
-        [
-          637,
-          489
-        ],
-        [
-          622,
-          466
-        ]
+        [892, 488],
+        [862, 509],
+        [820, 528],
+        [780, 539],
+        [758, 535],
+        [718, 512],
+        [688, 504],
+        [660, 502],
+        [637, 489],
+        [622, 466]
       ],
       "limited_edition_side_lobe": [
-        [
-          923,
-          553
-        ],
-        [
-          894,
-          564
-        ],
-        [
-          878,
-          566
-        ],
-        [
-          851,
-          576
-        ],
-        [
-          827,
-          569
-        ],
-        [
-          806,
-          558
-        ],
-        [
-          784,
-          558
-        ],
-        [
-          759,
-          551
-        ]
+        [923, 553],
+        [894, 564],
+        [878, 566],
+        [851, 576],
+        [827, 569],
+        [806, 558],
+        [784, 558],
+        [759, 551]
       ],
-      "chin_front_plane_htd": [[752, 580], [853, 541]],
-      "lip_front_plane_htd": [[778, 539], [896, 490]],
+      "chin_front_plane_htd": [
+        [752, 580],
+        [853, 541]
+      ],
+      "lip_front_plane_htd": [
+        [778, 539],
+        [896, 490]
+      ],
       "chin_width_reading": "The visible chin front plane is about 0.85 of the lip front plane in the same closed view; use as a projected ratio, not an exact orthographic width.",
       "reading": "The three-quarter contour includes the front plane; do not treat its entire projected diagonal as a side-view height slope."
-    }
+    },
+    "finished_profile_zy": [
+      [1.873, 1.334],
+      [1.845, 1.3550000000000002],
+      [1.825, 1.37],
+      [1.7924, 1.3932000000000002],
+      [1.7451999999999999, 1.4136000000000002],
+      [1.7117999999999998, 1.4274],
+      [1.6844000000000001, 1.4492000000000003],
+      [1.6596, 1.4828000000000001],
+      [1.6194, 1.5292000000000001],
+      [1.5782, 1.5576],
+      [1.5253999999999999, 1.5872000000000002],
+      [1.4922, 1.6096000000000001],
+      [1.4551999999999998, 1.6436000000000002],
+      [1.402, 1.6600000000000001]
+    ],
+    "full_line_landmarks": {
+      "front_corner_zy": [1.825, 1.37],
+      "first_lobe_zy": [1.703, 1.449],
+      "middle_arch_zy": [1.6194, 1.5292],
+      "posterior_lobe_zy": [1.4922, 1.6096],
+      "rearward_hook_zy": [1.402, 1.66],
+      "ear_root_zy": [1.47, 1.785],
+      "reading": "Complete line from the front corner to the ear attachment. Relief is measured normal to the skull: broad first depression, middle rise, shallower posterior depression and the terminal cheek hook/S return. The two depressions are not vertical-Y scallops."
+    },
+    "full_reference_trace": {
+      "source": "covers/Clay_htd_png.png",
+      "raw_pixels_front_to_ear": [
+        [895, 518],
+        [850, 532],
+        [800, 539],
+        [778, 539],
+        [756, 534],
+        [730, 516],
+        [708, 505],
+        [680, 502],
+        [655, 489],
+        [640, 474],
+        [630, 445],
+        [610, 424],
+        [585, 406],
+        [565, 392],
+        [560, 380],
+        [565, 364],
+        [575, 350],
+        [578, 337],
+        [570, 328]
+      ],
+      "note": "Front-face diagonal is foreshortened; it is not an orthographic side slope. Rear trace includes the cheek hook and S return to the ear."
+    },
+    "frame_profile_uh": [
+      [-0.06, 0],
+      [-0.025, 0],
+      [0, 0],
+      [0.04, -0.001],
+      [0.09, -0.013],
+      [0.125, -0.022],
+      [0.16, -0.021],
+      [0.2, -0.009],
+      [0.26, 0.004],
+      [0.31, 0.002],
+      [0.37, -0.006],
+      [0.41, -0.008],
+      [0.46, -0.003],
+      [0.5124, -0.0218]
+    ]
   },
   "lower_jaw": {
     "front_lip_seal": {
-      "lift": 0.006,
-      "from_z": [1.80, 1.88],
+      "lift": 0,
+      "from_z": [1.8, 1.88],
       "height_fade": 0.18,
-      "why": "The front lower lip meets the upper lip in the neutral bite; structural bone/gum levels stay fixed behind the soft margin. Match the shallow front corner arc without revealing a red gum slot."
+      "why": "The front lower lip meets the upper lip in the neutral bite; structural bone/gum levels stay fixed behind the soft margin. Match the shallow front corner arc without revealing a red gum slot.",
+      "follow_corner": false
     },
-    "columns": ["z", "top", "bottom", "half_width"],
-    "note": "A dragon's lower jaw, built from its bones rather than traced (user: the side sheet is a three-quarter view of the snout, so the short chin it seemed to show at z 1.86 was the front of the chin seen at an angle). The dentary carries the teeth forward to a rounded U-shaped chin (the symphysis) at z 1.985, just behind the upper jaw's front under a slight overbite; its tip rounds up and in over the last 0.03 (half-width 0.125 at z 1.86 narrowing to 0.06). Along the tooth row it is about 0.065 deep at the front, deepening steadily backward (0.105 at z 1.75, 0.17 at the mouth corner) as the surangular and angular bones under the jaw muscle (masseter, pterygoid) take over; its underside is one long, gently convex line from under the chin up to the back, where the retroarticular process curves up behind the hinge into the ear opening (z 1.39). Its top edge runs just inside the upper lip line at the front and inside the cheek behind the mouth corner. At the back it is as wide as the cheek (the jowl). Skin: cream with faint pebble scales.",
+    "columns": [
+      "z",
+      "top",
+      "bottom",
+      "half_width"
+    ],
+    "note": "One fitted dentary in the skull-aligned mouth frame. The front bite rim is planar, with a smooth rear ramus rising into the cheek; resculpt_rim_zy and resculpt_bottom_zy are authoritative generated profiles. The underside has smoothly changing normal depth and a rounded set-back chin. The previous flat-front/steep-coronoid splice is not used.",
     "rows": [
       [1.985, 1.292, 1.262, 0.06],
       [1.975, 1.288, 1.24, 0.085],
@@ -333,35 +254,42 @@
     ],
     "hinge": [0.0, 1.6, 1.45],
     "hinge_note": "The jaw joint (quadrate to articular) sits where reptiles have it: at the back end of the mouth line, at the back of the cheek under the back of the eye, level with the mouth line there (which runs back to the ear opening at z 1.41, y 1.656). It was 0.08 lower (y 1.52), and the low pivot swung the chin forward as the jaw opened; level with the mouth line, the jaw drops down and back, its tip well behind the upper jaw's (ClayTopShot, the flying painting).",
-    "squareness": 2.4,
+    "squareness": 2.3,
     "squareness_note": "a rounded U in section, as the cover shows from below with the mouth open; at 3.6 it was a box, and read as a flat plank when the jaw dropped",
     "bones": {
       "note": "The lower jaw as bones (jaw_from_bones generates the profile table from these; edit the bones, not a table). z along the head (forward +), y up; model units, before the snout warp.",
       "symphysis": {
         "z": 2.002,
         "bottom": 1.189,
-        "half_width": 0.14,
-        "round_len": 0.018,
-        "tip_frac": 0.90,
+        "half_width": 0.126,
+        "round_len": 0.04,
+        "tip_frac": 0.88,
         "note": "The chin's front: where the two dentaries meet, a rounded U just behind the upper jaw's front under a slight overbite. Its last round_len rounds off in side view and from above (tip half-width tip_frac of its width).",
-        "round_lift": 0.10
+        "round_lift": 0.1
       },
       "chin": {
         "z": 1.955,
         "bottom": 1.176,
         "note": "The chin's lowest point under the front teeth: the dentary's deepest front part.",
-        "front_backset": 0.012,
-        "front_squareness": 3.8,
-        "front_fade_z": [
-          1.87,
-          1.97
-        ]
+        "front_backset": 0.035,
+        "front_squareness": 2.7,
+        "front_fade_z": [1.87, 1.97]
       },
-      "chin_return": [[1.975, 1.180], [1.94, 1.180], [1.925, 1.195], [1.87, 1.21], [1.79, 1.24]],
+      "chin_return": [
+        [1.975, 1.18],
+        [1.94, 1.18],
+        [1.925, 1.195],
+        [1.87, 1.21],
+        [1.79, 1.24]
+      ],
       "alveolar": {
         "bite_gap": 0.006,
         "blend": 0.03,
-        "note": "The alveolar margin (where the teeth root, the jaw's top edge): bite_gap below the upper lip's edge from the chin back to the mouth corner, so the jaws close together along their whole length."
+        "note": "A straight dentary margin independent of the upper lip drape. The anatomical-axis compaction makes this almost level on the finished head; only the hidden rear ramus rises to the joint.",
+        "rim_zy": [
+          [2.002, 1.28],
+          [1.62, 1.405]
+        ]
       },
       "coronoid_line": {
         "zy": [
@@ -377,66 +305,28 @@
         "note": "Behind the mouth corner the jaw's top edge rises inside the cheek (the coronoid process, where the temporalis inserts) back to the hinge region; hidden under the cheek and the jowl's skin."
       },
       "retroarticular": {
-        "bottom": [[1.54, 1.385], [1.49, 1.42], [1.44, 1.46], [1.41, 1.48], [1.398, 1.53], [1.392, 1.58]],
+        "bottom": [
+          [1.54, 1.385],
+          [1.49, 1.42],
+          [1.44, 1.46],
+          [1.41, 1.48],
+          [1.398, 1.53],
+          [1.392, 1.58]
+        ],
         "note": "Behind the throat junction the jaw's deep back (angular, retroarticular) lies inside the throat's skin; its underside continues the same smooth rising line up to the ear opening."
       },
       "half_width": [
-        [
-          1.985,
-          0.135
-        ],
-        [
-          1.96,
-          0.125
-        ],
-        [
-          1.93,
-          0.122
-        ],
-        [
-          1.9,
-          0.118
-        ],
-        [
-          1.862,
-          0.125
-        ],
-        [
-          1.79,
-          0.14
-        ],
-        [
-          1.703,
-          0.15
-        ],
-        [
-          1.627,
-          0.172
-        ],
-        [
-          1.58,
-          0.188
-        ],
-        [
-          1.487,
-          0.215
-        ],
-        [
-          1.44,
-          0.228
-        ],
-        [
-          1.41,
-          0.236
-        ],
-        [
-          1.398,
-          0.232
-        ],
-        [
-          1.392,
-          0.222
-        ]
+        [1.96, 0.13],
+        [1.9, 0.134],
+        [1.79, 0.142],
+        [1.703, 0.151],
+        [1.627, 0.167],
+        [1.58, 0.188],
+        [1.487, 0.215],
+        [1.44, 0.228],
+        [1.41, 0.236],
+        [1.398, 0.232],
+        [1.392, 0.222]
       ],
       "depth_note": "Deepened from the covers (Dragonet Prophecy, limited edition): the cream lower jaw is heavy, about 0.45 of the upper jaw's height at the front, with a squared chin. Chin bottom 1.213 -> 1.188, symphysis 1.262 -> 1.232.",
       "throat_junction": {
@@ -444,9 +334,385 @@
         "bottom": 1.345,
         "note": "Where the jaw's underside meets the throat (the throat latch). The underside runs one smooth line from the chin, rising more and more steeply into it; there is no notch (user: a drastic stair step from the Adam's apple to the chin)."
       },
-      "underside_note": "Underside (y): symphysis 1.212 (rounded) -> chin 1.188 at z 1.89 -> throat junction 1.345 at 1.58 -> 1.42 at 1.49 -> up to the ear. Before, the visible jaw ran to 1.285 at the throat while its hidden back followed the cheek line from 1.385, a stair step of 0.1, and its front swept up with the lip line."
+      "underside_note": "User correction: preserve the established underside/chin silhouette. Build dentary body thickness upward by raising the top rim under the upper lips, not by lowering the jaw bottom.",
+      "body_min_depth_model": 0,
+      "body_depth_range_z": [1.62, 1.97],
+      "frame_underside_uh": [
+        [-0.1, -0.066],
+        [0, -0.068],
+        [0.1, -0.076],
+        [0.25, -0.092],
+        [0.4, -0.105],
+        [0.51, -0.102],
+        [0.6, -0.073],
+        [0.68, -0.04]
+      ],
+      "resculpt_rim_zy": [
+        [
+          2.1792459,
+          1.1813412
+        ],
+        [
+          2.1511367,
+          1.197785
+        ],
+        [
+          2.1230276,
+          1.2142289
+        ],
+        [
+          2.0949184,
+          1.2306727
+        ],
+        [
+          2.0668093,
+          1.2471166
+        ],
+        [
+          2.0387001,
+          1.2635604
+        ],
+        [
+          2.0021001,
+          1.2800043
+        ],
+        [
+          1.9692303,
+          1.2964481
+        ],
+        [
+          1.9404317,
+          1.312892
+        ],
+        [
+          1.9143263,
+          1.3293358
+        ],
+        [
+          1.8891513,
+          1.3457797
+        ],
+        [
+          1.8645801,
+          1.3622235
+        ],
+        [
+          1.8396586,
+          1.3786674
+        ],
+        [
+          1.8135431,
+          1.3951112
+        ],
+        [
+          1.7857178,
+          1.4115551
+        ],
+        [
+          1.7576087,
+          1.4279989
+        ],
+        [
+          1.7294995,
+          1.4444428
+        ],
+        [
+          1.7054845,
+          1.4608866
+        ],
+        [
+          1.6795221,
+          1.4803584
+        ],
+        [
+          1.6490723,
+          1.5031958
+        ],
+        [
+          1.6266394,
+          1.5200442
+        ],
+        [
+          1.609745,
+          1.5340986
+        ],
+        [
+          1.5958888,
+          1.5478344
+        ],
+        [
+          1.5834031,
+          1.5622648
+        ],
+        [
+          1.5716384,
+          1.577639
+        ],
+        [
+          1.5604721,
+          1.5938114
+        ],
+        [
+          1.5497902,
+          1.6106294
+        ],
+        [
+          1.5394785,
+          1.6279411
+        ],
+        [
+          1.529423,
+          1.6455942
+        ],
+        [
+          1.5195094,
+          1.6634367
+        ],
+        [
+          1.5096236,
+          1.6813162
+        ],
+        [
+          1.4996516,
+          1.6990809
+        ],
+        [
+          1.4894791,
+          1.7165781
+        ],
+        [
+          1.478992,
+          1.733656
+        ],
+        [
+          1.4680763,
+          1.7501623
+        ],
+        [
+          1.4566177,
+          1.7659448
+        ],
+        [
+          1.4445022,
+          1.7808515
+        ],
+        [
+          1.4316156,
+          1.79473
+        ],
+        [
+          1.4178439,
+          1.8074282
+        ],
+        [
+          1.4031455,
+          1.8188909
+        ],
+        [
+          1.3882364,
+          1.8300727
+        ],
+        [
+          1.3733273,
+          1.8412545
+        ],
+        [
+          1.3584182,
+          1.8524364
+        ],
+        [
+          1.3435091,
+          1.8636182
+        ],
+        [
+          1.3286,
+          1.8748
+        ]
+      ],
+      "resculpt_bottom_zy": [
+        [
+          2.1276163,
+          1.1276465
+        ],
+        [
+          2.0995978,
+          1.1441846
+        ],
+        [
+          2.071428,
+          1.1605653
+        ],
+        [
+          2.0431307,
+          1.1768135
+        ],
+        [
+          2.0147299,
+          1.192954
+        ],
+        [
+          1.9862493,
+          1.2090116
+        ],
+        [
+          1.9577131,
+          1.2250112
+        ],
+        [
+          1.929079,
+          1.2409092
+        ],
+        [
+          1.9000944,
+          1.2564426
+        ],
+        [
+          1.8708279,
+          1.2716827
+        ],
+        [
+          1.8413912,
+          1.2867459
+        ],
+        [
+          1.8118963,
+          1.3017486
+        ],
+        [
+          1.7824491,
+          1.3168009
+        ],
+        [
+          1.7529448,
+          1.3317938
+        ],
+        [
+          1.7233295,
+          1.3466712
+        ],
+        [
+          1.6994387,
+          1.3614708
+        ],
+        [
+          1.67625,
+          1.3762299
+        ],
+        [
+          1.653059,
+          1.390986
+        ],
+        [
+          1.6258567,
+          1.4088045
+        ],
+        [
+          1.5942208,
+          1.4300606
+        ],
+        [
+          1.5706777,
+          1.4454286
+        ],
+        [
+          1.5524209,
+          1.4576663
+        ],
+        [
+          1.5368347,
+          1.4690957
+        ],
+        [
+          1.5223647,
+          1.4808802
+        ],
+        [
+          1.5084741,
+          1.49342
+        ],
+        [
+          1.4951538,
+          1.5067201
+        ],
+        [
+          1.4824024,
+          1.520779
+        ],
+        [
+          1.4702193,
+          1.5355953
+        ],
+        [
+          1.4586014,
+          1.5511654
+        ],
+        [
+          1.4473274,
+          1.5671941
+        ],
+        [
+          1.4361813,
+          1.5833933
+        ],
+        [
+          1.4250762,
+          1.5996471
+        ],
+        [
+          1.4139252,
+          1.6158396
+        ],
+        [
+          1.4026414,
+          1.6318552
+        ],
+        [
+          1.3911795,
+          1.6476333
+        ],
+        [
+          1.3807374,
+          1.664771
+        ],
+        [
+          1.3713528,
+          1.6833189
+        ],
+        [
+          1.3622828,
+          1.7022861
+        ],
+        [
+          1.3527839,
+          1.7206816
+        ],
+        [
+          1.3422489,
+          1.7376955
+        ],
+        [
+          1.3316419,
+          1.7546135
+        ],
+        [
+          1.3212962,
+          1.7718798
+        ],
+        [
+          1.3111851,
+          1.7894589
+        ],
+        [
+          1.3012818,
+          1.8073152
+        ],
+        [
+          1.2915598,
+          1.825413
+        ]
+      ]
     },
-    "rows_note": "'rows' is no longer read: the table is generated from 'bones' (kept only as the last traced version for reference)."
+    "rows_note": "Legacy rows and named underside landmarks record earlier passes. The active rim and underside are generated from mouth.frame and frame_underside_uh by game/tools/remap_mouth_frame.py."
   },
   "dark_plate_edge": {
     "note": "The roof's lower edge, traced on the side sheet's colour boundary (dark roof over orange face) and checked against How to Draw and the flight render, which agree on its shape: the roof covers the whole nose, down to the lip at the front; from the nose the edge rises only gently for the front third of the muzzle, then turns sharply up in a near-vertical step at about mid-muzzle, climbs steeply and diagonally to the front of the eye, runs over the top of the eye (the eye tucked right under it), steps up again behind the eye and runs back toward the ear. The rim plates (edge row) follow this line.",
@@ -480,6 +746,7 @@
     "front_note": "Forward of the eye the shield's lower edge runs at about mid-height along the snout's side to the front corner (top shot: the rim of square scutes runs forward along the side with orange below it), instead of folding down the sides to the lip at the front, and without the step at mid-muzzle (user)."
   },
   "eye": {
+    "iris_diameter_scale": 1.1,
     "note": "Round, wide-open eye under the eave; its opening is one teardrop outline: the round eye with its inner corner drawn down and forward into a point, which the pink caruncle fills (side sheet). The lids are two sheets over that outline, and the blink covers the eyeball and the caruncle together.",
     "centre_zy": [1.695, 1.692],
     "radius": 0.031,
@@ -522,7 +789,8 @@
     "axis_yz": [-0.60, 0.80],
     "length_scale": 0.68,
     "gate_z": [1.61, 1.76],
-    "why": "Shorten along the actual down-and-forward muzzle axis. Compressing only world z made the face steeper instead of correcting the long horse-like proportion. Apply the same frame to both jaws, lips, palate, teeth, nose and rig anchors; retain the neck attachment. Official head drawings, not ref1400, guide the compactness."
+    "why": "Shorten along the actual down-and-forward muzzle axis. Compressing only world z made the face steeper instead of correcting the long horse-like proportion. Apply the same frame to both jaws, lips, palate, teeth, nose and rig anchors; retain the neck attachment. Official head drawings, not ref1400, guide the compactness.",
+    "axis_transition_model": 0.14
   },
   "head_proportion_review": {
     "sources": ["covers/Clay_htd.png", "covers/Clay_LE_Render_zstarchaserr_png.png", "covers/Clay_Render_zstarchaserr_png.png", "covers/Clay_SEPoster_Isolated_Edit_png.png"],
@@ -1058,80 +1326,77 @@
     "superseded": "Not built: the nose is lion_nose, on the muzzle shield."
   },
   "teeth": {
-    "lip_note": "Upper roots are embedded in the finished palate at ray-cast gum seats; crown length is limited by the actual clearance above the lip margin. Both rows root in gums, not in the lip surface. Tooth counts remain the reference-based seven upper and six lower side crowns, with four front crowns.",
-    "note": "Flight render and limited edition: small triangular crown silhouettes, interpreted as solid recurved animal teeth with oval cross-sections. The tooth rows start at the bite point (z 1.86), where the upper and lower fronts of the mouth meet when it is closed: a short row across the front of the mouth there, then rows back along each side lip, each tooth perpendicular to its lip edge, tips raked a little back. In front of the bite point is the front muzzle's underside: skin, no teeth. A little larger mid-row; no single big fang.",
-    "rake_deg": 12,
-    "base_frac": 0.6,
+    "lip_note": "Animal dentition replaces the illustration tooth count: continuous, closely spaced rows of broad-rooted recurved crowns, smaller at the premaxilla and rear. Construct rigid enamel after both head warps against the finished gum seats.",
+    "note": "Animal-inspired recurved crowns in continuous horseshoe gum beds. The anterior arch turns tangentially into side rows, with modestly larger paired corner crowns and smaller front teeth. Build rigid enamel against the finished compacted palate and jaw floor; do not squash crown shapes with head proportion edits.",
+    "rake_deg": 8,
+    "base_frac": 0.9,
     "thickness": 0.018,
     "upper": {
-      "z": [
-        1.955,
-        1.62
-      ],
-      "count": 7,
-      "length": [
-        0.042,
-        0.064
-      ],
+      "z": [1.933, 1.62],
+      "count": 12,
+      "length": [0.031, 0.041],
       "inset": 0.02,
       "tuck_up": 0.065,
       "inset_note": "From the tucked lip edge: the upper teeth stand just outside the lower ones (lower inset 0.016 from the jaw edge).",
       "outside_lower": 0.03,
-      "outside_note": "The upper row is limited to the smaller of the tucked upper-lip width and the lower tooth-row width plus outside_lower; it never crosses the upper lip. Placed from the lip alone, the back upper tooth stood outside the lower jaw at the mouth corner and hung down past it as a blade."
+      "outside_note": "The upper row is limited to the smaller of the tucked upper-lip width and the lower tooth-row width plus outside_lower; it never crosses the upper lip. Placed from the lip alone, the back upper tooth stood outside the lower jaw at the mouth corner and hung down past it as a blade.",
+      "u_range": [0.078, 0.36]
     },
     "lower": {
-      "z": [
-        1.945,
-        1.63
-      ],
-      "count": 6,
-      "length": [
-        0.03,
-        0.046
-      ],
-      "inset": 0.035
+      "z": [1.925, 1.63],
+      "count": 11,
+      "length": [0.027, 0.036],
+      "inset": 0.035,
+      "u_range": [0.086, 0.36]
     },
     "front": {
       "z": 1.985,
-      "count": 4,
-      "half_span": 0.06,
-      "length": 0.0336,
+      "count": 6,
+      "half_span": 0.085,
+      "length": 0.026,
       "tuck_up": 0.065,
-      "tuck_back": 0.012
+      "tuck_back": 0.012,
+      "arch_depth": 0.04,
+      "u_front": 0.012,
+      "arch_depth_u": 0.043
     },
     "front_lower": {
       "z": 1.97,
-      "count": 4,
-      "half_span": 0.06,
-      "length": 0.0253
+      "count": 6,
+      "half_span": 0.08,
+      "length": 0.023,
+      "arch_depth": 0.045,
+      "u_front": 0.045,
+      "arch_depth_u": 0.041
     },
-    "shape_note": "Solid recurved cones with 20 radial and 12 longitudinal samples; cross-jaw base width is 0.75 of the along-row base width. Crowns have real volume rather than fixed thin blade sections.",
-    "recurve": 0.18,
-    "size_note": "Stout cones as the covers paint them: across the base 0.6 of the tooth's length along the jaw, 0.018 thick.",
-    "row_note": "The rows run the whole jaw, to the front of the mouth (they stopped at a bite point at z 1.86 while the jaw was traced short from the side sheet).",
-    "count_note": "Re-read on the Dragonet Prophecy cover's open mouth: about six or seven stout cones show along each side of each jaw, with gaps between them, not a saw of small spikes. Upper 7 per side (0.042-0.064 long), lower 6 (0.03-0.046).",
-    "section_ratio": 0.75,
+    "shape_note": "A continuous rounded horseshoe in plan, with six small crowns over its anterior arc and modestly larger paired corner crowns at the turn into the side rows. Teeth are built rigid after head compaction.",
+    "recurve": 0.24,
+    "size_note": "Crown bases follow actual final row spacing; maintain a full oval cross-section and a convex taper. Corner crowns are 15 percent taller than regular maxima and have additional base space.",
+    "row_note": "The anterior ellipse connects both side rows without square corners. Teeth follow the whole alveolar arch, inside the snout and behind its front wall.",
+    "count_note": "12 upper and 11 lower crowns per side; six smaller anterior crowns on each curved arch. User permits animal dentition rather than the illustrations' sparse visible tooth count.",
+    "section_ratio": 0.85,
     "root_embed": 0.004,
-    "hide_margin": 0.003
+    "hide_margin": 0.003,
+    "animal_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9953444/ (monitor-lizard recurved crowns and embedded bases); rounded, fuller section is an art adaptation, not a literal Komodo blade.",
+    "corner_crown_scale": 1.15,
+    "corner_base_spacing": 0.47,
+    "coordinate_note": "u_range, u_front and arch_depth_u are the active longitudinal measurements in the final skull frame; earlier z fields remain as historical source measurements. Gum seats are ray-cast along the skull normal and crowns share that direction."
   },
   "mouth": {
     "why": "The mouth opens by stretching skin, not as two rigid pieces parting (user; Dragonet Prophecy cover). The cover's open mouth is a deep cavity, its floor a trough for the tongue under an arched palate, and the gape ends in a rounded corner of cheek skin under the eye. The lips stay joined from the corner back to the hinge, where the jaw's bone runs on inside the cheek.",
-    "corner_z": 1.59,
+    "corner_z": 1.67,
     "corner_note": "The web's front edge is closed by a half round from the skin into the lining, and the web thickens toward it (0.004 + 0.008 u^3), so the mouth's corner is a fleshy commissure. Before, the two loose sheets 0.004 apart showed as a thin pale sliver at the corner of the open mouth.",
     "corner_round": 0.035,
     "web_back_z": 1.45,
     "web_thickness": 0.004,
     "hinge_z": 1.45,
-    "inside_from": [
-      2.015,
-      1.98
-    ],
-    "palate_arch": 0.07,
+    "inside_from": [2.015, 1.98],
+    "palate_arch": 0.014,
     "palate_shape_power": 0.3,
     "floor_trough": 0.03,
     "web_orange_to": 0.2,
     "cheek_bulge": 0.035,
-    "cheek_bulge_note": "the outward bow of the cheek skin at the jaw's full opening (jaw 0.6 rad), as a corrective shape the jaw drives (jawOpen = jaw / 0.6)",
+    "cheek_bulge_note": "Legacy lateral bulge is replaced by three pose-corrected cheek curves with jaw-tangent attachments.",
     "lip_roll": {
       "amount": 0.004,
       "at": 0.006,
@@ -1142,10 +1407,7 @@
       "tip_z": 1.93,
       "root_z": 1.56,
       "width": 0.05,
-      "thickness": [
-        0.012,
-        0.03
-      ],
+      "thickness": [0.012, 0.03],
       "tip_round": 0.14,
       "groove": 0.004,
       "lift": 0.004,
@@ -1153,6 +1415,8 @@
     },
     "corner_thickness": 0.008,
     "opening_arc": {
+      "cheek_tangent_fraction": 0.38,
+      "cheek_sample_angles": [0.3, 0.6, 0.9],
       "attachment_snap_distance": 0.012,
       "attachment_blend_distance": 0.035,
       "fractions": [0.0, 0.3333333333, 0.6666666667, 1.0],
@@ -1172,63 +1436,215 @@
       "back_z": 1.32,
       "front_z": 1.76,
       "stations": [
-        [
-          1.43,
-          1.555,
-          0.095,
-          0.085
-        ],
-        [
-          1.56,
-          1.48,
-          0.11,
-          0.12
-        ],
-        [
-          1.72,
-          1.36,
-          0.115,
-          0.08
-        ]
+        [1.43, 1.6537500000000003, 0.11, 0.09],
+        [1.56, 1.5562500000000001, 0.11, 0.09],
+        [1.803124267509771, 1.387614705882353, 0.11, 0.09]
       ],
       "why": "Dark recessed oral space visible behind the tongue in the open-mouth cover; subtract from the body union so solid neck/head construction does not fill the gape. Stations are z, centre y, lateral radius, vertical radius."
     },
     "fire_origin": [
-      [
-        0,
-        1.41,
-        1.65
-      ],
-      [
-        0,
-        1.2,
-        2.05
-      ]
+      [0.0, 1.576, 1.542],
+      [0.0, 1.247129411764706, 2.0539668174962293]
     ],
-    "fire_note": "Animation emission guide aimed through the open gape below the upper lip. No fictional fire organ is modeled. Validate its ray against the posed mouth for fire breathing.",
+    "fire_note": "The source sits at the posterior oral cavity (near the throat station at z1.56), inside the mouth; its guide aims through the wide gape. The runtime emitter uses this origin exactly, without moving it in front of the face.",
     "floor_profile": [
-      [
-        1.43,
-        1.47
-      ],
-      [
-        1.56,
-        1.37
-      ],
-      [
-        1.7,
-        1.3
-      ],
-      [
-        1.86,
-        1.235
-      ],
-      [
-        1.98,
-        1.235
-      ]
+      [1.2518, 1.7724],
+      [1.2667091, 1.7612182],
+      [1.2816182, 1.7500364],
+      [1.2965273, 1.7388545],
+      [1.3114364, 1.7276727],
+      [1.3263455, 1.7164909],
+      [1.3412545, 1.7053091],
+      [1.3561636, 1.6941273],
+      [1.3710727, 1.6829455],
+      [1.3859818, 1.6717636],
+      [1.4008909, 1.6605818],
+      [1.4158, 1.6494],
+      [1.4307091, 1.6382182],
+      [1.4456182, 1.6270364],
+      [1.4605273, 1.6158545],
+      [1.4754364, 1.6046727],
+      [1.4903455, 1.5934909],
+      [1.5052545, 1.5823091],
+      [1.5201636, 1.5711273],
+      [1.5350727, 1.5599455],
+      [1.5499818, 1.5487636],
+      [1.5648909, 1.5375818],
+      [1.5798083, 1.5263938],
+      [1.5952695, 1.5147979],
+      [1.612828, 1.501629],
+      [1.6352723, 1.4847958],
+      [1.6657221, 1.4619584],
+      [1.6916845, 1.4424866],
+      [1.7136096, 1.4260428],
+      [1.7399164, 1.4095989],
+      [1.7680255, 1.3931551],
+      [1.7961346, 1.3767112],
+      [1.8236834, 1.3602674],
+      [1.850065, 1.3438235],
+      [1.8760012, 1.3273797],
+      [1.9026442, 1.3109358],
+      [1.9308279, 1.294492],
+      [1.9619291, 1.2780481],
+      [1.9928987, 1.2616043],
+      [2.0210078, 1.2451604],
+      [2.049117, 1.2287166],
+      [2.0772261, 1.2122727],
+      [2.1053353, 1.1958289],
+      [2.1334444, 1.179385],
+      [2.1615535, 1.1629412]
     ],
-    "floor_wall": 0.012
+    "floor_wall": 0.012,
+    "frame": {
+      "origin_yz": [1.37, 1.825],
+      "forward_yz": [-0.6, 0.8],
+      "up_yz": [0.8, 0.6],
+      "upper_bed_normal": 0.03,
+      "lower_floor_normal": -0.022,
+      "lower_rim_normal": 0.001,
+      "why": "One skull-aligned frame for lip relief, both jaw beds and the tooth axes. Downward relief is opposite up_yz, perpendicular to the sloping skull, never world -Y."
+    },
+    "upper_bed_profile_zy": [
+      [2.2015535, 1.2045412],
+      [2.1734444, 1.220985],
+      [2.1453353, 1.2374289],
+      [2.1172261, 1.2538727],
+      [2.0871357, 1.2703166],
+      [2.0449627, 1.2867604],
+      [2.0061378, 1.3032043],
+      [1.9767048, 1.3196481],
+      [1.9501122, 1.336092],
+      [1.9266148, 1.3525358],
+      [1.903562, 1.3689797],
+      [1.8806958, 1.3854235],
+      [1.8577143, 1.4018674],
+      [1.8337368, 1.4183112],
+      [1.8078868, 1.4347551],
+      [1.7799164, 1.4511989],
+      [1.7518072, 1.4676428],
+      [1.7236981, 1.4840866],
+      [1.6969221, 1.5035584],
+      [1.6664723, 1.5263958],
+      [1.644028, 1.543229],
+      [1.6264695, 1.5563979],
+      [1.6110083, 1.5679938],
+      [1.5960909, 1.5791818],
+      [1.5811818, 1.5903636],
+      [1.5662727, 1.6015455],
+      [1.5513636, 1.6127273],
+      [1.5364545, 1.6239091],
+      [1.5215455, 1.6350909],
+      [1.5066364, 1.6462727],
+      [1.4917273, 1.6574545],
+      [1.4768182, 1.6686364],
+      [1.4619091, 1.6798182],
+      [1.447, 1.691],
+      [1.4320909, 1.7021818],
+      [1.4171818, 1.7133636],
+      [1.4022727, 1.7245455],
+      [1.3873636, 1.7357273],
+      [1.3724545, 1.7469091],
+      [1.3575455, 1.7580909],
+      [1.3426364, 1.7692727],
+      [1.3277273, 1.7804545],
+      [1.3128182, 1.7916364],
+      [1.2979091, 1.8028182],
+      [1.283, 1.814]
+    ],
+    "upper_u_source_z": [
+      [-0.12, 2.2015535444947214],
+      [-0.10136363636363636, 2.1734443987385164],
+      [-0.08272727272727273, 2.1453352529823118],
+      [-0.06409090909090909, 2.117226107226107],
+      [-0.045454545454545456, 2.0871356780474426],
+      [-0.026818181818181824, 2.0449627129836108],
+      [-0.008181818181818179, 2.0061378492374136],
+      [0.010454545454545439, 1.9767048350972292],
+      [0.029090909090909084, 1.950112203605531],
+      [0.04772727272727273, 1.9266147517264223],
+      [0.06636363636363635, 1.9035620345887863],
+      [0.08499999999999999, 1.8806957789270344],
+      [0.10363636363636364, 1.8577142521589873],
+      [0.12227272727272726, 1.8337367899105335],
+      [0.14090909090909087, 1.8078868069498748],
+      [0.15954545454545455, 1.7799163581516522],
+      [0.17818181818181816, 1.7518072123954476],
+      [0.19681818181818178, 1.7236980666392432],
+      [0.21545454545454545, 1.6969221454373207],
+      [0.23409090909090907, 1.6664722590554084],
+      [0.2527272727272727, 1.6440280306332729],
+      [0.27136363636363636, 1.626469528039985],
+      [0.29, 1.6110082639746428],
+      [0.3086363636363636, 1.596090909090909],
+      [0.32727272727272727, 1.581181818181818],
+      [0.3459090909090909, 1.5662727272727273],
+      [0.3645454545454545, 1.5513636363636363],
+      [0.3831818181818182, 1.5364545454545453],
+      [0.40181818181818174, 1.5215454545454545],
+      [0.4204545454545454, 1.5066363636363636],
+      [0.4390909090909091, 1.4917272727272726],
+      [0.45772727272727265, 1.4768181818181818],
+      [0.4763636363636363, 1.4619090909090908],
+      [0.495, 1.4469999999999998],
+      [0.5136363636363636, 1.432090909090909],
+      [0.5322727272727272, 1.417181818181818],
+      [0.5509090909090909, 1.4022727272727271],
+      [0.5695454545454545, 1.3873636363636364],
+      [0.5881818181818181, 1.3724545454545454],
+      [0.6068181818181818, 1.3575454545454544],
+      [0.6254545454545454, 1.3426363636363636],
+      [0.644090909090909, 1.3277272727272729],
+      [0.6627272727272727, 1.3128181818181817],
+      [0.6813636363636363, 1.297909090909091],
+      [0.7, 1.2830000000000001]
+    ],
+    "lower_u_source_z": [
+      [-0.12, 2.161553544494721],
+      [-0.10136363636363636, 2.133444398738516],
+      [-0.08272727272727273, 2.1053352529823113],
+      [-0.06409090909090909, 2.077226107226107],
+      [-0.045454545454545456, 2.049116961469902],
+      [-0.026818181818181824, 2.021007815713698],
+      [-0.008181818181818179, 1.9928986699574935],
+      [0.010454545454545439, 1.961929079478078],
+      [0.029090909090909084, 1.9308279249385054],
+      [0.04772727272727273, 1.902644150697875],
+      [0.06636363636363635, 1.876001175655504],
+      [0.08499999999999999, 1.8500650026714918],
+      [0.10363636363636364, 1.8236833568191417],
+      [0.12227272727272726, 1.7961346496640611],
+      [0.14090909090909087, 1.7680255039078565],
+      [0.15954545454545455, 1.7399163581516524],
+      [0.17818181818181816, 1.713609625668449],
+      [0.19681818181818178, 1.6916844919786092],
+      [0.21545454545454545, 1.6657221454468554],
+      [0.23409090909090907, 1.635272259055523],
+      [0.2527272727272727, 1.6128280306331968],
+      [0.27136363636363636, 1.5952695280399734],
+      [0.29, 1.5798082639746422],
+      [0.3086363636363636, 1.5648909090909089],
+      [0.32727272727272727, 1.549981818181818],
+      [0.3459090909090909, 1.5350727272727271],
+      [0.3645454545454545, 1.5201636363636362],
+      [0.3831818181818182, 1.5052545454545452],
+      [0.40181818181818174, 1.4903454545454544],
+      [0.4204545454545454, 1.4754363636363634],
+      [0.4390909090909091, 1.4605272727272725],
+      [0.45772727272727265, 1.4456181818181817],
+      [0.4763636363636363, 1.4307090909090907],
+      [0.495, 1.4157999999999997],
+      [0.5136363636363636, 1.400890909090909],
+      [0.5322727272727272, 1.385981818181818],
+      [0.5509090909090909, 1.371072727272727],
+      [0.5695454545454545, 1.3561636363636362],
+      [0.5881818181818181, 1.3412545454545453],
+      [0.6068181818181818, 1.3263454545454543],
+      [0.6254545454545454, 1.3114363636363635],
+      [0.644090909090909, 1.2965272727272728],
+      [0.6627272727272727, 1.2816181818181815],
+      [0.6813636363636363, 1.2667090909090908],
+      [0.7, 1.2518]
+    ]
   },
   "muzzle_shield": {
     "note": "The muzzle shield (user): one solid piece raised from the face itself over the region above one edge line (dark_plate_edge, lifted clear of the ear), so the top, the angular front corners and the upper front face are one continuous surface, its edge rounded all round; no seams, no fitted front cap. Its plating is carved in like an ankylosaur's fused skull armour (grooves at the joints, a low dome per tile; layout from roof_plates.layout). The lion's nose rises out of it.",

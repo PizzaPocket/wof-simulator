@@ -1,248 +1,1099 @@
 {
   "skin_pattern": {
     "neck_scale": 2.0,
-    "neck_blend_s": [0.48, 0.75],
-    "body_spacing": [0.065, 0.06],
-    "limb_spacing": [0.07, 0.075],
-    "why": "How to Draw neck crop x280–610 y320–880: broad orange scales in roughly two columns between armor and cream, versus the model's denser small cells. Flight crop x2320–2800 y1580–1990 confirms large elongated neck scales. Double neck spacing, fade into the chest, retain body and leg density."
+    "neck_blend_s": [
+      0.48,
+      0.75
+    ],
+    "body_spacing": [
+      0.065,
+      0.06
+    ],
+    "limb_spacing": [
+      0.07,
+      0.075
+    ],
+    "why": "How to Draw neck crop x280\u2013610 y320\u2013880: broad orange scales in roughly two columns between armor and cream, versus the model's denser small cells. Flight crop x2320\u20132800 y1580\u20131990 confirms large elongated neck scales. Double neck spacing, fade into the chest, retain body and leg density."
   },
   "about": "Clay's body (neck, torso, tail, then limbs and wings), element by element (see body_sheets.md). Model units: z = (700 - px) / 343, y = (830 - py) / 343, from the 1400 px side sheet; x = Clay's left. The bind pose is the side sheet's pose, so the side view can be checked against the sheet directly; the tail's lower run is lifted onto the ground and curls toward the viewer (+x).",
   "trunk": {
     "note": "Neck, torso and tail are one continuous mass, built as one loft along a curved spine with cross-sections perpendicular to it. Measured on the side sheet (trunk_overlay): the spine was traced through the middle of the body, and at each station the depth to the dorsal outline (top of the neck and back along the body under the mane, at the bases of the spike blades, not their tips; outer edge of the tail curl) and to the ventral outline (the throat and chest along the underside's midline, drawn down the middle of the cream throat band, not the outline in front of it, which is the far front leg's shoulder; at about elbow height where the near upper arm hides the chest; belly, inner edge of the tail curl) was measured along the perpendicular. The neck is short and thick, the torso a deep barrel (~0.9 from back to belly), the tail thick (~0.25-0.38) nearly to its tip. The throat's ventral depth runs smoothly from the jaw down the neck (0.212, 0.213, 0.207, 0.200, 0.203): the trace had a bump at s 0.23 (0.232 between 0.213 and 0.195), most likely the jaw's corner read as throat, which made a collar round the neck just behind the jaw.",
-    "stations_columns": ["s", "z", "y", "dorsal", "ventral"],
+    "stations_columns": [
+      "s",
+      "z",
+      "y",
+      "dorsal",
+      "ventral"
+    ],
     "stations": [
-      [0.0, 1.3848, 1.656, 0.2473, 0.2116],
-      [0.1166, 1.2889, 1.5897, 0.3075, 0.2131],
-      [0.2333, 1.196, 1.5195, 0.3778, 0.207],
-      [0.3499, 1.1093, 1.4415, 0.4113, 0.2],
-      [0.4666, 1.0228, 1.3632, 0.4411, 0.2034],
-      [0.5832, 0.9365, 1.2847, 0.4769, 0.2407],
-      [0.6999, 0.8388, 1.2218, 0.4766, 0.3516],
-      [0.8165, 0.7375, 1.1642, 0.4876, 0.5019],
-      [0.9331, 0.6268, 1.1273, 0.4869, 0.576],
-      [1.0498, 0.5162, 1.0904, 0.4938, 0.5532],
-      [1.1664, 0.4041, 1.0598, 0.4992, 0.503],
-      [1.2831, 0.2884, 1.0448, 0.481, 0.4908],
-      [1.3997, 0.1728, 1.0297, 0.462, 0.4779],
-      [1.5164, 0.0564, 1.0227, 0.4543, 0.4691],
-      [1.633, -0.0601, 1.018, 0.4415, 0.4644],
-      [1.7496, -0.1767, 1.0158, 0.4305, 0.4578],
-      [1.8663, -0.2932, 1.0205, 0.3999, 0.4367],
-      [1.9829, -0.4098, 1.0251, 0.3694, 0.4156],
-      [2.0996, -0.5262, 1.0316, 0.3332, 0.3975],
-      [2.2162, -0.6427, 1.0386, 0.2904, 0.3814],
-      [2.3328, -0.7587, 1.0384, 0.2308, 0.3814],
-      [2.4495, -0.8735, 1.0177, 0.2017, 0.3649],
-      [2.5661, -0.9883, 0.997, 0.1726, 0.3615],
-      [2.6828, -1.094, 0.9508, 0.1294, 0.3532],
-      [2.7994, -1.1962, 0.8946, 0.1129, 0.3207],
-      [2.9161, -1.2984, 0.8383, 0.0873, 0.3266],
-      [3.0327, -1.3835, 0.7593, 0.0769, 0.3127],
-      [3.1493, -1.466, 0.6769, 0.0734, 0.2856],
-      [3.266, -1.5387, 0.5883, 0.064, 0.3052],
-      [3.3826, -1.576, 0.4778, 0.0898, 0.2643],
-      [3.4993, -1.609, 0.3666, 0.1194, 0.2511],
-      [3.6159, -1.6061, 0.25, 0.1537, 0.1999],
-      [3.7326, -1.598, 0.1347, 0.1793, 0.1921],
-      [3.8492, -1.5458, 0.0304, 0.2069, 0.1373],
-      [3.9658, -1.4869, -0.0679, 0.1662, 0.1296],
-      [4.0825, -1.3896, -0.1323, 0.1609, 0.0778],
-      [4.1991, -1.2886, -0.1867, 0.1432, 0.1047],
-      [4.3158, -1.1729, -0.2017, 0.1532, 0.1105],
-      [4.4324, -1.0573, -0.2168, 0.1489, 0.1276],
-      [4.5491, -0.941, -0.22, 0.1445, 0.1314],
-      [4.6657, -0.8243, -0.2177, 0.1468, 0.1302],
-      [4.7823, -0.7077, -0.2155, 0.1413, 0.1281],
-      [4.899, -0.5911, -0.2144, 0.1311, 0.1269],
-      [5.0156, -0.4744, -0.2132, 0.1209, 0.1257],
-      [5.1323, -0.3579, -0.2172, 0.1164, 0.1223],
-      [5.2489, -0.2415, -0.2237, 0.1175, 0.1184],
-      [5.3656, -0.1272, -0.2424, 0.1094, 0.1006],
-      [5.4822, -0.016, -0.2774, 0.104, 0.0861],
-      [5.5988, 0.0857, -0.3317, 0.083, 0.051],
-      [5.7155, 0.1733, -0.4062, 0.0484, 0.0146]
+      [
+        0.0,
+        1.3848,
+        1.656,
+        0.2473,
+        0.2116
+      ],
+      [
+        0.1166,
+        1.2889,
+        1.5897,
+        0.3075,
+        0.2131
+      ],
+      [
+        0.2333,
+        1.196,
+        1.5195,
+        0.3778,
+        0.207
+      ],
+      [
+        0.3499,
+        1.1093,
+        1.4415,
+        0.4113,
+        0.2
+      ],
+      [
+        0.4666,
+        1.0228,
+        1.3632,
+        0.4411,
+        0.2034
+      ],
+      [
+        0.5832,
+        0.9365,
+        1.2847,
+        0.4769,
+        0.2407
+      ],
+      [
+        0.6999,
+        0.8388,
+        1.2218,
+        0.4766,
+        0.3516
+      ],
+      [
+        0.8165,
+        0.7375,
+        1.1642,
+        0.4876,
+        0.5019
+      ],
+      [
+        0.9331,
+        0.6268,
+        1.1273,
+        0.4869,
+        0.576
+      ],
+      [
+        1.0498,
+        0.5162,
+        1.0904,
+        0.4938,
+        0.5532
+      ],
+      [
+        1.1664,
+        0.4041,
+        1.0598,
+        0.4992,
+        0.503
+      ],
+      [
+        1.2831,
+        0.2884,
+        1.0448,
+        0.481,
+        0.4908
+      ],
+      [
+        1.3997,
+        0.1728,
+        1.0297,
+        0.462,
+        0.4779
+      ],
+      [
+        1.5164,
+        0.0564,
+        1.0227,
+        0.4543,
+        0.4691
+      ],
+      [
+        1.633,
+        -0.0601,
+        1.018,
+        0.4415,
+        0.4644
+      ],
+      [
+        1.7496,
+        -0.1767,
+        1.0158,
+        0.4305,
+        0.4578
+      ],
+      [
+        1.8663,
+        -0.2932,
+        1.0205,
+        0.3999,
+        0.4367
+      ],
+      [
+        1.9829,
+        -0.4098,
+        1.0251,
+        0.3694,
+        0.4156
+      ],
+      [
+        2.0996,
+        -0.5262,
+        1.0316,
+        0.3332,
+        0.3975
+      ],
+      [
+        2.2162,
+        -0.6427,
+        1.0386,
+        0.2904,
+        0.3814
+      ],
+      [
+        2.3328,
+        -0.7587,
+        1.0384,
+        0.2308,
+        0.3814
+      ],
+      [
+        2.4495,
+        -0.8735,
+        1.0177,
+        0.2017,
+        0.3649
+      ],
+      [
+        2.5661,
+        -0.9883,
+        0.997,
+        0.1726,
+        0.3615
+      ],
+      [
+        2.6828,
+        -1.094,
+        0.9508,
+        0.1294,
+        0.3532
+      ],
+      [
+        2.7994,
+        -1.1962,
+        0.8946,
+        0.1129,
+        0.3207
+      ],
+      [
+        2.9161,
+        -1.2984,
+        0.8383,
+        0.0873,
+        0.3266
+      ],
+      [
+        3.0327,
+        -1.3835,
+        0.7593,
+        0.0769,
+        0.3127
+      ],
+      [
+        3.1493,
+        -1.466,
+        0.6769,
+        0.0734,
+        0.2856
+      ],
+      [
+        3.266,
+        -1.5387,
+        0.5883,
+        0.064,
+        0.3052
+      ],
+      [
+        3.3826,
+        -1.576,
+        0.4778,
+        0.0898,
+        0.2643
+      ],
+      [
+        3.4993,
+        -1.609,
+        0.3666,
+        0.1194,
+        0.2511
+      ],
+      [
+        3.6159,
+        -1.6061,
+        0.25,
+        0.1537,
+        0.1999
+      ],
+      [
+        3.7326,
+        -1.598,
+        0.1347,
+        0.1793,
+        0.1921
+      ],
+      [
+        3.8492,
+        -1.5458,
+        0.0304,
+        0.2069,
+        0.1373
+      ],
+      [
+        3.9658,
+        -1.4869,
+        -0.0679,
+        0.1662,
+        0.1296
+      ],
+      [
+        4.0825,
+        -1.3896,
+        -0.1323,
+        0.1609,
+        0.0778
+      ],
+      [
+        4.1991,
+        -1.2886,
+        -0.1867,
+        0.1432,
+        0.1047
+      ],
+      [
+        4.3158,
+        -1.1729,
+        -0.2017,
+        0.1532,
+        0.1105
+      ],
+      [
+        4.4324,
+        -1.0573,
+        -0.2168,
+        0.1489,
+        0.1276
+      ],
+      [
+        4.5491,
+        -0.941,
+        -0.22,
+        0.1445,
+        0.1314
+      ],
+      [
+        4.6657,
+        -0.8243,
+        -0.2177,
+        0.1468,
+        0.1302
+      ],
+      [
+        4.7823,
+        -0.7077,
+        -0.2155,
+        0.1413,
+        0.1281
+      ],
+      [
+        4.899,
+        -0.5911,
+        -0.2144,
+        0.1311,
+        0.1269
+      ],
+      [
+        5.0156,
+        -0.4744,
+        -0.2132,
+        0.1209,
+        0.1257
+      ],
+      [
+        5.1323,
+        -0.3579,
+        -0.2172,
+        0.1164,
+        0.1223
+      ],
+      [
+        5.2489,
+        -0.2415,
+        -0.2237,
+        0.1175,
+        0.1184
+      ],
+      [
+        5.3656,
+        -0.1272,
+        -0.2424,
+        0.1094,
+        0.1006
+      ],
+      [
+        5.4822,
+        -0.016,
+        -0.2774,
+        0.104,
+        0.0861
+      ],
+      [
+        5.5988,
+        0.0857,
+        -0.3317,
+        0.083,
+        0.051
+      ],
+      [
+        5.7155,
+        0.1733,
+        -0.4062,
+        0.0484,
+        0.0146
+      ]
     ],
     "width": {
       "note": "Half-width = factor * mean depth at the widest level of each section. From the official front-facing art (box set, How to Draw, limited edition): the shoulders are about twice as wide as the neck at its base, but the chest is not a barrel. Its section is a deep keel, widest high up at the shoulders and narrowing toward the breastbone, so the front legs hang close beside it, like a cat's. The belly tucks up into a waist before the haunches. The tail is taller than it is wide. Over the hips the section broadens again (factor 0.9-0.95): the pelvis and the croup are broad on top, as in a cat, so the haunches grow out of the hips with no pit between them and the spine. At the head (s 0) the neck is as wide as the back of the skull and the jaw's corners (half-width ~0.235, factor 1.02), so it takes them in rather than the head's back edges standing out of a narrower neck.",
       "factor": [
-        [0.0, 1.02],
-        [0.15, 0.93],
-        [0.5, 0.8],
-        [0.8, 0.74],
-        [1.2, 0.72],
-        [1.7, 0.7],
-        [2.0, 0.9],
-        [2.3, 0.95],
-        [2.7, 0.72],
-        [5.72, 0.66]
+        [
+          0.0,
+          1.02
+        ],
+        [
+          0.15,
+          0.93
+        ],
+        [
+          0.5,
+          0.8
+        ],
+        [
+          0.8,
+          0.74
+        ],
+        [
+          1.2,
+          0.72
+        ],
+        [
+          1.7,
+          0.7
+        ],
+        [
+          2.0,
+          0.9
+        ],
+        [
+          2.3,
+          0.95
+        ],
+        [
+          2.7,
+          0.72
+        ],
+        [
+          5.72,
+          0.66
+        ]
       ]
     },
-    "squareness": [[0.0, 2.4], [1.0, 2.2], [2.3, 2.2], [5.72, 2.0]],
+    "squareness": [
+      [
+        0.0,
+        2.4
+      ],
+      [
+        1.0,
+        2.2
+      ],
+      [
+        2.3,
+        2.2
+      ],
+      [
+        5.72,
+        2.0
+      ]
+    ],
     "zones": {
       "note": "On the neck and torso the zone edges are measured side-view lines, not fractions. The dark edge is the line of small square plates: from behind the ear it runs back and then straight DOWN the side of the neck into the shoulder, round the bottom of the dark shoulder patch, and back along the wing arm. The cream edge bounds the wide throat band, down the front of the neck into the chest; behind the forelegs the cream rises to meet the dark edge (no orange band). On the tail (after lines_until_s) the edges are side fractions. Behind the shoulder the sheet's wing hides the hips, so their edge mirrors the shoulder's: the dark edge dips over the hip into a brown cap (to py 532, as at the shoulder) and runs on past the hips to the tail, so the shell is unbroken.",
-      "columns": ["s", "dark_to", "cream_from"],
+      "columns": [
+        "s",
+        "dark_to",
+        "cream_from"
+      ],
       "rows": [
-        [0.0, 0.3, 0.72],
-        [0.55, 0.3, 0.7],
-        [0.75, 0.33, 0.6],
-        [1.0, 0.42, 0.45],
-        [2.2, 0.42, 0.45],
-        [2.6, 0.5, 0.5],
-        [3.5, 0.5, 0.5],
-        [3.9, 0.3, 0.3],
-        [5.72, 0.3, 0.3]
+        [
+          0.0,
+          0.3,
+          0.72
+        ],
+        [
+          0.55,
+          0.3,
+          0.7
+        ],
+        [
+          0.75,
+          0.33,
+          0.6
+        ],
+        [
+          1.0,
+          0.42,
+          0.45
+        ],
+        [
+          2.2,
+          0.42,
+          0.45
+        ],
+        [
+          2.6,
+          0.5,
+          0.5
+        ],
+        [
+          3.5,
+          0.5,
+          0.5
+        ],
+        [
+          3.9,
+          0.3,
+          0.3
+        ],
+        [
+          5.72,
+          0.3,
+          0.3
+        ]
       ],
       "dark_edge_px": [
-        [213, 182],
-        [254, 178],
-        [288, 192],
-        [316, 219],
-        [336, 247],
-        [347, 260],
-        [363, 276],
-        [375, 300],
-        [388, 325],
-        [396, 350],
-        [404, 382],
-        [412, 415],
-        [420, 440],
-        [430, 466],
-        [446, 488],
-        [470, 500],
-        [520, 506],
-        [560, 496],
-        [585, 470],
-        [605, 447],
-        [640, 436],
-        [680, 428],
-        [720, 425],
-        [760, 427],
-        [800, 432],
-        [840, 440],
-        [865, 465],
-        [892, 498],
-        [920, 522],
-        [945, 532],
-        [995, 522],
-        [1030, 495],
-        [1060, 470],
-        [1150, 470],
-        [1400, 470]
+        [
+          213,
+          182
+        ],
+        [
+          254,
+          178
+        ],
+        [
+          288,
+          192
+        ],
+        [
+          316,
+          219
+        ],
+        [
+          336,
+          247
+        ],
+        [
+          347,
+          260
+        ],
+        [
+          363,
+          276
+        ],
+        [
+          375,
+          300
+        ],
+        [
+          388,
+          325
+        ],
+        [
+          396,
+          350
+        ],
+        [
+          404,
+          382
+        ],
+        [
+          412,
+          415
+        ],
+        [
+          420,
+          440
+        ],
+        [
+          430,
+          466
+        ],
+        [
+          446,
+          488
+        ],
+        [
+          470,
+          500
+        ],
+        [
+          520,
+          506
+        ],
+        [
+          560,
+          496
+        ],
+        [
+          585,
+          470
+        ],
+        [
+          605,
+          447
+        ],
+        [
+          640,
+          436
+        ],
+        [
+          680,
+          428
+        ],
+        [
+          720,
+          425
+        ],
+        [
+          760,
+          427
+        ],
+        [
+          800,
+          432
+        ],
+        [
+          840,
+          440
+        ],
+        [
+          865,
+          465
+        ],
+        [
+          892,
+          498
+        ],
+        [
+          920,
+          522
+        ],
+        [
+          945,
+          532
+        ],
+        [
+          995,
+          522
+        ],
+        [
+          1030,
+          495
+        ],
+        [
+          1060,
+          470
+        ],
+        [
+          1150,
+          470
+        ],
+        [
+          1400,
+          470
+        ]
       ],
       "dark_region_px": [
-        [213, 182],
-        [254, 178],
-        [288, 192],
-        [316, 219],
-        [336, 247],
-        [347, 260],
-        [363, 276],
-        [375, 300],
-        [388, 325],
-        [396, 350],
-        [404, 382],
-        [412, 415],
-        [420, 440],
-        [430, 466],
-        [446, 488],
-        [470, 500],
-        [520, 506],
-        [560, 496],
-        [585, 470],
-        [605, 447],
-        [640, 436],
-        [680, 428],
-        [720, 425],
-        [760, 427],
-        [800, 432],
-        [840, 440],
-        [865, 465],
-        [892, 498],
-        [920, 522],
-        [945, 532],
-        [995, 522],
-        [1030, 495],
-        [1060, 470],
-        [1150, 470],
-        [1400, 470],
-        [1400, 0],
-        [150, 0],
-        [150, 182]
+        [
+          213,
+          182
+        ],
+        [
+          254,
+          178
+        ],
+        [
+          288,
+          192
+        ],
+        [
+          316,
+          219
+        ],
+        [
+          336,
+          247
+        ],
+        [
+          347,
+          260
+        ],
+        [
+          363,
+          276
+        ],
+        [
+          375,
+          300
+        ],
+        [
+          388,
+          325
+        ],
+        [
+          396,
+          350
+        ],
+        [
+          404,
+          382
+        ],
+        [
+          412,
+          415
+        ],
+        [
+          420,
+          440
+        ],
+        [
+          430,
+          466
+        ],
+        [
+          446,
+          488
+        ],
+        [
+          470,
+          500
+        ],
+        [
+          520,
+          506
+        ],
+        [
+          560,
+          496
+        ],
+        [
+          585,
+          470
+        ],
+        [
+          605,
+          447
+        ],
+        [
+          640,
+          436
+        ],
+        [
+          680,
+          428
+        ],
+        [
+          720,
+          425
+        ],
+        [
+          760,
+          427
+        ],
+        [
+          800,
+          432
+        ],
+        [
+          840,
+          440
+        ],
+        [
+          865,
+          465
+        ],
+        [
+          892,
+          498
+        ],
+        [
+          920,
+          522
+        ],
+        [
+          945,
+          532
+        ],
+        [
+          995,
+          522
+        ],
+        [
+          1030,
+          495
+        ],
+        [
+          1060,
+          470
+        ],
+        [
+          1150,
+          470
+        ],
+        [
+          1400,
+          470
+        ],
+        [
+          1400,
+          0
+        ],
+        [
+          150,
+          0
+        ],
+        [
+          150,
+          182
+        ]
       ],
       "cream_edge_px": [
-        [190, 342],
-        [252, 374],
-        [277, 407],
-        [306, 448],
-        [334, 481],
-        [363, 513],
-        [380, 546],
-        [395, 600],
-        [410, 650],
-        [480, 610],
-        [540, 555],
-        [585, 474],
-        [605, 450],
-        [640, 439],
-        [680, 431],
-        [720, 428],
-        [760, 430],
-        [800, 435],
-        [880, 470]
+        [
+          190,
+          342
+        ],
+        [
+          252,
+          374
+        ],
+        [
+          277,
+          407
+        ],
+        [
+          306,
+          448
+        ],
+        [
+          334,
+          481
+        ],
+        [
+          363,
+          513
+        ],
+        [
+          380,
+          546
+        ],
+        [
+          395,
+          600
+        ],
+        [
+          410,
+          650
+        ],
+        [
+          480,
+          610
+        ],
+        [
+          540,
+          555
+        ],
+        [
+          585,
+          474
+        ],
+        [
+          605,
+          450
+        ],
+        [
+          640,
+          439
+        ],
+        [
+          680,
+          431
+        ],
+        [
+          720,
+          428
+        ],
+        [
+          760,
+          430
+        ],
+        [
+          800,
+          435
+        ],
+        [
+          880,
+          470
+        ]
       ],
       "cream_region_px": [
-        [190, 342],
-        [252, 374],
-        [277, 407],
-        [306, 448],
-        [334, 481],
-        [363, 513],
-        [380, 546],
-        [395, 600],
-        [410, 650],
-        [480, 610],
-        [540, 555],
-        [585, 474],
-        [605, 450],
-        [640, 439],
-        [680, 431],
-        [720, 428],
-        [760, 430],
-        [800, 435],
-        [880, 470],
-        [1400, 476],
-        [1400, 1100],
-        [100, 1100],
-        [100, 342]
+        [
+          190,
+          342
+        ],
+        [
+          252,
+          374
+        ],
+        [
+          277,
+          407
+        ],
+        [
+          306,
+          448
+        ],
+        [
+          334,
+          481
+        ],
+        [
+          363,
+          513
+        ],
+        [
+          380,
+          546
+        ],
+        [
+          395,
+          600
+        ],
+        [
+          410,
+          650
+        ],
+        [
+          480,
+          610
+        ],
+        [
+          540,
+          555
+        ],
+        [
+          585,
+          474
+        ],
+        [
+          605,
+          450
+        ],
+        [
+          640,
+          439
+        ],
+        [
+          680,
+          431
+        ],
+        [
+          720,
+          428
+        ],
+        [
+          760,
+          430
+        ],
+        [
+          800,
+          435
+        ],
+        [
+          880,
+          470
+        ],
+        [
+          1400,
+          476
+        ],
+        [
+          1400,
+          1100
+        ],
+        [
+          100,
+          1100
+        ],
+        [
+          100,
+          342
+        ]
       ],
       "lines_until_s": 2.45,
-      "cream_halfwidth": [[0.0, 0.22], [0.5, 0.25], [0.8, 0.33], [1.1, 0.37], [1.4, 1.0], [5.72, 1.0]],
+      "cream_halfwidth": [
+        [
+          0.0,
+          0.22
+        ],
+        [
+          0.5,
+          0.25
+        ],
+        [
+          0.8,
+          0.33
+        ],
+        [
+          1.1,
+          0.37
+        ],
+        [
+          1.4,
+          1.0
+        ],
+        [
+          5.72,
+          1.0
+        ]
+      ],
       "cream_halfwidth_why": "The cream comes down the neck as the throat band and broadens over the chest to meet the front of the foreleg shoulders, where it merges with the belly (the official art): about 0.25 either side of the midline at the base of the neck, 0.33-0.37 across the chest; behind the forelegs (s > 1.4) it widens to meet the carapace's edge. Earlier it was held to a thin central strip (0.17), which left a wide orange front to the shoulders.",
       "dark_edge_arc_why": "The shoulder armor reaches less far down (its bottom at py ~506, was 532) and its hind point rises (px 605, py 447); from there the carapace's lower edge is one smooth arc (py ~425 at its top) to the front of the hip armor (px 840), the cream of the flank directly below it all the way; the hip armor's front then runs down the thigh from there. The wing's arm roots at the shoulder armor's hind point, and its membrane meets the body along this junction, under the carapace's edge.",
       "tail_zone_why": "Side sheet (tail crop): the tail's upright run behind the hind leg is dark with plates on its outer side and cream along its inner edge (dark to half way round); its run along the ground, curling toward the viewer, shows cream with transverse bands nearly all over, the dark top only a narrow edge carrying the spikes. So the dark top narrows from half the girth (s 3.5) to 0.3 of it (s 3.9) as the tail turns onto the ground. On the tail the dark meets the cream directly (no orange between): a band 0.02-0.03 wide showed only as a flickering orange fringe along the shell's edge.",
       "tail_cream_from_s": 2.7,
       "dark_edge_head_why": "Walkthrough (user: the neck's carapace connected below the ear, discontinuous with the head's shield, instead of coming up above the ear to meet where the head's shield ends). Its edge now starts at the head shield's back lower edge (z 1.42, y 1.89), runs back over the ear's top and tip (y 1.90 at z 1.30), then down behind the ear (z 1.12, y 1.78) to the traced neck edge at z 1.03; the ear sits on the orange below it, in front of the shell.",
-      "neck_top_band": [[0.0, 0.24], [0.3, 0.24], [0.5, 0.0]],
-      "neck_top_band_why": "Behind the head the neck's top line (y 1.84-1.86) is lower than the ear's top edge (1.88): the ear lies high on the side of the neck. So the shell there is a band over the top of the neck, to 0.24 of the way round, continuous with the head's shield and passing above the ear, fading out by s 0.5 where the traced side line (dark_edge_px) carries on. User: the neck's carapace had connected below the ear, discontinuous with the head's shield."
+      "neck_top_band": [
+        [
+          0.0,
+          0.24
+        ],
+        [
+          0.3,
+          0.24
+        ],
+        [
+          0.5,
+          0.0
+        ]
+      ],
+      "neck_top_band_why": "Behind the head the neck's top line (y 1.84-1.86) is lower than the ear's top edge (1.88): the ear lies high on the side of the neck. So the shell there is a band over the top of the neck, to 0.24 of the way round, continuous with the head's shield and passing above the ear, fading out by s 0.5 where the traced side line (dark_edge_px) carries on. User: the neck's carapace had connected below the ear, discontinuous with the head's shield.",
+      "tail_tip_cap": {
+        "blend_length": 0.1,
+        "closed_length": 0.025,
+        "max_relief_radius_fraction": 0.35
+      }
     },
     "front_overlap": 0.06,
     "bones": {
       "note": "spine bones by ranges of s; the head bone attaches to the last neck bone; the tail's bones each span three caudal vertebrae",
       "chain_forward": [
-        ["hips", 2.3, 1.75],
-        ["spine", 1.75, 1.2],
-        ["chest", 1.2, 0.65],
-        ["neck1", 0.65, 0.48],
-        ["neck2", 0.48, 0.32],
-        ["neck3", 0.32, 0.16],
-        ["neck4", 0.16, 0.0]
+        [
+          "hips",
+          2.3,
+          1.75
+        ],
+        [
+          "spine",
+          1.75,
+          1.2
+        ],
+        [
+          "chest",
+          1.2,
+          0.65
+        ],
+        [
+          "neck1",
+          0.65,
+          0.48
+        ],
+        [
+          "neck2",
+          0.48,
+          0.32
+        ],
+        [
+          "neck3",
+          0.32,
+          0.16
+        ],
+        [
+          "neck4",
+          0.16,
+          0.0
+        ]
       ],
       "tail_from": 2.3,
       "neck_blend": 0.08
     },
     "keel": {
       "note": "How much the section narrows from its widest level toward the underside (0 none, 0.5 to half width at the breastbone): the deep keel of the chest, a gentler one under the belly, none on the tail. Gentle at the chest (0.3): from the front a lion's chest is a rounded U between the forelegs, not a V; a stronger keel left a ridge down its middle. Over the forelegs (s 0.8-1.3) only 0.12-0.15: from the front (the limited edition, the side sheet turned toward us) the chest is broad and round at the bottom, the cream plates its most forward part; a deeper keel left a groove down the chest between the shoulder masses.",
-      "rows": [[0.0, 0.12], [0.5, 0.15], [0.8, 0.12], [1.3, 0.15], [1.8, 0.2], [2.1, 0.1], [2.7, 0.0], [5.72, 0.0]]
+      "rows": [
+        [
+          0.0,
+          0.12
+        ],
+        [
+          0.5,
+          0.15
+        ],
+        [
+          0.8,
+          0.12
+        ],
+        [
+          1.3,
+          0.15
+        ],
+        [
+          1.8,
+          0.2
+        ],
+        [
+          2.1,
+          0.1
+        ],
+        [
+          2.7,
+          0.0
+        ],
+        [
+          5.72,
+          0.0
+        ]
+      ]
     },
     "tail": {
       "note": "The tail is a chain of caudal vertebrae, like a lizard's. Each vertebra turns a little from the one before, in pitch (up and down) and yaw (side to side), and its top stays up: the tail never rolls over. On the side sheet the tail drops from the hips to the ground behind the hind legs, then snakes round sideways toward the viewer (Clay's left) and forward along the ground, which is why its lower run is drawn below the feet (it is nearer the viewer). Its side-view path matches the sheet down to s 3.5. It then runs forward at x 0.85, outside the hind foot. The tightest bend is about 16 degrees per vertebra. heading_keys: [s, pitch (deg, + up), yaw (deg, 0 straight back, 90 toward Clay's left, 180 forward)], interpolated along the chain. The section is symmetric about the spine (half the measured depth above and below), tapering with the measured depth.",
@@ -250,30 +1101,80 @@
       "vertebrae": 36,
       "first_length": 0.13,
       "heading_keys": [
-        [2.3, 0, 0],
-        [2.8, -32, 0],
-        [3.2, -58, 10],
-        [3.5, -55, 45],
-        [3.75, -22, 85],
-        [4.05, 0, 110],
-        [4.35, 0, 155],
-        [4.65, 0, 178],
-        [5.3, 0, 182],
-        [5.72, 0, 200]
+        [
+          2.3,
+          0,
+          0
+        ],
+        [
+          2.8,
+          -32,
+          0
+        ],
+        [
+          3.2,
+          -58,
+          10
+        ],
+        [
+          3.5,
+          -55,
+          45
+        ],
+        [
+          3.75,
+          -22,
+          85
+        ],
+        [
+          4.05,
+          0,
+          110
+        ],
+        [
+          4.35,
+          0,
+          155
+        ],
+        [
+          4.65,
+          0,
+          178
+        ],
+        [
+          5.3,
+          0,
+          182
+        ],
+        [
+          5.72,
+          0,
+          200
+        ]
       ],
       "ground_y": -0.03,
       "rest_from_s": 3.8,
       "rest_to_s": 4.1,
       "taper_power": 1.1,
       "taper_note": "Like a gecko's, the tail is fat at its root and tapers steadily all the way to a point (half-depth r0 * (remaining / length)^taper_power), as in every reference. Following the sheet's depths kept it nearly the same thickness down its lower run, like an earthworm.",
-      "tip_radius": 0.012,
-      "tip_note": "The tail ends in a small rounded tip of radius 0.012 (the skin's mesh spacing): tapering to a point, its last 0.16 was thinner than the mesh could hold and broke off into floating specks.",
-      "top_up_s": [3.5, 4.1],
+      "tip_radius": 0.05,
+      "terminal_trim_model": 0.32,
+      "tip_note": "User requested removal of the needle-like end. Trim the final 0.32 model units; close the remaining taper with a 0.05-long rounded cap, without adding a narrow extension.",
+      "top_up_s": [
+        3.5,
+        4.1
+      ],
       "top_up_note": "Where the tail lies on the ground (from s 3.5, fully by 4.1) its section's top is turned to face up: carried along the turning path alone (no roll per step), the top had rolled over to face outward (+x), so the ground run lay on its side, dark and spiked toward the viewer, where the side sheet shows it top-up, cream side toward the viewer and the spikes along its top."
     }
   },
   "wing": {
     "canonical_fold": {
+      "chest_attachment": [
+        0.29,
+        1.31,
+        0.66
+      ],
+      "girdle_revision": "User-directed forward/high wing socket near the foreleg scapular region. Chest attachment remains fixed during wing rotation; it must not orbit with the humerus.",
       "finger_joint_blend": 0.035,
       "pose_steps": 8,
       "elbow_finger_dir": [
@@ -510,18 +1411,58 @@
       }
     },
     "articulation": {
-      "shoulder_arc_fractions": [0.3333333333, 0.6666666667],
-      "socket": [0.34, 1.12, 0.3],
+      "shoulder_arc_fractions": [
+        0.3333333333,
+        0.6666666667
+      ],
+      "socket": [
+        0.36,
+        1.3,
+        0.59
+      ],
       "elbow_axial_twist_deg": 0.0,
       "why": "The humeral head rotates in the shoulder socket. Shoulder skin grades from the moving humerus attachment to the fixed chest attachment. Upper arm and forearm share a bend plane, so elbow flexion does not add an independent roll; folded-to-spread construction and the fold pose are exact inverses."
     },
     "note": "Built like a bat's arm (the official art draws it so: the spread wings of the limited-edition render and the full render, the raised wing in How to Draw), bone first, then muscle, then membrane. Upper arm: short and heavily muscled, a fleshy belly over the humerus that swells out of a round mound on the shoulder (the side sheet's scaly mound, px 490-560, py 340-400). Forearm: long, thick and fleshy for its first third below the elbow (the forearm muscles), then a bony shaft (tendons) to a knobby wrist; the elbow's point stands out behind. Thumb: a short digit on the wrist's leading side ending in a hooked claw. Fingers: four long ones from the wrist, each a metacarpal to a knuckle partway out and a phalanx to a small hooked claw past the membrane. Pose: the side sheet's folded wing. The arm runs from the shoulder back along the flank to the elbow (px 525,385 -> 785,425); the forearm drops straight down to a low wrist (765,760) with the thumb claw (735,800); the fingers fan up and back to their tips (1055,255; 1165,140; 1265,55; 1365,20), nearly parallel, the membrane between them in narrow strips, scalloped between the tips (a sixth of the finger's length). x from the model: the shoulder cap is 0.40 out, the flank under the arm 0.34-0.36, the hind thigh 0.57, so the arm lies on the flank (the sheet's arm is a broad band, py 395-460: 0.19 tall) and the fan stands just outside the thigh. [x, y, z].",
     "joints": {
-      "shoulder": [0.34, 1.12, 0.3],
-      "elbow": [0.41, 1.16, -0.25],
-      "wrist": [0.72, 0.22, -0.19]
+      "shoulder": [
+        0.36,
+        1.3,
+        0.59
+      ],
+      "elbow": [
+        0.43,
+        1.34,
+        0.04
+      ],
+      "wrist": [
+        0.74,
+        0.4,
+        0.1
+      ]
     },
-    "fingers": [[0.8, 1.676, -1.035], [0.82, 2.012, -1.356], [0.84, 2.259, -1.647], [0.86, 2.362, -1.939]],
+    "fingers": [
+      [
+        0.8,
+        1.676,
+        -1.035
+      ],
+      [
+        0.82,
+        2.012,
+        -1.356
+      ],
+      [
+        0.84,
+        2.259,
+        -1.647
+      ],
+      [
+        0.86,
+        2.362,
+        -1.939
+      ]
+    ],
     "finger_bow": 0.025,
     "claw": {
       "length": 0.075,
@@ -530,7 +1471,11 @@
     },
     "thumb": {
       "length": 0.06,
-      "direction": [0.0, -0.6, 0.8],
+      "direction": [
+        0.0,
+        -0.6,
+        0.8
+      ],
       "radius": 0.022,
       "claw": {
         "length": 0.07,
@@ -553,9 +1498,20 @@
       "bones": [
         {
           "name": "humerus",
-          "from": [0.34, 1.12, 0.3],
-          "to": [0.41, 1.16, -0.25],
-          "r": [0.06, 0.05],
+          "from": [
+            0.34,
+            1.12,
+            0.3
+          ],
+          "to": [
+            0.41,
+            1.16,
+            -0.25
+          ],
+          "r": [
+            0.06,
+            0.05
+          ],
           "k": 0.03,
           "rig": {
             "wing_humerus": 1.0
@@ -564,9 +1520,20 @@
         {
           "name": "olecranon",
           "why": "the elbow's point, behind the joint",
-          "from": [0.41, 1.16, -0.22],
-          "to": [0.42, 1.2, -0.32],
-          "r": [0.05, 0.03],
+          "from": [
+            0.41,
+            1.16,
+            -0.22
+          ],
+          "to": [
+            0.42,
+            1.2,
+            -0.32
+          ],
+          "r": [
+            0.05,
+            0.03
+          ],
           "k": 0.03,
           "rig": {
             "wing_forearm": 1.0
@@ -574,9 +1541,20 @@
         },
         {
           "name": "forearm",
-          "from": [0.41, 1.16, -0.25],
-          "to": [0.6, 0.22, -0.19],
-          "r": [0.05, 0.035],
+          "from": [
+            0.41,
+            1.16,
+            -0.25
+          ],
+          "to": [
+            0.6,
+            0.22,
+            -0.19
+          ],
+          "r": [
+            0.05,
+            0.035
+          ],
           "k": 0.03,
           "rig": {
             "wing_forearm": 1.0
@@ -585,9 +1563,20 @@
         {
           "name": "wrist knob",
           "why": "the carpals: a knob at the wrist the fingers and thumb spring from",
-          "from": [0.6, 0.26, -0.2],
-          "to": [0.62, 0.19, -0.18],
-          "r": [0.04, 0.038],
+          "from": [
+            0.6,
+            0.26,
+            -0.2
+          ],
+          "to": [
+            0.62,
+            0.19,
+            -0.18
+          ],
+          "r": [
+            0.04,
+            0.038
+          ],
           "k": 0.03,
           "rig": {
             "wing_forearm": 1.0
@@ -598,12 +1587,30 @@
         {
           "name": "wing shoulder (the wing's deltoid)",
           "why": "The wing's shoulder: from the arm's socket (the head of the humerus) forward over the top of the foreleg's shoulder, where every reference shows it (the side sheet's scaly mound in front of the arm, Umber's plated shoulder). It lies on the body, outside the shoulder armor, carrying the wing's armor on its top, so the arm has a defined shoulder rather than a cut-off cap; weighted continuously from its chest attachment to the humerus attachment, it deforms with the shoulder as the wing moves.",
-          "from": [0.44, 1.14, 0.24],
-          "to": [0.52, 1.06, 0.62],
-          "radii": [0.13, 0.11],
-          "hint": [1, 0.4, 0],
+          "from": [
+            0.44,
+            1.14,
+            0.24
+          ],
+          "to": [
+            0.52,
+            1.06,
+            0.62
+          ],
+          "radii": [
+            0.13,
+            0.11
+          ],
+          "hint": [
+            1,
+            0.4,
+            0
+          ],
           "k": 0.08,
-          "endpoint_rig": {"from": "wing_humerus", "to": "chest"},
+          "endpoint_rig": {
+            "from": "wing_humerus",
+            "to": "chest"
+          },
           "rig": {
             "chest": 0.8,
             "wing_humerus": 0.2
@@ -612,10 +1619,25 @@
         {
           "name": "socket",
           "why": "the head of the humerus in its socket, under the wing's shoulder",
-          "from": [0.36, 1.13, 0.32],
-          "to": [0.4, 1.13, 0.14],
-          "radii": [0.085, 0.08],
-          "hint": [1, 0, 0],
+          "from": [
+            0.36,
+            1.13,
+            0.32
+          ],
+          "to": [
+            0.4,
+            1.13,
+            0.14
+          ],
+          "radii": [
+            0.085,
+            0.08
+          ],
+          "hint": [
+            1,
+            0,
+            0
+          ],
           "k": 0.06,
           "rig": {
             "wing_humerus": 0.7,
@@ -625,10 +1647,25 @@
         {
           "name": "upper arm",
           "why": "biceps and triceps: the heavy belly of the upper arm, as thick as the leg's (Umber: the wing arm is a heavy limb, not a strut), tapering into the elbow",
-          "from": [0.34, 1.13, 0.28],
-          "to": [0.42, 1.16, -0.2],
-          "radii": [0.12, 0.12],
-          "hint": [1, 0, 0],
+          "from": [
+            0.34,
+            1.13,
+            0.28
+          ],
+          "to": [
+            0.42,
+            1.16,
+            -0.2
+          ],
+          "radii": [
+            0.12,
+            0.12
+          ],
+          "hint": [
+            1,
+            0,
+            0
+          ],
           "k": 0.05,
           "rig": {
             "wing_humerus": 1.0
@@ -637,10 +1674,25 @@
         {
           "name": "forearm muscles",
           "why": "the flexors and extensors: fleshy for the first half or more below the elbow, then tendon over the bone to the wrist (Umber: the forearm stays thick toward the wrist)",
-          "from": [0.41, 1.16, -0.25],
-          "to": [0.524, 0.596, -0.214],
-          "radii": [0.08, 0.07],
-          "hint": [1, 0, 0],
+          "from": [
+            0.41,
+            1.16,
+            -0.25
+          ],
+          "to": [
+            0.524,
+            0.596,
+            -0.214
+          ],
+          "radii": [
+            0.08,
+            0.07
+          ],
+          "hint": [
+            1,
+            0,
+            0
+          ],
           "k": 0.05,
           "rig": {
             "wing_forearm": 1.0
@@ -706,8 +1758,18 @@
       ]
     },
     "elbow_finger": {
-      "tip": [0.5, 1.32, -1.11],
-      "radius": [0.036, 0.026, 0.03, 0.02, 0.013],
+      "tip": [
+        0.5,
+        1.32,
+        -1.11
+      ],
+      "radius": [
+        0.036,
+        0.026,
+        0.03,
+        0.02,
+        0.013
+      ],
       "why": "A short plated finger springing from the elbow, up and back to a small claw at the membrane's edge: on the side sheet from the elbow (px 785,425) to its claw at px 912,347; on the TDP cover render it rises from the arm beside the body with membrane on both sides of it. It holds up the inner membrane: from it the membrane runs across to the wing fingers and back to the flank. About 0.88 long, twice its length as seen on the side sheet: the spread covers show it long, so on the sheet it is foreshortened, raked back away from us; folded it lies back along the side.",
       "claw": {
         "length": 0.065,
@@ -744,19 +1806,67 @@
   "front_leg": {
     "note": "Measured on the side sheet's near front leg (crop px 300-720, py 300-880). The dark shoulder patch is the shoulder blade and its muscles seen from the side; the shoulder joint sits at the front of the upper arm under it (px 425, py 495). The upper arm slopes down and back to an elbow at the bottom of the chest (px 625, py 605; its point at 649, 613); the forearm angles down and forward to a slim wrist (px 515, py 790, 0.155 deep against 0.37 below the elbow); the hand lies flat on the ground. Like a great cat's: the elbow tucked in against the chest, the leg hanging close beside the keel of the chest. Built as bones and muscles (anatomy).",
     "joints": {
-      "scapula_top": [0.25, 1.458, 0.466],
-      "shoulder": [0.38, 1.037, 0.802],
-      "elbow": [0.4, 0.656, 0.219],
-      "wrist": [0.41, 0.117, 0.539],
-      "knuckles": [0.41, 0.05, 0.72]
+      "scapula_top": [
+        0.25,
+        1.458,
+        0.466
+      ],
+      "shoulder": [
+        0.38,
+        1.12,
+        0.802
+      ],
+      "elbow": [
+        0.4,
+        0.656,
+        0.219
+      ],
+      "wrist": [
+        0.41,
+        0.117,
+        0.539
+      ],
+      "knuckles": [
+        0.41,
+        0.05,
+        0.72
+      ]
     },
     "toes": {
       "count": 4,
-      "spread_deg": [-24, -8, 8, 24],
-      "base_offset_x": [-0.075, -0.025, 0.025, 0.075],
-      "segments": [0.06, 0.05, 0.04],
-      "radius": [0.042, 0.038, 0.033],
-      "drop_deg": [-15, 15, 45],
+      "spread_deg": [
+        -24,
+        -8,
+        8,
+        24
+      ],
+      "base_offset_x": [
+        -0.075,
+        -0.025,
+        0.025,
+        0.075
+      ],
+      "segments": [
+        0.06,
+        0.05,
+        0.04
+      ],
+      "length_scale": [
+        0.9,
+        1.0,
+        1.0,
+        0.9
+      ],
+      "radius": [
+        0.042,
+        0.038,
+        0.033
+      ],
+      "drop_deg": [
+        -15,
+        15,
+        45
+      ],
       "claw": {
         "length": 0.085,
         "radius": 0.03,
@@ -764,14 +1874,54 @@
         "pitch_deg": 20
       },
       "note": "Measured on the side sheet's near hand: wrist to toe tips about 0.46 (px 515 to 369), 0.12 deep at the knuckles. From the front (How to Draw, the SE poster, the GN cover): a broad hand, the four fingers thick and close together like a lizard's or a raptor's, fused into one mass at the palm and parted by grooves toward the tips; each finger three segments, rising to a knuckle bump and arching down to a rounded tip with a pad under it, a row of dark plates across its top, and a thick dark claw springing from the top of the tip, forward and hooking down to the ground (the side sheet: big sickle claws, about 0.1 long).",
-      "blend": 0.03
+      "blend": 0.03,
+      "joint_blend_fraction": 0.32,
+      "curl_shares": [
+        0.45,
+        0.35,
+        0.2
+      ],
+      "flexion_limits_deg": [
+        45,
+        55,
+        35
+      ],
+      "rays": {
+        "root_fraction": 0.12,
+        "root_lateral_fraction": 0.18,
+        "radius": [
+          0.026,
+          0.032
+        ],
+        "blend": 0.028,
+        "why": "Four metacarpal rays continue from the compact wrist/palm to each MCP joint, beneath one hand surface. How to Draw and the SE poster show a broad connected hand, not toe tubes attached to a tapering central point. Outer digits are modestly shorter; the art is oblique, so length scales are conservative design adaptations rather than orthographic measurements."
+      }
     },
     "thumb": {
       "at_frac": 0.35,
       "inset_x": -0.07,
-      "direction": [-0.35, -0.85, 0.4],
-      "segments": [0.05, 0.04],
-      "radius": [0.035, 0.03],
+      "direction": [
+        -0.35,
+        -0.85,
+        0.4
+      ],
+      "segments": [
+        0.05,
+        0.04
+      ],
+      "radius": [
+        0.035,
+        0.03
+      ],
+      "joint_blend_fraction": 0.32,
+      "curl_shares": [
+        0.6,
+        0.4
+      ],
+      "flexion_limits_deg": [
+        40,
+        45
+      ],
       "claw": {
         "length": 0.07,
         "radius": 0.026,
@@ -779,40 +1929,126 @@
       },
       "note": "The opposable thumb: on the inner side of the hand about a third of the way from the wrist to the knuckles (How to Draw's hooked claw high on the inner side of the foot; the SE poster's thumb branching off the inner hand with the cream palm between it and the fingers). Standing, it points down and a little forward and in, its claw hooked toward the ground."
     },
-    "joints_why": " The shoulder joint sits 0.06 higher than first traced: seen at the side sheet's own angle (turned about 25 degrees), the joints read low and the shoulder armor came down further than the sheet's."
+    "joints_why": "Shoulder-girdle revision requested by the user: raise the inferred foreleg socket to y1.12 beneath the scapular blade, and bring the wing socket forward/up to z0.59/y1.30. The initial z0.65 revision was pulled back 0.06 after visual review. The old wing socket sat half a model unit behind the foreleg socket. These socket placements are anatomical design adaptations superseding the earlier outline-based joint inference, not new claims of exact pixel measurement."
   },
   "hind_leg": {
     "note": "Measured on the side sheet (tail crop): the hind leg is drawn in a deep crouch. The thigh, mostly hidden behind the wing, runs down from the hip to a low knee (~px 895, py 720); the shin runs back to the heel near the ground (~px 1090, py 812), cream down its back; the long digitigrade foot runs forward from the heel along the ground to the ball of the foot (~px 900) with dark square studs along its top; four longer, splayed toes with claws; a spur claw at the heel points back. The haunch, from the official art (How to Draw, limited edition): a big rounded orange mass over the folded thigh, growing out of the hips and the root of the tail. Built as bones and muscles (anatomy), like a sitting great cat's, with a reptile's caudofemoralis tying the thigh to the tail.",
     "joints": {
-      "iliac_crest": [0.2, 1.22, -0.42],
-      "hip": [0.4, 0.9, -0.62],
-      "ischium": [0.22, 0.84, -0.95],
-      "knee": [0.46, 0.46, -0.46],
-      "heel": [0.45, 0.22, -0.86],
-      "ball": [0.45, 0.05, -0.6]
+      "iliac_crest": [
+        0.2,
+        1.22,
+        -0.42
+      ],
+      "hip": [
+        0.4,
+        0.9,
+        -0.62
+      ],
+      "ischium": [
+        0.22,
+        0.84,
+        -0.95
+      ],
+      "knee": [
+        0.46,
+        0.46,
+        -0.46
+      ],
+      "heel": [
+        0.45,
+        0.22,
+        -0.86
+      ],
+      "ball": [
+        0.45,
+        0.05,
+        -0.6
+      ]
     },
     "toes": {
       "count": 4,
-      "spread_deg": [-30, -10, 10, 30],
-      "base_offset_x": [-0.07, -0.025, 0.025, 0.07],
-      "segments": [0.07, 0.06, 0.045],
-      "radius": [0.04, 0.035, 0.03],
-      "drop_deg": [-15, 15, 45],
+      "spread_deg": [
+        -30,
+        -10,
+        10,
+        30
+      ],
+      "base_offset_x": [
+        -0.07,
+        -0.025,
+        0.025,
+        0.07
+      ],
+      "segments": [
+        0.07,
+        0.06,
+        0.045
+      ],
+      "length_scale": [
+        0.9,
+        1.0,
+        1.0,
+        0.9
+      ],
+      "radius": [
+        0.04,
+        0.035,
+        0.03
+      ],
+      "drop_deg": [
+        -15,
+        15,
+        45
+      ],
       "claw": {
         "length": 0.08,
         "radius": 0.027,
         "hook_deg": 95,
         "pitch_deg": 20
       },
-      "blend": 0.03
+      "blend": 0.03,
+      "joint_blend_fraction": 0.32,
+      "curl_shares": [
+        0.45,
+        0.35,
+        0.2
+      ],
+      "flexion_limits_deg": [
+        45,
+        55,
+        35
+      ],
+      "rays": {
+        "root_fraction": 0.1,
+        "root_lateral_fraction": 0.18,
+        "radius": [
+          0.024,
+          0.032
+        ],
+        "blend": 0.026,
+        "why": "Four metatarsal rays fan from the raised hock into each MTP joint. Each outer toe needs its own bony/soft-tissue continuation, since the old central ellipsoid ended before its root. The side sheet and How to Draw show a single continuous foot dividing into clawed digits; canine distal-limb references supply the joint hierarchy, not a replacement paw silhouette."
+      }
     },
     "spur": {
-      "at": [0.45, 0.25, -0.92],
-      "direction": [0.0, -0.5, -1.0],
+      "at": [
+        0.45,
+        0.25,
+        -0.92
+      ],
+      "direction": [
+        0.0,
+        -0.5,
+        -1.0
+      ],
       "length": 0.08,
       "radius": 0.022
     },
     "joints_why": "Digitigrade, like a cat's or a dog's: the knee forward at mid-height, the hock (heel) raised behind it to about a quarter of the hip's height with a dark spur on its back, and the metatarsus running down and forward to the toes (the JP design sheet, the only standing view of the hind leg; the side sheet's wing hides it)."
+  },
+  "limb_articulation": {
+    "note": "Half-rotation shoulder/hip skin helpers preserve attachment volume without adding anatomical joints. Distal forearm twist distributes rotation along the radius/ulna region for arm use; it is a coupled skin control, not a simulation of the two bones crossing. Rest joint locations and segment lengths remain measured from the design.",
+    "soft_helper_fraction": 0.5,
+    "forearm_twist_max_degrees": 65
   },
   "anatomy": {
     "note": "Clay's body is built from the inside out: a skeleton of bones, muscles laid over it from origin to insertion, and one skin over everything (skin.py), so the shoulders grow out of the chest and back, and the haunches out of the hips and the tail. Quadruped anatomy as in a great cat (lion, tiger) for the legs; a reptile's tail root (caudofemoralis, as in lizards and dinosaurs); bird- and dinosaur-like feet. Left side; the right is mirrored. Each piece: from and to (model units), radii [out, across] where 'out' is measured along the hint direction (default: out from the body, +x), the blend radius k with its neighbours, the rig bones that move it, and its colour zone (0 dark, 0.5 orange, 1 cream; null takes the trunk's zone there). Bones show orange where they lie near the skin (the shin, the elbow, the wrist). Leg muscles are about 0.65-0.75 as wide side to side as they are deep, as in a cat; the shoulder cap and gluteals are flat layers over the blade and hip, so each shoulder and haunch reads as one mass. Neighbouring muscles blend over 0.07-0.12, so the shoulder and the haunch each read as one smooth mass, not separate balls; the shoulder's colour comes from the sheet's dark patch (the trunk's zones). The dark shell (zones.dark_region_px, on the body's upper side) covers whatever lies under it, muscle or trunk: the shoulder and the haunch each get a brown cap where the dark edge dips over them.",
@@ -821,9 +2057,20 @@
     "bones": [
       {
         "name": "humerus",
-        "from": [0.38, 1.037, 0.802],
-        "to": [0.4, 0.656, 0.219],
-        "r": [0.06, 0.055],
+        "from": [
+          0.38,
+          1.12,
+          0.802
+        ],
+        "to": [
+          0.4,
+          0.656,
+          0.219
+        ],
+        "r": [
+          0.06,
+          0.055
+        ],
         "k": 0.04,
         "rig": {
           "upperarm": 1
@@ -831,31 +2078,117 @@
       },
       {
         "name": "olecranon (point of the elbow)",
-        "from": [0.4, 0.66, 0.2],
-        "to": [0.4, 0.633, 0.149],
-        "r": [0.05, 0.045],
+        "from": [
+          0.4,
+          0.66,
+          0.2
+        ],
+        "to": [
+          0.4,
+          0.633,
+          0.149
+        ],
+        "r": [
+          0.05,
+          0.045
+        ],
         "k": 0.03,
         "rig": {
-          "upperarm": 0.5,
-          "forearm": 0.5
+          "forearm": 1
         }
       },
       {
-        "name": "radius and ulna",
-        "from": [0.4, 0.656, 0.219],
-        "to": [0.41, 0.117, 0.539],
-        "r": [0.065, 0.075],
+        "name": "radius",
+        "from": [
+          0.388,
+          0.647,
+          0.243
+        ],
+        "to": [
+          0.389,
+          0.128,
+          0.558
+        ],
+        "r": [
+          0.044,
+          0.043
+        ],
         "k": 0.04,
         "rig": {
           "forearm": 1
         },
-        "why": "thick down to the wrist: the side sheet's forearm is a column about 0.2 wide in profile right down to a wrist that does not narrow"
+        "rig_path": [
+          [
+            0,
+            "forearm"
+          ],
+          [
+            0.25,
+            "forearm"
+          ],
+          [
+            1,
+            "forearm_twist"
+          ]
+        ],
+        "why": "Radius under the front/extensor compartment; a bony distal shaft under the broad carpus, not a second muscle belly at the wrist. Separate ulna carries the olecranon. The side sheet's forearm narrows from px 600-675 to 480-540 near the wrist."
+      },
+      {
+        "name": "ulna",
+        "from": [
+          0.414,
+          0.65,
+          0.18
+        ],
+        "to": [
+          0.434,
+          0.125,
+          0.516
+        ],
+        "r": [
+          0.033,
+          0.028
+        ],
+        "k": 0.035,
+        "rig": {
+          "forearm": 1
+        },
+        "why": "The ulna continues the posterior olecranon to the carpus; radius/ulna share elbow flexion while the distal forearm has a coupled skin-twist control for arm use."
       },
       {
         "name": "wrist",
-        "from": [0.41, 0.13, 0.53],
-        "to": [0.41, 0.1, 0.56],
-        "r": [0.075, 0.07],
+        "rig_path": [
+          [
+            0,
+            "forearm_twist"
+          ],
+          [
+            0.33,
+            "wrist_arc1"
+          ],
+          [
+            0.67,
+            "wrist_arc2"
+          ],
+          [
+            1,
+            "hand"
+          ]
+        ],
+        "from": [
+          0.41,
+          0.13,
+          0.53
+        ],
+        "to": [
+          0.41,
+          0.1,
+          0.56
+        ],
+        "r": [
+          0.065,
+          0.06
+        ],
         "k": 0.03,
         "rig": {
           "hand": 1
@@ -863,9 +2196,20 @@
       },
       {
         "name": "femur",
-        "from": [0.4, 0.9, -0.62],
-        "to": [0.46, 0.46, -0.46],
-        "r": [0.065, 0.06],
+        "from": [
+          0.4,
+          0.9,
+          -0.62
+        ],
+        "to": [
+          0.46,
+          0.46,
+          -0.46
+        ],
+        "r": [
+          0.065,
+          0.06
+        ],
         "k": 0.04,
         "rig": {
           "thigh": 1
@@ -873,9 +2217,20 @@
       },
       {
         "name": "tibia",
-        "from": [0.46, 0.46, -0.46],
-        "to": [0.45, 0.22, -0.86],
-        "r": [0.055, 0.05],
+        "from": [
+          0.46,
+          0.46,
+          -0.46
+        ],
+        "to": [
+          0.45,
+          0.22,
+          -0.86
+        ],
+        "r": [
+          0.055,
+          0.041
+        ],
         "k": 0.04,
         "rig": {
           "shin": 1
@@ -883,23 +2238,361 @@
       },
       {
         "name": "heel (calcaneus)",
-        "from": [0.45, 0.24, -0.86],
-        "to": [0.45, 0.27, -0.94],
-        "r": [0.05, 0.04],
+        "from": [
+          0.45,
+          0.24,
+          -0.86
+        ],
+        "to": [
+          0.45,
+          0.27,
+          -0.94
+        ],
+        "r": [
+          0.043,
+          0.031
+        ],
         "k": 0.03,
         "rig": {
           "foot": 1
         },
-        "why": "the point of the hock, behind the ankle joint"
+        "why": "Raised calcaneal point behind the hock; the common calcaneal tendon terminates here, above the long metatarsal segment. It belongs to the foot/tarsal control, not the knee."
+      },
+      {
+        "name": "fibula",
+        "from": [
+          0.487,
+          0.45,
+          -0.49
+        ],
+        "to": [
+          0.478,
+          0.225,
+          -0.84
+        ],
+        "r": [
+          0.024,
+          0.018
+        ],
+        "k": 0.025,
+        "rig": {
+          "shin": 1
+        },
+        "why": "Slender lateral lower-leg support beside the tibia, embedded beneath the calf and lateral extensor compartment."
+      },
+      {
+        "name": "patellar and tibial-crest support",
+        "from": [
+          0.46,
+          0.478,
+          -0.41
+        ],
+        "to": [
+          0.46,
+          0.414,
+          -0.445
+        ],
+        "r": [
+          0.033,
+          0.027
+        ],
+        "k": 0.035,
+        "rig": {
+          "thigh": 0.4,
+          "shin": 0.6
+        },
+        "rig_path": [
+          [
+            0,
+            "thigh"
+          ],
+          [
+            1,
+            "shin"
+          ]
+        ],
+        "why": "Small anterior stifle transition from the extensor apparatus into the tibial crest. It gives the knee a direction without adding an exposed ball or changing the joint's measured center."
       }
     ],
     "muscles": [
       {
+        "name": "trapezius over the shoulder girdle",
+        "from": [
+          0.08,
+          1.43,
+          0.37
+        ],
+        "to": [
+          0.25,
+          1.43,
+          0.56
+        ],
+        "radii": [
+          0.035,
+          0.11
+        ],
+        "hint": [
+          0,
+          1,
+          0
+        ],
+        "profile": [
+          [
+            0,
+            0.35,
+            0.45
+          ],
+          [
+            0.35,
+            1,
+            1
+          ],
+          [
+            0.7,
+            0.8,
+            0.85
+          ],
+          [
+            1,
+            0.3,
+            0.3
+          ]
+        ],
+        "k": 0.06,
+        "rig": {
+          "chest": 1
+        },
+        "rig_path": [
+          [
+            0,
+            "chest"
+          ],
+          [
+            0.8,
+            "chest"
+          ],
+          [
+            1,
+            "shoulder_soft"
+          ]
+        ],
+        "zone": null,
+        "why": "Shallow dorsal sheet from the cervicothoracic midline into the scapular region, beneath existing shoulder armor. It suspends/blends the girdle into the back rather than adding a separate shoulder ball."
+      },
+      {
+        "name": "rhomboid scapular support",
+        "from": [
+          0.08,
+          1.37,
+          0.18
+        ],
+        "to": [
+          0.235,
+          1.4,
+          0.47
+        ],
+        "radii": [
+          0.032,
+          0.085
+        ],
+        "hint": [
+          0,
+          1,
+          0
+        ],
+        "k": 0.06,
+        "rig": {
+          "chest": 1
+        },
+        "zone": null,
+        "why": "Dorsomedial scapular attachment to the thoracic spine; a flat underlying support layer, not an exposed ridge."
+      },
+      {
+        "name": "serratus ventralis thoracic sling",
+        "from": [
+          0.2,
+          1.08,
+          0.35
+        ],
+        "to": [
+          0.26,
+          1.35,
+          0.51
+        ],
+        "radii": [
+          0.04,
+          0.12
+        ],
+        "hint": [
+          1,
+          0,
+          0
+        ],
+        "profile": [
+          [
+            0,
+            0.4,
+            0.55
+          ],
+          [
+            0.3,
+            1,
+            1
+          ],
+          [
+            0.7,
+            0.85,
+            0.8
+          ],
+          [
+            1,
+            0.3,
+            0.3
+          ]
+        ],
+        "k": 0.075,
+        "rig": {
+          "chest": 1
+        },
+        "rig_path": [
+          [
+            0,
+            "chest"
+          ],
+          [
+            0.8,
+            "chest"
+          ],
+          [
+            1,
+            "shoulder_soft"
+          ]
+        ],
+        "zone": null,
+        "why": "Broad rib-to-medial-scapular muscular sling, connecting a weight-bearing forelimb to the thorax. The design keeps it within the existing shoulder envelope."
+      },
+      {
+        "name": "wing pectoral girdle attachment",
+        "from": [
+          0.07,
+          0.98,
+          0.65
+        ],
+        "to": [
+          0.32,
+          1.25,
+          0.58
+        ],
+        "radii": [
+          0.045,
+          0.13
+        ],
+        "hint": [
+          0,
+          0,
+          1
+        ],
+        "profile": [
+          [
+            0,
+            0.35,
+            0.45
+          ],
+          [
+            0.35,
+            1,
+            1
+          ],
+          [
+            0.7,
+            0.75,
+            0.7
+          ],
+          [
+            1,
+            0.28,
+            0.25
+          ]
+        ],
+        "k": 0.075,
+        "rig": {
+          "chest": 1
+        },
+        "rig_path": [
+          [
+            0,
+            "chest"
+          ],
+          [
+            0.82,
+            "chest"
+          ],
+          [
+            1,
+            "wing_socketBlend1"
+          ]
+        ],
+        "zone": null,
+        "why": "Fictional six-limb adaptation: a shallow sternal-to-dorsal-wing-glenoid attachment under the common shoulder envelope. This is an explicit design accommodation, not an anatomical claim that real quadrupeds have a second humeral socket."
+      },
+      {
         "name": "shoulder cap: supraspinatus, infraspinatus and deltoid",
+        "profile": [
+          [
+            0,
+            0.25,
+            0.32
+          ],
+          [
+            0.18,
+            0.65,
+            0.75
+          ],
+          [
+            0.42,
+            1,
+            1
+          ],
+          [
+            0.72,
+            0.75,
+            0.72
+          ],
+          [
+            1,
+            0.25,
+            0.22
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "chest"
+          ],
+          [
+            0.48,
+            "shoulder_soft"
+          ],
+          [
+            1,
+            "upperarm"
+          ]
+        ],
         "why": "the dark rounded shoulder patch on the side sheet (px 400-567, py 300-521); How to Draw's rounded shoulder at the top of the near leg; a flat layer over the shoulder blade, so the shoulder reads as one mass with the triceps, not two humps",
-        "from": [0.25, 1.44, 0.47],
-        "to": [0.44, 0.92, 0.72],
-        "radii": [0.06, 0.17],
+        "from": [
+          0.25,
+          1.44,
+          0.47
+        ],
+        "to": [
+          0.44,
+          1.01,
+          0.72
+        ],
+        "radii": [
+          0.06,
+          0.17
+        ],
         "k": 0.06,
         "rig": {
           "chest": 0.6,
@@ -909,10 +2602,71 @@
       },
       {
         "name": "triceps",
+        "profile": [
+          [
+            0,
+            0.38,
+            0.42
+          ],
+          [
+            0.22,
+            0.9,
+            0.95
+          ],
+          [
+            0.43,
+            1,
+            1
+          ],
+          [
+            0.72,
+            0.7,
+            0.65
+          ],
+          [
+            0.9,
+            0.32,
+            0.28
+          ],
+          [
+            1,
+            0.22,
+            0.22
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "shoulder_soft"
+          ],
+          [
+            0.22,
+            "upperarm"
+          ],
+          [
+            0.8,
+            "upperarm"
+          ],
+          [
+            1,
+            "forearm"
+          ]
+        ],
         "why": "the heavy upper-arm mass behind the humerus, from behind the shoulder joint to the point of the elbow (side sheet); it starts below the shoulder cap, so the two read as one shoulder",
-        "from": [0.36, 1.04, 0.55],
-        "to": [0.41, 0.64, 0.16],
-        "radii": [0.12, 0.15],
+        "from": [
+          0.36,
+          1.1,
+          0.55
+        ],
+        "to": [
+          0.41,
+          0.64,
+          0.16
+        ],
+        "radii": [
+          0.12,
+          0.15
+        ],
         "k": 0.14,
         "rig": {
           "upperarm": 0.7,
@@ -921,11 +2675,68 @@
         "zone": 0.5
       },
       {
-        "name": "biceps and brachialis",
-        "why": "the front of the upper arm under the shoulder point (side sheet)",
-        "from": [0.42, 1.04, 0.84],
-        "to": [0.43, 0.56, 0.3],
-        "radii": [0.12, 0.12],
+        "name": "biceps brachii",
+        "why": "Anterior upper-arm belly under the shoulder point, tapering into its proximal radial insertion near the elbow. Side-sheet px 450-625, py 510-645 and the limited-edition front-oblique view show a rounded anterior plane, not a spherical lump over the elbow.",
+        "profile": [
+          [
+            0,
+            0.25,
+            0.25
+          ],
+          [
+            0.2,
+            0.72,
+            0.78
+          ],
+          [
+            0.43,
+            1,
+            1
+          ],
+          [
+            0.67,
+            0.78,
+            0.72
+          ],
+          [
+            0.88,
+            0.32,
+            0.26
+          ],
+          [
+            1,
+            0.18,
+            0.18
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "upperarm"
+          ],
+          [
+            0.8,
+            "upperarm"
+          ],
+          [
+            1,
+            "forearm"
+          ]
+        ],
+        "from": [
+          0.42,
+          1.12,
+          0.84
+        ],
+        "to": [
+          0.43,
+          0.56,
+          0.3
+        ],
+        "radii": [
+          0.12,
+          0.12
+        ],
         "k": 0.14,
         "rig": {
           "upperarm": 0.8,
@@ -935,11 +2746,67 @@
       },
       {
         "name": "pectoral",
-        "why": "a lion's chest muscle: broad, flat and smooth, from the breastbone to the inside of the upper arm, so the chest is one rounded mass sweeping into the legs (the limited edition, the side sheet). Starting on the midline, it fills the chest's front between the shoulders.",
-        "from": [0.0, 0.76, 0.8],
-        "to": [0.32, 0.8, 0.56],
-        "radii": [0.19, 0.13],
-        "hint": [0, 1, 0],
+        "rig_path": [
+          [
+            0,
+            "chest"
+          ],
+          [
+            0.68,
+            "chest"
+          ],
+          [
+            1,
+            "upperarm"
+          ]
+        ],
+        "profile": [
+          [
+            0,
+            0.5,
+            0.55
+          ],
+          [
+            0.25,
+            0.95,
+            1
+          ],
+          [
+            0.5,
+            1,
+            0.9
+          ],
+          [
+            0.78,
+            0.55,
+            0.48
+          ],
+          [
+            1,
+            0.23,
+            0.22
+          ]
+        ],
+        "why": "Broad sternal origin into the proximal medial humerus, as in the feline/reptilian anatomical references. The earlier insertion halfway down the upper arm dragged a chest-to-elbow sail out during reaching. The limited-edition oblique view supports one smooth chest-to-shoulder transition, with a free distal upper arm.",
+        "from": [
+          0.0,
+          0.79,
+          0.8
+        ],
+        "to": [
+          0.355,
+          1.035,
+          0.66
+        ],
+        "radii": [
+          0.14,
+          0.12
+        ],
+        "hint": [
+          0,
+          1,
+          0
+        ],
         "k": 0.16,
         "rig": {
           "chest": 0.6,
@@ -948,12 +2815,68 @@
         "zone": null
       },
       {
-        "name": "inner upper arm (biceps, brachialis, the triceps' inner head)",
-        "why": "TDP limited-edition cover and How to Draw: the inside of the upper arm is a big muscle mass merging into the chest, not a cylinder hanging beside it with a groove between (the user's reading)",
-        "from": [0.28, 1.01, 0.72],
-        "to": [0.32, 0.6, 0.3],
-        "radii": [0.14, 0.18],
-        "k": 0.15,
+        "name": "brachialis and medial triceps",
+        "profile": [
+          [
+            0,
+            0.32,
+            0.35
+          ],
+          [
+            0.25,
+            0.85,
+            0.85
+          ],
+          [
+            0.52,
+            1,
+            1
+          ],
+          [
+            0.78,
+            0.65,
+            0.68
+          ],
+          [
+            1,
+            0.22,
+            0.25
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "shoulder_soft"
+          ],
+          [
+            0.3,
+            "upperarm"
+          ],
+          [
+            0.85,
+            "upperarm"
+          ],
+          [
+            1,
+            "forearm"
+          ]
+        ],
+        "why": "Medial humeral muscle envelope, merging proximally into the shoulder but remaining part of the moving upper arm. The old very wide field filled the axilla all the way to the elbow and became a hanging sheet when the arm lifted. How to Draw and the LE oblique view retain a distinct distal upper arm.",
+        "from": [
+          0.355,
+          1.09,
+          0.72
+        ],
+        "to": [
+          0.39,
+          0.6,
+          0.3
+        ],
+        "radii": [
+          0.075,
+          0.12
+        ],
+        "k": 0.09,
         "rig": {
           "upperarm": 0.8,
           "chest": 0.2
@@ -962,10 +2885,67 @@
       },
       {
         "name": "forearm extensors",
+        "profile": [
+          [
+            0,
+            0.4,
+            0.45
+          ],
+          [
+            0.16,
+            0.88,
+            0.95
+          ],
+          [
+            0.32,
+            1,
+            1
+          ],
+          [
+            0.57,
+            0.75,
+            0.72
+          ],
+          [
+            0.8,
+            0.4,
+            0.38
+          ],
+          [
+            1,
+            0.25,
+            0.22
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "forearm"
+          ],
+          [
+            0.35,
+            "forearm"
+          ],
+          [
+            1,
+            "forearm_twist"
+          ]
+        ],
         "why": "the front of the forearm: thick below the elbow, tapering to the slim wrist (side sheet)",
-        "from": [0.41, 0.639, 0.288],
-        "to": [0.41, 0.17, 0.52],
-        "radii": [0.12, 0.13],
+        "from": [
+          0.41,
+          0.639,
+          0.288
+        ],
+        "to": [
+          0.41,
+          0.17,
+          0.52
+        ],
+        "radii": [
+          0.12,
+          0.13
+        ],
         "k": 0.07,
         "rig": {
           "forearm": 1
@@ -974,10 +2954,67 @@
       },
       {
         "name": "forearm flexors",
+        "profile": [
+          [
+            0,
+            0.4,
+            0.4
+          ],
+          [
+            0.18,
+            0.9,
+            0.9
+          ],
+          [
+            0.35,
+            1,
+            1
+          ],
+          [
+            0.6,
+            0.7,
+            0.7
+          ],
+          [
+            0.85,
+            0.35,
+            0.32
+          ],
+          [
+            1,
+            0.25,
+            0.22
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "forearm"
+          ],
+          [
+            0.35,
+            "forearm"
+          ],
+          [
+            1,
+            "forearm_twist"
+          ]
+        ],
         "why": "the back of the forearm, cream on the side sheet from below the elbow to the wrist",
-        "from": [0.41, 0.598, 0.183],
-        "to": [0.41, 0.14, 0.49],
-        "radii": [0.11, 0.12],
+        "from": [
+          0.41,
+          0.598,
+          0.183
+        ],
+        "to": [
+          0.41,
+          0.14,
+          0.49
+        ],
+        "radii": [
+          0.11,
+          0.12
+        ],
         "k": 0.07,
         "rig": {
           "forearm": 1
@@ -986,10 +3023,35 @@
       },
       {
         "name": "hand (metacarpals)",
+        "rig_path": [
+          [
+            0,
+            "wrist_arc2"
+          ],
+          [
+            0.3,
+            "hand"
+          ],
+          [
+            1,
+            "hand"
+          ]
+        ],
         "why": "a broad, thick hand (side sheet: 0.12 deep at the knuckles; How to Draw: as wide as the forearm and more)",
-        "from": [0.41, 0.11, 0.53],
-        "to": [0.41, 0.06, 0.73],
-        "radii": [0.13, 0.06],
+        "from": [
+          0.41,
+          0.11,
+          0.53
+        ],
+        "to": [
+          0.41,
+          0.06,
+          0.73
+        ],
+        "radii": [
+          0.13,
+          0.06
+        ],
         "k": 0.04,
         "rig": {
           "hand": 1
@@ -998,24 +3060,141 @@
       },
       {
         "name": "gluteals",
+        "profile": [
+          [
+            0,
+            0.3,
+            0.3
+          ],
+          [
+            0.25,
+            0.85,
+            0.8
+          ],
+          [
+            0.5,
+            1,
+            1
+          ],
+          [
+            0.8,
+            0.7,
+            0.75
+          ],
+          [
+            1,
+            0.3,
+            0.35
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "hips"
+          ],
+          [
+            0.6,
+            "hip_soft"
+          ],
+          [
+            1,
+            "thigh"
+          ]
+        ],
         "why": "one broad flat pad from the spine to the hip joint, like a cat's croup: the top of the haunch is continuous with the back (How to Draw), with no pit between them",
-        "from": [0.06, 1.2, -0.72],
-        "to": [0.4, 0.98, -0.64],
-        "radii": [0.09, 0.26],
+        "from": [
+          0.06,
+          1.2,
+          -0.72
+        ],
+        "to": [
+          0.4,
+          0.98,
+          -0.64
+        ],
+        "radii": [
+          0.09,
+          0.26
+        ],
         "k": 0.12,
         "rig": {
           "hips": 0.6,
           "thigh": 0.4
         },
         "zone": 0.5,
-        "hint": [0, 1, 0]
+        "hint": [
+          0,
+          1,
+          0
+        ]
       },
       {
         "name": "thigh (quadriceps and hamstrings together)",
+        "profile": [
+          [
+            0,
+            0.45,
+            0.45
+          ],
+          [
+            0.2,
+            0.9,
+            0.95
+          ],
+          [
+            0.38,
+            1,
+            1
+          ],
+          [
+            0.62,
+            0.85,
+            0.78
+          ],
+          [
+            0.82,
+            0.5,
+            0.4
+          ],
+          [
+            1,
+            0.3,
+            0.26
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "hip_soft"
+          ],
+          [
+            0.2,
+            "thigh"
+          ],
+          [
+            0.85,
+            "thigh"
+          ],
+          [
+            1,
+            "shin"
+          ]
+        ],
         "why": "How to Draw and the limited edition draw the haunch as one round mass over the folded thigh, not separate front and back muscles",
-        "from": [0.38, 1.0, -0.7],
-        "to": [0.47, 0.5, -0.47],
-        "radii": [0.14, 0.24],
+        "from": [
+          0.38,
+          1.0,
+          -0.7
+        ],
+        "to": [
+          0.47,
+          0.5,
+          -0.47
+        ],
+        "radii": [
+          0.14,
+          0.24
+        ],
         "k": 0.14,
         "rig": {
           "thigh": 0.8,
@@ -1025,10 +3204,66 @@
       },
       {
         "name": "hamstrings (biceps femoris)",
+        "profile": [
+          [
+            0,
+            0.35,
+            0.35
+          ],
+          [
+            0.2,
+            0.85,
+            0.8
+          ],
+          [
+            0.45,
+            1,
+            1
+          ],
+          [
+            0.75,
+            0.7,
+            0.65
+          ],
+          [
+            1,
+            0.22,
+            0.25
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "hips"
+          ],
+          [
+            0.25,
+            "thigh"
+          ],
+          [
+            0.85,
+            "thigh"
+          ],
+          [
+            1,
+            "shin"
+          ]
+        ],
         "why": "fills the back of the haunch down to the top of the shin",
-        "from": [0.25, 0.86, -0.92],
-        "to": [0.46, 0.46, -0.6],
-        "radii": [0.1, 0.12],
+        "from": [
+          0.25,
+          0.86,
+          -0.92
+        ],
+        "to": [
+          0.46,
+          0.46,
+          -0.6
+        ],
+        "radii": [
+          0.1,
+          0.12
+        ],
         "k": 0.12,
         "rig": {
           "thigh": 0.7,
@@ -1039,9 +3274,20 @@
       {
         "name": "caudofemoralis",
         "why": "a reptile's (and dinosaur's) great tail muscle, from the tail's root to the thigh: the tail and haunch are one mass",
-        "from": [0.1, 0.95, -1.25],
-        "to": [0.36, 0.72, -0.7],
-        "radii": [0.09, 0.13],
+        "from": [
+          0.1,
+          0.95,
+          -1.25
+        ],
+        "to": [
+          0.36,
+          0.72,
+          -0.7
+        ],
+        "radii": [
+          0.09,
+          0.13
+        ],
         "k": 0.12,
         "rig": {
           "hips": 0.5,
@@ -1052,11 +3298,40 @@
       },
       {
         "name": "adductors",
+        "rig_path": [
+          [
+            0,
+            "hips"
+          ],
+          [
+            0.35,
+            "hip_soft"
+          ],
+          [
+            1,
+            "thigh"
+          ]
+        ],
         "why": "the inside of the thigh: from the underside of the pelvis to the inner knee. Modest: from below (the Hybrid Prince cover's Umber) the thigh is a distinct oval set on the side and meets a slim belly in a clean crease, not a web; a bigger, wider-blended fill made the groin bulky.",
-        "from": [0.06, 0.68, -0.62],
-        "to": [0.4, 0.46, -0.5],
-        "radii": [0.09, 0.07],
-        "hint": [0, 1, 0],
+        "from": [
+          0.06,
+          0.68,
+          -0.62
+        ],
+        "to": [
+          0.4,
+          0.46,
+          -0.5
+        ],
+        "radii": [
+          0.09,
+          0.07
+        ],
+        "hint": [
+          0,
+          1,
+          0
+        ],
         "k": 0.09,
         "rig": {
           "hips": 0.5,
@@ -1067,10 +3342,25 @@
       {
         "name": "flank fold",
         "why": "the fold of skin and muscle from the belly to the front of the knee (a cat's flank fold): fills the hollow in front of the thigh (0.04 deep)",
-        "from": [0.16, 0.8, -0.3],
-        "to": [0.42, 0.5, -0.45],
-        "radii": [0.05, 0.06],
-        "hint": [1, 0, 0],
+        "from": [
+          0.16,
+          0.8,
+          -0.3
+        ],
+        "to": [
+          0.42,
+          0.5,
+          -0.45
+        ],
+        "radii": [
+          0.05,
+          0.06
+        ],
+        "hint": [
+          1,
+          0,
+          0
+        ],
         "k": 0.08,
         "rig": {
           "hips": 0.5,
@@ -1080,10 +3370,39 @@
       },
       {
         "name": "semitendinosus",
+        "rig_path": [
+          [
+            0,
+            "hips"
+          ],
+          [
+            0.25,
+            "thigh"
+          ],
+          [
+            0.8,
+            "thigh"
+          ],
+          [
+            1,
+            "shin"
+          ]
+        ],
         "why": "the inner hamstring, from the ischium under the tail's root to the back of the knee: fills the hollow behind the thigh beside the tail (0.03 deep)",
-        "from": [0.12, 0.8, -0.98],
-        "to": [0.43, 0.46, -0.6],
-        "radii": [0.08, 0.08],
+        "from": [
+          0.12,
+          0.8,
+          -0.98
+        ],
+        "to": [
+          0.43,
+          0.46,
+          -0.6
+        ],
+        "radii": [
+          0.08,
+          0.08
+        ],
         "k": 0.1,
         "rig": {
           "thigh": 0.6,
@@ -1092,12 +3411,59 @@
         "zone": null
       },
       {
-        "name": "armpit (latissimus and the triceps' long head)",
-        "why": "from the side of the chest behind the elbow to the back of the upper arm: fills the pit behind the elbow (0.03 deep)",
-        "from": [0.16, 0.86, 0.08],
-        "to": [0.38, 0.68, 0.22],
-        "radii": [0.07, 0.08],
-        "k": 0.18,
+        "name": "latissimus insertion at the proximal humerus",
+        "rig_path": [
+          [
+            0,
+            "chest"
+          ],
+          [
+            0.72,
+            "chest"
+          ],
+          [
+            1,
+            "upperarm"
+          ]
+        ],
+        "profile": [
+          [
+            0,
+            0.5,
+            0.55
+          ],
+          [
+            0.3,
+            1,
+            1
+          ],
+          [
+            0.65,
+            0.8,
+            0.72
+          ],
+          [
+            1,
+            0.25,
+            0.25
+          ]
+        ],
+        "why": "Thoracic-to-proximal-humeral attachment beneath the shoulder. A latissimus insertion at the elbow was anatomically misplaced; the triceps already has its own olecranon insertion. Raising the arm revealed the old distal field as an excessive axillary web.",
+        "from": [
+          0.16,
+          0.96,
+          0.18
+        ],
+        "to": [
+          0.37,
+          1.04,
+          0.65
+        ],
+        "radii": [
+          0.06,
+          0.08
+        ],
+        "k": 0.1,
         "rig": {
           "chest": 0.6,
           "upperarm": 0.4
@@ -1106,10 +3472,71 @@
       },
       {
         "name": "calf (gastrocnemius)",
+        "profile": [
+          [
+            0,
+            0.4,
+            0.4
+          ],
+          [
+            0.18,
+            0.95,
+            0.9
+          ],
+          [
+            0.35,
+            1,
+            1
+          ],
+          [
+            0.58,
+            0.7,
+            0.65
+          ],
+          [
+            0.8,
+            0.3,
+            0.28
+          ],
+          [
+            1,
+            0.2,
+            0.2
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "thigh"
+          ],
+          [
+            0.18,
+            "shin"
+          ],
+          [
+            0.8,
+            "shin"
+          ],
+          [
+            1,
+            "foot"
+          ]
+        ],
         "why": "the back of the shin, orange like the rest of the hind leg in How to Draw (seen from behind, a cream calf read as a peg under the haunch), to the heel",
-        "from": [0.46, 0.47, -0.58],
-        "to": [0.45, 0.27, -0.89],
-        "radii": [0.11, 0.11],
+        "from": [
+          0.46,
+          0.47,
+          -0.58
+        ],
+        "to": [
+          0.45,
+          0.27,
+          -0.89
+        ],
+        "radii": [
+          0.11,
+          0.11
+        ],
         "k": 0.07,
         "rig": {
           "shin": 1
@@ -1118,10 +3545,62 @@
       },
       {
         "name": "shin front (tibialis cranialis)",
+        "profile": [
+          [
+            0,
+            0.4,
+            0.45
+          ],
+          [
+            0.2,
+            0.9,
+            0.9
+          ],
+          [
+            0.4,
+            1,
+            1
+          ],
+          [
+            0.7,
+            0.6,
+            0.55
+          ],
+          [
+            1,
+            0.22,
+            0.24
+          ]
+        ],
+        "rig_path": [
+          [
+            0,
+            "shin"
+          ],
+          [
+            0.8,
+            "shin"
+          ],
+          [
+            1,
+            "foot"
+          ]
+        ],
         "why": "the front of the shin, orange on the side sheet, from below the knee to the ankle",
-        "from": [0.47, 0.43, -0.5],
-        "to": [0.45, 0.24, -0.8],
-        "radii": [0.09, 0.075],
+        "from": [
+          0.47,
+          0.43,
+          -0.5
+        ],
+        "to": [
+          0.45,
+          0.24,
+          -0.8
+        ],
+        "radii": [
+          0.09,
+          0.075
+        ],
         "k": 0.05,
         "rig": {
           "shin": 1
@@ -1131,9 +3610,20 @@
       {
         "name": "foot (metatarsals)",
         "why": "the long digitigrade foot lying along the ground (side sheet), as in birds and dinosaurs",
-        "from": [0.45, 0.22, -0.86],
-        "to": [0.45, 0.05, -0.6],
-        "radii": [0.08, 0.05],
+        "from": [
+          0.45,
+          0.22,
+          -0.86
+        ],
+        "to": [
+          0.45,
+          0.05,
+          -0.6
+        ],
+        "radii": [
+          0.08,
+          0.05
+        ],
         "k": 0.04,
         "rig": {
           "foot": 1
@@ -1142,6 +3632,34 @@
       }
     ],
     "head_weld": {
+      "lateral_fillet_forward": 0.055,
+      "fit_probe_points": [
+        [
+          0.18,
+          1.56,
+          1.38
+        ],
+        [
+          0.18,
+          1.56,
+          1.4
+        ],
+        [
+          0.21,
+          1.56,
+          1.38
+        ],
+        [
+          0.2,
+          1.6,
+          1.46
+        ],
+        [
+          0.2,
+          1.64,
+          1.46
+        ]
+      ],
       "why": "The back of the head is part of the body's skin, so the neck, cheek, jowl and the back of the skull are one surface and the cream jaw runs straight on into the cream throat (side sheet, Dragonet Prophecy cover). The face and jaw join the skin's field as pieces built from their own cross-sections (SectionPiece). In front of the cheek line the skin is kept inside them (set in by inset), hidden under their own meshes; behind the line those meshes are trimmed away and the skin is the head's surface, let out gradually (rise) so the neck's fillet swells out of it smoothly. Skin at and in front of the line moves with the head and jaw (handover), so the trimmed edges never part from it, and opening the mouth stretches the throat skin with the jaw.",
       "parts": [
         {
@@ -1153,6 +3671,7 @@
         },
         {
           "mesh": "Jaw",
+          "back_z": 1.27,
           "rig": {
             "jaw": 1.0
           },
@@ -1164,32 +3683,96 @@
       "inset": 0.004,
       "zcut": 1.56,
       "cheek_line": {
-        "why": "The cheek's back edge, traced on the side sheet (ref px -> model): the jaw's back edge from just under the throat notch back and up (z 1.60, y 1.38 -> 1.44, 1.46), up into the ear opening (1.414, 1.656), then the heavy S line behind the cheek (px 215,262 -> 195,248 -> 190,232 -> 200,222) up to the ear's base and on under the horn. The face's pebbles end and the neck's scales begin on it; the form runs on across it.",
+        "why": "The full upper-lip/cheek outline ends at the ear base (z1.47,y1.785). Its last backward projection at z1.402,y1.66 is a gentle cheek hook, then a rounded forward return through z1.49,y1.748 into the ear root. This is the outline itself, not an attached horn. The lower leg still follows the jaw underside.",
         "zy": [
-          [1.7, 1.2],
-          [1.62, 1.29],
-          [1.58, 1.335],
-          [1.54, 1.375],
-          [1.49, 1.415],
-          [1.44, 1.46],
-          [1.414, 1.656],
-          [1.472, 1.7],
-          [1.487, 1.744],
-          [1.458, 1.773],
-          [1.44, 1.85],
-          [1.44, 2.0]
+          [
+            1.78,
+            1.1
+          ],
+          [
+            1.660709,
+            1.4183
+          ],
+          [
+            1.587041,
+            1.465734
+          ],
+          [
+            1.534919,
+            1.496559
+          ],
+          [
+            1.485,
+            1.53
+          ],
+          [
+            1.437561,
+            1.566747
+          ],
+          [
+            1.41,
+            1.6
+          ],
+          [
+            1.402,
+            1.66
+          ],
+          [
+            1.443,
+            1.685
+          ],
+          [
+            1.478,
+            1.72
+          ],
+          [
+            1.49,
+            1.748
+          ],
+          [
+            1.47,
+            1.785
+          ],
+          [
+            1.44,
+            1.85
+          ],
+          [
+            1.44,
+            2.0
+          ]
         ],
-        "blend": [0.0, 0.006],
+        "blend": [
+          0.0,
+          0.006
+        ],
         "blend_note": "the inset ramps in over blend (in front of the line)",
-        "lower_leg_note": "The line's lower leg runs diagonally along the jaw's underside (just inside it) from under the chin's back to the ear opening, instead of dropping vertically at the throat notch (z 1.60-1.62): trimmed on a vertical, the jaw ended in a cut with the throat skin a step higher behind it (user: a drastic stair step). The throat skin now wraps the jaw's underside from the line back, carrying the jaw's own shape."
+        "lower_leg_note": "The attachment follows the lateral underside, not the centre-lowest line of the rounded jaw. Its forward fillet allowance keeps the throat skin underneath the raised jaw instead of clipping away that bridge; the posterior hook and ear return are unchanged."
       },
       "rise": 60.0,
       "clip_k": 0.008,
-      "handover": [-0.08, -0.01],
+      "handover": [
+        -0.08,
+        -0.01
+      ],
       "shell_taper": 0.13,
       "rise_note": "behind the line the skin may stand out from the head's surface by rise * (distance behind)^2, joined with a smooth maximum of radius clip_k (a hard cut leaves a kink the mesh steps on)",
       "handover_note": "skin weights: the head's and jaw's from the line forward, the neck's from handover[0] behind it",
-      "zcut_note": "The face's and jaw's own sections join the skin's field from the back of the head forward to zcut: the face to 1.56, the jaw to 1.72, ahead of the cheek line's lowest point (1.70), so the throat skin behind the line has the jaw's shape all along its underside. Taken to 1.72 the face's end left a seam across the cheek."
+      "zcut_note": "The face's and jaw's own sections join the skin's field from the back of the head forward to zcut: the face to 1.56, the jaw to 1.72, ahead of the cheek line's lowest point (1.70), so the throat skin behind the line has the jaw's shape all along its underside. Taken to 1.72 the face's end left a seam across the cheek.",
+      "junction_blend": {
+        "radius": 0.18,
+        "height_band": [
+          1.46,
+          1.53,
+          1.69,
+          1.77
+        ],
+        "forward_fade": [
+          1.47,
+          1.57
+        ],
+        "why": "Close the visible retroarticular jaw-to-throat gap with the existing tissue union. The previous 0.05 fillet could not span the separation of the face and ascending jaw sections; retain it outside this posterior junction."
+      }
     },
     "ear_clearance": {
       "flush_within": 0.006,
@@ -1204,7 +3787,28 @@
     "rim_height": 0.024,
     "foot": 0.01,
     "dark_below_f": 0.72,
-    "band_every": [[0.0, 0.085], [2.2, 0.095], [2.8, 0.13], [4.8, 0.11], [5.72, 0.06]],
+    "band_every": [
+      [
+        0.0,
+        0.085
+      ],
+      [
+        2.2,
+        0.095
+      ],
+      [
+        2.8,
+        0.13
+      ],
+      [
+        4.8,
+        0.11
+      ],
+      [
+        5.72,
+        0.06
+      ]
+    ],
     "band_slant": 0.08,
     "shingle": 0.007,
     "groove_depth": 0.008,
@@ -1223,7 +3827,36 @@
         "rake_deg": 28,
         "width": 0.045,
         "thickness": 0.03,
-        "height": [[0.12, 0.035], [0.35, 0.055], [0.6, 0.09], [0.93, 0.12], [1.1, 0.075], [1.3, 0.05], [1.6, 0.045]]
+        "height": [
+          [
+            0.12,
+            0.035
+          ],
+          [
+            0.35,
+            0.055
+          ],
+          [
+            0.6,
+            0.09
+          ],
+          [
+            0.93,
+            0.12
+          ],
+          [
+            1.1,
+            0.075
+          ],
+          [
+            1.3,
+            0.05
+          ],
+          [
+            1.6,
+            0.045
+          ]
+        ]
       },
       {
         "name": "tail",
@@ -1235,14 +3868,45 @@
         "length_per_height": 2.4,
         "width": 0.06,
         "thickness": 0.035,
-        "height": [[1.6, 0.045], [2.3, 0.05], [2.7, 0.065], [3.5, 0.06], [4.3, 0.045], [5.0, 0.025]]
+        "height": [
+          [
+            1.6,
+            0.045
+          ],
+          [
+            2.3,
+            0.05
+          ],
+          [
+            2.7,
+            0.065
+          ],
+          [
+            3.5,
+            0.06
+          ],
+          [
+            4.3,
+            0.045
+          ],
+          [
+            5.0,
+            0.025
+          ]
+        ]
       }
     ]
   },
   "surface_joins": {
     "ear_skin_relax": {
-      "center_yz": [1.745, 1.415],
-      "radius_yz": [0.10, 0.095],
+      "center_yz": [
+        1.745,
+        1.415
+      ],
+      "radius_yz": [
+        0.1,
+        0.095
+      ],
       "iterations": 24,
       "why": "Relax welded-section corrugation below the ear; protect the fitted cheek seam and the ear leaf."
     },

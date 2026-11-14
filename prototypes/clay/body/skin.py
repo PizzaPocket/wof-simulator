@@ -37,6 +37,15 @@ class Piece:
         self.a, self.b = np.array(spec["from"]) * m, np.array(spec["to"]) * m
         self.rig = {f"{bn}.{'L' if sgn > 0 else 'R'}" if bn in LIMB_BONES else bn: w for bn, w in spec["rig"].items()}
         self.endpoint_rig = {key: (f"{bn}.{'L' if sgn > 0 else 'R'}" if bn in LIMB_BONES else bn) for key, bn in spec.get("endpoint_rig", {}).items()}
+        self.rig_path = [(t, f"{bn}.{'L' if sgn > 0 else 'R'}" if bn in LIMB_BONES else bn) for t, bn in spec.get("rig_path", [])]
+        self.profile = np.asarray(spec.get("profile", []), float)
+        if len(self.profile):
+            from scipy.interpolate import PchipInterpolator
+            self.profile_curve = PchipInterpolator(self.profile[:, 0], self.profile[:, 1:], axis=0)
+        self.joint_rig = dict(spec.get("joint_rig", {}))
+        for key in ("parent", "bone", "next"):
+            if key in self.joint_rig:
+                self.joint_rig[key] += f".{'L' if sgn > 0 else 'R'}"
         self.zone = spec.get("zone", 0.5 if kind == "bone" else None)  # bones near the skin show orange
         # a limb's piece: coloured by which way its skin faces (limb_zone), not by its own zone
         self.limb = sum(w for bn, w in spec["rig"].items() if bn in LIMB_BONES) > 0.5
@@ -52,6 +61,25 @@ class Piece:
         self.ax, self.len = ax, np.linalg.norm(self.b - self.a)
 
     def rig_at(self, X):
+        if self.joint_rig:
+            t = np.clip((X - self.a) @ self.ax / max(self.len, 1e-9), 0.0, 1.0)
+            fraction = self.joint_rig["fraction"]
+            start = np.clip(t / fraction, 0, 1)
+            previous = 0.5 * (1 - start * start * (3 - 2 * start))
+            end = np.clip((t - (1 - fraction)) / fraction, 0, 1)
+            following = 0.5 * end * end * (3 - 2 * end) if "next" in self.joint_rig else np.zeros(len(X))
+            out = {self.joint_rig["parent"]: previous, self.joint_rig["bone"]: 1 - previous - following}
+            if "next" in self.joint_rig:
+                out[self.joint_rig["next"]] = following
+            return out
+        if self.rig_path:
+            t = np.clip((X - self.a) @ self.ax / max(self.len, 1e-9), 0, 1)
+            fractions = np.array([a for a, _ in self.rig_path])
+            interval = np.clip(np.searchsorted(fractions, t) - 1, 0, len(fractions) - 2)
+            u = (t - fractions[interval]) / (fractions[interval + 1] - fractions[interval])
+            smooth_t = fractions[interval] + u * u * (3 - 2 * u) * (fractions[interval + 1] - fractions[interval])
+            return {bn: np.interp(smooth_t, fractions, [float(name == bn) for _, name in self.rig_path])
+                    for bn in dict(self.rig_path).values()}
         if not self.endpoint_rig:
             return {bn: np.full(len(X), weight) for bn, weight in self.rig.items()}
         t = np.clip((X - self.a) @ self.ax / max(self.len, 1e-9), 0.0, 1.0)
@@ -64,6 +92,18 @@ class Piece:
             h = np.clip(((X - self.a) @ ba) / (ba @ ba), 0.0, 1.0)
             r = self.r[0] + (self.r[1] - self.r[0]) * h
             return np.linalg.norm(X - self.a - h[:, None] * ba, axis=1) - r
+        if len(self.profile):
+            # Measured/adapted belly-to-tendon stations in this muscle's own
+            # frame. Rounded embedded endcaps keep attachments continuous.
+            along = (X - self.a) @ self.ax
+            t = np.clip(along / self.len, 0, 1)
+            scales = self.profile_curve(t)
+            outward = scales[:, 0] * self.radii[1]
+            across = scales[:, 1] * self.radii[2]
+            q = X - self.a - (t * self.len)[:, None] * self.ax
+            cap_radius = np.minimum(outward, across)
+            value = np.sqrt(((q @ self.E[1]) / outward) ** 2 + ((q @ self.E[2]) / across) ** 2 + ((q @ self.ax) / cap_radius) ** 2)
+            return (value - 1) * cap_radius
         q = (X - self.c) @ self.E.T  # ellipsoid (approximate distance, exact on the surface)
         k0 = np.linalg.norm(q / self.radii, axis=1)
         k1 = np.linalg.norm(q / self.radii ** 2, axis=1)
@@ -104,6 +144,9 @@ class SectionPiece:
         self.b = np.array([allp[:, 0].max(), allp[:, 1].max(), min(self.z[-1], zcut)])
         self.radii = np.zeros(3)
 
+    def rig_at(self, X):
+        return {bn: np.full(len(X), weight) for bn, weight in self.rig.items()}
+
     def sdf(self, X):
         q = np.linalg.norm(np.maximum(np.maximum(self.a - X, X - self.b), 0.0), axis=1)
         d = np.maximum(q, self.margin)  # far away: past any fillet
@@ -127,6 +170,11 @@ class SectionPiece:
 
 
 LIMB_BONES = {"upperarm", "forearm", "hand", "thigh", "shin", "foot", "wing_humerus", "wing_forearm"} | {f"{p}{k}" for p in ("ftoe", "htoe") for k in range(1, 5)} | {"fthumb"}
+LIMB_BONES |= {f"{p}{k}" for p in ("fmeta", "hmeta") for k in range(1, 5)}
+LIMB_BONES |= {f"{p}{k}_p{j}" for p in ("ftoe", "htoe") for k in range(1, 5) for j in (2, 3)} | {"fthumb_p2"}
+LIMB_BONES |= {"forearm_twist", "shoulder_soft", "hip_soft"}
+LIMB_BONES |= {"wrist_arc1", "wrist_arc2"}
+LIMB_BONES |= {"wing_socketBlend1", "wing_socketBlend2"}
 
 
 class Trunk:
@@ -201,7 +249,8 @@ def field(X, trunk, parts, all_parts=False, with_cavity=True):
     dt = trunk.sdf(X) if trunk is not None else np.full(len(X), 1e3)
     d = dt.copy()
     for p, dp in zip(parts, D):
-        d = smin(d, dp, p.k)
+        blend = getattr(p, "blend_radius", None)
+        d = smin(d, dp, blend(X) if blend is not None else p.k)
     if CLIP is not None:
         d = CLIP(X, d, D, parts)
     if trunk is not None and CAVITY is not None and with_cavity:
@@ -382,6 +431,7 @@ def vertex_data(V, trunk, parts, trunk_weights, trunk_zone, dark_zone, tail_trus
     infl = np.exp(-(allD - allD.min(axis=0)) / blend)
     infl /= infl.sum(axis=0)
     ZP = [p.zone_at(V) for p in parts]
+    sampled_rig = [p.rig_at(V) for p in parts]
     W, Z, A, T = [], [], [], []
     for n in range(len(V)):
         sc = max(float(s[n]), 0.0)
@@ -394,8 +444,8 @@ def vertex_data(V, trunk, parts, trunk_weights, trunk_zone, dark_zone, tail_trus
             ik = infl[k + 1, n]
             if ik < 1e-3:
                 continue
-            for bn, wt in p.rig.items():
-                acc[bn] = acc.get(bn, 0.0) + ik * wt
+            for bn, values in sampled_rig[k].items():
+                acc[bn] = acc.get(bn, 0.0) + ik * values[n]
             z += ik * (limb_zone(V[n, 0], N[n]) if (p.limb and N is not None) else (zt if ZP[k] is None else ZP[k][n]))
         top = sorted(acc.items(), key=lambda kv: -kv[1])[:4]
         tot = sum(wt for _, wt in top)

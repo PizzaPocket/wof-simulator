@@ -57,7 +57,8 @@ Work top to bottom: the head first, because the neck and body join onto it. Tick
 
 - [ ] **Belly plates.** The stepped belly bands are painted; build them as real plates.
 - [ ] **Hind thigh.** Its top pokes up through the side of the torso.
-- [ ] **Toes.** Sculpt the toes into the hands and feet; only the claws are separate pieces.
+- [x] **Toe attachment and articulation.** Continuous metacarpal/metatarsal rays into each main digit, three phalangeal controls per main toe and two per front thumb; claws follow terminal phalanges. Source-field, exported-skin and runtime walk/jump/flight checks pass. See `docs/clay-feet-anatomy.md` for before/after review and limits.
+- [ ] **Toe surface/contact polish.** Reduce close-up voxel faceting and add per-digit uneven-terrain contact/pressure behavior.
 - [ ] **Tail.** Build the hook at the tip and the row of tail spikes.
 - [ ] **Mane.** Not built.
 - [ ] **Wings.** First pass built in the side sheet's folded pose (`wing` in body_design.json): the arm along the flank, the forearm down to a low wrist with a thumb claw, four plated fingers with claws, and the membrane scalloped between the tips. Still to do: posing (the official art raises them), membrane colour and thickness at the edges, and plates with depth.

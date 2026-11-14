@@ -1,5 +1,59 @@
 # Clay's body: element sheets
 
+## Continuous wing deployment
+
+The [wing motion sheet](../../../docs/clay-wing-fold.md) records the staged
+shoulder, elbow, wrist and phalanx path, span-aware membrane gathering, shorter
+runtime transitions and isolated review workflow. Approved endpoint silhouettes
+and segment lengths remain unchanged. Timing data lives in `wing_motion.json`
+so this pass does not edit the shared head/body design file. Integration into
+the full dragon asset follows the head sculpt's coordinated export.
+
+## Full leg musculature and arm use
+
+The [full-leg sheet](../../../docs/clay-full-legs.md) records the reference crops,
+real anatomical studies, source profiles and review limits. The muscle fields
+now have shape-preserving belly/tendon stations and attachment-weight paths,
+with clearer biceps/triceps, forearm-to-carpus and thigh/calf-to-hock transitions.
+Radius/ulna and tibia/fibula are separate underlying fields. The olecranon follows
+the ulna, and the calf's tendon region follows the calcaneal attachment.
+
+Raising the arm exposed the old distal pectoral/latissimus fill as an excessive
+axillary sail. Their insertions now approach the proximal humerus; the medial
+upper-arm envelope is narrower and belongs to the moving arm. Shoulder/hip
+half-rotation helpers preserve attachment volume; forearm twist supports palm
+rotation without assigning that motion to the wrist alone. Free-hand orientation
+follows the forearm, with intermediate carpal deformation controls keeping the
+wrist rounded. The foreleg socket is raised beneath the scapula, and the wing
+root is moved forward/high with a small rearward correction after user review.
+Trapezius/rhomboid, serratus and pectoral forms support that girdle. Digit layout
+and armor intent remain; posed links preserve lengths from the revised source.
+
+Flight uses an engaged asymmetrical carried pose, replacing both the sharp
+knee/hock zigzag and a subsequent rejected limp hang.
+Review uses matched native Godot cameras, plain clay, reaching/palm rotation,
+walking and flight. Muscle force/volume simulation, independent scapular slide
+and extreme-pose corrective sculpting remain separate work.
+
+## Connected foot rays and articulated phalanges
+
+The fore/hind feet keep four main digits, a two-phalange front thumb and the hind
+heel spur. Each main digit now has its own metapodial ray continuing out of the
+palm/raised hock, then three actual rig controls matching its modeled phalanges.
+The old single ellipsoid tapered between outer digit roots, and the old rig moved
+each entire toe with one bone. Smooth ray fields fill that structural transition;
+joint-local weight gradients and terminal-phalanx claw weights follow articulation.
+
+Evidence, crop coordinates, construction numbers, anatomical sources and review
+limits are in [the foot anatomy sheet](../../../docs/clay-feet-anatomy.md). The
+side-sheet mapping is unchanged. How to Draw supplies the oblique front/hind
+root arrangement; modestly shorter outer digits are an artistic adaptation,
+not a reconstruction of hidden joints. Runtime review includes plain clay,
+before/after views and walk/jump/flight plus isolated phalangeal flexion.
+
+Remaining: voxel faceting and the absence of tendon simulation or separate
+terrain contact/pressure solving for each digit.
+
 ## Reference-based finger lengths and continuous wrist
 
 The user accepts the folded shell orientation in `2c8fd97`. Preserve brown outward/orange inward. Their new requests supersede the upright fan targets and the earlier forward elbow-digit angle.
@@ -466,3 +520,32 @@ These are deformation helpers at the same socket, not extra anatomical joints.
 Their rotations are included in the fold animation, requiring no extra viewer
 control. The chest attachment remains fixed and the humeral endpoint remains
 rigid with the upper arm.
+
+
+## Terminal tail shell (2026-10-29)
+
+The thin terminal cone lost its dark region during categorical-zone smoothing,
+leaving bare light/orange skin beyond the shell. A data-driven terminal cap
+widens the existing dorsal coverage over the last 0.28 model units, closing
+around the final 0.04. It uses the skin topology and tail weights. Shell relief
+is limited to 35% of the local radius in that region to retain a tapered end.
+The cream underside remains exposed farther up the tail.
+
+
+## Rounded tail termination (2026-10-29, user revision)
+
+Remove the last 0.32 model units of needle-like taper. The remaining cone closes
+through a 0.05-long rounded profile. Keep the preceding taper unchanged and
+retarget all 36 caudal vertebrae to the new endpoint. The previous long terminal
+shell-cap workaround is reduced to the small rounded ending (0.10 blend region,
+0.025 terminal closure); shell relief still follows local radius.
+
+### Posterior jaw / throat continuity
+
+The reported see-through opening lay in the ascending-jaw junction. The previous
+0.05 smooth union did not bridge the separation between the face and jaw sections.
+`anatomy.head_weld.junction_blend` now reaches 0.18 locally over source heights
+1.53–1.69, fades before z1.57, and keeps the original blend elsewhere. The existing
+neck field is allowed forward beneath the retroarticular attachment. Additional
+tissue probes cover y1.60 and y1.64, z1.46; full closed/open mouth renders confirm
+the side and three-quarter opening is closed.

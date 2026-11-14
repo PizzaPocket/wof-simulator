@@ -1,0 +1,12 @@
+{
+  "why": "Keep the approved spread and folded silhouettes. Coordinate a bat-inspired arm, wrist and finger chain between them rather than pulling tips through straight lines. Timing is an animation choice, not a measurement from the static art.",
+  "pose_steps": 16,
+  "shoulder": [0.12, 1.0],
+  "elbow": [0.04, 0.9],
+  "wrist": [0.0, 0.8],
+  "finger_base": [0.0, 0.7],
+  "finger_middle": [0.1, 0.84],
+  "finger_tip": [0.2, 0.96],
+  "accessory": [0.08, 0.86],
+  "membrane_gather": [0.28, 1.0]
+}
