@@ -57,7 +57,7 @@ func _run() -> void:
 	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Map must release the mouse")
 
 	# Every start location of every landmass is a pin, plus the detailed village.
-	var expected := 2 # the MudWing village and Jade Mountain Academy
+	var expected := 4 # the MudWing village, Jade Mountain Academy, Sky Kingdom palace, Scorpion Den
 	for id in ["pyrrhia", "pantala", "forgotten_isles", "nightwing_island"]:
 		var definition: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/terrain/%s.json" % id))
 		expected += definition.entries.size()
@@ -204,6 +204,25 @@ func _run() -> void:
 	await wait_for_scene("Overworld")
 	check(current_scene.era == "arc2" and current_scene.era_buttons["arc2"].button_pressed, "The chosen era must persist after returning")
 
+	# The palace and the Scorpion Den also travel through the real loader in this era.
+	atlas = current_scene
+	for site in [["Sky Kingdom palace and arena", "SkyPalace"], ["Scorpion Den", "ScorpionDen"]]:
+		atlas = current_scene # the map is rebuilt after every visit
+		var index := pin_named(atlas, site[0])
+		check(index >= 0 and atlas._open_in_era(atlas.pins[index]), "%s needs an open pin in Arc 2" % site[0])
+		atlas.map.set_view(atlas.pins[index].world, 1.0 / 200.0, true)
+		atlas._update_pins()
+		atlas.hotspots[index].pressed.emit()
+		await wait_for_scene(site[1])
+		deadline = Time.get_ticks_msec() + 60000
+		while current_scene.get("collision_ready") == false and Time.get_ticks_msec() < deadline:
+			await process_frame
+		for i in 20: await physics_frame
+		check(current_scene.player.position.y > -5.0, "%s: the player must not fall through the world" % site[0])
+		var back := current_scene.find_child("WorldMapButton", true, false) as Button
+		check(back != null, "Missing return-to-map button in " + site[0])
+		back.pressed.emit()
+		await wait_for_scene("Overworld")
 	atlas = current_scene
 	atlas.map.fit_world(true)
 	atlas._update_pins()

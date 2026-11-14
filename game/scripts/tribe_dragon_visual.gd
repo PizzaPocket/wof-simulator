@@ -10,7 +10,9 @@ func _ready() -> void:
 	var id: String = get_parent().character_id
 	var profiles: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/protagonists.json"))
 	profile = profiles[id]
-	var path := "res://assets/dragons/" + id + ".glb"
+	# Several characters can share one baked model (Starflight uses the NightWing build).
+	var model_id: String = str(profile.get("model", id))
+	var path := "res://assets/dragons/" + model_id + ".glb"
 	var model := (load(path) as PackedScene).instantiate() as Node3D
 	add_child(model)
 	model.scale = Vector3.ONE * model_scale
@@ -40,9 +42,17 @@ func _ready() -> void:
 					material.cull_mode = BaseMaterial3D.CULL_DISABLED
 					material.vertex_color_use_as_albedo = mesh.mesh.surface_get_format(i) & Mesh.ARRAY_FORMAT_COLOR != 0
 					mesh.set_surface_override_material(i, material)
+	if profile.get("eyes", "") == "blind":
+		# Clouded, pupil-less eyes replace the seated pigmented globes.
+		var milky := StandardMaterial3D.new()
+		milky.albedo_color = Color("aab4ae")
+		milky.roughness = 0.3
+		for mesh: MeshInstance3D in model.find_children("*", "MeshInstance3D", true, false):
+			if mesh.name.begins_with("Moon seated pigmented globe"):
+				mesh.material_override = milky
 	motion = preload("res://scripts/tribe_dragon_motion.gd").new()
 	add_child(motion)
-	var anatomy: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/dragons/" + id + "_anatomy.json"))
+	var anatomy: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/dragons/" + model_id + "_anatomy.json"))
 	if not anatomy.has("ground_plant_model"):
 		var lowest := INF
 		for part: MeshInstance3D in model.find_children("*", "MeshInstance3D", true, false):

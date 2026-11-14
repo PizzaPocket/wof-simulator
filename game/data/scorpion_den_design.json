@@ -1,0 +1,112 @@
+{
+  "note": "Authored blockout of the Scorpion Den (Kingdom of Sand). Metres relative to the town centre. Sources: Wings of Fire wiki mirror (Scorpion Den page): a sprawling walled town, not a pit or cave; several gated entrances onto a street lined with stalls; hundreds of narrow winding alleys and dead ends; a large central oasis (the Outclaws' base, with free meals for young dragonets) and a market; Qibli's home, an orphanage, and Vulture's heavily fortified compound with an observatory and prison cell. The page gives no dimensions, wall height, gate count or building heights, so all sizes, counts and positions are authored. It also leaves the date range of the Outclaws' rule unclear, so the era split below is a simplification.",
+  "title": "Scorpion Den",
+  "eras": [
+    "arc1",
+    "arc2"
+  ],
+  "label_by_era": {
+    "arc1": [
+      "Scorpion Den \u00b7 Arc 1",
+      "The Outclaws hold the oasis \u00b7 authored layout"
+    ],
+    "arc2": [
+      "Scorpion Den \u00b7 Arc 2",
+      "Vulture's compound stands \u00b7 authored layout"
+    ]
+  },
+  "env": {
+    "sky_top": "7fa6c4",
+    "sky_horizon": "f0dcb4",
+    "fog_color": "ead2a8",
+    "fog_density": 0.00018,
+    "sun_color": "ffe3b8"
+  },
+  "ground_radius": 900.0,
+  "boundary_radius": 780.0,
+  "ground_color": "c9a96a",
+  "spawn": [
+    0,
+    0.2,
+    360
+  ],
+  "wall": {
+    "radius": 290.0,
+    "height": 28.0,
+    "thickness": 7.0,
+    "segments": 64,
+    "gate_width": 30.0,
+    "gates_deg": [
+      90,
+      20,
+      165,
+      235,
+      310
+    ],
+    "tower": [
+      14,
+      42
+    ]
+  },
+  "oasis": {
+    "radius": 38.0,
+    "palms": 9
+  },
+  "plaza_radius": 78.0,
+  "stalls": 16,
+  "cell": 44.0,
+  "seed": 4242,
+  "named": {
+    "orphanage": {
+      "name": "Orphanage",
+      "x": 98,
+      "z": 118,
+      "size": [
+        42,
+        22,
+        36
+      ],
+      "color": "b89466"
+    },
+    "qibli": {
+      "name": "Qibli's home",
+      "x": -112,
+      "z": 70,
+      "size": [
+        30,
+        14,
+        26
+      ],
+      "color": "a8825a",
+      "eras": [
+        "arc2"
+      ]
+    }
+  },
+  "outclaws": {
+    "name": "Outclaws' camp",
+    "x": 52,
+    "z": -8,
+    "tents": 7,
+    "eras": [
+      "arc1"
+    ]
+  },
+  "compound": {
+    "name": "Vulture's compound",
+    "x": 165,
+    "z": -135,
+    "size": [
+      110,
+      80
+    ],
+    "wall_height": 20,
+    "tower": [
+      7,
+      48
+    ],
+    "eras": [
+      "arc2"
+    ]
+  }
+}

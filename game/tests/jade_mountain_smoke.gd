@@ -17,6 +17,11 @@ func check(condition: bool, message: String) -> void:
 func ray(from: Vector3, to: Vector3) -> Dictionary:
 	var query := PhysicsRayQueryParameters3D.create(from, to)
 	query.collision_mask = 1
+	# Characters standing in the scene must not read as floor or wall.
+	var bodies: Array[RID] = [world.player.get_rid()]
+	for resident in world.residents:
+		bodies.append(resident.get_rid())
+	query.exclude = bodies
 	return world.get_world_3d().direct_space_state.intersect_ray(query)
 
 func capture(filename: String) -> void:
@@ -45,6 +50,7 @@ func _run() -> void:
 	var deadline := Time.get_ticks_msec() + 20000
 	while not world.collision_ready and Time.get_ticks_msec() < deadline: await physics_frame
 	check(world.collision_ready, "Ledge collision never became ready")
+	check(world.residents.size() == 1 and world.residents[0].character_id == "starflight_blind", "The blind Starflight must stand in the library")
 	for i in 6: await physics_frame
 	player = world.player
 	print("Loaded in ms: ", Time.get_ticks_msec() - began)

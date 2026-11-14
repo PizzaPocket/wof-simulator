@@ -8,7 +8,8 @@ Clay movement prototype.
 - [Playable bare terrain: both continents and islands](docs/bare-terrain.md)
 - [Clay prototype (work in progress)](prototypes/clay/README.md)
 - [Godot movement playground: setup, model build and controls](game/README.md)
-- [Jade Mountain Academy (Arc 2, first detailed location)](docs/jade-mountain.md)
+- [Jade Mountain Academy (Arc 2)](docs/jade-mountain.md)
+- [Sky Kingdom palace and Scorpion Den (rough blockouts)](docs/sites.md)
 - [Web export and Vercel deployment](docs/web-deployment.md)
 
 Open `game/project.godot` in Godot 4.5+ and press **F5**. Move with WASD or a
@@ -21,7 +22,8 @@ there: every kingdom, island and shore start is pinned, and **Jump to a place**
 lists them all. Terrain is bare, with colored biomes, mountains, hills and water.
 Pyrrhia spans 320 × 237 km, with all four maps expanded tenfold and terrain
 streamed around the player.
-Pick an era on the timeline along the bottom: **Jade Mountain Academy** opens in Arc 2.
+Pick an era on the timeline along the bottom: **Jade Mountain Academy** opens in Arc 2, while the
+**Sky Kingdom palace** and **Scorpion Den** change between Arc 1 and Arc 2.
 Select **MudWing village** on Pyrrhia to enter the detailed wetlands;
 press **M / controller Start** or click **World map** to return to the map.
 

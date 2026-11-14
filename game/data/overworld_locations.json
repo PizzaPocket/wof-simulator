@@ -146,6 +146,50 @@
           "Loading Clay"
         ]
       ]
+    },
+    {
+      "id": "sky_palace",
+      "name": "Sky Kingdom palace and arena",
+      "kingdom": "Sky Kingdom",
+      "continent": "pyrrhia",
+      "position": [
+        1225,
+        375
+      ],
+      "eras": [
+        "arc1",
+        "arc2"
+      ],
+      "placement_note": "At the Queen Scarlet's Palace label on the traced map. Authored blockout; see docs/sites.md.",
+      "scene": "res://scenes/sky_palace.tscn",
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
+    },
+    {
+      "id": "scorpion_den",
+      "name": "Scorpion Den",
+      "kingdom": "Kingdom of Sand",
+      "continent": "pyrrhia",
+      "position": [
+        640,
+        1142
+      ],
+      "eras": [
+        "arc1",
+        "arc2"
+      ],
+      "placement_note": "At the Scorpion Den label on the traced map. Authored blockout; see docs/sites.md.",
+      "scene": "res://scenes/scorpion_den.tscn",
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
     }
   ]
 }

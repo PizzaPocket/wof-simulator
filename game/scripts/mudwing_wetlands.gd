@@ -364,6 +364,9 @@ func _make_villagers() -> void:
 		{"id": "camille", "age": 9, "start": Vector2(-12, 2), "route": [Vector2(-14, 1), Vector2(-14, -3), Vector2(-11, 3)]},
 		{"id": "corinne", "age": 6, "start": Vector2(-14, 4), "route": [Vector2(-15, 3), Vector2(-16, 0), Vector2(-14, 2)]},
 	]
+	# Arc 1 Starflight (sighted) visits the village when the map's era is Arc 1.
+	if Engine.has_meta("map_era") and str(Engine.get_meta("map_era")) == "arc1":
+		cast.append({"id": "starflight", "age": 6, "start": Vector2(-27, -26), "route": [Vector2(-27, -26), Vector2(-24, -22)]})
 	for entry in cast:
 		var npc := preload("res://scripts/protagonist_factory.gd").make_actor(entry.id)
 		npc.age = entry.get("age", npc.age)

@@ -11,6 +11,25 @@ game/scenes/character_review.tscn directly. It uses the real game actors.
 - Local reference images can be shown alongside the model. They are private cached
   reference material, not bundled game art.
 
+## Starflight
+
+Starflight is a NightWing with two era-specific profiles, `starflight` and `starflight_blind`, in
+`game/data/protagonists.json`. Both set `"model": "moon"`, so they reuse Moon's baked mesh, rig and
+anatomy at a larger inferred scale (1.95) rather than a new Blender build, and are not playable.
+Source: the wiki mirror's *Starflight* page.
+
+| Era | Profile | Where | Notes |
+| --- | --- | --- | --- |
+| Arc 1 | `starflight` (sighted) | MudWing village, when the map's era is Arc 1 | The wiki places him in the Mud Kingdom in *The Dragonet Prophecy* |
+| Arc 2 | `starflight_blind` | Jade Mountain Academy library | Head librarian and co-founder (*Moon Rising*, *Talons of Power*) |
+
+He was blinded and burned in the volcanic eruption in *The Dark Secret*. The blind profile swaps the
+seated eye globes for clouded, pupil-less ones. **Not done:** his burn scars (the wiki describes long
+scars across his scales and snout), the midnight-black palette with purple and blue glints and silver
+wing undersides (the shared model keeps Moon's palette), and any slimmer build. A proper variant would
+add build entries for both ids in `game/tools/build_tribe_dragons.py`. The wiki gives no body size,
+so the scale is a guess.
+
 ## Final source mapping
 
 **Umber uses the shared base MudWing model**, as requested. His size, warm

@@ -38,6 +38,7 @@ func _ready() -> void:
 	var era_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/eras.json"))
 	eras = era_data.eras
 	era = str(Engine.get_meta("map_era")) if Engine.has_meta("map_era") else str(era_data.default)
+	Engine.set_meta("map_era", era) # destinations read the era the player chose on the map
 	map = WorldMap.new()
 	map.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(map)

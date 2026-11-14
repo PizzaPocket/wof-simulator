@@ -7,6 +7,8 @@ uniform vec3 snow_color : source_color = vec3(0.93, 0.96, 0.98);
 uniform float base_height = 500.0;
 uniform float snow_line = 1550.0;
 uniform float bump = 0.55;
+uniform float gold_veins : hint_range(0.0, 1.0) = 0.0;
+uniform vec3 gold_color : source_color = vec3(0.95, 0.72, 0.22);
 
 varying vec3 wpos;
 varying vec3 wnormal;
@@ -54,6 +56,12 @@ void fragment() {
 	snow *= smoothstep(0.30, 0.72, wnormal.y + 0.25 * broad);
 	ALBEDO = mix(rock, snow_color, snow);
 	ROUGHNESS = mix(0.96, 0.75, snow);
+	// Optional veins of gold through carved stone.
+	float vein = smoothstep(0.60, 0.65, fbm(wpos * vec3(0.07, 0.05, 0.07), 3)) * gold_veins;
+	ALBEDO = mix(ALBEDO, gold_color, vein);
+	ROUGHNESS = mix(ROUGHNESS, 0.35, vein);
+	METALLIC = vein * 0.6;
+	EMISSION = gold_color * vein * 0.12;
 	float step_size = 0.3;
 	float h0 = fbm(wpos * 1.6, 3);
 	vec3 grad = vec3(fbm((wpos + vec3(step_size, 0, 0)) * 1.6, 3) - h0,

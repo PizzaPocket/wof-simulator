@@ -4,11 +4,12 @@ A first playable slice of Jade Mountain and its academy, reached from the world 
 **Arc 2** and is dimmed on the timeline in other eras. Its pin sits on the traced Jade Mountain
 peak in the Kingdom of Sand / Sky Kingdom border country.
 
-This is an **authored blockout**, not a faithful reconstruction. The books and wiki describe the
-academy but give no floor plan, and this pass had no access to wiki text (Fandom blocked fetches
-and the search results were thin). The layout therefore follows what is described in outline and
-invents the rest. Every chamber in `game/data/jade_mountain_design.json` carries a `source` field
-saying which it is.
+This is an **authored blockout**, not a faithful reconstruction. The wiki describes the academy's
+rooms and mood but gives no floor plan or dimensions, so the layout follows the named places and
+invents the plan and sizes. Sources are the Wings of Fire wiki mirror
+(`mirror.wingsoffire.wiki`, an older revision of the *Jade Mountain Academy*, *Jade Mountain* and
+*Starflight* pages); Fandom itself blocks automated fetches. Every chamber in
+`game/data/jade_mountain_design.json` carries a `source` field saying which it is.
 
 ## What is in the scene
 
@@ -26,16 +27,25 @@ saying which it is.
 
 | Chamber | Source |
 | --- | --- |
-| Central cavern with tunnels branching off | wiki: a central cave with tunnels branching from it |
-| Library | *A Guide to the Dragon World*: scrolls in the academy library |
+| Great Hall | wiki: the unofficial entrance, sunlit, bronze gong, school map, four tunnel openings (about 400 dragons). Here a plain round hall |
+| Central cavern with tunnels branching off | wiki snippet: a central cave with tunnels branching from it |
+| Library | wiki: scroll-filled, a circular LIBRARIAN desk, skylights, leaf-covered windows. Starflight stands here |
 | Study room, battle arena, guardians' cave | wiki snippets naming each (not verified against the books) |
-| Entrance hall, feeding cave, eight winglet caves, the passage layout | authored |
+| Prey center | wiki: Clay's prey center, open to the sky on one side with a river. Here an ordinary cave |
+| Eight sleeping caves | wiki: sleeping caves off the halls left of the Great Hall. Count and positions authored |
 
-Winglet caves are eight identical rooms. Whether and how they map to tribes is not decided.
+**Named in the wiki but not built:** art cave, music cave, healing center, mourning cave, history
+cave, museum, Sunny's office, Stonemover's cave (a second entrance), weapons cave, and the
+underground lakes (the largest has a hole to the sky). The wiki also describes the main entrance as
+a mountaintop ledge with trees, glass globes hung in the tunnels, plants and small streams, and
+the mountain itself as having twin fang-shaped peaks and as the tallest in the Claws of the Clouds.
+None of that is modelled yet.
+
+Starflight is the head librarian in this era (see [character models](character-models.md#starflight)).
 
 ## Known limits
 
-- No NPCs, dialogue, doors, furniture or tribe-specific cave interiors yet.
+- Only Starflight stands in the library. No dialogue, doors, furniture or tribe-specific cave interiors yet.
 - The mountain exterior is simple (cones and spires) and the foothills are a flat disc. Nothing
   beyond the ledge is detailed, and there is no weather or cloud layer.
 - CSG is fine at this size (about 2 s to build) but is not a long-term answer for web builds.
