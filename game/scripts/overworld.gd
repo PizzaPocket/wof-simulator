@@ -10,6 +10,7 @@ const PIN_GAP := 26.0
 const MARSH := Color("172c28")
 const GOLD := Color("edce91")
 const HIGHLIGHT := Color("f3e5c4")
+const HINT := "Drag to move · scroll or pinch to zoom · click a pin to travel"
 
 var registry: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/overworld_locations.json"))
 var map: Control
@@ -27,9 +28,16 @@ var hovered := -1
 var focused := -1
 var forced := -1
 var entering := false
+var eras: Array = []
+var era := ""
+var era_buttons: Dictionary = {}
+var timeline: PanelContainer
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	var era_data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/eras.json"))
+	eras = era_data.eras
+	era = str(Engine.get_meta("map_era")) if Engine.has_meta("map_era") else str(era_data.default)
 	map = WorldMap.new()
 	map.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(map)
@@ -43,6 +51,7 @@ func _ready() -> void:
 		_add_pin_widgets(index)
 	_build_header()
 	_build_zoom_controls()
+	_build_timeline()
 	hover_tip = PanelContainer.new()
 	hover_tip.z_index = 10
 	hover_tip.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -60,11 +69,11 @@ func _ready() -> void:
 	hover_tip.add_child(tip_copy)
 	add_child(hover_tip)
 	hover_tip.hide()
-	message = _label("Drag to move · scroll or pinch to zoom · click a pin to travel", 16)
+	message = _label(HINT, 16)
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	message.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	message.offset_top = -47
-	message.offset_bottom = -21
+	message.offset_top = -100
+	message.offset_bottom = -74
 	add_child(message)
 	map.view_changed.connect(_update_pins)
 	resized.connect(_update_pins)
@@ -218,21 +227,40 @@ func _update_pins() -> void:
 	markers.queue_redraw()
 	_refresh_tip()
 
+## Pins list the eras they are open in; none listed means every era.
+func _open_in_era(pin: Dictionary) -> bool:
+	var open_eras: Array = pin.get("eras", [])
+	return open_eras.is_empty() or era in open_eras
+
+func _era_name(id: String) -> String:
+	for item in eras:
+		if item.id == id:
+			return item.name
+	return id
+
+func _era_hint(pin: Dictionary) -> String:
+	var names: Array[String] = []
+	for id in pin.get("eras", []):
+		names.append(_era_name(id))
+	return "Opens in " + " / ".join(names)
+
 func _draw_markers() -> void:
 	for i in pins.size():
 		if not hotspots[i].visible:
 			continue
 		var point: Vector2 = map.world_to_screen(pins[i].world)
+		var open := _open_in_era(pins[i])
+		var gold := GOLD if open else Color(GOLD, 0.4)
 		if hovered == i or focused == i:
 			markers.draw_arc(point, 19, 0, TAU, 48, HIGHLIGHT, 2, true)
 		markers.draw_circle(point, 12, MARSH)
 		if pins[i].tier == 0:
-			# The detailed village is a solid gold pin.
-			markers.draw_circle(point, 9, GOLD)
+			# Detailed destinations are solid gold pins.
+			markers.draw_circle(point, 9, gold)
 			markers.draw_circle(point, 3.5, MARSH)
 		else:
-			markers.draw_arc(point, 10, 0, TAU, 32, GOLD, 2, true)
-			markers.draw_circle(point, 4, GOLD)
+			markers.draw_arc(point, 10, 0, TAU, 32, gold, 2, true)
+			markers.draw_circle(point, 4, gold)
 
 func _refresh_tip() -> void:
 	if not is_instance_valid(hover_tip):
@@ -241,7 +269,8 @@ func _refresh_tip() -> void:
 	hover_tip.visible = index >= 0 and hotspots[index].visible
 	if hover_tip.visible:
 		var pin := pins[index]
-		tip_copy.text = "%s\n%s\nClick / Enter / A to travel" % [pin.name, pin.subtitle]
+		var action := "Click / Enter / A to travel" if _open_in_era(pin) else _era_hint(pin) + " (see the timeline)"
+		tip_copy.text = "%s\n%s\n%s" % [pin.name, pin.subtitle, action]
 		hover_tip.size = hover_tip.get_combined_minimum_size()
 		var anchor := hotspots[index].position + Vector2(48, -hover_tip.size.y / 2 + 24)
 		if anchor.x + hover_tip.size.x > size.x - 16:
@@ -284,10 +313,61 @@ func _build_header() -> void:
 		if continent != group:
 			group = continent
 			popup.add_separator(map.continent(continent).definition.name)
-		popup.add_item(pins[index].name, index)
+		popup.add_item(_menu_text(pins[index]), index)
 	popup.id_pressed.connect(_fly_to_pin)
 	column.add_child(places)
 	add_child(panel)
+
+func _menu_text(pin: Dictionary) -> String:
+	return pin.name if _open_in_era(pin) else "%s  (%s)" % [pin.name, _era_hint(pin).trim_prefix("Opens in ")]
+
+func _build_timeline() -> void:
+	timeline = PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.09, 0.17, 0.16, 0.9)
+	style.border_color = Color(0.93, 0.81, 0.57, 0.55)
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(6)
+	style.content_margin_left = 12
+	style.content_margin_right = 12
+	style.content_margin_top = 8
+	style.content_margin_bottom = 8
+	timeline.add_theme_stylebox_override("panel", style)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 6)
+	timeline.add_child(row)
+	var caption := _label("Era", 14)
+	caption.add_theme_constant_override("outline_size", 0)
+	row.add_child(caption)
+	var group := ButtonGroup.new()
+	for item in eras:
+		var button := Button.new()
+		button.text = item.name
+		button.toggle_mode = true
+		button.button_group = group
+		button.tooltip_text = item.subtitle
+		button.custom_minimum_size = Vector2(72, 34)
+		button.button_pressed = item.id == era
+		button.pressed.connect(_set_era.bind(item.id))
+		row.add_child(button)
+		era_buttons[item.id] = button
+	timeline.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	timeline.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	timeline.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	timeline.offset_top = -62
+	timeline.offset_bottom = -18
+	add_child(timeline)
+
+func _set_era(id: String) -> void:
+	if era == id:
+		return
+	era = id
+	Engine.set_meta("map_era", id)
+	message.text = HINT
+	var popup := places.get_popup()
+	for index in pins.size():
+		popup.set_item_text(popup.get_item_index(index), _menu_text(pins[index]))
+	_update_pins()
 
 func _build_zoom_controls() -> void:
 	var column := VBoxContainer.new()
@@ -329,6 +409,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _enter(location: Dictionary) -> void:
 	if entering:
+		return
+	if not _open_in_era(location):
+		message.text = "%s: %s. Choose that era on the timeline below." % [location.name, _era_hint(location)]
 		return
 	if not ResourceLoader.exists(location.scene):
 		message.text = "This destination could not be loaded. Check the game files and try again."

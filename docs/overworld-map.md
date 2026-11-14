@@ -13,7 +13,15 @@ Island at a shared metre scale. There are no separate maps or tabs.
 - **Travel:** click a pin, or press Enter / controller A while it is focused.
   Returning from a scene restores the map view you left.
 
-See [bare terrain](bare-terrain.md) for scales, generation and controls.
+- **Era:** the timeline strip along the bottom (Legends, Arc 1 to Arc 4) sets the era, saved
+  for the session and restored when you return from a scene. The land never changes between
+  eras; an era decides which destinations are open. Pins with an `eras` list in
+  `game/data/overworld_locations.json` are dimmed outside those eras, say when they open, and
+  refuse to travel. Pins without a list are open in every era. Eras live in
+  `game/data/eras.json`; the arc names follow the books and their dating is not established.
+
+See [bare terrain](bare-terrain.md) for scales, generation and controls and
+[Jade Mountain Academy](jade-mountain.md) for the first detailed Arc 2 destination.
 
 Select **MudWing village** in the Mud Kingdom to
 load the existing wetlands through the measured loading screen. Hover over the village marker to reveal its name and entry tip, then click it.
@@ -96,7 +104,7 @@ scene bases should expose equivalent return navigation.
 
 ## Verification
 
-`game/tests/overworld_smoke.gd` checks that every start is pinned, wheel/drag/pinch
+`game/tests/overworld_smoke.gd` checks that every start is pinned, the era timeline and gating, wheel/drag/pinch
 camera behaviour and zoom limits, that every pin is reachable and unclipped at the
 closest zoom, hover/focus details, the Jump menu, the real loading path into an
 island and the wetlands (landing on the chosen start), view restore, the return

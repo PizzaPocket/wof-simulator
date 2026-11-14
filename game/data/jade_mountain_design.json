@@ -1,0 +1,55 @@
+{
+  "note": "Authored blockout of Jade Mountain Academy. Metres. Interior coordinates are relative to the cave mouth on the arrival ledge: x east, z negative into the mountain, y up from the ledge floor. Layout and dimensions are interpretations: the books and wiki describe a central cave with tunnels branching off, a library, study room, battle area, guardians' cave and winglet caves, but give no plan. Replace entries as sourced detail arrives (docs/jade-mountain.md).",
+  "eras": ["arc2"],
+  "mountain": {
+    "ledge_y": 500.0,
+    "height": 2075.0,
+    "base_radius": 1100.0,
+    "satellites": [
+      {"x": -520, "z": -80, "radius": 620, "height": 1250},
+      {"x": 430, "z": -300, "radius": 560, "height": 1500},
+      {"x": 80, "z": -560, "radius": 520, "height": 1100},
+      {"x": -330, "z": 330, "radius": 470, "height": 900},
+      {"x": 520, "z": 250, "radius": 430, "height": 820}
+    ],
+    "boundary_radius": 3000.0,
+    "ground_radius": 3400.0
+  },
+  "ledge": {"width": 90.0, "depth": 70.0},
+  "chambers": [
+    {"id": "gate", "name": "Entrance hall", "x": 0, "z": -92, "radius": 34, "height": 26, "dome": 0.5, "source": "authored"},
+    {"id": "central", "name": "Central cavern", "x": 0, "z": -215, "radius": 62, "height": 46, "dome": 0.55, "source": "wiki: a central cave with tunnels branching from it"},
+    {"id": "library", "name": "Library", "x": -175, "z": -215, "radius": 34, "height": 30, "dome": 0.5, "source": "A Guide to the Dragon World: scrolls in the academy library"},
+    {"id": "study", "name": "Study room", "x": -205, "z": -272, "radius": 15, "height": 18, "dome": 0.6, "source": "wiki: a study room"},
+    {"id": "feeding", "name": "Feeding cave", "x": 175, "z": -215, "radius": 34, "height": 26, "dome": 0.5, "source": "authored"},
+    {"id": "arena", "name": "Battle arena", "x": 0, "z": -440, "radius": 52, "height": 50, "dome": 0.55, "source": "wiki: a battle area"},
+    {"id": "guardians", "name": "Guardians' cave", "x": -105, "z": -440, "radius": 17, "height": 20, "dome": 0.6, "source": "wiki: a guardians' cave"},
+    {"id": "winglet_1", "name": "Winglet cave", "x": -175, "z": -338, "radius": 14, "height": 17, "dome": 0.6, "source": "authored count and positions"},
+    {"id": "winglet_2", "name": "Winglet cave", "x": -130, "z": -338, "radius": 14, "height": 17, "dome": 0.6, "source": "authored count and positions"},
+    {"id": "winglet_3", "name": "Winglet cave", "x": -85, "z": -338, "radius": 14, "height": 17, "dome": 0.6, "source": "authored count and positions"},
+    {"id": "winglet_4", "name": "Winglet cave", "x": -40, "z": -338, "radius": 14, "height": 17, "dome": 0.6, "source": "authored count and positions"},
+    {"id": "winglet_5", "name": "Winglet cave", "x": 40, "z": -338, "radius": 14, "height": 17, "dome": 0.6, "source": "authored count and positions"},
+    {"id": "winglet_6", "name": "Winglet cave", "x": 85, "z": -338, "radius": 14, "height": 17, "dome": 0.6, "source": "authored count and positions"},
+    {"id": "winglet_7", "name": "Winglet cave", "x": 130, "z": -338, "radius": 14, "height": 17, "dome": 0.6, "source": "authored count and positions"},
+    {"id": "winglet_8", "name": "Winglet cave", "x": 175, "z": -338, "radius": 14, "height": 17, "dome": 0.6, "source": "authored count and positions"}
+  ],
+  "tunnels": [
+    {"from": [0, 40], "to": [0, -92], "width": 24, "height": 22},
+    {"from": [0, -92], "to": [0, -215], "width": 26, "height": 24},
+    {"from": [0, -215], "to": [-175, -215], "width": 20, "height": 20},
+    {"from": [0, -215], "to": [175, -215], "width": 20, "height": 20},
+    {"from": [-175, -215], "to": [-205, -272], "width": 14, "height": 16},
+    {"from": [0, -215], "to": [0, -310], "width": 22, "height": 22},
+    {"from": [-190, -310], "to": [190, -310], "width": 26, "height": 21},
+    {"from": [0, -310], "to": [0, -440], "width": 22, "height": 22},
+    {"from": [0, -440], "to": [-105, -440], "width": 14, "height": 16},
+    {"from": [-175, -310], "to": [-175, -338], "width": 14, "height": 15},
+    {"from": [-130, -310], "to": [-130, -338], "width": 14, "height": 15},
+    {"from": [-85, -310], "to": [-85, -338], "width": 14, "height": 15},
+    {"from": [-40, -310], "to": [-40, -338], "width": 14, "height": 15},
+    {"from": [40, -310], "to": [40, -338], "width": 14, "height": 15},
+    {"from": [85, -310], "to": [85, -338], "width": 14, "height": 15},
+    {"from": [130, -310], "to": [130, -338], "width": 14, "height": 15},
+    {"from": [175, -310], "to": [175, -338], "width": 14, "height": 15}
+  ]
+}

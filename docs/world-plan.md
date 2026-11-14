@@ -152,7 +152,7 @@ These are taken from the map art and need checking against the wiki text in stag
 1. **Target hardware.** Desktop PC only? This decides the memory budget and the vertex spacing.
 2. **How the player moves on the ground.** Mostly flying, or also a lot of walking? Walking needs finer ground detail.
 3. **Underwater.** How much of the Kingdom of the Sea is playable underwater? This affects whether the seabed needs real terrain.
-4. **Era.** Which point in the timeline? This changes labels, buildings and politics, not the land.
+4. **Era.** Which point in the timeline? This changes labels, buildings and politics, not the land. *Partly answered:* the world map has an era timeline that gates destinations ([overworld map](overworld-map.md)); per-era labels and buildings are still open.
 5. **Art style.** Stylized, like the book illustrations, or realistic? This affects terrain textures and shaders.
 
 ## Next steps

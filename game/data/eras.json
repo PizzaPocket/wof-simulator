@@ -1,0 +1,11 @@
+{
+  "note": "Eras follow the books' arc structure. The land never changes between eras (see docs/world-plan.md); eras gate which destinations are open and, later, their labels and buildings. Dating between eras is not established here.",
+  "default": "arc1",
+  "eras": [
+    {"id": "legends", "name": "Legends", "subtitle": "Darkstalker's age, long before the war"},
+    {"id": "arc1", "name": "Arc 1", "subtitle": "The Dragonet Prophecy"},
+    {"id": "arc2", "name": "Arc 2", "subtitle": "The Jade Mountain Prophecy"},
+    {"id": "arc3", "name": "Arc 3", "subtitle": "The Lost Continent Prophecy"},
+    {"id": "arc4", "name": "Arc 4", "subtitle": "The Forgotten Isles"}
+  ]
+}

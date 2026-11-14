@@ -79,6 +79,10 @@ The map shows a pin for every `entries` item in each terrain definition (Pyrrhia
 
 The map draws native Godot polygons and strokes through `world_map.gd`: coastlines, a soft shallow-water shelf, clipped region fields, rivers, lakes and mountain symbols that fade in with zoom. Generated definitions in `game/data/terrain/` provide shared coastline and terrain rules for the map and playable ground. The editable source is `data/terrain/world_regions.json`; Pyrrhia's extracted coastline remains in `game/data/pyrrhia_coast.json`. Illustrated reference artwork stays in ignored cache files and is not a runtime texture.
 
+### Era timeline
+
+A native bottom-center card holds an **Era** caption and one toggle button per era (Legends, Arc 1 to Arc 4; 72 × 34 px, hover text gives the arc's title). Selecting an era keeps the map in place and dims pins that are closed in it (40% gold). A closed pin's tooltip reads "Opens in Arc N (see the timeline)", and activating it leaves the player on the map with a footer message. The Jump to a place menu appends the era to closed entries. The chosen era is held for the session and restored on return.
+
 ### Destinations and tooltip
 
 Terrain pin names and positions come from each landmass's `entries`; scenes and preload assets come from the template locations in `game/data/overworld_locations.json`, which also holds the detailed village. The village position (1480, 1080) is authored, not a canonical settlement.

@@ -46,6 +46,7 @@ func pin_named(atlas: Control, name: String) -> int:
 func _run() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output))
 	Engine.remove_meta("world_map_view")
+	if Engine.has_meta("map_era"): Engine.remove_meta("map_era")
 	root.size = Vector2i(1280, 800)
 	change_scene_to_file("res://scenes/overworld.tscn")
 	await wait_for_scene("Overworld")
@@ -56,12 +57,19 @@ func _run() -> void:
 	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Map must release the mouse")
 
 	# Every start location of every landmass is a pin, plus the detailed village.
-	var expected := 1
+	var expected := 2 # the MudWing village and Jade Mountain Academy
 	for id in ["pyrrhia", "pantala", "forgotten_isles", "nightwing_island"]:
 		var definition: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/terrain/%s.json" % id))
 		expected += definition.entries.size()
 	check(atlas.pins.size() == expected and atlas.hotspots.size() == expected, "Expected %d pins, found %d" % [expected, atlas.pins.size()])
 	check(atlas.pins.size() >= 30, "Islands and every kingdom start should be on the map")
+	# The timeline: eras load from data, Arc 1 is the default, and the academy only opens in Arc 2.
+	check(atlas.eras.size() >= 3 and atlas.era == "arc1", "The map opens on Arc 1 with a timeline of eras")
+	check(atlas.era_buttons["arc1"].button_pressed, "The current era must be selected on the timeline")
+	var academy := pin_named(atlas, "Jade Mountain Academy")
+	check(academy >= 0, "Jade Mountain Academy needs a pin")
+	check(not atlas._open_in_era(atlas.pins[academy]), "The academy must be closed in Arc 1")
+	check(atlas._open_in_era(atlas.pins[pin_named(atlas, "Mud Kingdom")]), "Ordinary terrain starts are open in every era")
 	check(map.zoom == map.min_zoom, "The map opens on the whole world")
 	check(not atlas.hover_tip.visible, "Destination details must be hidden on arrival")
 	var visible_at_world := 0
@@ -110,6 +118,15 @@ func _run() -> void:
 		check(atlas.hotspots[index].visible, "%s cannot be reached on the map" % atlas.pins[index].name)
 		var rect := Rect2(Vector2.ZERO, atlas.size)
 		check(rect.encloses(atlas.hotspots[index].get_rect()), "%s pin is clipped at the closest zoom" % atlas.pins[index].name)
+	# A closed pin explains itself and does not travel.
+	map.set_view(atlas.pins[academy].world, 1.0 / 200.0, true)
+	atlas._update_pins()
+	atlas.hotspots[academy].mouse_entered.emit()
+	check(atlas.tip_copy.text.contains("Opens in Arc 2"), "A closed pin's tip must name its era")
+	atlas.hotspots[academy].mouse_exited.emit()
+	atlas.hotspots[academy].pressed.emit()
+	await process_frame
+	check(current_scene == atlas and not atlas.entering and atlas.message.text.contains("Arc 2"), "A closed pin must stay on the map and say when it opens")
 	var mud := pin_named(atlas, "Mud Kingdom")
 	var village := pin_named(atlas, "MudWing village")
 	check(mud >= 0 and village >= 0, "Mud Kingdom and the village need pins")
@@ -166,6 +183,27 @@ func _run() -> void:
 	await wait_for_scene("Overworld")
 	check(current_scene.map.target_zoom > current_scene.map.min_zoom * 2.0, "Returning to the map must restore the previous view")
 
+	# Choose Arc 2 on the timeline, then travel to the academy.
+	atlas = current_scene
+	atlas.era_buttons["arc2"].pressed.emit()
+	check(atlas.era == "arc2" and atlas._open_in_era(atlas.pins[academy]), "Selecting Arc 2 must open the academy")
+	atlas.map.set_view(atlas.pins[academy].world, 1.0 / 200.0, true)
+	atlas._update_pins()
+	atlas.hotspots[academy].pressed.emit()
+	await wait_for_scene("JadeMountain")
+	deadline = Time.get_ticks_msec() + 60000
+	while not current_scene.collision_ready and Time.get_ticks_msec() < deadline:
+		await process_frame
+	check(current_scene.collision_ready, "Jade Mountain must settle its collision")
+	for i in 20: await physics_frame
+	check(current_scene.player.position.distance_to(current_scene.mouth + Vector3(0, 0.2, 24)) < 3.0 and current_scene.player.position.y > current_scene.mouth.y - 1.0, "The player must arrive on the ledge")
+	await capture("academy")
+	var return_academy := current_scene.find_child("WorldMapButton", true, false) as Button
+	check(return_academy != null, "Missing return-to-map button")
+	return_academy.pressed.emit()
+	await wait_for_scene("Overworld")
+	check(current_scene.era == "arc2" and current_scene.era_buttons["arc2"].button_pressed, "The chosen era must persist after returning")
+
 	atlas = current_scene
 	atlas.map.fit_world(true)
 	atlas._update_pins()
@@ -187,5 +225,5 @@ func _run() -> void:
 	Input.action_release("world_map")
 	await wait_for_scene("Overworld")
 	if failures.is_empty():
-		print("PASS: world map pan/zoom, every start pinned and reachable, island and village loading, view restore and return navigation")
+		print("PASS: world map pan/zoom, every start pinned and reachable, era gating, island, academy and village loading, view restore and return navigation")
 	quit(0 if failures.is_empty() else 1)
