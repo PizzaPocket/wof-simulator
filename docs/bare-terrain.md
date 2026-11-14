@@ -1,9 +1,8 @@
 # Bare playable world terrain
 
-F5 opens the atlas. Use the **Pyrrhia**, **Pantala**, **Forgotten Isles** and
-**NightWing Island** tabs, then hover/focus a marker and click or press Enter/A.
-Pyrrhia retains the existing MudWing village marker and adds **Explore Pyrrhia**
-in the desert. The other tabs each have an exploration marker.
+F5 opens the world map. Drag and zoom to any landmass, then hover/focus a pin and
+click or press Enter/A. Every starting point below is a pin, and Pyrrhia keeps the
+separate MudWing village pin beside its Mud Kingdom start.
 
 The terrain scenes contain ground, basic biome colors, connected mountain ranges,
 foothills, broad hills, shores, ocean, major authored rivers/lakes and collision.
@@ -16,8 +15,12 @@ Only the player model is requested by these terrain destinations, not the villag
 cast. The existing detailed village remains a separate destination.
 
 The starting-point selector moves within the current continent and prepares its
-nearby ground before movement resumes. Pyrrhia offers seven starting points,
-Pantala six, and each island map four. Near the Mud Kingdom starting point,
+nearby ground before movement resumes. Pyrrhia offers ten starting points
+(including the Sea Kingdom islands, the northern cape and the southern islets),
+Pantala seven, the Forgotten Isles seven (with three outlying islands) and
+NightWing Island six. Starts are the `entries` in `data/terrain/world_regions.json`;
+the map pins and the in-game selector both read them, so adding an entry there and
+rebaking adds a pin. Near the Mud Kingdom starting point,
 **Enter MudWing village** loads the existing village through the measured loader.
 **M / controller Start** or **World map** returns to the atlas. Ocean swimming is
 not part of this pass: falling into deep water returns to the selected start.
@@ -50,7 +53,7 @@ approaches broaden fourfold while elevations are retained.
 
 Separate book illustrations do not establish a shared measured scale. Pantala's
 relative size and the islands' widths remain explicit gameplay choices. They
-can be changed with `width_m` and rebaked. The **World** atlas tab shows all four
+can be changed with `width_m` and rebaked. The world map shows all four
 landmasses together using one uniform metre scale and illustrative spacing. The Forgotten Isles scene represents
 the enlarged main island (Dungeon Isle) and nearby inset islands; it does not
 invent land for every tiny dot across the outer ocean overview.
@@ -96,7 +99,10 @@ with continuous small relief and analytic lake/river channels. These samples do
 not claim 32 m geographic source detail. Generation checks finite samples and
 dry starting points.
 
-Outputs are versioned under `game/data/terrain/` and `game/assets/terrain/`:
+Small outputs (definitions and color/ocean masks) are committed under
+`game/data/terrain/` and `game/assets/terrain/`. The large `.height` files,
+`.rgb` overviews and `*_pages/` directories (about 150 MB) are git-ignored and
+rebuilt by this script:
 
 - JSON definitions include map dimensions, metre extents, starts and terrain rules.
 - `.height` files are row-major little-endian float32 heights in metres, north to

@@ -4457,8 +4457,8 @@
     {
       "name": "Mud Kingdom",
       "position": [
-        1478,
-        1080
+        1620,
+        1020
       ]
     },
     {
@@ -4501,6 +4501,27 @@
       "position": [
         1740,
         1160
+      ]
+    },
+    {
+      "name": "Sea Kingdom islands",
+      "position": [
+        1687,
+        516
+      ]
+    },
+    {
+      "name": "Sky Kingdom northern cape",
+      "position": [
+        1645,
+        208
+      ]
+    },
+    {
+      "name": "Southern islets",
+      "position": [
+        1493,
+        1533
       ]
     }
   ],

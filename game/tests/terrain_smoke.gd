@@ -100,18 +100,28 @@ func run() -> void:
 	change_scene_to_file("res://scenes/overworld.tscn")
 	await process_frame
 	var atlas = current_scene
-	for id in ["pyrrhia","pantala","forgotten_isles","nightwing_island","world"]:
-		atlas._select_continent(id)
-		await process_frame
-		check(atlas.atlas.locations.size()==(4 if id=="world" else (2 if id=="pyrrhia" else 1)),id+": missing atlas destination")
-		check(not atlas.hover_tip.visible,id+": tooltip unexpectedly visible")
-		root.size=Vector2i(800,500)
-		await process_frame
-		atlas.hotspots.back().mouse_entered.emit()
-		check(Rect2(Vector2.ZERO,atlas.size).encloses(atlas.hover_tip.get_rect()),id+": tooltip clips")
+	await process_frame
+	await process_frame
+	var map: Control = atlas.map
+	for id in ["pyrrhia","pantala","forgotten_isles","nightwing_island"]:
+		var count := 0
+		var definition: Dictionary = map.continent(id).definition
+		for pin in atlas.pins:
+			if pin.continent == id and pin.has("terrain_entry"): count += 1
+		check(count==definition.entries.size(),id+": every start must be a map pin")
+	check(not atlas.hover_tip.visible,"tooltip unexpectedly visible")
+	root.size=Vector2i(800,500)
+	await process_frame
+	var kingdom_of_sand := -1
+	for i in atlas.pins.size():
+		if atlas.pins[i].name=="Kingdom of Sand": kingdom_of_sand=i
+	check(kingdom_of_sand>=0,"Kingdom of Sand needs a pin")
+	map.set_view(atlas.pins[kingdom_of_sand].world,1.0/200.0,true)
+	atlas._update_pins()
+	atlas.hotspots[kingdom_of_sand].mouse_entered.emit()
+	check(Rect2(Vector2.ZERO,atlas.size).encloses(atlas.hover_tip.get_rect()),"tooltip clips")
 	# Exercise the actual configured loader, including the selected map start.
-	atlas._select_continent("pyrrhia")
-	atlas.hotspots[1].pressed.emit()
+	atlas.hotspots[kingdom_of_sand].pressed.emit()
 	var deadline := Time.get_ticks_msec()+120000
 	while not current_scene or current_scene.name != "Terrain_pyrrhia":
 		if Time.get_ticks_msec()>deadline:

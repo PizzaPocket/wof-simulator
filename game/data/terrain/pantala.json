@@ -2445,6 +2445,13 @@
         1050,
         1200
       ]
+    },
+    {
+      "name": "Southern isle",
+      "position": [
+        927,
+        1305
+      ]
     }
   ],
   "stream_pages": true,

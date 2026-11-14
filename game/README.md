@@ -6,13 +6,14 @@ notarization, and the one-command shareable release. F5 opens the world map;
 villages use the logo splash and measured loader. F6 runs a scene directly.
 
 Open `game/project.godot` in **Godot 4.5 or newer** and press **F5**. Tested locally
-with Godot 4.7.1. No plugins are needed. F5 opens the world atlas. Its tabs offer bare playable
+with Godot 4.7.1. No plugins are needed. F5 opens the world map: one chart you drag and zoom, with a pin on every place
+you can travel to. It offers bare playable
 terrain for Pyrrhia, Pantala, the Forgotten Isles and NightWing Island, with simple
 biome colors, mountains, hills and water. Pyrrhia is now 320 × 237 km, with nearby
 terrain loaded from disk and distant land kept at coarse detail. Pantala is
 320 × 250 km, the Forgotten Isles map 120 × 125 km, and NightWing Island
-100 × 64 km; all four stream terrain on demand. Choose an exploration marker, then use
-the starting-point selector to visit different regions. See
+100 × 64 km; all four stream terrain on demand. Click a pin to start there; the in-game
+starting-point selector also remains available. See
 [bare terrain](../docs/bare-terrain.md) for scales, generation and limitations.
 Select **MudWing village** to enter the first wetland
 village: an irregular region with a deep winding river, tributaries, pools,

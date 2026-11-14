@@ -14,13 +14,14 @@ Open `game/project.godot` in Godot 4.5+ and press **F5**. Move with WASD or a
 controller's left stick; orbit with the mouse or right stick. Build Clay locally
 using the game setup instructions, or try the controls with the placeholder.
 
-F5 opens the world atlas. Choose a continent/island tab and its exploration marker
-to walk or fly across bare terrain, with colored biomes, mountains, hills and water.
-Pyrrhia now spans 320 × 237 km, with all four maps expanded tenfold and terrain
+F5 opens one world map showing Pyrrhia, Pantala, the Forgotten Isles and NightWing
+Island together. Drag to move, scroll or pinch to zoom, and click a pin to travel
+there: every kingdom, island and shore start is pinned, and **Jump to a place**
+lists them all. Terrain is bare, with colored biomes, mountains, hills and water.
+Pyrrhia spans 320 × 237 km, with all four maps expanded tenfold and terrain
 streamed around the player.
-The terrain selector offers starting points across each map.
 Select **MudWing village** on Pyrrhia to enter the detailed wetlands;
-press **M / controller Start** or click **World map** to return to the atlas.
+press **M / controller Start** or click **World map** to return to the map.
 
 In the village, approach Umber and press **X** (Xbox **X** / PlayStation **Square**)
 to play as him. Once he joins your collection, **Tab** or **D-pad left** switches

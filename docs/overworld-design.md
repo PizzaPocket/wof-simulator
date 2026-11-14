@@ -23,7 +23,7 @@ rounded:
 
 The overworld preserves the existing marsh green, gold and parchment identity. The atlas and playable landscape lead; native Godot controls provide the surrounding navigation. This is the established design record for these surfaces, not a replacement project identity.
 
-The atlas has five tabs: **Pyrrhia**, **Pantala**, **Forgotten Isles**, **NightWing Island** and **World**. Each landmass has a playable bare terrain destination. Pyrrhia also retains the separate detailed MudWing village destination. World presents all four terrain destinations together.
+The world map is one continuous chart of **Pyrrhia**, **Pantala**, the **Forgotten Isles** and **NightWing Island**, placed together at one metre scale. The player drags and zooms it like an online map; there are no tabs or separate maps. Every starting point is a pin, and Pyrrhia also keeps the separate detailed MudWing village pin. The terrain scenes remain separate playable destinations, so the shared map is illustrative spacing, not a seamless ocean.
 
 The terrain extension is deliberately a foundation: colored ground, mountains, hills, shores and water with collision. New vegetation, buildings, settlement scenery and NPCs are outside this pass. The existing village remains available. Geographic and implementation details, provisional sizes and verification commands are in [Bare playable world terrain](bare-terrain.md).
 
@@ -45,19 +45,19 @@ Muted biome fields distinguish land regions; blue-green water separates coastlin
 
 ## Typography
 
-The atlas uses Godot's default theme font. Its title uses the title token; subtitle, region labels, tooltip and footer use the body token. Native tab buttons, terrain starting-point selector and existing Help/map controls retain their theme typography. Startup retains its existing title (25 px), status (16 px) and supporting copy (14 px).
+The map uses Godot's default theme font. Its title uses the title token (28 px); hint, region labels, pin names, tooltip and controls use the body token (14-16 px). Native buttons, the Jump to a place menu, terrain starting-point selector and existing Help/map controls retain their theme typography. Startup retains its existing title (25 px), status (16 px) and supporting copy (14 px).
 
 No custom typeface, new display style or project-wide type scale is established by this extension. The native font is an incumbent implementation choice, not a newly selected brand face.
 
 ## Layout
 
-The atlas heading begins at (28, 16), subtitle at (29, 59), and navigation row at (28, 90). Tabs use native toggle buttons with a minimum height (36 px) and row separation (8 px).
+The map fills the window. A translucent marsh card at (20, 16) holds the title, a one-line hint and the **Jump to a place** menu; zoom in, zoom out and show-whole-world buttons (44 px) sit at the bottom right. The view opens on the whole world and is clamped between that and 80 m per pixel; resizing keeps the same camera and recomputes labels and pins from it.
 
-The map begins at y=140 and fits proportionally within the available window area (width minus 56 px, height minus 200 px). It is centered horizontally and preserves the complete selected map's aspect ratio. Each landmass uses its own source coordinate space; Pyrrhia retains the cropped source proportions (2165 × 1606). World uses a common metre scale and authored offsets before the same aspect-fit layout.
+Pins keep a 26 px minimum separation and yield to higher-priority neighbours (the village, then the first start of each landmass), so zooming in reveals more pins. Names appear beside a pin only when they would not overlap another name or marker, and flip left near the right edge. Continent names fade out and kingdom/region names fade in as a landmass grows past about 700 px on screen.
 
-Desktop (1280 × 800) and small-window (800 × 500) are review sizes, not responsive breakpoints. Resize recomputes map geometry, labels and marker positions from the same transform. Text and hit targets retain their sizes as the map scales. The current navigation row remains horizontal at both review sizes.
+Desktop (1280 × 800) and small-window (800 × 500) are review sizes, not responsive breakpoints. Text, pins and hit targets keep their pixel sizes as the map scales.
 
-Destination targets have a minimum size (48 × 48 px) centered on the geographic point. The tooltip appears beside its marker, switches sides near the right edge and is clamped to a screen inset (16 px). It renders above map labels through an explicit canvas layer order (`z_index = 10`).
+Pin targets have a minimum size (40 × 40 px) centered on the geographic point. The tooltip appears beside its pin, switches sides near the right edge and is clamped to a screen inset (16 px). It renders above map labels through an explicit canvas layer order (`z_index = 10`).
 
 Terrain retains the existing Help and World map controls. Its native starting-point selector sits in a horizontal row at (24, 66), with a minimum size (210 × 36 px). The location label begins at (24, 110). Expanding Help hides this row and label to keep the overlays readable.
 
@@ -75,21 +75,21 @@ Cartographic coastlines and native polygon fields retain the geographic silhouet
 
 ### Atlas navigation and map
 
-Tabs select a map and replace its labels and destination targets. Pyrrhia has **MudWing village** plus **Explore Pyrrhia**, whose terrain entry is in the desert. Pantala, Forgotten Isles and NightWing Island each have one exploration marker. World has four transformed terrain markers; it does not add a second village marker.
+The map shows a pin for every `entries` item in each terrain definition (Pyrrhia ten, Pantala seven, Forgotten Isles seven, NightWing Island six) plus the detailed **MudWing village**, drawn as a solid gold pin. Tab and Jump to a place reach pins that zooming has not revealed yet.
 
-The atlas draws native Godot polygons and strokes through `vector_atlas.gd`. Generated definitions in `game/data/terrain/` provide shared coastline and terrain rules for the atlas and playable ground. The editable source is `data/terrain/world_regions.json`; Pyrrhia's extracted coastline remains in `game/data/pyrrhia_coast.json`. Illustrated reference artwork stays in ignored cache files and is not a runtime texture.
+The map draws native Godot polygons and strokes through `world_map.gd`: coastlines, a soft shallow-water shelf, clipped region fields, rivers, lakes and mountain symbols that fade in with zoom. Generated definitions in `game/data/terrain/` provide shared coastline and terrain rules for the map and playable ground. The editable source is `data/terrain/world_regions.json`; Pyrrhia's extracted coastline remains in `game/data/pyrrhia_coast.json`. Illustrated reference artwork stays in ignored cache files and is not a runtime texture.
 
 ### Destinations and tooltip
 
-Destination names, scenes and preload assets come from `game/data/overworld_locations.json`; generated World data transforms the terrain destinations into its shared coordinate space. The village position (1480, 1080) is authored, not a canonical settlement.
+Terrain pin names and positions come from each landmass's `entries`; scenes and preload assets come from the template locations in `game/data/overworld_locations.json`, which also holds the detailed village. The village position (1480, 1080) is authored, not a canonical settlement.
 
-The initial atlas has no focused destination or visible tooltip. Hover or keyboard/controller focus reveals the name, location context and “Click / Enter / A to explore”. Tab or D-pad selects; click, Enter or controller A enters. An initial up/down/accept action can establish marker focus. A missing scene produces a footer error. Hover and focus share the same visible marker treatment.
+The initial map has no focused destination or visible tooltip. Hover or keyboard/controller focus reveals the name, location context and “Click / Enter / A to travel”. Tab or D-pad selects (the map pans to keep the pin in view); click, Enter or controller A travels. A missing scene produces a footer error. Hover and focus share the same visible pin treatment. Returning from a scene restores the view the player left.
 
 ### Playable terrain and travel
 
 Each landmass loads a separate native 3D scene with simple biome colors, mountains, foothills, hills, coast and water. Runtime ground uses original native mesh geometry, generated height samples and procedural color PNGs. The surface remains intentionally undecorated.
 
-The starting-point selector travels within the current scene and prepares nearby collision before movement resumes. Pyrrhia offers seven starting points, Pantala six, and each island four. The Pyrrhia village entrance button becomes available within 600 m of the village near the Mud Kingdom start. Deep-water recovery returns the player to the selected starting point; swimming is not implemented by this pass.
+The starting-point selector travels within the current scene and prepares nearby collision before movement resumes. Pyrrhia offers ten starting points, Pantala seven, the Forgotten Isles seven and NightWing Island six. The Pyrrhia village entrance button becomes available within 600 m of the village near the Mud Kingdom start. Deep-water recovery returns the player to the selected starting point; swimming is not implemented by this pass.
 
 ### Loading and return
 
@@ -98,7 +98,7 @@ Destinations use the existing measured loader, preserving its startup compositio
 ## Do's and Don'ts
 
 - **Do** keep the atlas or terrain dominant and surrounding controls minimal.
-- **Do** preserve whole-map aspect fit, native controls and visible keyboard/controller focus.
+- **Do** keep one continuous, draggable and zoomable map with native controls and visible keyboard/controller focus.
 - **Do** keep atlas silhouettes and terrain geography derived from the shared data pipeline.
 - **Do** preserve the atlas → loader → terrain/village → atlas roundtrip.
 - **Do** keep provisional physical scale and illustrative world spacing explicit; separate book maps do not establish measured intercontinental distances.
@@ -106,7 +106,7 @@ Destinations use the existing measured loader, preserving its startup compositio
 - **Don't** imply the World overview is a seamless playable ocean or canonical distance chart.
 - **Don't** replace the inherited color and typography system as part of this extension.
 
-Implementation sources: `game/scripts/overworld.gd`, `game/scripts/vector_atlas.gd`, `game/scripts/continent_terrain.gd`, `game/scripts/startup.gd`, `game/scripts/playground.gd`, `data/terrain/world_regions.json` and the generated `game/data/terrain/` definitions. Final primary-renderer review captures are under `.impeccable/review/terrain/forward/`; detailed operational and verification notes remain in [bare-terrain.md](bare-terrain.md) and [overworld-map.md](overworld-map.md).
+Implementation sources: `game/scripts/overworld.gd`, `game/scripts/world_map.gd`, `game/scripts/continent_terrain.gd`, `game/scripts/startup.gd`, `game/scripts/playground.gd`, `data/terrain/world_regions.json` and the generated `game/data/terrain/` definitions. Final primary-renderer review captures are under `.impeccable/review/terrain/forward/`; detailed operational and verification notes remain in [bare-terrain.md](bare-terrain.md) and [overworld-map.md](overworld-map.md).
 
 ## Expanded world streaming
 

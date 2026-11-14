@@ -616,6 +616,20 @@
         418,
         238
       ]
+    },
+    {
+      "name": "South-western islet",
+      "position": [
+        196,
+        566
+      ]
+    },
+    {
+      "name": "North-eastern islets",
+      "position": [
+        894,
+        74
+      ]
     }
   ],
   "stream_pages": true,

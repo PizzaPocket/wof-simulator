@@ -2,7 +2,7 @@
 
 This is a personal 3D Wings of Fire project in Godot, with world planning, an early playable dragon movement prototype, a world atlas and a detailed MudWing village. The current extension adds playable bare terrain across Pyrrhia, Pantala, the arc-four Forgotten Isles and NightWing Island. This record follows the existing [README](README.md) and the explicitly approved terrain scope; no commercial model or broader audience strategy is established here.
 
-Opening the project with F5 starts the atlas. Players can choose a landmass or the World overview, enter a terrain marker, walk or fly, choose another starting point and return to the atlas. Pyrrhia retains its separate MudWing village marker, and a nearby entrance from its Mud Kingdom terrain start. Existing village characters and collection interactions remain part of that detailed destination.
+Opening the project with F5 starts the atlas. Players drag and zoom one world map, click a pin on any kingdom, island or shore (or pick it from a list), walk or fly, choose another starting point and return to the map. Pyrrhia retains its separate MudWing village marker, and a nearby entrance from its Mud Kingdom terrain start. Existing village characters and collection interactions remain part of that detailed destination.
 
 The approved terrain foundation consists of basic colored ground, mountains, hills, coast and water with usable collision. It preserves source-map horizontal proportions. New vegetation, buildings, settlement scenery, NPCs and quests are outside this extension. The map and terrain lead the interface; existing native controls, marsh/gold/parchment colors and default Godot typography remain the visual authority. See [Overworld design](docs/overworld-design.md).
 

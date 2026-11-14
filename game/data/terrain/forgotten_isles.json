@@ -958,6 +958,27 @@
         370,
         600
       ]
+    },
+    {
+      "name": "Northern island",
+      "position": [
+        412,
+        60
+      ]
+    },
+    {
+      "name": "North-western island",
+      "position": [
+        197,
+        77
+      ]
+    },
+    {
+      "name": "Eastern islet",
+      "position": [
+        623,
+        428
+      ]
     }
   ],
   "stream_pages": true,

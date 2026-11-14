@@ -14,5 +14,5 @@ The optional **ignored** `pyrrhia_reference.png` is the cropped original
 The illustration is third-party book reference art; no new license or ownership
 is claimed. It stays outside version control under the existing public-repository
 source-art policy. Game exports exclude it. The runtime draws native vector geometry from
-`game/data/pyrrhia_coast.json` with `game/scripts/vector_atlas.gd`; this SVG is a
+`game/data/pyrrhia_coast.json` with `game/scripts/world_map.gd`; this SVG is a
 source preview only. See `docs/overworld-map.md` for regeneration.

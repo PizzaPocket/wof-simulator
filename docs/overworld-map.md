@@ -1,9 +1,19 @@
 # World atlas and destinations
 
-F5 opens the world atlas on Pyrrhia. Tabs also open Pantala, the Forgotten Isles
-and NightWing Island, each with a playable bare-terrain destination. Select
-**Explore Pyrrhia** in the desert for the first continent's terrain. See
-[bare terrain](bare-terrain.md) for scales, generation and controls.
+F5 opens one world map showing Pyrrhia, Pantala, the Forgotten Isles and NightWing
+Island at a shared metre scale. There are no separate maps or tabs.
+
+- **Move:** drag, two-finger scroll on a trackpad, controller right stick, or Tab
+  to a pin (the map pans to it).
+- **Zoom:** mouse wheel, pinch, **+** / **−** keys, the on-screen buttons,
+  double-click, or controller triggers. **⌂** returns to the whole world.
+- **Pins:** every starting point of every landmass, plus the MudWing village.
+  Pins thin out at low zoom so labels never collide, and zooming in reveals the
+  rest. **Jump to a place** lists all of them, flies there and focuses the pin.
+- **Travel:** click a pin, or press Enter / controller A while it is focused.
+  Returning from a scene restores the map view you left.
+
+See [bare terrain](bare-terrain.md) for scales, generation and controls.
 
 Select **MudWing village** in the Mud Kingdom to
 load the existing wetlands through the measured loading screen. Hover over the village marker to reveal its name and entry tip, then click it.
@@ -31,14 +41,16 @@ lakes, biome rules and elevation remain future work in the original plan.
 
 ## Map assets
 
-The atlas is drawn entirely from native vector geometry by
-`game/scripts/vector_atlas.gd`: extracted coastline polygons, clipped terrain
-color fields, mountain symbols, river strokes and a lake. Kingdom labels are
-real Godot text. There is no raster map or imported SVG texture in the runtime.
-Pyrrhia geometry and hotspot positions use **2165 × 1606** cropped pixel coordinates.
-Other tabs use their own source-map dimensions from `game/data/terrain/*.json`;
-all fit uniformly without changing aspect ratio. Terrain colors and geographic
-rules are shared with the playable heightfields.
+The map is drawn entirely from native vector geometry by
+`game/scripts/world_map.gd`: extracted coastline polygons, clipped terrain
+color fields, a soft shallow-water shelf, mountain symbols, river strokes and
+lakes. Labels are real Godot text; continent names fade out and kingdom/region
+names fade in as you zoom. There is no raster map or imported SVG texture in the runtime.
+Each landmass keeps its own source-map pixel space (Pyrrhia is **2165 × 1606**);
+`world_map.gd` places all four in one 1200 × 700 km metre space using the same
+offsets as `game/data/terrain/world.json`. The camera is a centre and a zoom
+(pixels per metre) clamped between the whole world and 80 m per pixel. Terrain
+colors and geographic rules are shared with the playable heightfields.
 
 `game/data/pyrrhia_coast.json` is the versioned coastline geometry produced from
 the extracted land mask. Terrain colors, mountain symbols and waterways come from the generated terrain
@@ -61,7 +73,14 @@ CDN returns 403. Pillow reads either PNG or WebP responses.
 
 ## Adding a scene
 
-Add a location to `game/data/overworld_locations.json` with a unique `id`, display
+Starting points on an existing landmass need no code: add an `entries` item
+(`name`, `position` in that landmass's source-map pixels) in
+`data/terrain/world_regions.json`, run `tools/map/build_terrain.py`, and a pin
+appears (the bake fails if the point is not on dry ground). The entry lists in
+`overworld_locations.json` are templates (scene and preload assets) that every
+terrain pin of that landmass reuses.
+
+For a new detailed destination, add a location to `game/data/overworld_locations.json` with a unique `id`, display
 `name`, `kingdom`, cropped-map pixel `position`, destination `scene` path and an
 `assets` array of `[resource_path, loading_description]` pairs. The loader adds
 the destination scene as its final job. Use the annotation boxes and the source
@@ -77,7 +96,10 @@ scene bases should expose equivalent return navigation.
 
 ## Verification
 
-`game/tests/overworld_smoke.gd` checks atlas focus and bounds, the real loading
-path into the wetlands, the return button, the shared keyboard/controller action
-and kingdom labels. In a graphical run it also saves desktop,
-small-window, hovered-marker and village captures to `cache/overworld-review/`.
+`game/tests/overworld_smoke.gd` checks that every start is pinned, wheel/drag/pinch
+camera behaviour and zoom limits, that every pin is reachable and unclipped at the
+closest zoom, hover/focus details, the Jump menu, the real loading path into an
+island and the wetlands (landing on the chosen start), view restore, the return
+button and the shared keyboard/controller action. In a graphical run it also saves
+captures to `cache/overworld-review/`. Run it with `-- --atlas-only` to skip the
+slow scene loads.

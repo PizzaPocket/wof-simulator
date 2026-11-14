@@ -4461,8 +4461,8 @@
         {
           "name": "Mud Kingdom",
           "position": [
-            1478,
-            1080
+            1620,
+            1020
           ]
         },
         {
@@ -4505,6 +4505,27 @@
           "position": [
             1740,
             1160
+          ]
+        },
+        {
+          "name": "Sea Kingdom islands",
+          "position": [
+            1687,
+            516
+          ]
+        },
+        {
+          "name": "Sky Kingdom northern cape",
+          "position": [
+            1645,
+            208
+          ]
+        },
+        {
+          "name": "Southern islets",
+          "position": [
+            1493,
+            1533
           ]
         }
       ],
@@ -6957,6 +6978,13 @@
             1050,
             1200
           ]
+        },
+        {
+          "name": "Southern isle",
+          "position": [
+            927,
+            1305
+          ]
         }
       ],
       "stream_pages": true
@@ -7921,6 +7949,27 @@
             370,
             600
           ]
+        },
+        {
+          "name": "Northern island",
+          "position": [
+            412,
+            60
+          ]
+        },
+        {
+          "name": "North-western island",
+          "position": [
+            197,
+            77
+          ]
+        },
+        {
+          "name": "Eastern islet",
+          "position": [
+            623,
+            428
+          ]
         }
       ],
       "stream_pages": true
@@ -8542,6 +8591,20 @@
           "position": [
             418,
             238
+          ]
+        },
+        {
+          "name": "South-western islet",
+          "position": [
+            196,
+            566
+          ]
+        },
+        {
+          "name": "North-eastern islets",
+          "position": [
+            894,
+            74
           ]
         }
       ],
