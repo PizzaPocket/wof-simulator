@@ -22,7 +22,7 @@
     "fog_density": 0.00018,
     "sun_color": "ffe3b8"
   },
-  "ground_radius": 900.0,
+  "ground_radius": 7000.0,
   "boundary_radius": 780.0,
   "ground_color": "c9a96a",
   "spawn": [
@@ -108,5 +108,6 @@
     "eras": [
       "arc2"
     ]
-  }
+  },
+  "view_distance": 8000.0
 }

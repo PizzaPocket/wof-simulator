@@ -408,7 +408,7 @@
     "Authored layout \u00b7 caves are interpretations"
   ],
   "boundary_radius": 3000.0,
-  "ground_radius": 3400.0,
+  "ground_radius": 14000.0,
   "spawn": [
     0,
     0.2,
@@ -423,5 +423,6 @@
       0.3,
       -60.2
     ]
-  ]
+  ],
+  "view_distance": 20000.0
 }

@@ -27,6 +27,8 @@ func initialize_world(progress_callback: Callable = Callable()) -> void:
 	if not era in design.label_by_era:
 		era = "arc1"
 	rng.seed = int(design.seed)
+	# The default camera far plane is 300 m, which would clip the walls until the player is close.
+	(player.get_node("CameraPivot/SpringArm3D/Camera3D") as Camera3D).far = float(design.get("view_distance", 8000.0))
 	await _loading(progress_callback, 0.0, "Marking out the Scorpion Den")
 	_make_environment_desert()
 	_make_ground()

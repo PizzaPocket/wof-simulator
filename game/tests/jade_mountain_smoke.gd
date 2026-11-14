@@ -50,6 +50,8 @@ func _run() -> void:
 	var deadline := Time.get_ticks_msec() + 20000
 	while not world.collision_ready and Time.get_ticks_msec() < deadline: await physics_frame
 	check(world.collision_ready, "Ledge collision never became ready")
+	var player_camera := world.player.get_node("CameraPivot/SpringArm3D/Camera3D") as Camera3D
+	check(player_camera.far >= 10000.0, "The mountain must be visible from afar (camera far %.0f)" % player_camera.far)
 	check(world.residents.size() == 1 and world.residents[0].character_id == "starflight_blind", "The blind Starflight must stand in the library")
 	for i in 6: await physics_frame
 	player = world.player

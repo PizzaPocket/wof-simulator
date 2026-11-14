@@ -1,39 +1,164 @@
 {
   "note": "Authored blockout of Queen Scarlet's palace and arena (Sky Kingdom). Metres relative to the plateau centre. Sources: Wings of Fire wiki mirror (Sky Kingdom page): a fortress carved into a mountain in the far north of the kingdom, about half inside the rock and half open to the sky; a huge bowl-shaped arena with stands and prisoners held on tall barless rock spires; gold veins and talon-print floors in Scarlet's reign, removed on Ruby's order; the arena later a hospital for war veterans. No dimensions, floor plan or tower counts are given, so every size and position here is authored.",
   "title": "Queen Scarlet's palace",
-  "eras": ["arc1", "arc2"],
+  "eras": [
+    "arc1",
+    "arc2"
+  ],
   "label_by_era": {
-    "arc1": ["Queen Scarlet's palace and arena · Arc 1", "Scarlet's reign: gold in the stone · authored layout"],
-    "arc2": ["Queen Ruby's palace and arena · Arc 2", "Gold stripped, arena a hospital for veterans · authored layout"]
+    "arc1": [
+      "Queen Scarlet's palace and arena \u00b7 Arc 1",
+      "Scarlet's reign: gold in the stone \u00b7 authored layout"
+    ],
+    "arc2": [
+      "Queen Ruby's palace and arena \u00b7 Arc 2",
+      "Gold stripped, arena a hospital for veterans \u00b7 authored layout"
+    ]
   },
-  "label": ["Sky Kingdom palace", "Authored layout"],
-  "gold_by_era": {"arc1": 0.85, "arc2": 0.0},
-  "env": {"sky_top": "6b8fb0", "sky_horizon": "e0d6c4", "fog_color": "d8d2c6", "fog_density": 0.00006, "sun_color": "ffe9cc"},
+  "label": [
+    "Sky Kingdom palace",
+    "Authored layout"
+  ],
+  "gold_by_era": {
+    "arc1": 0.85,
+    "arc2": 0.0
+  },
+  "env": {
+    "sky_top": "6b8fb0",
+    "sky_horizon": "e0d6c4",
+    "fog_color": "d8d2c6",
+    "fog_density": 6e-05,
+    "sun_color": "ffe9cc"
+  },
   "ground_color": "7a6f55",
-  "ground_radius": 3400.0,
+  "ground_radius": 14000.0,
   "boundary_radius": 2200.0,
-  "spawn": [0, 0.2, 300],
-  "ready_probes": [[0.3, 300.2], [0.3, -120.2]],
+  "spawn": [
+    0,
+    0.2,
+    300
+  ],
+  "ready_probes": [
+    [
+      0.3,
+      300.2
+    ],
+    [
+      0.3,
+      -120.2
+    ]
+  ],
   "mountain": {
     "plateau_y": 600.0,
     "base_radius": 800.0,
     "height": 1100.0,
-    "peak": {"x": 0, "z": -235, "radius": 240, "height": 380},
+    "peak": {
+      "x": 0,
+      "z": -235,
+      "radius": 240,
+      "height": 380
+    },
     "satellites": [
-      {"x": -620, "z": 120, "radius": 420, "height": 700},
-      {"x": 560, "z": -200, "radius": 480, "height": 820},
-      {"x": 80, "z": 650, "radius": 360, "height": 520}
+      {
+        "x": -620,
+        "z": 120,
+        "radius": 420,
+        "height": 700
+      },
+      {
+        "x": 560,
+        "z": -200,
+        "radius": 480,
+        "height": 820
+      },
+      {
+        "x": 80,
+        "z": 650,
+        "radius": 360,
+        "height": 520
+      }
     ]
   },
-  "arena": {"x": 0, "z": 110, "radius": 100, "steps": 5, "step_height": 10.0, "step_inset": 8.0, "spires": 10, "spire_ring": 56, "spire_radius": 3.2},
+  "arena": {
+    "x": 0,
+    "z": 110,
+    "radius": 100,
+    "steps": 5,
+    "step_height": 10.0,
+    "step_inset": 8.0,
+    "spires": 10,
+    "spire_ring": 56,
+    "spire_radius": 3.2
+  },
   "chambers": [
-    {"id": "throne", "name": "Throne hall", "x": 0, "z": -235, "radius": 42, "height": 34, "dome": 0.6, "source": "authored (palace half inside the rock)"},
-    {"id": "treasury", "name": "Treasury", "x": -110, "z": -262, "radius": 26, "height": 22, "dome": 0.6, "source": "authored (Scarlet's gold; stripped under Ruby)"},
-    {"id": "barracks", "name": "Guard hall", "x": 110, "z": -262, "radius": 26, "height": 22, "dome": 0.6, "source": "authored"}
+    {
+      "id": "throne",
+      "name": "Throne hall",
+      "x": 0,
+      "z": -235,
+      "radius": 42,
+      "height": 34,
+      "dome": 0.6,
+      "source": "authored (palace half inside the rock)"
+    },
+    {
+      "id": "treasury",
+      "name": "Treasury",
+      "x": -110,
+      "z": -262,
+      "radius": 26,
+      "height": 22,
+      "dome": 0.6,
+      "source": "authored (Scarlet's gold; stripped under Ruby)"
+    },
+    {
+      "id": "barracks",
+      "name": "Guard hall",
+      "x": 110,
+      "z": -262,
+      "radius": 26,
+      "height": 22,
+      "dome": 0.6,
+      "source": "authored"
+    }
   ],
   "tunnels": [
-    {"from": [0, 10], "to": [0, -235], "width": 26, "height": 26},
-    {"from": [0, -235], "to": [-110, -262], "width": 16, "height": 16},
-    {"from": [0, -235], "to": [110, -262], "width": 16, "height": 16}
-  ]
+    {
+      "from": [
+        0,
+        10
+      ],
+      "to": [
+        0,
+        -235
+      ],
+      "width": 26,
+      "height": 26
+    },
+    {
+      "from": [
+        0,
+        -235
+      ],
+      "to": [
+        -110,
+        -262
+      ],
+      "width": 16,
+      "height": 16
+    },
+    {
+      "from": [
+        0,
+        -235
+      ],
+      "to": [
+        110,
+        -262
+      ],
+      "width": 16,
+      "height": 16
+    }
+  ],
+  "view_distance": 20000.0
 }

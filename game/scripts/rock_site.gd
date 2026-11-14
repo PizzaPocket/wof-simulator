@@ -55,6 +55,7 @@ func _loading(callback: Callable, fraction: float, description: String) -> void:
 func initialize_world(progress_callback: Callable = Callable()) -> void:
 	design = JSON.parse_string(FileAccess.get_file_as_string(_design_path()))
 	_prepare_site()
+	_set_view_distance(float(design.get("view_distance", 20000.0)))
 	await _loading(progress_callback, 0.0, "Raising " + str(design.title))
 	_make_environment()
 	_make_rock()
@@ -107,6 +108,13 @@ func _floor_below(point: Vector3) -> float:
 
 # --- Materials and environment ----------------------------------------------
 
+## The player camera's default far plane is 300 m, which would clip the mountain until the
+## player was almost against it. Sites that can be seen from far away raise it.
+func _set_view_distance(distance: float) -> void:
+	var camera := player.get_node("CameraPivot/SpringArm3D/Camera3D") as Camera3D
+	camera.far = distance
+
+
 func _make_rock() -> void:
 	rock = ShaderMaterial.new()
 	rock.shader = load("res://shaders/jade_rock.gdshader")
@@ -147,7 +155,7 @@ func _make_environment() -> void:
 	sun.light_color = Color(env.get("sun_color", "fff1dc"))
 	sun.light_energy = 1.25
 	sun.shadow_enabled = true
-	sun.directional_shadow_max_distance = 1800.0
+	sun.directional_shadow_max_distance = 3500.0
 	add_child(sun)
 
 

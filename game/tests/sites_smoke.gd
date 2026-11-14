@@ -56,6 +56,8 @@ func _run() -> void:
 		while not (is_instance_valid(world.mountain) and world.collision_ready) and Time.get_ticks_msec() < deadline:
 			await physics_frame
 		check(world.collision_ready, "Palace collision never settled (%s)" % era)
+		var palace_camera := world.player.get_node("CameraPivot/SpringArm3D/Camera3D") as Camera3D
+		check(palace_camera.far >= 10000.0, "The palace must be visible from afar (camera far %.0f)" % palace_camera.far)
 		for i in 8: await physics_frame
 		var mouth: Vector3 = world.mouth
 		var gold: float = world.rock_interior.get_shader_parameter("gold_veins")
@@ -81,6 +83,8 @@ func _run() -> void:
 		load_site("res://scenes/scorpion_den.tscn", era)
 		for i in 40: await physics_frame
 		check(world.building_count >= 60, "The Den needs a dense town (%d buildings)" % world.building_count)
+		var den_camera := world.player.get_node("CameraPivot/SpringArm3D/Camera3D") as Camera3D
+		check(den_camera.far >= 2000.0, "The Den's walls must be visible from afar (camera far %.0f)" % den_camera.far)
 		var ground := ray(Vector3(0.3, 10, 360), Vector3(0.3, -10, 360))
 		check(not ground.is_empty() and absf(ground.position.y) < 0.6, "The Den's spawn must stand on sand")
 		var gate_road := ray(Vector3(0.4, 5, 380), Vector3(0.4, 5, 100))

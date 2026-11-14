@@ -49,6 +49,14 @@ The Scorpion Den is a plain box-built scene.
 Each site reads the era the player chose on the map (`Engine` meta `map_era`, set whenever the map
 opens, default Arc 1) through `current_era()`.
 
+## View distance
+
+The player camera's far plane defaults to 300 m, which makes anything farther away simply not draw.
+On Jade Mountain this showed as the whole mountain appearing as you approached. Each site now sets
+the camera's far plane from its design file (`view_distance`: 20 km for the mountains, 8 km for the
+Den), pushes the ground disc out to the horizon haze, and extends sun shadows to 3.5 km. Any new site
+that can be seen from afar needs the same.
+
 ## Test
 
 ```sh
