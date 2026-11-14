@@ -1,0 +1,15 @@
+{
+  "note": "Art-adapted kinematic safeguards and inspection poses, not measured dragon ranges. Elbows/knees share a bend plane; forearm roll is available for manipulation, while the hind shank has no equivalent roll control.",
+  "front": {"joint_min_degrees": 35, "joint_max_degrees": 170},
+  "hind": {"joint_min_degrees": 40, "joint_max_degrees": 170},
+  "arm": {
+    "reach_wrist_target": [0.52, 0.75, 1.50],
+    "palm_wrist_target": [0.58, 1.0, 1.20],
+    "reach_wrist_flex_degrees": 20,
+    "palm_wrist_flex_degrees": 30,
+    "palm_supination_degrees": 60,
+    "elbow_pole": [0, -1, -0.35],
+    "blend_seconds": 0.8,
+    "toe_curl_degrees": 12
+  }
+}

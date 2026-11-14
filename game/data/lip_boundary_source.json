@@ -1,0 +1,7 @@
+{
+  "project": "MakeHuman Community MPFB",
+  "commit": "6ff1eb358f6c1959ced77e79e6dd2406d9a71f49",
+  "path": "src/mpfb/data/textures/mpfb_lips.jpg",
+  "license": "CC0-1.0",
+  "why": "Authored HM08 UV-space vermilion mask. Keeps tint aligned to the lip/face boundary, including Cupid\u2019s bow and mouth corners."
+}

@@ -1,0 +1,10 @@
+{
+  "up_model": [
+    0.0,
+    0.8,
+    0.6
+  ],
+  "normal_slope": 0.25,
+  "skull_lift_degrees": 5.0,
+  "why": "Aim from the posterior mouth through the middle of the open gape using the sculpt skull frame."
+}

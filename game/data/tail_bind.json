@@ -1,0 +1,8 @@
+{
+  "note": "Game export variant only. Preserve the source modeling pose on disk; build the same measured tail extended so a coarse curled bind is not baked into moving skin. One skinning bone per source caudal vertebra, with smooth overlapping weights.",
+  "vertebrae_per_bone": 1,
+  "bind_pitch_degrees": 0.0,
+  "weight_support_segments": 1.6,
+  "root_blend_model": 0.10,
+  "collision_padding_model": 0.015
+}

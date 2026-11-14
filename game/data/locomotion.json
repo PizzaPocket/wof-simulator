@@ -1,0 +1,259 @@
+{
+  "note": "Initial feline-inspired walk adapted to Clay's existing dragon rig, not measured dragon biomechanics. Angles are artistic starting values; lengths and bend poles come from Clay's anatomy export.",
+  "walk": {
+    "stride_length_m": 2.9,
+    "stance_fraction": 0.68,
+    "step_height_model": 0.23,
+    "pad_height_model": 0.095,
+    "start_speed_m_s": 0.12,
+    "body_bob_model": 0.018,
+    "body_roll_degrees": 1.2,
+    "toe_off_degrees": 18.0,
+    "swing_wrist_degrees": -24.0,
+    "swing_hock_degrees": -12.0,
+    "max_swing_seconds": 0.38,
+    "min_swing_seconds": 0.15,
+    "touchdown_offsets": {
+      "hind.L": 0.0,
+      "front.L": 0.25,
+      "hind.R": 0.5,
+      "front.R": 0.75
+    }
+  },
+  "tail": {
+    "note": "The game bind uses one bone per measured caudal vertebra. Curled modeling references are preserved in the sculpting source. Conservative skin/armor capsules prevent distant parts of the tail overlapping.",
+    "follow_response": 7.0,
+    "rest_capture_seconds": 0.35,
+    "recovery_turn_degrees": 125.0,
+    "tangle_turn_degrees": 240.0,
+    "clearance_m": 0.18,
+    "max_bend_degrees_per_bone": 16.0,
+    "self_collision_margin_m": 0.04,
+    "contact_iterations": 12,
+    "body_radius_model": 0.38,
+    "preview_curl_degrees": 270.0,
+    "history_spacing_m": 0.04,
+    "teleport_reset_m": 4.0
+  },
+  "wings": {
+    "seconds_to_fold": 0.65,
+    "seconds_to_spread": 0.55,
+    "socket_target_model": [
+      0.36,
+      1.3,
+      0.59
+    ]
+  },
+  "gaze": {
+    "yaw_limit_degrees": 90.0,
+    "pitch_limit_degrees": 95.0,
+    "neutral_camera_pitch": -0.4,
+    "front_stage_enter_degrees": 92.0,
+    "front_stage_leave_degrees": 90.5,
+    "response": 7.0,
+    "max_speed_degrees_s": 120.0,
+    "head_share": 0.3
+  },
+  "jump": {
+    "preparation_seconds": 0.04,
+    "push_seconds": 0.08,
+    "fore_release_seconds": 0.045,
+    "hind_recovery_delay_seconds": 0.1,
+    "takeoff_pitch_degrees": 16.0,
+    "landing_pitch_degrees": 12.0,
+    "landing_seconds": 0.22,
+    "crouch_depth_m": 0.26,
+    "landing_depth_m": 0.24,
+    "front_tuck_model": 0.26,
+    "hind_tuck_model": 0.32,
+    "flight_tuck_model": 0.34,
+    "anticipate_landing_height_m": 2.2,
+    "pose_response": 28.0,
+    "horizontal_speed_multiplier": 1.15,
+    "air_steering_m_s2": 5.5,
+    "moving_landing_seconds": 0.1
+  },
+  "flight": {
+    "speed_m_s": 60.0,
+    "boost_speed_m_s": 180.0,
+    "acceleration_m_s2": 12.0,
+    "vertical_acceleration_m_s2": 16.0,
+    "max_climb_m_s": 45.0,
+    "max_descent_m_s": 65.0,
+    "max_pitch_degrees": 65.0,
+    "horizon_deadzone_degrees": 2.5,
+    "turn_response": 2.4,
+    "deployment_seconds": 0.45,
+    "flap_frequency_hz": 0.8,
+    "flap_up_degrees": 28.0,
+    "flap_down_degrees": -18.0,
+    "downstroke_fraction": 0.48,
+    "launch_seconds": 1.7,
+    "glide_dihedral_degrees": 4.0,
+    "flap_response": 5.0,
+    "boost_acceleration_m_s2": 18.0,
+    "deceleration_m_s2": 10.0,
+    "boost_vertical_acceleration_m_s2": 30.0,
+    "boost_max_climb_m_s": 110.0,
+    "boost_max_descent_m_s": 130.0
+  },
+  "sources": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC11737544/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6230802/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC4644224/",
+    "https://www.jstage.jst.go.jp/article/jvms1991/56/6/56_6_1107/_pdf",
+    "https://pubmed.ncbi.nlm.nih.gov/3998801/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6721424/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC3522884/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC2696142/"
+  ],
+  "blink": {
+    "first_interval": [
+      1.5,
+      3.5
+    ],
+    "interval": [
+      2.8,
+      7.0
+    ],
+    "close_seconds": 0.075,
+    "hold_seconds": 0.025,
+    "open_seconds": 0.16,
+    "duration_scale": [
+      0.85,
+      1.15
+    ],
+    "double_probability": 0.12,
+    "double_interval": [
+      0.18,
+      0.32
+    ]
+  },
+  "run": {
+    "note": "Easy lope is preserved. Sprint blends into a separately authored forelimb catch, hindquarter drive and extended suspension cycle; ape-inspired support is adapted to Clay's clawed hands, not knuckle walking.",
+    "enter_speed_m_s": 3.5,
+    "exit_speed_m_s": 2.9,
+    "transition_seconds": 0.24,
+    "toe_off_degrees": 26.0,
+    "swing_wrist_degrees": -38.0,
+    "swing_hock_degrees": -26.0,
+    "easy_stride_length_m": 3.8,
+    "easy_stance_fraction": 0.28,
+    "easy_touchdown_offsets": {
+      "hind.L": 0.0,
+      "hind.R": 0.14,
+      "front.L": 0.4,
+      "front.R": 0.54
+    },
+    "extension_start_m_s": 6.0,
+    "extension_full_m_s": 16.0,
+    "easy_step_height_model": 0.25,
+    "easy_body_lift_model": 0.055,
+    "easy_body_pitch_degrees": 2.5,
+    "easy_convergence": 0.08,
+    "sprint_convergence": 0.25,
+    "sprint": {
+      "stride_length_m": 8.6,
+      "front_stance_fraction": 0.24,
+      "hind_stance_fraction": 0.17,
+      "touchdown_offsets": {
+        "front.L": 0.0,
+        "front.R": 0.11,
+        "hind.L": 0.32,
+        "hind.R": 0.44
+      },
+      "front_recovery_height_model": 0.43,
+      "hind_recovery_height_model": 0.34,
+      "front_recovery_pitch_degrees": -46.0,
+      "hind_recovery_pitch_degrees": -34.0,
+      "front_toe_off_degrees": 18.0,
+      "hind_toe_off_degrees": 32.0,
+      "body_keys_note": "cycle, height (model), pitch (degrees), forward surge (model), pelvis pitch, spine pitch, chest drop (model). Forelimb catch -> chest passes hands -> hindquarter compression/push -> flight -> reach.",
+      "body_keys": [
+        [
+          0.0,
+          0.025,
+          4.0,
+          0.0,
+          0.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.09,
+          -0.055,
+          8.0,
+          -0.045,
+          1.5,
+          -2.0,
+          0.035
+        ],
+        [
+          0.23,
+          -0.025,
+          -2.0,
+          0.015,
+          3.0,
+          -1.0,
+          0.005
+        ],
+        [
+          0.36,
+          -0.06,
+          -5.0,
+          0.025,
+          5.0,
+          -3.0,
+          0.0
+        ],
+        [
+          0.49,
+          -0.075,
+          -8.0,
+          -0.025,
+          -4.0,
+          2.0,
+          0.0
+        ],
+        [
+          0.62,
+          0.015,
+          -6.0,
+          0.06,
+          -2.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.81,
+          0.13,
+          -1.0,
+          0.03,
+          1.0,
+          -1.0,
+          0.0
+        ],
+        [
+          0.94,
+          0.07,
+          3.0,
+          0.0,
+          1.0,
+          -1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.025,
+          4.0,
+          0.0,
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      "front_reach_model": 0.6,
+      "hind_reach_model": -0.04
+    }
+  }
+}

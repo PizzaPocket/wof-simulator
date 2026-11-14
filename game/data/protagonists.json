@@ -1,0 +1,71 @@
+{
+  "umber": {
+    "name": "Umber",
+    "species": "dragon",
+    "tribe": "MudWing",
+    "model_scale": 1.55,
+    "dorsal": "512e24",
+    "scales": "aa6e44",
+    "belly": "c4a077",
+    "wing": "cca17e",
+    "iris": "c19341",
+    "source": "https://tuibooks.com/book/the-hybrid-prince/",
+    "why": "Uses the shared base MudWing model at a smaller scale, with his own warm copper-brown palette, amber eyes, nose scar and fitted pouch. No independent Umber body."
+  },
+  "moon": {
+    "name": "Moon",
+    "species": "dragon",
+    "tribe": "NightWing",
+    "model_scale": 1.65,
+    "dorsal": "191c26",
+    "scales": "282e37",
+    "belly": "39404b",
+    "wing": "17232c",
+    "iris": "437d54",
+    "source": "https://tuibooks.com/book/moon-rising/",
+    "why": "Four-year-old small but strong-muscled NightWing: broad cranium, tapered beaked muzzle, housed grey horns, fuller shared dragon muscle/foot anatomy, raised resting wing fan, green eyes and silver tears. World scale is inferred, not a canon metric.",
+    "age": 4
+  },
+  "blue": {
+    "name": "Blue",
+    "species": "dragon",
+    "tribe": "SilkWing",
+    "model_scale": 1.6,
+    "dorsal": "594279",
+    "scales": "3d91bd",
+    "belly": "b4cdae",
+    "wing": "52bce1",
+    "iris": "8870a3",
+    "source": "https://tuibooks.com/book/the-lost-continent/",
+    "why": "Rebuilt SilkWing: long rounded muzzle and skull, fitted mouth and staged lateral eyes, paired slender antennae and swept horn housings, lean full-muscle body and articulated digits, four supported articulated wings with rounded membranes and trailing arm attachment.",
+    "age": 6
+  },
+  "darkstalker": {
+    "name": "Darkstalker",
+    "species": "dragon",
+    "tribe": "NightWing\u2013IceWing",
+    "model_scale": 10.8,
+    "dorsal": "090b12",
+    "scales": "171c26",
+    "belly": "252b35",
+    "wing": "0b101b",
+    "iris": "0a0b12",
+    "source": "https://tuibooks.com/book/darkstalker/",
+    "why": "Ancient-adult NightWing scene resident in the northwestern village clearing, not collectible. Corrected shared NightWing anatomy with broad mature musculature, ebony palette, black eyes, long twisted horns, pale wing-root scales and left bone hoop. World scale 10.8 is an inferred giant scale anchored to the large-adult comparison, not a canon metre measurement.",
+    "gameplay": false,
+    "age": 2005
+  },
+  "wren": {
+    "name": "Wren",
+    "species": "human",
+    "age": 15,
+    "height_m": 1.57,
+    "skin": "a86e50",
+    "hair": "30201d",
+    "shirt": "e3d4a3",
+    "pants": "879278",
+    "boots": "86603a",
+    "source": "https://mirror.wingsoffire.wiki/wiki/Wren",
+    "why": "Joy Ang's Dragonslayer and Flames of Hope jacket artwork: shoulder-length dark curls, brown eyes, freckles, cream wrap tunic, sage trousers, brown boots and a reddish-brown sword baldric. Teen anatomy rather than a resized six-year-old."
+  }
+}

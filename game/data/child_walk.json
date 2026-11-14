@@ -1,0 +1,14 @@
+{
+  "pelvis_drop_m": 0.016,
+  "vertical_amplitude_m": 0.009,
+  "lateral_amplitude_m": 0.010,
+  "pelvis_yaw_rad": 0.045,
+  "pelvis_roll_rad": 0.018,
+  "chest_counter_yaw_rad": 0.065,
+  "chest_counter_roll_rad": 0.030,
+  "chest_pitch_rad": 0.009,
+  "hand_swing_m": 0.095,
+  "elbow_back_rad": 0.24,
+  "elbow_forward_rad": 0.56,
+  "why": "User observed a gliding torso and insufficient arm/elbow motion. Add quiet support-linked rise and weight shift, chest counter-rotation, and a pendular arm swing with a folding elbow. Distances scale from the 1.35 m child. Keep the accepted foot roll and relaxed hands."
+}

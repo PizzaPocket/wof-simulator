@@ -1,0 +1,753 @@
+{
+  "references": [
+    {
+      "file": "cache/protagonist-references/blue-cover.jpg",
+      "source": "https://tuibooks.com/book/the-lost-continent/",
+      "artist": "Joy Ang",
+      "kind": "official cover",
+      "use": "Primary colored anatomy; distinguish lighting green cast from textual azure/violet coloring. Airborne pose and perspective, not a true orthographic sheet."
+    },
+    {
+      "file": "cache/protagonist-references/blue-drawing.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/Blue#Gallery",
+      "artist": "Brianna C. Walsh",
+      "kind": "Official How to Draw, cached edited crop",
+      "use": "Pre-Metamorphosis wingless body, head, legs and feet only; do not interpret wingbuds as folded full wings."
+    },
+    {
+      "file": "cache/protagonist-references/blue-reference.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/Blue#Gallery",
+      "artist": "Bluethedragoon",
+      "kind": "fan reference built on a tribe base; wiki filename BlueCoverTemplateLoopy.png",
+      "use": "Secondary color/side interpretation; the oval lobe silhouettes are not evidence for an insect-wing rig."
+    },
+    {
+      "file": "cache/protagonist-references/silkwing-lineart.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/SilkWings",
+      "artist": "Joy Ang",
+      "kind": "official tribe line art",
+      "use": "Full fore/hind fan outline, visible support rays, attachment order, head plane and body ratios; do not flatten overlapping far wings into extra fingers."
+    },
+    {
+      "file": "cache/protagonist-references/blue-top-shot.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/Blue",
+      "artist": "Joy Ang; extracted art",
+      "kind": "cover head/body crop",
+      "use": "Closer look at muzzle and three-quarter cranial width; still a posed illustration, not a top orthographic view despite the filename."
+    },
+    {
+      "file": "cache/protagonist-references/blue-htd.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/Blue",
+      "artist": "Brianna C. Walsh; extracted by WillowCharlotte1234",
+      "kind": "official How to Draw, edited cutout",
+      "use": "Larger body/head source, wingless life stage."
+    }
+  ],
+  "head": {
+    "source": "prototypes/moon/head/head_design.json",
+    "scale": 0.47,
+    "height": 1.88,
+    "longitudinal_anchor": 1.45,
+    "jaw_close_degrees": 0,
+    "why": "Start from the corrected NightWing skull proportions with a modestly more delicate muzzle; avoid inflating or lengthening the face into a separate bulbous nose.",
+    "muzzle_width_reduction": 0.21,
+    "muzzle_extension": 0.065,
+    "nose_cap_rounding": 0.125,
+    "beak_drop": 0,
+    "anterior_lift": 0.075,
+    "cranial_vault": {
+      "height": 0.075,
+      "rear_extension": 0.11,
+      "why": "Posterior cranial roof is independent of the orbital rim, continuing into the occiput and arched upper cervical attachment."
+    },
+    "anterior_profile_compression": 0.16,
+    "muzzle_squareness": 2.25
+  },
+  "body": {
+    "prototype": "prototypes/clay/body/body_design.json: anatomy.bones and anatomy.muscles",
+    "muscle_radius_scale": 0.85,
+    "why": "Clay-derived full trunk and named muscle profiles with a NightWing S-curve cervical centerline: forward lower neck, recessed mid-cervical bend, upper arch and a near-horizontal approach into the skull base. Actual rig stations follow those spinal landmarks.",
+    "transverse_attachment_scale": 0.87,
+    "foot_scale": 0.85,
+    "spine": [
+      [
+        1.37,
+        1.98,
+        0.1958,
+        0.2225,
+        0.20470000000000002
+      ],
+      [
+        1.18,
+        2.005,
+        0.19135,
+        0.21359999999999998,
+        0.20915
+      ],
+      [
+        0.98,
+        1.95,
+        0.1958,
+        0.2225,
+        0.21359999999999998
+      ],
+      [
+        0.84,
+        1.79,
+        0.20025,
+        0.24920000000000003,
+        0.2403
+      ],
+      [
+        0.8,
+        1.55,
+        0.21359999999999998,
+        0.267,
+        0.2581
+      ],
+      [
+        0.72,
+        1.31,
+        0.2581,
+        0.3204,
+        0.3204
+      ],
+      [
+        0.48,
+        1.15,
+        0.35200000000000004,
+        0.35200000000000004,
+        0.4224
+      ],
+      [
+        0.05,
+        1.1,
+        0.3212,
+        0.3212,
+        0.35200000000000004
+      ],
+      [
+        -0.45,
+        1.07,
+        0.2816,
+        0.2816,
+        0.2904
+      ],
+      [
+        -0.82,
+        1.08,
+        0.2728,
+        0.2816,
+        0.2992
+      ],
+      [
+        -1.18,
+        0.95,
+        0.1936,
+        0.22,
+        0.22
+      ],
+      [
+        -1.68,
+        0.73,
+        0.1276,
+        0.1496,
+        0.1496
+      ],
+      [
+        -2.18,
+        0.49,
+        0.0748,
+        0.08800000000000001,
+        0.08800000000000001
+      ],
+      [
+        -2.68,
+        0.38,
+        0.03696,
+        0.04224,
+        0.04224
+      ],
+      [
+        -3.1,
+        0.43,
+        0.00352,
+        0.0044,
+        0.0044
+      ]
+    ],
+    "section_squareness": 2.35,
+    "keel_taper": 0.22,
+    "front": [
+      [
+        0.29,
+        1.22,
+        0.6
+      ],
+      [
+        0.29,
+        0.64,
+        0.18
+      ],
+      [
+        0.255,
+        0.19,
+        0.61
+      ],
+      [
+        0.24,
+        0.105,
+        0.83
+      ]
+    ],
+    "hind": [
+      [
+        0.305,
+        1.08,
+        -0.72
+      ],
+      [
+        0.285,
+        0.66,
+        -0.35
+      ],
+      [
+        0.25,
+        0.25,
+        -0.85
+      ],
+      [
+        0.25,
+        0.105,
+        -0.6
+      ]
+    ],
+    "upper_neck_fit": "Relaxed cranial return: no dorsal centerline hump above the occipital station; longer fore-aft transition into the skull."
+  },
+  "horn": {
+    "path": [
+      [
+        0.19,
+        2.105,
+        1.34
+      ],
+      [
+        0.205,
+        2.2,
+        1.18
+      ],
+      [
+        0.23,
+        2.23,
+        0.95
+      ],
+      [
+        0.25,
+        2.16,
+        0.7
+      ],
+      [
+        0.27,
+        2.12,
+        0.48
+      ],
+      [
+        0.29,
+        2.21,
+        0.27
+      ]
+    ],
+    "radius": [
+      0.043,
+      0.037,
+      0.031,
+      0.023,
+      0.014,
+      0.001
+    ],
+    "why": "User reference: the skull grows into a housing over the horn root. Almost straight swept shafts with a very slight upward arch and distinct satin grey keratin; no exposed end caps or downward-curled tips.",
+    "color": "514471",
+    "roughness": 0.74,
+    "housing_radius": 0.049,
+    "housing_length": 0.125,
+    "housing_fillet": 0.035
+  },
+  "wing": {
+    "sets": [
+      {
+        "bank": "fore",
+        "root": [
+          0.275,
+          1.38,
+          0.48
+        ],
+        "elbow": [
+          0.86,
+          1.62,
+          0.3
+        ],
+        "wrist": [
+          1.95,
+          1.75,
+          1.0
+        ],
+        "tips": [
+          [
+            4.4,
+            1.6,
+            0.88
+          ],
+          [
+            4.15,
+            1.52,
+            0.52
+          ],
+          [
+            3.55,
+            1.4,
+            0.3
+          ]
+        ],
+        "fold_upper_direction": [
+          0.08,
+          0.5,
+          -0.56
+        ],
+        "fold_fore_direction": [
+          0.1,
+          1.05,
+          -0.5
+        ],
+        "fold_finger_directions": [
+          [
+            0.26,
+            -0.32,
+            -1
+          ],
+          [
+            0.215,
+            -0.24,
+            -1
+          ],
+          [
+            0.17,
+            -0.29,
+            -1
+          ]
+        ],
+        "fold_distal_lateral_fraction": 0.5,
+        "arm_muscle_scale": 0.8,
+        "web_end_offset": [
+          0,
+          -0.04,
+          -0.1
+        ],
+        "web_end_bone": "spine",
+        "rest_fan_leading": [
+          0.12,
+          0.4,
+          -1
+        ],
+        "rest_fan_mode": "preserve_open_lobe",
+        "trailing_lobe_controls": [
+          [
+            3.7,
+            1.16,
+            -2.3
+          ],
+          [
+            1.1,
+            1.1,
+            -2.2
+          ]
+        ],
+        "digit_attachments": [
+          "wrist",
+          "wrist",
+          "wrist"
+        ],
+        "reference_landmarks": {
+          "image": "silkwing-lineart.png, 1974x1872",
+          "distal_origins_px": [
+            [
+              800,
+              390
+            ],
+            [
+              795,
+              405
+            ],
+            [
+              790,
+              418
+            ]
+          ],
+          "tip_points_px": [
+            [
+              1650,
+              110
+            ],
+            [
+              1590,
+              270
+            ],
+            [
+              1435,
+              420
+            ]
+          ],
+          "thumb_px": [
+            780,
+            370
+          ],
+          "trailing_lobe_lower_px": [
+            [
+              1250,
+              650
+            ],
+            [
+              1100,
+              880
+            ],
+            [
+              760,
+              900
+            ],
+            [
+              660,
+              810
+            ]
+          ],
+          "note": "Manual source picks, roughly +/-10 px; separate the near wing ink from the pale far wing."
+        },
+        "reference_curve_yz": [
+          [
+            [
+              3.55,
+              -1.2
+            ],
+            [
+              4.45,
+              -2.4
+            ]
+          ],
+          [
+            [
+              3.35,
+              -1.3
+            ],
+            [
+              3.75,
+              -2.45
+            ]
+          ],
+          [
+            [
+              3.12,
+              -1.2
+            ],
+            [
+              3.35,
+              -2.1
+            ]
+          ]
+        ],
+        "rest_trailing_lobe_yz": [
+          [
+            2.35,
+            -2.1
+          ],
+          [
+            1.45,
+            -1.55
+          ]
+        ]
+      },
+      {
+        "bank": "hind",
+        "root": [
+          0.32,
+          1.18,
+          0.42
+        ],
+        "elbow": [
+          0.9,
+          1.22,
+          0.2
+        ],
+        "wrist": [
+          1.65,
+          1.35,
+          0.45
+        ],
+        "tips": [
+          [
+            2.78,
+            1.21,
+            0.18
+          ],
+          [
+            0.96,
+            0.96,
+            0.24
+          ]
+        ],
+        "fold_upper_direction": [
+          0.12,
+          0.05,
+          -0.54
+        ],
+        "fold_fore_direction": [
+          0.12,
+          0.42,
+          -0.56
+        ],
+        "fold_finger_directions": [
+          [
+            0.29,
+            -0.35,
+            -1
+          ],
+          [
+            0.17,
+            -0.41,
+            -1
+          ]
+        ],
+        "fold_distal_lateral_fraction": 0.55,
+        "arm_muscle_scale": 0.66,
+        "web_end_offset": [
+          0,
+          -0.25,
+          -0.7
+        ],
+        "web_end_bone": "hips",
+        "rest_fan_leading": [
+          0.2,
+          -0.28,
+          -1
+        ],
+        "rest_fan_mode": "preserve_open_lobe",
+        "digit_attachments": [
+          "wrist",
+          "proximal"
+        ],
+        "digit_controls": [
+          [
+            [
+              2.0,
+              1.5,
+              0.6
+            ],
+            [
+              2.6,
+              1.4,
+              0.4
+            ]
+          ],
+          [
+            [
+              0.98,
+              1.17,
+              0.24
+            ],
+            [
+              1.0,
+              1.04,
+              0.25
+            ]
+          ]
+        ],
+        "main_lobe_controls": [
+          [
+            3.35,
+            1.03,
+            -2.0
+          ],
+          [
+            1.25,
+            0.92,
+            -2.45
+          ]
+        ],
+        "reference_landmarks": {
+          "image": "silkwing-lineart.png, 1974x1872",
+          "primary_origin_px": [
+            870,
+            875
+          ],
+          "primary_arc_tip_px": [
+            1250,
+            1010
+          ],
+          "proximal_hook_px": [
+            [
+              620,
+              1060
+            ],
+            [
+              650,
+              1140
+            ]
+          ],
+          "lower_lobe_arc_px": [
+            [
+              1260,
+              1100
+            ],
+            [
+              1170,
+              1200
+            ],
+            [
+              1000,
+              1250
+            ],
+            [
+              800,
+              1210
+            ],
+            [
+              650,
+              1140
+            ]
+          ],
+          "note": "Long curved leading support, short basal support; the lower oval is membrane outline, not a second long radial spoke."
+        },
+        "reference_curve_yz": [
+          [
+            [
+              1.9,
+              -1.15
+            ],
+            [
+              1.7,
+              -1.7
+            ]
+          ],
+          null
+        ],
+        "rest_main_lobe_yz": [
+          [
+            1.0,
+            -2.25
+          ],
+          [
+            0.25,
+            -1.2
+          ]
+        ],
+        "flight_sweep_degrees": 32
+      }
+    ],
+    "arm_muscle_scale": 0.8,
+    "rest_style": "upright_layered_lobes",
+    "why": "Measured side-reference architecture: three clustered distal forewing arches above a long banana-shaped trailing lobe; lower wing has one long arch and a short basal support around a broad rounded lobe. Preserve the arm/wrist hook and trailing attachments; no uniform four-ray upper fan or two full-length lower spokes.",
+    "edge_style": "continuous_spline_lobes",
+    "support_style": "smooth_curved_arches",
+    "rest_evidence": "Official Joy Ang standing SilkWing sheet: broad forewing lobes high above the back, smaller hindwings lower and outboard. Rotate each open fan into its resting plane instead of gathering its supports into a NightWing bundle.",
+    "construction": "Fit support and lobe curves in reference standing pose, then invert each actual weighted skin transform into the flight construction pose."
+  },
+  "physical_estimate": {
+    "status": "inferred game scale, not canon dimensions",
+    "age_years": 6,
+    "world_scale": 1.6,
+    "effective_density_kg_m3": 650,
+    "density_range_kg_m3": [
+      450,
+      950
+    ],
+    "method": "Provisional game scale only; Blue is a six-year-old post-Metamorphosis SilkWing, not linearly age-scaled. No verified metric body measurements.",
+    "sources": [
+      "https://mirror.wingsoffire.wiki/wiki/Blue",
+      "https://mirror.wingsoffire.wiki/wiki/SilkWings",
+      "https://tuibooks.com/book/the-lost-continent/"
+    ],
+    "near_mature_nightwing_scale": 1.903846,
+    "relative_linear_size": 0.9,
+    "relative_size_range": [
+      0.75,
+      0.9
+    ],
+    "maturity_basis": "Rapid growth through roughly seven years; four-year-old Moon is modeled as an advanced juvenile, not at 4/7 adult linear size. The 83% size choice is an explicit interpolation, not a published age-to-height equation."
+  },
+  "mouth": {
+    "bite_gap": 0.009,
+    "floor_depth": 0.035,
+    "jaw_depth": 0.105,
+    "side_teeth": 12,
+    "front_teeth": 6,
+    "crown_length": 0.019,
+    "front_crown_length": 0.014,
+    "why": "Final upper host and matching lower jaw share the bite boundary. Clay tooth primitive, curved front/side gum arches, surface-seated roots and floor-referenced tongue replace quantile placement and fixed coordinates.",
+    "anterior_jaw_depth_scale": 0.35,
+    "jaw_taper_start": 1.48,
+    "anterior_floor_reduction": 0.4
+  },
+  "eye": {
+    "gaze": [
+      0.88,
+      0.025,
+      0.47
+    ],
+    "iris_extent": 0.039,
+    "why": "Lateral equine-like orbital orientation, retaining NightWing green iris and vertical pupil; fitted source globe, host and staged lids remain one seated assembly.",
+    "iris_color": "8870a3",
+    "sclera_color": "3b4657"
+  },
+  "nose_cap": {
+    "length": 0.09,
+    "color": "5e829f",
+    "roughness": 0.68,
+    "nostril_height": 0.024,
+    "nostril_width": 0.01,
+    "nostril_depth": 0.032,
+    "why": "Short terminal cap follows the bounded colored reference: a local eagle-like premaxillary tip rather than a long gray sleeve. Curved dorsal boundary and two recessed nostril apertures.",
+    "shape": "rounded"
+  },
+  "surface": {
+    "muzzle_color": "635391",
+    "crown_blade_height": 0.045,
+    "dorsal_blade_height": 0.07
+  },
+  "antenna": {
+    "root": [
+      0.17,
+      2.12,
+      1.44
+    ],
+    "offsets": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0.018,
+        0.16,
+        -0.14
+      ],
+      [
+        0.035,
+        0.2,
+        -0.4
+      ],
+      [
+        0.055,
+        0.13,
+        -0.67
+      ],
+      [
+        0.07,
+        0.09,
+        -0.91
+      ],
+      [
+        0.075,
+        0.19,
+        -1.08
+      ]
+    ],
+    "why": "Bases just anterior to the horn housings; slender rise-dip-upturned sweep parallels the horns."
+  }
+}

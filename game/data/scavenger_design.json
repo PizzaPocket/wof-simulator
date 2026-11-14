@@ -1,0 +1,119 @@
+{
+  "source": {
+    "project": "MakeHuman hm08",
+    "commit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+    "license": "CC0-1.0",
+    "why": "Use authored child anatomy, fitted joint landmarks and skinning instead of disconnected primitives."
+  },
+  "characters": {
+    "kai": {
+      "age": 9,
+      "height_m": 1.35,
+      "sex_target": "male",
+      "skin": "e2b391",
+      "hair": "5d3b26",
+      "shirt": "527d77",
+      "hair_length_m": 0.04,
+      "curl_radius_m": 0.0012,
+      "curl_turns": 0.35,
+      "hair_asset": "short02",
+      "proportion_profile": "boy_9",
+      "nose_shape": {
+        "width_scale": 1.17,
+        "projection_reduction_m": 0.0035,
+        "tip_height_m": 1.215,
+        "height_band_m": [
+          1.203,
+          1.208,
+          1.224,
+          1.241
+        ],
+        "lateral_fade_m": [
+          0.018,
+          0.033
+        ],
+        "front_fade_m": [
+          0.115,
+          0.14
+        ],
+        "why": "User requested a subtly wider, less protruding nose for Kai. Keep the change localized to his nose rather than applying a whole-face ancestry morph."
+      },
+      "brow_color": "5d3b26"
+    },
+    "camille": {
+      "age": 9,
+      "height_m": 1.35,
+      "sex_target": "female",
+      "skin": "e8bc9a",
+      "hair": "cbb786",
+      "shirt": "829463",
+      "hair_length_m": 0.38,
+      "curl_radius_m": 0.0045,
+      "curl_turns": 0.8,
+      "hair_asset": "elvs_hazel_hair",
+      "proportion_profile": "girl_9",
+      "brow_color": "b39c6b"
+    },
+    "corinne": {
+      "age": 6,
+      "height_m": 1.15,
+      "sex_target": "female",
+      "skin": "e8b594",
+      "hair": "e4b986",
+      "shirt": "b87862",
+      "hair_length_m": 0.32,
+      "curl_radius_m": 0.012,
+      "curl_turns": 3.0,
+      "hair_asset": "punkduck_alpha7_curly2",
+      "proportion_profile": "girl_6",
+      "brow_color": "c09370"
+    }
+  },
+  "hair": {
+    "why": "Authored fitted hairstyles with 2K strand textures and alpha-cut layered cards: short02 for Kai, elvs_hazel_hair for Camille, punkduck_alpha7_curly2 for Corinne. Procedural tube hair removed."
+  },
+  "clothing": {
+    "shirt_ease_m": 0.022,
+    "trouser_ease_m": 0.014,
+    "fabric_thickness_m": 0.0014,
+    "drape_frames": 36,
+    "why": "Separate loose fabric patterns, pinned at neckline or waistband, collision-draped over plain child bodies. Baked folds, thick fabric edges and rolled hems; skinned for game animation.",
+    "backpacks": false,
+    "shoe_clearance_m": 0.008,
+    "covered_skin": {
+      "collar_margin_m": 0.07,
+      "hem_margin_m": 0.012,
+      "sleeve_fraction": 0.34,
+      "why": "Omit only skin well inside the shirt, leaving overlap inside the open collar, hem and cuffs. This prevents independently skinned armpit tissue from poking through the cloth during walking."
+    }
+  },
+  "pouch": {
+    "center": [
+      0.39,
+      1.0,
+      1.0
+    ],
+    "height": 0.36,
+    "depth": 0.18,
+    "width": 0.29,
+    "strap_z": 1.0,
+    "strap_clearance_m": 0.009,
+    "strap_width_m": 0.035,
+    "why": "A complete fitted neck loop, closed under the throat by a buckle and tongue, carries a gathered leather bag against the right side. The loop is sampled from the actual neck cross-section, rather than an arc floating above the back."
+  },
+  "developmental_shape": {
+    "why": "Age-specific source shapes and authored shoulder/arm measurement morphs; skin sections fitted to height-scaled NCHS child references. No arbitrary width fields. Accepted face and hair geometry held fixed.",
+    "muscle_slider": 0.0,
+    "weight_slider": 0.25,
+    "art_direction": {
+      "shoulder_muscle_reduction": 1.0,
+      "shoulder_drop_m": 0.01,
+      "shoulder_breadth_scale": 0.96,
+      "upper_arm_length_scale": 0.9,
+      "forearm_length_scale": 0.93,
+      "hand_length_scale": 0.91,
+      "why": "User requested simpler sloping shoulders and shorter, less lanky arms with smaller hands. Population lengths remain a reference, not the visual target.",
+      "shoulder_slope": 0.55
+    }
+  }
+}

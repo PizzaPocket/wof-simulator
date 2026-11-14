@@ -1,0 +1,960 @@
+{
+  "umber": [
+    {
+      "id": "umber_01",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "Clay! Watch your left foot. Corinne's built something down there."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Oh. Is it a house?"
+        },
+        {
+          "speaker": "Umber",
+          "text": "A bakery, apparently. I stepped on the first one. She's charging me two pebbles."
+        }
+      ]
+    },
+    {
+      "id": "umber_02",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "I've got dried fruit in my pouch, if you're hungry."
+        },
+        {
+          "speaker": "Clay",
+          "text": "How much dried fruit?"
+        },
+        {
+          "speaker": "Umber",
+          "text": "I should have guessed that would be your first question."
+        }
+      ]
+    },
+    {
+      "id": "umber_03",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "Reed used to check on all of us before he went to sleep. Every single night."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Sounds like Reed."
+        },
+        {
+          "speaker": "Umber",
+          "text": "I still do the counting sometimes. Even here."
+        }
+      ]
+    },
+    {
+      "id": "umber_04",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "Kai asked if we could race. I said he could choose the finish line."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Where is it?"
+        },
+        {
+          "speaker": "Umber",
+          "text": "Under a tree root. I think I've been tricked."
+        }
+      ]
+    },
+    {
+      "id": "umber_05",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "Do you remember when you first came looking for us?"
+        },
+        {
+          "speaker": "Clay",
+          "text": "I was worried you wouldn't want me there."
+        },
+        {
+          "speaker": "Umber",
+          "text": "We wanted you to stay. I don't think I said that properly."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I wanted to. I still like coming back."
+        }
+      ]
+    },
+    {
+      "id": "umber_06",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "Camille's drawing the whole village. She made my pouch enormous."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Maybe she's hoping there's lunch in it."
+        },
+        {
+          "speaker": "Umber",
+          "text": "There was. You ate it."
+        }
+      ]
+    },
+    {
+      "id": "umber_07",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "It's quiet today. I keep waiting for someone to shout an order."
+        },
+        {
+          "speaker": "Clay",
+          "text": "We could sit here a while."
+        },
+        {
+          "speaker": "Umber",
+          "text": "I'd like that. Leave a bit of room for the little ones."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I'll move my tail."
+        }
+      ]
+    },
+    {
+      "id": "umber_08",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "Sora would've found the shady spot already. She always does."
+        },
+        {
+          "speaker": "Clay",
+          "text": "We could save it for her."
+        },
+        {
+          "speaker": "Umber",
+          "text": "The one by the wallow? Yes. She'd like that."
+        }
+      ]
+    },
+    {
+      "id": "umber_09",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "Corinne asked about my scar. Then she asked if scars need blankets."
+        },
+        {
+          "speaker": "Clay",
+          "text": "What did you tell her?"
+        },
+        {
+          "speaker": "Umber",
+          "text": "That mine was warm enough. She gave me a leaf anyway."
+        },
+        {
+          "speaker": "Clay",
+          "text": "A leaf blanket. That's a new one."
+        }
+      ]
+    },
+    {
+      "id": "umber_10",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "I can hear three different frogs in those reeds. That low one's only just started."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I'll sit here. Maybe he'll do it again."
+        }
+      ]
+    },
+    {
+      "id": "umber_11",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "I like seeing you with them. You put your head down so they can reach you."
+        },
+        {
+          "speaker": "Clay",
+          "text": "They're very small."
+        },
+        {
+          "speaker": "Umber",
+          "text": "So was I, once. Reed had to help me out of my egg."
+        }
+      ]
+    },
+    {
+      "id": "umber_12",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "I'm trying to keep the mud out of this pouch."
+        },
+        {
+          "speaker": "Clay",
+          "text": "In a MudWing village?"
+        },
+        {
+          "speaker": "Umber",
+          "text": "Yes, thank you, Clay. I'm beginning to see the problem."
+        }
+      ]
+    },
+    {
+      "id": "umber_13",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "We could show the kids the wallow later. The shallow edge."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I'll go in first and check it."
+        },
+        {
+          "speaker": "Umber",
+          "text": "And come back out when we call you? Camille asked me to check that part."
+        }
+      ]
+    },
+    {
+      "id": "umber_14",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "I used to think meeting new dragons would be easy at school."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Was it?"
+        },
+        {
+          "speaker": "Umber",
+          "text": "Sometimes. It's easier when someone saves you a place to sit."
+        },
+        {
+          "speaker": "Clay",
+          "text": "You can sit by me."
+        }
+      ]
+    },
+    {
+      "id": "umber_15",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "Want to walk with me? I was going as far as the bend."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Are we looking for anything?"
+        },
+        {
+          "speaker": "Umber",
+          "text": "No. I thought we could have a walk without looking for anything."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Come on, then."
+        }
+      ]
+    },
+    {
+      "id": "umber_16",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "Corinne put a pebble in my pouch for luck. Kai put in another one."
+        },
+        {
+          "speaker": "Clay",
+          "text": "What did Camille put in?"
+        },
+        {
+          "speaker": "Umber",
+          "text": "A note asking me to stop carrying everybody's rocks."
+        }
+      ]
+    },
+    {
+      "id": "umber_17",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "You've got a leaf stuck behind your horn."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Can you reach it?"
+        },
+        {
+          "speaker": "Umber",
+          "text": "Hold still. You're much too tall for this to be convenient."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I'll crouch down. How about now?"
+        }
+      ]
+    },
+    {
+      "id": "umber_18",
+      "lines": [
+        {
+          "speaker": "Umber",
+          "text": "I found a dry patch big enough for all of us. I checked there's room for your tail."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Thanks. I'll bring the others over."
+        }
+      ]
+    }
+  ],
+  "kai": [
+    {
+      "id": "kai_01",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "Clay, how far can you jump? Past that stump?"
+        },
+        {
+          "speaker": "Clay",
+          "text": "Probably. Are you standing on the stump?"
+        },
+        {
+          "speaker": "Kai",
+          "text": "Not anymore. Give me a second."
+        }
+      ]
+    },
+    {
+      "id": "kai_02",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "I found a shortcut. Camille says it goes the wrong way."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Where were you trying to go?"
+        },
+        {
+          "speaker": "Kai",
+          "text": "That depends where it comes out."
+        }
+      ]
+    },
+    {
+      "id": "kai_03",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "Umber let me hold his pouch. I had to use both hands."
+        },
+        {
+          "speaker": "Clay",
+          "text": "What would you keep in a pouch that big?"
+        },
+        {
+          "speaker": "Kai",
+          "text": "String. A stick. Another stick, in case the first one breaks."
+        }
+      ]
+    },
+    {
+      "id": "kai_04",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "Could you see our footprints from the air?"
+        },
+        {
+          "speaker": "Clay",
+          "text": "Yours might be a bit small."
+        }
+      ]
+    },
+    {
+      "id": "kai_05",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "Camille and I are both nine. She says she's in charge of the map."
+        },
+        {
+          "speaker": "Clay",
+          "text": "What are you in charge of?"
+        },
+        {
+          "speaker": "Kai",
+          "text": "Finding things that aren't on it yet."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Try finding us somewhere to have lunch."
+        }
+      ]
+    },
+    {
+      "id": "kai_06",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "There's something moving by that root."
+        },
+        {
+          "speaker": "Clay",
+          "text": "A lizard, I think."
+        },
+        {
+          "speaker": "Kai",
+          "text": "Oh, good. I told Corinne it was a lizard. I wasn't sure."
+        }
+      ]
+    },
+    {
+      "id": "kai_07",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "I can balance on one foot longer than you."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I've got four feet. Which one?"
+        },
+        {
+          "speaker": "Kai",
+          "text": "You have to pick three up. Those are the rules now."
+        }
+      ]
+    },
+    {
+      "id": "kai_08",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "Would a dragon fit in a scavenger house?"
+        },
+        {
+          "speaker": "Clay",
+          "text": "I think I'd get stuck at the door."
+        },
+        {
+          "speaker": "Kai",
+          "text": "We could make the door bigger. Mum might notice."
+        }
+      ]
+    },
+    {
+      "id": "kai_09",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "I promised Camille I'd stay where she could see me."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Can she see you here?"
+        },
+        {
+          "speaker": "Kai",
+          "text": "Yes. She keeps pointing at me."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I'd stay close. She looks worried."
+        }
+      ]
+    },
+    {
+      "id": "kai_10",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "I was going to name this stick, but Corinne's already named it Peter."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Does Peter do anything?"
+        },
+        {
+          "speaker": "Kai",
+          "text": "Mostly gets borrowed. Have you seen Corinne?"
+        }
+      ]
+    },
+    {
+      "id": "kai_11",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "Do your wings get tired?"
+        },
+        {
+          "speaker": "Clay",
+          "text": "They do after a long flight."
+        }
+      ]
+    },
+    {
+      "id": "kai_12",
+      "lines": [
+        {
+          "speaker": "Kai",
+          "text": "Can we come back here tomorrow? I haven't checked behind the big house."
+        },
+        {
+          "speaker": "Clay",
+          "text": "We'll ask the dragons who live there first."
+        },
+        {
+          "speaker": "Kai",
+          "text": "Okay. You ask. You can reach the door."
+        }
+      ]
+    }
+  ],
+  "camille": [
+    {
+      "id": "camille_01",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "Clay, hold still. I'm drawing your horns."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Like this?"
+        },
+        {
+          "speaker": "Camille",
+          "text": "Yes. Oh, your head's too big for this bit of paper. I'll turn it sideways."
+        }
+      ]
+    },
+    {
+      "id": "camille_02",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "Corinne says she isn't tired. She asked me to carry her shoes."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I can carry both of you if you need a rest."
+        },
+        {
+          "speaker": "Camille",
+          "text": "Thanks. I'll ask her again in a minute."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I'll be here."
+        }
+      ]
+    },
+    {
+      "id": "camille_03",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "Kai's shortcut brought us back to the same tree."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Maybe he likes that tree."
+        },
+        {
+          "speaker": "Camille",
+          "text": "He said it was a different tree. It still had my ribbon on it."
+        }
+      ]
+    },
+    {
+      "id": "camille_04",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "Umber remembered which fruit Corinne likes. She only told him once."
+        },
+        {
+          "speaker": "Clay",
+          "text": "He listens."
+        },
+        {
+          "speaker": "Camille",
+          "text": "She told him all about breakfast today. He might regret it."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I don't think he minds."
+        }
+      ]
+    },
+    {
+      "id": "camille_05",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "I'm marking the dry ground on our map. That patch wasn't dry."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Your boots look muddy."
+        }
+      ]
+    },
+    {
+      "id": "camille_06",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "Kai keeps saying he's nearly ten. His birthday's ages away."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Is yours soon?"
+        },
+        {
+          "speaker": "Camille",
+          "text": "No. We're both nine for a while yet. I keep telling him."
+        }
+      ]
+    },
+    {
+      "id": "camille_07",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "Could you put your tail on the other side of the path?"
+        },
+        {
+          "speaker": "Clay",
+          "text": "Sorry. Is it in the way?"
+        },
+        {
+          "speaker": "Camille",
+          "text": "Corinne thinks it's a bridge. I'm trying to get her down."
+        }
+      ]
+    },
+    {
+      "id": "camille_08",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "My hair caught on a branch again. Is there still a twig in it?"
+        },
+        {
+          "speaker": "Clay",
+          "text": "A small one, on your left."
+        },
+        {
+          "speaker": "Camille",
+          "text": "Can you tell Kai? He said I imagined it."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Kai? Camille's got a twig in her hair."
+        }
+      ]
+    },
+    {
+      "id": "camille_09",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "I packed three snacks. Corinne ate one, Kai ate one, and I ate one."
+        },
+        {
+          "speaker": "Clay",
+          "text": "That sounds fair."
+        },
+        {
+          "speaker": "Camille",
+          "text": "They were meant for the journey home. We might need to leave after lunch."
+        }
+      ]
+    },
+    {
+      "id": "camille_10",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "Corinne wants to sleep in a dragon house tonight."
+        },
+        {
+          "speaker": "Clay",
+          "text": "There's plenty of room."
+        },
+        {
+          "speaker": "Camille",
+          "text": "She also wants you to say good night to every one of her pebbles."
+        }
+      ]
+    },
+    {
+      "id": "camille_11",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "I drew you and Umber together. I made him smaller."
+        },
+        {
+          "speaker": "Clay",
+          "text": "He'll probably check how much smaller."
+        },
+        {
+          "speaker": "Camille",
+          "text": "I can rub that bit out if he complains."
+        }
+      ]
+    },
+    {
+      "id": "camille_12",
+      "lines": [
+        {
+          "speaker": "Camille",
+          "text": "We should sit down for a bit. Kai keeps running ahead."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I'll save him a spot."
+        },
+        {
+          "speaker": "Camille",
+          "text": "Next to you, please. Then he might stay for five minutes."
+        }
+      ]
+    }
+  ],
+  "corinne": [
+    {
+      "id": "corinne_01",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "Clay! Put your head down. Lower. Lower than that."
+        },
+        {
+          "speaker": "Clay",
+          "text": "How's this?"
+        },
+        {
+          "speaker": "Corinne",
+          "text": "Good. There was a bug on you. It's gone now."
+        }
+      ]
+    },
+    {
+      "id": "corinne_02",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "Hold your foot up. I want to count the pointy bits."
+        },
+        {
+          "speaker": "Clay",
+          "text": "I can hold it here. Take your time."
+        }
+      ]
+    },
+    {
+      "id": "corinne_03",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "This pebble's for Umber. You can have this one."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Thank you. Why that one?"
+        },
+        {
+          "speaker": "Corinne",
+          "text": "It's bigger. Your pockets must be bigger."
+        }
+      ]
+    },
+    {
+      "id": "corinne_04",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "Camille says we can't take a frog home."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Where would it sleep?"
+        },
+        {
+          "speaker": "Corinne",
+          "text": "In Kai's bag. He hasn't said no yet."
+        }
+      ]
+    },
+    {
+      "id": "corinne_05",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "I made a bakery. Umber stepped in it."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Can you fix it?"
+        },
+        {
+          "speaker": "Corinne",
+          "text": "Yes. But now he has to buy a cake."
+        }
+      ]
+    },
+    {
+      "id": "corinne_06",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "Your eye's bigger than my hand."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Do you want to see it blink?"
+        },
+        {
+          "speaker": "Corinne",
+          "text": "Again! Both this time."
+        },
+        {
+          "speaker": "Clay",
+          "text": "All right. Watch."
+        }
+      ]
+    },
+    {
+      "id": "corinne_07",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "Kai said Peter was a sword. Peter is a stick."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Could he be both?"
+        },
+        {
+          "speaker": "Corinne",
+          "text": "He can be a spoon. I'm making soup."
+        }
+      ]
+    },
+    {
+      "id": "corinne_08",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "Will you come when we go home?"
+        },
+        {
+          "speaker": "Clay",
+          "text": "I'll walk with you for a bit."
+        },
+        {
+          "speaker": "Corinne",
+          "text": "All the way to the next tree? It's far."
+        },
+        {
+          "speaker": "Clay",
+          "text": "We can go as slowly as you like."
+        }
+      ]
+    },
+    {
+      "id": "corinne_09",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "Umber gave me a leaf. I gave it back for his nose."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Was his nose cold?"
+        },
+        {
+          "speaker": "Corinne",
+          "text": "I forgot to ask. Can you ask him?"
+        }
+      ]
+    },
+    {
+      "id": "corinne_10",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "Camille's my sister. You can sit with us, though."
+        },
+        {
+          "speaker": "Clay",
+          "text": "Thanks. Where should I sit?"
+        },
+        {
+          "speaker": "Corinne",
+          "text": "There. Careful of the bakery."
+        }
+      ]
+    },
+    {
+      "id": "corinne_11",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "I saw a fish! It went under and it didn't come back."
+        },
+        {
+          "speaker": "Clay",
+          "text": "It might be hiding."
+        },
+        {
+          "speaker": "Corinne",
+          "text": "Then we have to look away. You're looking, Clay."
+        },
+        {
+          "speaker": "Clay",
+          "text": "All right. Tell me when I can look again."
+        }
+      ]
+    },
+    {
+      "id": "corinne_12",
+      "lines": [
+        {
+          "speaker": "Corinne",
+          "text": "Can I touch your claw? Just the end?"
+        },
+        {
+          "speaker": "Clay",
+          "text": "Gently. I'll keep still."
+        },
+        {
+          "speaker": "Corinne",
+          "text": "It's smooth. I thought it would feel like a rock."
+        }
+      ]
+    }
+  ]
+}

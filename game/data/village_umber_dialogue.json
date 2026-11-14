@@ -1,0 +1,17 @@
+{
+  "kai": [{"lines": [
+    {"speaker": "Kai", "text": "Can we race to that tree again? I'll choose a bigger one this time."},
+    {"speaker": "Umber", "text": "Only if the finish line is outside the roots."},
+    {"speaker": "Kai", "text": "Fine. Can it be between the roots?"}
+  ]}],
+  "camille": [{"lines": [
+    {"speaker": "Camille", "text": "Is it hard to see us when you're flying?"},
+    {"speaker": "Umber", "text": "A little. I usually look for you on the path."},
+    {"speaker": "Camille", "text": "Next time I'll wave my scarf."}
+  ]}],
+  "corinne": [{"lines": [
+    {"speaker": "Corinne", "text": "I moved my bakery out of the path. You can come look."},
+    {"speaker": "Umber", "text": "I'll watch where I put my feet this time."},
+    {"speaker": "Corinne", "text": "Good. I just made a whole tray of pebble buns."}
+  ]}]
+}

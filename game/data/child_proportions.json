@@ -1,0 +1,72 @@
+{
+  "source": {
+    "title": "NCHS child body dimensions, Series 11 No. 143 (1974)",
+    "url": "https://stacks.cdc.gov/view/cdc/12665/cdc_12665_DS1.pdf",
+    "note": "Authoring benchmarks from the first published age/sex series, normalized to character height. Slim-build targets use the 25th percentile. These are population references, not a claim of one mandatory child body shape. Shoulder joint spacing is not mislabeled as external biacromial breadth. Lengths use age medians; shoulder breadth uses the slim-build 25th percentile. External landmarks follow the source measurement plugin.",
+    "tables": {
+      "chest_width_m": 16,
+      "chest_depth_m": 17,
+      "upper_arm_girth_m": 19,
+      "forearm_girth_m": 20,
+      "calf_girth_m": 21,
+      "waist_girth_m": 24,
+      "hip_girth_m": 25,
+      "biacromial_breadth_m": 13,
+      "upper_arm_external_length_m": 10,
+      "forearm_external_length_m": 11
+    }
+  },
+  "profiles": {
+    "boy_9": {
+      "reference_height_m": 1.355,
+      "target": {
+        "chest_width_m": 0.196,
+        "chest_depth_m": 0.137,
+        "upper_arm_girth_m": 0.183,
+        "forearm_girth_m": 0.183,
+        "calf_girth_m": 0.251,
+        "waist_girth_m": 0.544,
+        "hip_girth_m": 0.626
+      },
+      "length_targets": {
+        "biacromial_breadth_m": 0.284,
+        "upper_arm_external_length_m": 0.275,
+        "forearm_external_length_m": 0.211
+      }
+    },
+    "girl_9": {
+      "reference_height_m": 1.351,
+      "target": {
+        "chest_width_m": 0.189,
+        "chest_depth_m": 0.132,
+        "upper_arm_girth_m": 0.184,
+        "forearm_girth_m": 0.179,
+        "calf_girth_m": 0.252,
+        "waist_girth_m": 0.533,
+        "hip_girth_m": 0.637
+      },
+      "length_targets": {
+        "biacromial_breadth_m": 0.281,
+        "upper_arm_external_length_m": 0.275,
+        "forearm_external_length_m": 0.206
+      }
+    },
+    "girl_6": {
+      "reference_height_m": 1.177,
+      "target": {
+        "chest_width_m": 0.171,
+        "chest_depth_m": 0.122,
+        "upper_arm_girth_m": 0.164,
+        "forearm_girth_m": 0.163,
+        "calf_girth_m": 0.224,
+        "waist_girth_m": 0.491,
+        "hip_girth_m": 0.556
+      },
+      "length_targets": {
+        "biacromial_breadth_m": 0.247,
+        "upper_arm_external_length_m": 0.235,
+        "forearm_external_length_m": 0.177
+      }
+    }
+  }
+}

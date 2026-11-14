@@ -1,0 +1,334 @@
+{
+  "status": "Reference research implemented in blue_model_design.json and the rebuilt Blue GLB",
+  "character": "Blue",
+  "tribe": "SilkWing",
+  "version": "winged cover / post-Metamorphosis; age six",
+  "reference_priority": [
+    {
+      "file": "cache/protagonist-references/blue-cover.jpg",
+      "source": "https://tuibooks.com/book/the-lost-continent/",
+      "artist": "Joy Ang",
+      "kind": "official cover",
+      "use": "Primary colored anatomy; distinguish lighting green cast from textual azure/violet coloring. Airborne pose and perspective, not a true orthographic sheet."
+    },
+    {
+      "file": "cache/protagonist-references/blue-drawing.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/Blue#Gallery",
+      "artist": "Brianna C. Walsh",
+      "kind": "Official How to Draw, cached edited crop",
+      "use": "Pre-Metamorphosis wingless body, head, legs and feet only; do not interpret wingbuds as folded full wings."
+    },
+    {
+      "file": "cache/protagonist-references/blue-reference.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/Blue#Gallery",
+      "artist": "Bluethedragoon",
+      "kind": "fan reference built on a tribe base; wiki filename BlueCoverTemplateLoopy.png",
+      "use": "Secondary color/side interpretation; the oval lobe silhouettes are not evidence for an insect-wing rig."
+    },
+    {
+      "file": "cache/protagonist-references/silkwing-lineart.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/SilkWings",
+      "artist": "Joy Ang",
+      "kind": "official tribe line art",
+      "use": "Full fore/hind fan outline, visible support rays, attachment order, head plane and body ratios; do not flatten overlapping far wings into extra fingers."
+    },
+    {
+      "file": "cache/protagonist-references/blue-top-shot.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/Blue",
+      "artist": "Joy Ang; extracted art",
+      "kind": "cover head/body crop",
+      "use": "Closer look at muzzle and three-quarter cranial width; still a posed illustration, not a top orthographic view despite the filename."
+    },
+    {
+      "file": "cache/protagonist-references/blue-htd.png",
+      "source": "https://mirror.wingsoffire.wiki/wiki/Blue",
+      "artist": "Brianna C. Walsh; extracted by WillowCharlotte1234",
+      "kind": "official How to Draw, edited cutout",
+      "use": "Larger body/head source, wingless life stage."
+    }
+  ],
+  "sources": [
+    "https://mirror.wingsoffire.wiki/wiki/Blue",
+    "https://mirror.wingsoffire.wiki/wiki/SilkWings",
+    "https://tuibooks.com/book/the-lost-continent/"
+  ],
+  "anatomical_frames": {
+    "head": "Level skull longitudinal axis; pose pitch applied after construction. Keep jaw tooth bed in its own smooth bite frame.",
+    "body": "Use Clay skeletal/muscle architecture and the corrected shared NightWing construction methods; retain thorax, shoulder and haunch volume. Slim is a change of degree, not missing musculature.",
+    "wing_order": "Two forewings plus two smaller hindwings. Separate shoulder attachments and fan domains, each on actual articulated supports."
+  },
+  "tribe_deltas": {
+    "skull": {
+      "primary_mass": "Long low rounded wedge with a supported cranial vault, tapered nasal bridge and rounded U-shaped anterior footprint.",
+      "differences_from_nightwing": "Cover shows a blunt-rounded, subtly raised nasal tip, not Moon's eagle hook or Clay's broad square muzzle. Orbital rim must not become the whole roof.",
+      "hidden_width": "Retain cranial breadth relative to head length from Clay until top/front SilkWing evidence constrains the delta. A side image cannot establish width.",
+      "mouth": "Reuse smooth bite-frame fitting, seated upper/lower dental arcs, tongue clearance and deforming cheek method; rebuild against SilkWing host rather than transplanting Moon's finished mouth coordinates."
+    },
+    "horns_and_antennae": {
+      "horns": "Long slender swept, plated horns seated in cranial housings; stronger backward curve than Moon.",
+      "antennae": "Distinct pair from brow above eyes, forward/dorsal to horn bases, long flexible furling tips. Do not treat four appendages as horns."
+    },
+    "neck_and_torso": {
+      "shape": "Long S-curve neck into deep shoulder keel and narrow waist; continuous rounded body with no pinched throat or weak cylindrical legs.",
+      "muscles": "Retarget Clay origin/insertion profiles, preserve volume through each joint, reduce breadth and bulk in measured amounts.",
+      "feet": "Reuse articulated Clay digit/claw organization at proportionate scale; do not bind all toe segments to one foot bone."
+    },
+    "wings": {
+      "forewing_digits": 4,
+      "hindwing_digits": 2,
+      "digit_counts_status": "Side-image trace distinguishes distal arches from the arm-bend free hook. The earlier four-ray upper fan / two full-length lower spokes misread those roles.",
+      "structure": "Muscular arms with elbow, wrist and finger knuckles. Rounded continuous membranes on supported fans, not rigid oval butterfly cards and no additional leftover MudWing wings.",
+      "resting_fold": "Unresolved: cover is open/airborne; How to Draw crop is wingless. Need actual folded SilkWing evidence. Any provisional rest rig must preserve segment lengths, fan ordering, compact gathering and outward cupping.",
+      "attachment_contract": "Trace the trailing shoulder-elbow-wrist chain, with no shoulder-to-wrist chord or leading-side fill triangle. Arm tissue, body web and digit panels share sampled boundaries and identical weights; release into membrane weights smoothly behind the arm. Test all folds and stroke rotations.",
+      "forewing_distal_arches": 3,
+      "forewing_hand_hook": true,
+      "hindwing_support_roles": [
+        "long distal arch",
+        "short basal support"
+      ]
+    },
+    "surface": {
+      "palette": "Textual azure/morpho blue, lavender/violet back and arms, purple snout, cerulean wings with purple/blue shimmer; cover lighting shifts some surfaces green.",
+      "scales": "Gem-like plated scale flow, smaller dorsal spines, continuous belly under throat/jaw. Color differences follow actual fitted surfaces, not a global height cutoff.",
+      "flamesilk": "Small wrist glands/glow, not fire breath. Palm marking can be a later fine detail after anatomy."
+    }
+  },
+  "size": {
+    "age_years": 6,
+    "maturity": "Wings develop around six; rapid juvenile growth is well advanced. Do not use 6/7 as a linear size multiplier.",
+    "canon_comparisons": [
+      "Larger than Cricket in the book-cited description; that does not establish larger than Moon or an absolute height."
+    ],
+    "metric_dimensions": null,
+    "mass_kg": null,
+    "reason": "No verified numeric character dimensions. Keep the current gameplay scale provisional until the rebuilt mesh and comparisons exist."
+  },
+  "construction_order": [
+    "Head/skull/bite on level anatomical frames; check front and top, not only profile",
+    "Full continuous neck/trunk with retargeted Clay muscle and digit architecture",
+    "Forewing 4-ray and hindwing 2-ray skeleton, supported outlines, joined attachment topology",
+    "Fold and spread through shared movement pipeline, then surface scales/color",
+    "Actual game checks: standing contacts, walk/run/jump/climb, ascent power and descent glide; inspect all-angle shape and mouth/blink"
+  ],
+  "acceptance": [
+    "No flat anterior cap in top/front views; rounded nasal footprint and distinct SilkWing profile",
+    "No head/body disproportion or twig neck",
+    "No floating horn roots, antenna bases or wrist claws",
+    "No eyelid/globe exposure on closed blink, tongue/jaw intersections or rear oral curtain",
+    "No membrane gaps at arm, web or articulated fingers at intermediate folds",
+    "No removed or duplicated MudWing wings; exactly four anatomically supported wings",
+    "Same Clay movement components, scaled from measured bone lengths; no copied animation loop",
+    "No leading-side membrane sail during retraction; wing web follows the back of the actual arm chain"
+  ],
+  "reference_landmarks": {
+    "file": "cache/protagonist-references/silkwing-lineart.png",
+    "resolution_px": [
+      1974,
+      1872
+    ],
+    "status": "Initial manual landmark picks, roughly +/-8 px; no pixel-perfect trace claimed",
+    "anatomical_frame": {
+      "orbital_center_px": [
+        149,
+        805
+      ],
+      "anterior_nasal_center_px": [
+        111,
+        960
+      ],
+      "longitudinal_unit_in_image": [
+        -0.23811,
+        0.971238
+      ],
+      "note": "Frame built from explicit orbital/nasal landmarks; build skull level in this frame before applying the pictured downward pitch.",
+      "normal_unit_in_image": [
+        0.971238,
+        0.23811
+      ]
+    },
+    "nasal_pad_outline_px": [
+      [
+        113,
+        907
+      ],
+      [
+        94,
+        942
+      ],
+      [
+        79,
+        965
+      ],
+      [
+        88,
+        985
+      ],
+      [
+        113,
+        993
+      ],
+      [
+        140,
+        984
+      ],
+      [
+        133,
+        963
+      ],
+      [
+        144,
+        943
+      ]
+    ],
+    "upper_muzzle_profile_px": [
+      [
+        110,
+        842
+      ],
+      [
+        111,
+        872
+      ],
+      [
+        105,
+        902
+      ],
+      [
+        94,
+        935
+      ],
+      [
+        80,
+        959
+      ],
+      [
+        79,
+        973
+      ],
+      [
+        88,
+        987
+      ]
+    ],
+    "visible_lip_px": [
+      [
+        145,
+        979
+      ],
+      [
+        165,
+        971
+      ],
+      [
+        167,
+        942
+      ],
+      [
+        170,
+        912
+      ],
+      [
+        185,
+        881
+      ],
+      [
+        209,
+        859
+      ],
+      [
+        233,
+        849
+      ]
+    ],
+    "lip_note": "Visible lip contour only. Must not become a zigzag tooth-bearing jaw plane. Hidden dentary is reconstructed in a smooth shared bite frame.",
+    "horn_near_centerline_px": [
+      [
+        173,
+        746
+      ],
+      [
+        197,
+        646
+      ],
+      [
+        224,
+        556
+      ],
+      [
+        254,
+        476
+      ],
+      [
+        267,
+        390
+      ]
+    ],
+    "horn_far_centerline_px": [
+      [
+        103,
+        771
+      ],
+      [
+        105,
+        658
+      ],
+      [
+        117,
+        554
+      ],
+      [
+        112,
+        454
+      ]
+    ],
+    "antenna_near_px": [
+      [
+        147,
+        764
+      ],
+      [
+        156,
+        647
+      ],
+      [
+        165,
+        558
+      ],
+      [
+        185,
+        493
+      ],
+      [
+        224,
+        455
+      ]
+    ],
+    "antenna_far_px": [
+      [
+        91,
+        790
+      ],
+      [
+        59,
+        715
+      ],
+      [
+        36,
+        626
+      ],
+      [
+        38,
+        568
+      ],
+      [
+        57,
+        527
+      ],
+      [
+        87,
+        504
+      ]
+    ],
+    "proportion_note": "The tribe sheet is oblique; these coordinates constrain profile and attachment arrangement, not skull width or world limb lengths."
+  }
+}

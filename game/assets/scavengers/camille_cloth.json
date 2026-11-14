@@ -1,0 +1,14 @@
+{
+  "trousers": {
+    "method": "Blender cloth collision bake",
+    "frames": 36,
+    "vertices": 4290,
+    "max_pattern_displacement_m": 0.0758865624234296
+  },
+  "shirt": {
+    "method": "Blender cloth collision bake",
+    "frames": 36,
+    "vertices": 3382,
+    "max_pattern_displacement_m": 0.10028232487439044
+  }
+}

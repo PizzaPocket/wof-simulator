@@ -1,0 +1,103 @@
+{
+  "note": "Resting but engaged asymmetrical carriage adapted from the indexed illustrations and user review. Moderate held elbow/knee flexion replaces both the earlier sharp zigzag and a rejected limp hang. Partial gravity alignment preserves the muscularly held relationship to the torso. Side offsets change bend, foot height and digit curl. These are artistic 3D adaptations, not orthographic reconstructions.",
+  "references": [
+    {
+      "file": "covers/Clay_Render_zstarchaserr_png.png",
+      "observation": "Horizontal flight: flexed forelimbs and loose hanging hands; posterior limbs are partly occluded."
+    },
+    {
+      "file": "covers/Clay_SEPoster_Isolated_Edit_png.png",
+      "size": [
+        1743,
+        1017
+      ],
+      "projected_fore_centerline_px": [
+        [
+          960,
+          355
+        ],
+        [
+          865,
+          430
+        ],
+        [
+          955,
+          565
+        ],
+        [
+          970,
+          615
+        ]
+      ],
+      "observation": "Bent elbows, flexed wrists and unequal hindlimb recovery. These projected landmarks are not treated as orthographic joint coordinates."
+    },
+    {
+      "file": "covers/Clay_LE_Render_zstarchaserr_png.png",
+      "observation": "Raised elbow and drooping/curling hands; rear legs trail."
+    },
+    {
+      "file": "covers/Clay_GN_Render_png.png",
+      "observation": "Forelimbs bend against the torso with curled hands; hind legs recover behind."
+    }
+  ],
+  "response": 8.0,
+  "drift_degrees": 0.35,
+  "gravity_alignment": 0.4,
+  "front": {
+    "upper_direction": [
+      0.025,
+      -0.7,
+      -0.714
+    ],
+    "lower_direction": [
+      0.015,
+      -0.83,
+      0.55
+    ],
+    "distal_pitch_degrees": 55.0,
+    "toe_curl_degrees": 15.0,
+    "forearm_twist_degrees": 4,
+    "L": {
+      "upper_pitch": -3,
+      "lower_pitch": 5,
+      "distal_pitch": -4,
+      "toe_curl": 2
+    },
+    "R": {
+      "upper_pitch": 4,
+      "lower_pitch": -9,
+      "distal_pitch": 5,
+      "toe_curl": -1
+    }
+  },
+  "hind": {
+    "upper_direction": [
+      0.04,
+      -0.58,
+      0.813
+    ],
+    "lower_direction": [
+      0.015,
+      -0.69,
+      -0.724
+    ],
+    "distal_pitch_degrees": 45.0,
+    "toe_curl_degrees": 17.0,
+    "forearm_twist_degrees": 0,
+    "L": {
+      "upper_pitch": 3,
+      "lower_pitch": -3,
+      "distal_pitch": -5,
+      "toe_curl": 0
+    },
+    "R": {
+      "upper_pitch": -7,
+      "lower_pitch": 6,
+      "distal_pitch": 4,
+      "toe_curl": 4
+    },
+    "minimum_hock_flexion_degrees": 35.0,
+    "maximum_hock_flexion_degrees": 95.0,
+    "note": "User-supplied flying references: a more folded knee brings the feet toward the belly; retain hock flexion rather than pointing the metatarsals into line with the shank. Preserve held asymmetric carriage."
+  }
+}

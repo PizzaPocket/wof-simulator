@@ -1,0 +1,15 @@
+{
+  "speed_m_s": 3.1,
+  "stride_m": 2.4,
+  "grip_lead_m": 0.9,
+  "paw_clearance_m": 0.32,
+  "minimum_slope_degrees": 48,
+  "maximum_slope_degrees": 115,
+  "surface_probe_m": 2.2,
+  "adhesion_m_s": 1.4,
+  "jump_up_m_s": 8.0,
+  "jump_out_m_s": 5.0,
+  "mantle_seconds": 0.95,
+  "wing_half_span_m": 7.2,
+  "note": "Claws support steep mud walls up to vertical and a limited overhang. Beyond 115 degrees there is no grip. W/S climbs vertically; A/D traverses. Jump leaves the surface; forward movement over a reachable lip mantles with collision checks."
+}

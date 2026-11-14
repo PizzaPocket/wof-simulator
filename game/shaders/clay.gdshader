@@ -1,0 +1,229 @@
+// Ported from prototypes/clay/head/head-viewer.js; regenerate with tools/port_clay_shader.py.
+    shader_type spatial;
+    render_mode cull_disabled, diffuse_burley, specular_schlick_ggx;
+    uniform float neckScale = 2.0;
+    uniform vec2 neckBlend = vec2(0.48, 0.75);
+    uniform vec2 bodySpacing = vec2(0.065, 0.06);
+    uniform vec2 limbSpacing = vec2(0.07, 0.075);
+    uniform vec3 limbStart[6];
+    uniform vec3 limbEnd[6];
+    uniform float limbOffset[6];
+    uniform bool clay_mode = false;
+    uniform bool umber_variant = false;
+    uniform bool bump_enabled = true;
+    uniform float bump_depth = 0.003;
+    varying vec3 vObj;
+    varying float vPart;
+    varying vec3 vAB;
+    varying float modelScale;
+    void vertex() {
+        vPart = CUSTOM0.x;
+        vAB = CUSTOM0.yzw;
+        vObj = CUSTOM1.xyz;
+        modelScale = length(MODEL_MATRIX[0].xyz);
+    }
+    
+    float neckRows(float s) {
+      float a = neckBlend.x, b = neckBlend.y, len = b - a, q = 1.0 / neckScale;
+      float t = clamp((s - a) / len, 0.0, 1.0);
+      float integral = a * q + len * (q * t + (1.0 - q) * (t*t*t - 0.5*t*t*t*t));
+      return (s < a ? s * q : (s > b ? a*q + len*(q+1.0)*0.5 + s-b : integral)) / bodySpacing.x;
+    }
+    vec2 limbFlow(vec3 point) {
+      point.x = abs(point.x);
+      float best = 1e9; vec2 uv = vec2(0.0);
+      for (int i = 0; i < 6; i++) {
+        vec3 delta = limbEnd[i] - limbStart[i]; float len = max(length(delta), 0.001);
+        vec3 axis = delta / len; vec3 rel = point - limbStart[i];
+        float t = dot(rel, axis); vec3 radius = rel - axis * t;
+        float d = length(rel - axis * clamp(t, 0.0, len));
+        if (d < best) {
+          best = d;
+          vec3 side = normalize(vec3(1.0, 0.0, 0.0) - axis * axis.x);
+          vec3 front = cross(axis, side);
+          uv = vec2(limbOffset[i] + t, atan(dot(radius, front), dot(radius, side)) * max(length(radius), 0.02));
+        }
+      }
+      return uv;
+    }
+    vec3 srgb(vec3 c) { return pow(c / 255.0, vec3(2.2)); }
+    float isP(float p) { return 1.0 - step(0.5, abs(vPart - p)); }
+    vec3 hash3(vec3 p) { p = vec3(dot(p, vec3(127.1, 311.7, 74.7)), dot(p, vec3(269.5, 183.3, 246.1)), dot(p, vec3(113.5, 271.9, 124.6))); return fract(sin(p) * 43758.5453); }
+    float cellEdge(vec3 x) { vec3 p = floor(x), f = fract(x); float d1 = 8.0, d2 = 8.0;
+      for (int k = -1; k <= 1; k++) for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {
+        vec3 b = vec3(float(i), float(j), float(k)); vec3 r = b + hash3(p + b) * 0.8 - f; float d = dot(r, r);
+        if (d < d1) { d2 = d1; d1 = d; } else if (d < d2) d2 = d; }
+      return sqrt(d2) - sqrt(d1); }
+    // overlapping shingle scales in rows (p in scale spacings: x along the body toward the tail, y round it), each a
+    // disc a little wider than the spacing, the one nearer the head lying on top (the side sheet's neck): returns the
+    // distance in from the free edge of the scale showing at p (x) and that scale's id (y)
+    vec2 shingle(vec2 p) { float best = 1e9; vec2 r = vec2(1.0, 0.0);
+      for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {
+        float row = floor(p.y) + float(j), off = mod(row, 2.0) * 0.5;
+        vec2 c = vec2(floor(p.x - off) + float(i) + off + 0.5, row + 0.5);
+        vec3 h = hash3(vec3(c, 7.0)); c += (h.xy - 0.5) * 0.12;
+        float d = length(p - c);
+        if (d < 0.74 && c.x < best) { best = c.x; r = vec2(0.74 - d, h.z); } }
+      return r; }
+    float lineAtW(float f, float w) { float e = min(f, 1.0 - f); return 1.0 - smoothstep(w, w + fwidth(f) * 1.5 + 0.01, e); }
+    // plates in brick rows (p: rows, columns), organically warped: returns the joint line (x) and a per-plate tint (y)
+    vec3 plates(vec2 p) { float r = p.x, c = p.y + 0.5 * floor(p.x);
+      r += 0.14 * sin(c * 1.7 + floor(c) * 2.3); c += 0.1 * sin(r * 1.3 + floor(r) * 1.7);
+      return vec3(max(lineAtW(fract(r), 0.05), lineAtW(fract(c), 0.045)), hash3(vec3(floor(r), floor(c), 5.0)).x, 0.0); }
+    float lineAt(float f, float w) { float e = min(f, 1.0 - f); return 1.0 - smoothstep(w, w + fwidth(f) * 1.5 + 0.01, e); }
+  
+void fragment() {
+vec3 dark = srgb(vec3(98.0, 45.0, 33.0)), line = srgb(vec3(58.0, 24.0, 17.0));
+          vec3 orange = srgb(vec3(229.0, 88.0, 41.0)), cream = srgb(vec3(241.0, 196.0, 142.0));
+          if (umber_variant) {
+              dark = srgb(vec3(83.0, 51.0, 38.0));
+              line = srgb(vec3(47.0, 31.0, 24.0));
+              orange = srgb(vec3(143.0, 94.0, 66.0));
+              cream = srgb(vec3(189.0, 155.0, 114.0));
+          }
+          vec3 col = orange; float rough = 0.6; float groove = 0.0;
+          if (isP(1.0) > 0.5) { // orange face with pebble scales
+            float pe = (1.0 - smoothstep(0.02, 0.05, cellEdge(vObj * 30.0))) * (1.0 - vAB.z); // the overhang's underside is smooth skin
+            col = mix(orange, line, pe * 0.22);
+            groove = pe * 0.5;
+          }
+          if (isP(10.0) > 0.5) { // roof: overlapping bands (geometry), outlined at each band's back edge and along the eave
+            float f = vAB.y;
+            col = mix(dark * 1.12, dark * 0.88, f);
+            col = mix(col, line, smoothstep(0.93, 0.99, f) * 0.9);
+            col = mix(col, line, (1.0 - smoothstep(0.0, 0.025, min(vAB.z, 1.0 - vAB.z))) * step(0.0, vAB.z) * 0.9);
+            if (vAB.z < 0.0) col = line;
+            rough = 0.5;
+          }
+          if (isP(13.0) > 0.5) { // roof plates: solid tiles; their bevelled edges and the gaps between them make the lines
+            col = mix(dark * 0.92, dark * 1.12, vAB.y);
+            col = mix(line, col, smoothstep(0.0, 0.004, vAB.x));
+            col = mix(col, vec3(0.012, 0.006, 0.005), smoothstep(0.25, 0.55, vAB.z)); // nostrils, sculpted into the nose plate
+            rough = 0.5;
+          }
+          if (isP(20.0) > 0.5) { // trunk: dark back, orange side, cream underside (vAB: s along the spine, the trunk's share, zone)
+            float lining = 1.0 - smoothstep(-0.75, -0.25, vAB.z);
+            float zv = clamp(vAB.z, 0.0, 1.0);
+            // the sides: shingle scales ~0.065 along x 0.06 round (side sheet's neck), free edges facing back; vPart carries
+            // the distance round the trunk (20 + around / 4)
+            float neckFactor = mix(neckScale, 1.0, smoothstep(neckBlend.x, neckBlend.y, vAB.x));
+            vec2 sc = shingle(vec2(neckRows(vAB.x), (vPart - 20.0) * 4.0 / (bodySpacing.y * neckFactor)));
+            float pe = 1.0 - smoothstep(0.03, 0.08, sc.x);
+            // the legs (where the trunk's share is low): plates in brick rows across the limb, ~0.07 x 0.075, organically
+            // warped (How to Draw); coordinates run along and around each anatomical limb segment
+            float limb = 1.0 - smoothstep(0.3, 0.6, vAB.y);
+            vec3 legP = plates(limbFlow(vObj) / limbSpacing);
+            float lp = legP.x, lt = legP.y;
+            pe = mix(pe, lp, limb); sc.y = mix(sc.y, lt, limb); sc.x = mix(sc.x, 0.4, limb);
+            vec3 back = mix(dark, line, lineAt(fract(vAB.x / 0.10), 0.04) * 0.6); // back plates ~0.08-0.12 apart (measured)
+            vec3 side = mix(orange * (0.93 + 0.1 * sc.y) * (0.9 + 0.1 * smoothstep(0.0, 0.4, sc.x)), line, pe * 0.45); // each scale lit toward its middle
+            vec3 belly = mix(cream, line, lineAt(fract(vAB.x / 0.095), 0.035) * 0.45 * smoothstep(0.5, 0.8, vAB.y)); // ventral bands ~0.09-0.10 apart (measured), on the trunk only (vAB.y: its share)
+            float mer = (1.0 - smoothstep(0.004, 0.008, abs(vObj.x))) * smoothstep(0.1, 0.25, vAB.x) * (1.0 - smoothstep(1.35, 1.55, vAB.x)) * smoothstep(0.5, 0.8, vAB.y);
+            belly = mix(belly, line, mer * 0.55); // the meridian: a seam down the middle of the plates, throat to mid-thorax (How to Draw, box set)
+            col = zv < 0.5 ? mix(back, side, zv * 2.0) : mix(side, belly, zv * 2.0 - 1.0);
+            groove = pe * 0.3 * (1.0 - abs(zv - 0.5) * 2.0) + mer * 0.5 * smoothstep(0.5, 1.0, zv);
+            col = mix(col, srgb(vec3(92.0, 26.0, 32.0)), lining);
+            rough = mix(rough, 0.4, lining); groove *= 1.0 - lining;
+          }
+          if (isP(21.0) > 0.5) { // limb skin: plates in columns along the limb, ~0.10 long x 0.075 across (measured), organically warped
+            float r = vAB.x / 0.10, c = vAB.y / 0.075;
+            r += 0.16 * sin(c * 1.7 + floor(c) * 2.3); c += 0.1 * sin(r * 1.3 + floor(r) * 1.7);
+            float pl = max(lineAt(fract(r), 0.045), lineAt(fract(c), 0.04));
+            float tint = hash3(vec3(floor(r), floor(c), 3.0)).x;
+            col = mix(mix(orange * (0.94 + 0.12 * tint), cream, vAB.z), line, pl * 0.5); groove = pl * 0.6;
+          }
+          if (isP(22.0) > 0.5) { col = mix(dark, dark * 1.15, vAB.x); rough = 0.5; } // dark shoulder mass
+          if (isP(23.0) > 0.5) { col = srgb(vec3(72.0, 50.0, 58.0)); rough = 0.25; } // claws
+          if (isP(24.0) > 0.5) { // wing arm and fingers: orange pebbled skin, dark square plates in rows over the top (Umber, the side sheet)
+            float pe = 1.0 - smoothstep(0.02, 0.05, cellEdge(vObj * 30.0));
+            float a = fract(vAB.x / 0.075), top = smoothstep(0.58, 0.68, vAB.y);
+            vec3 skin = mix(orange * 0.92, line, pe * 0.25);
+            vec3 plate = mix(dark * mix(0.9, 1.08, hash3(vec3(floor(vAB.x / 0.075), 7.0, 1.0)).x), line, lineAt(a, 0.06) * 0.85);
+            col = mix(skin, plate, top); rough = 0.5; groove = pe * 0.4 * (1.0 - top) + lineAt(a, 0.06) * top * 0.5;
+          }
+          if (isP(25.0) > 0.5) { // wing membrane: peach, lighter toward the tips, inked along the trailing edge
+            col = mix((umber_variant ? srgb(vec3(142.0, 99.0, 65.0)) : srgb(vec3(232.0, 128.0, 70.0))), (umber_variant ? srgb(vec3(183.0, 143.0, 98.0)) : srgb(vec3(246.0, 168.0, 106.0))), vAB.x);
+            col = mix(col, line, smoothstep(0.985, 1.0, vAB.y) * 0.9); rough = 0.7;
+          }
+          if (isP(2.0) > 0.5) { // cream lower jaw: faint pebble scales, larger and softer than the face's (no bands: those start on the neck)
+            float pe = 1.0 - smoothstep(0.02, 0.06, cellEdge(vObj * 20.0));
+            col = mix(cream, line, pe * 0.14); groove = pe * 0.35;
+          }
+          if (isP(3.0) > 0.5) { col = srgb(vec3(92.0, 26.0, 32.0)); rough = 0.4; } // the mouth's lining: dark red, a cavity (Dragonet Prophecy cover)
+          if (isP(4.0) > 0.5) { col = srgb(vec3(245.0, 238.0, 220.0)); rough = 0.25; }
+          if (isP(14.0) > 0.5) { col = srgb(vec3(130.0, 56.0, 49.0)); rough = 0.7; } // gum tissue around the roots
+          if (isP(5.0) > 0.5) { col = srgb(vec3(170.0, 70.0, 75.0)); rough = 0.35; }
+          if (isP(6.0) > 0.5) { // eyeball: _a is the angle from the gaze direction (0..1 over 180 degrees)
+            float a = vAB.x;
+            col = srgb(vec3(242.0, 236.0, 226.0));
+            // wide-open eye: a white ring shows all round a warm brown iris, as in every official image
+            col = mix(col, srgb(vec3(112.0, 66.0, 34.0)), 1.0 - smoothstep(0.155, 0.165, a)); // dark warm brown iris, as in every official image
+            col = mix(col, srgb(vec3(92.0, 44.0, 14.0)), (1.0 - smoothstep(0.15, 0.185, abs(a - 0.152) + 0.15)) * 0.95); // a rich brown rim round the iris
+            col = mix(col, vec3(0.01), 1.0 - smoothstep(0.085, 0.095, a)); // large pupil
+            rough = 0.08;
+          }
+          if (isP(12.0) > 0.5) { col = mix(line * 0.6, srgb(vec3(226.0, 140.0, 150.0)), smoothstep(0.2, 0.45, vAB.x)); rough = 0.3; } // caruncle and tear tail, the tail rimmed dark
+          if (isP(7.0) > 0.5) { float pl = 1.0 - smoothstep(0.02, 0.05, cellEdge(vObj * 30.0)); col = mix(line * 0.6, mix(orange, line, pl * 0.22), max(smoothstep(0.2, 0.28, vAB.x), vAB.y)); } // lid: a heavy dark ring round the opening (only between the eye's corners)
+          if (isP(8.0) > 0.5) { col = mix(dark * 1.15, dark * 0.8, smoothstep(0.6, 1.0, vAB.x)); col = mix(col, line, smoothstep(0.25, 0.7, vAB.y) * 0.85); rough = 0.35; } // smooth horn, incised ring lines inked
+          if (isP(9.0) > 0.5) { // ear: a curled flap, cream inside and orange outside, a thin dark line round its edge
+            // (vAB: along 0 root -> 1 tip, across 0 lower edge -> 1 upper edge, 0 inside / 1 outside)
+            float pe = 1.0 - smoothstep(0.02, 0.05, cellEdge(vObj * 30.0));
+            vec3 inside = mix(srgb(vec3(250.0, 214.0, 170.0)), srgb(vec3(244.0, 186.0, 140.0)), vAB.x * 0.6);
+            vec3 outside = mix(orange, line, pe * 0.22);
+            col = mix(inside, outside, vAB.z);
+            float edge = max(1.0 - smoothstep(0.0, 0.03, vAB.y), smoothstep(0.97, 1.0, vAB.y));
+            col = mix(col, line, edge * 0.8 * step(0.0, vAB.x));
+            // the stalk's root (vAB.x < 0) is the face's own pebbled orange, giving way along the fillet
+            float face = 1.0 - smoothstep(-0.25, 0.0, vAB.x);
+            col = mix(col, outside, face); groove = pe * 0.5 * max(face, vAB.z); }
+
+        if (umber_variant) {
+            if (isP(6.0) > 0.5) {
+                vec3 eye_center=vec3(sign(vObj.x)*0.15214467,1.69209337,1.68664968);
+                vec3 n=normalize(vObj-eye_center);
+                // Both pupils aim partly forward, not straight out to each side.
+                vec3 gaze=normalize(vec3(sign(vObj.x)*0.86,0.025,0.51));
+                vec3 horizontal=normalize(cross(vec3(0.,1.,0.),gaze));
+                vec3 vertical=normalize(cross(gaze,horizontal));
+                vec2 q=vec2(dot(n,horizontal),dot(n,vertical));
+                float front=step(0.0,dot(n,gaze));
+                float iris=(1.-smoothstep(.48,.53,length(q)))*front;
+                // Soft upright oval, neither a circular dot nor a narrow slit.
+                float pupil=(1.-smoothstep(.92,1.06,length(q/vec2(.145,.285))))*front;
+                col=srgb(vec3(230.,220.,196.));
+                col=mix(col,srgb(vec3(193.,147.,65.)),iris);
+                col=mix(col,vec3(.009,.007,.005),pupil);
+                rough=.13;
+            }
+            // Rest-space scar follows the skinned roof across the top of the snout.
+            float scar = (1.0 - smoothstep(0.007, 0.014, abs(vObj.z - 1.925 - vObj.x * 0.24)))
+                * step(1.46, vObj.y) * (1.0 - smoothstep(0.12, 0.16, abs(vObj.x)))
+                * max(isP(1.0), max(isP(10.0), isP(13.0)));
+            col = mix(col, srgb(vec3(190.0, 150.0, 123.0)), scar * 0.92);
+        }
+        if (clay_mode) {
+            col = srgb(vec3(190.0, 180.0, 170.0)); groove = 0.0; rough = 0.7;
+        }
+        // Forward+/Mobile shade in linear space; Compatibility shades in sRGB.
+        // Convert the original linear palette exactly once for the active renderer.
+        vec3 srgb_output = mix(col * 12.92, 1.055 * pow(max(col, vec3(0.0)), vec3(1.0/2.4)) - 0.055, step(vec3(0.0031308), col));
+        ALBEDO = OUTPUT_IS_SRGB ? srgb_output : col;
+        ROUGHNESS = rough;
+        METALLIC = 0.0;
+        SPECULAR = 0.5;
+        if (!clay_mode && isP(25.0) > 0.5) {
+            EMISSION = ALBEDO * 0.4;
+        }
+        if (bump_enabled && !clay_mode) {
+            // Derivative surface gradient: same recessed-scale relief as the viewer.
+            vec3 dx = dFdx(VERTEX), dy = dFdy(VERTEX);
+            vec3 base_normal = normalize(NORMAL);
+            vec3 r1 = cross(dy, base_normal), r2 = cross(base_normal, dx);
+            float determinant = dot(dx, r1);
+            float height = -groove * bump_depth * modelScale;
+            vec3 gradient = sign(determinant) * (dFdx(height) * r1 + dFdy(height) * r2);
+            vec3 perturbed = abs(determinant) * base_normal - gradient;
+            if (dot(perturbed, perturbed) > 1e-16) NORMAL = normalize(perturbed);
+        }
+    }
+    

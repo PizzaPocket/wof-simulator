@@ -1,0 +1,315 @@
+{
+  "references": [
+    "Joy Ang: Moon Rising cover and official NightWing tribe drawing",
+    "Brianna C. Walsh: official How to Draw Moon and Starflight",
+    "Mike Holmes: Starflight frontal/dorsal oblique and Morrowseer frontal oblique, Scholastic Dark Secret preview pages 11 and 24"
+  ],
+  "head": {
+    "source": "prototypes/moon/head/head_design.json",
+    "scale": 0.47,
+    "height": 1.88,
+    "longitudinal_anchor": 1.45,
+    "jaw_close_degrees": 0,
+    "why": "Joy Ang NightWing/How to Draw anatomy is the primary muzzle source: tapered nasal wedge and an overhanging beaked tip, retaining broad underlying cranial support. Graphic novel facial compression is not the nose template.",
+    "muzzle_width_reduction": 0.14,
+    "muzzle_extension": 0.025,
+    "nose_cap_rounding": 0.08,
+    "beak_drop": 0,
+    "anterior_lift": 0.075,
+    "cranial_vault": {
+      "height": 0.075,
+      "rear_extension": 0.11,
+      "why": "Posterior cranial roof is independent of the orbital rim, continuing into the occiput and arched upper cervical attachment."
+    }
+  },
+  "body": {
+    "prototype": "prototypes/clay/body/body_design.json: anatomy.bones and anatomy.muscles",
+    "muscle_radius_scale": 0.96,
+    "why": "Clay-derived full trunk and named muscle profiles with a NightWing S-curve cervical centerline: forward lower neck, recessed mid-cervical bend, upper arch and a near-horizontal approach into the skull base. Actual rig stations follow those spinal landmarks.",
+    "transverse_attachment_scale": 0.96,
+    "foot_scale": 0.9,
+    "spine": [
+      [
+        1.37,
+        1.98,
+        0.22,
+        0.25,
+        0.23
+      ],
+      [
+        1.18,
+        2.005,
+        0.215,
+        0.24,
+        0.235
+      ],
+      [
+        0.98,
+        1.95,
+        0.22,
+        0.25,
+        0.24
+      ],
+      [
+        0.84,
+        1.79,
+        0.225,
+        0.28,
+        0.27
+      ],
+      [
+        0.8,
+        1.55,
+        0.24,
+        0.3,
+        0.29
+      ],
+      [
+        0.72,
+        1.31,
+        0.29,
+        0.36,
+        0.36
+      ],
+      [
+        0.48,
+        1.15,
+        0.4,
+        0.4,
+        0.48
+      ],
+      [
+        0.05,
+        1.1,
+        0.365,
+        0.365,
+        0.4
+      ],
+      [
+        -0.45,
+        1.07,
+        0.32,
+        0.32,
+        0.33
+      ],
+      [
+        -0.82,
+        1.08,
+        0.31,
+        0.32,
+        0.34
+      ],
+      [
+        -1.18,
+        0.95,
+        0.22,
+        0.25,
+        0.25
+      ],
+      [
+        -1.68,
+        0.73,
+        0.145,
+        0.17,
+        0.17
+      ],
+      [
+        -2.18,
+        0.49,
+        0.085,
+        0.1,
+        0.1
+      ],
+      [
+        -2.68,
+        0.38,
+        0.042,
+        0.048,
+        0.048
+      ],
+      [
+        -3.1,
+        0.43,
+        0.004,
+        0.005,
+        0.005
+      ]
+    ],
+    "section_squareness": 2.35,
+    "keel_taper": 0.22,
+    "upper_neck_fit": "Relaxed cranial return: no dorsal centerline hump above the occipital station; longer fore-aft transition into the skull."
+  },
+  "horn": {
+    "path": [
+      [
+        0.19,
+        2.105,
+        1.34
+      ],
+      [
+        0.22,
+        2.17,
+        1.13
+      ],
+      [
+        0.255,
+        2.235,
+        0.91
+      ],
+      [
+        0.285,
+        2.31,
+        0.68
+      ]
+    ],
+    "radius": [
+      0.052,
+      0.043,
+      0.024,
+      0.001
+    ],
+    "why": "User reference: the skull grows into a housing over the horn root. Almost straight swept shafts with a very slight upward arch and distinct satin grey keratin; no exposed end caps or downward-curled tips.",
+    "color": "2c333d",
+    "roughness": 0.74,
+    "housing_radius": 0.057,
+    "housing_length": 0.125,
+    "housing_fillet": 0.035
+  },
+  "wing": {
+    "root": [
+      0.27,
+      1.36,
+      0.48
+    ],
+    "elbow": [
+      0.88,
+      1.61,
+      0.3
+    ],
+    "wrist": [
+      1.72,
+      1.66,
+      0.9
+    ],
+    "tips": [
+      [
+        4.55,
+        1.46,
+        0.78
+      ],
+      [
+        4.3,
+        1.3,
+        -0.18
+      ],
+      [
+        3.62,
+        1.15,
+        -1.05
+      ],
+      [
+        2.64,
+        1.04,
+        -1.3
+      ],
+      [
+        1.53,
+        1.0,
+        -0.65
+      ]
+    ],
+    "fold_upper_direction": [
+      0.14,
+      0.38,
+      -0.24
+    ],
+    "fold_fore_direction": [
+      0.08,
+      0.42,
+      0.72
+    ],
+    "fold_finger_directions": [
+      [
+        0.26,
+        -0.36,
+        -1
+      ],
+      [
+        0.215,
+        -0.25,
+        -1
+      ],
+      [
+        0.17,
+        -0.31,
+        -1
+      ],
+      [
+        0.125,
+        -0.37,
+        -1
+      ],
+      [
+        0.08,
+        -0.43,
+        -1
+      ]
+    ],
+    "why": "Longer humeral/forearm segments account for side-reference foreshortening. Outer flight rays extend the spread span; body-side rays shorten. Contracted rays remain ordered and close, with the pointer lower than the second ray to create an arc. Clay-derived humeral, forearm and carpal anatomy supports continuous membranes.",
+    "rest_style": "raised_fan",
+    "digit_length_multiplier": 1.0,
+    "fold_distal_lateral_fraction": 0.55,
+    "arm_muscle_scale": 0.92
+  },
+  "physical_estimate": {
+    "status": "inferred game scale, not canon dimensions",
+    "age_years": 4,
+    "world_scale": 1.65,
+    "effective_density_kg_m3": 650,
+    "density_range_kg_m3": [
+      450,
+      950
+    ],
+    "method": "Age and small/strong-muscled descriptions constrain relative scale against the established Clay/human world. Export measures actual geometry and estimates mass from the closed primary body plus head/jaw volume, allowing 10% head-neck overlap. Effective density is an explicit speculative biological assumption, not a book fact.",
+    "sources": [
+      "https://mirror.wingsoffire.wiki/wiki/Moonwatcher",
+      "https://mirror.wingsoffire.wiki/wiki/Starflight",
+      "https://mirror.wingsoffire.wiki/wiki/Dragons"
+    ],
+    "near_mature_nightwing_scale": 1.903846,
+    "relative_linear_size": 0.866667,
+    "relative_size_range": [
+      0.75,
+      0.9
+    ],
+    "maturity_basis": "Rapid growth through roughly seven years; four-year-old Moon is modeled as an advanced juvenile, not at 4/7 adult linear size. The 83% size choice is an explicit interpolation, not a published age-to-height equation."
+  },
+  "mouth": {
+    "bite_gap": 0.009,
+    "floor_depth": 0.035,
+    "jaw_depth": 0.105,
+    "side_teeth": 12,
+    "front_teeth": 6,
+    "crown_length": 0.019,
+    "front_crown_length": 0.014,
+    "why": "Final upper host and matching lower jaw share the bite boundary. Clay tooth primitive, curved front/side gum arches, surface-seated roots and floor-referenced tongue replace quantile placement and fixed coordinates."
+  },
+  "eye": {
+    "gaze": [
+      0.97,
+      0.025,
+      0.24
+    ],
+    "iris_extent": 0.039,
+    "why": "Lateral equine-like orbital orientation, retaining NightWing green iris and vertical pupil; fitted source globe, host and staged lids remain one seated assembly."
+  },
+  "nose_cap": {
+    "length": 0.095,
+    "color": "303741",
+    "roughness": 0.82,
+    "nostril_height": 0.024,
+    "nostril_width": 0.01,
+    "nostril_depth": 0.032,
+    "why": "Short terminal cap follows the bounded colored reference: a local eagle-like premaxillary tip rather than a long gray sleeve. Curved dorsal boundary and two recessed nostril apertures."
+  }
+}

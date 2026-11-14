@@ -1,0 +1,251 @@
+{
+  "unfitted": {
+    "upper_arm_girth_m": 0.18430394861464877,
+    "forearm_girth_m": 0.14781667973178758,
+    "calf_girth_m": 0.26152435582674166,
+    "waist_girth_m": 0.5624515722746594,
+    "hip_girth_m": 0.6804662035725492,
+    "chest_width_m": 0.22050487421524181,
+    "chest_depth_m": 0.19689308100345804,
+    "shoulder_joint_span_m": 0.2682974044737252,
+    "upper_arm_joint_length_m": 0.22561191780555373,
+    "forearm_joint_length_m": 0.19601702493346113,
+    "femur_joint_length_m": 0.3181259080824904,
+    "tibia_joint_length_m": 0.33053131158083093,
+    "neck_base_height_m": 1.1287135100881367,
+    "hip_joint_height_m": 0.6932034692748708,
+    "knee_joint_height_m": 0.3798433268757389,
+    "ankle_joint_height_m": 0.05334226386307446
+  },
+  "actual": {
+    "upper_arm_girth_m": 0.18399066897603217,
+    "forearm_girth_m": 0.1775084771744462,
+    "calf_girth_m": 0.25221291093159326,
+    "waist_girth_m": 0.5304261895068849,
+    "hip_girth_m": 0.6458028710938658,
+    "chest_width_m": 0.1900907667266027,
+    "chest_depth_m": 0.13519160623239773,
+    "shoulder_joint_span_m": 0.2682974044737252,
+    "upper_arm_joint_length_m": 0.22561191780555373,
+    "forearm_joint_length_m": 0.19601702493346113,
+    "femur_joint_length_m": 0.3181259080824904,
+    "tibia_joint_length_m": 0.33053131158083093,
+    "neck_base_height_m": 1.1287135100881367,
+    "hip_joint_height_m": 0.6932034692748708,
+    "knee_joint_height_m": 0.3798433268757389,
+    "ankle_joint_height_m": 0.05334226386307446
+  },
+  "targets": {
+    "chest_width_m": 0.18886010362694303,
+    "chest_depth_m": 0.13190229459659514,
+    "upper_arm_girth_m": 0.1838638045891932,
+    "forearm_girth_m": 0.17886750555144337,
+    "calf_girth_m": 0.2518134715025907,
+    "waist_girth_m": 0.5326054774241303,
+    "hip_girth_m": 0.6365284974093265
+  },
+  "relative_errors": {
+    "chest_width_m": 0.006516268264315839,
+    "chest_depth_m": 0.0249374860828806,
+    "upper_arm_girth_m": 0.0006899910894502259,
+    "forearm_girth_m": -0.007597961255216945,
+    "calf_girth_m": 0.0015862512304010146,
+    "waist_girth_m": -0.0040917489767196,
+    "hip_girth_m": 0.014570241116126148
+  },
+  "scales": {
+    "chest_width_m": 0.8613546525177003,
+    "chest_depth_m": 0.6715531116642793,
+    "upper_arm_girth_m": 0.9966134614871056,
+    "forearm_girth_m": 1.200869334239913,
+    "calf_girth_m": 0.9641916492857019,
+    "waist_girth_m": 0.9556133135572602,
+    "hip_girth_m": 0.9254421712200593
+  },
+  "iterations": 3,
+  "plain_torso": {
+    "method": "convex low-order trunk fairing",
+    "max_relief_removed_m": 0.041039354658535726,
+    "vertices_faired": 1020
+  },
+  "art_direction": {
+    "shoulder_drop_m": 0.010040685466218219,
+    "shoulder_muscle_reduction": 1.0,
+    "hand_length_before_m": 0.14645873974004978,
+    "hand_length_after_m": 0.13327745373905772,
+    "hand_morph_amount": 0.34753182530403137,
+    "why": "Gentler shoulder slope, less deltoid mass and smaller hands requested by the user."
+  },
+  "age_years": 9,
+  "age_weights": {
+    "baby": 0.11111111111111116,
+    "child": 0.8888888888888888,
+    "young": 0
+  },
+  "length_fit": {
+    "biacromial_breadth_m": {
+      "before": 0.28499618573754204,
+      "target": 0.269560325684678,
+      "after": 0.2695603281132894,
+      "source_morph": "shoulder-dist-decr",
+      "amount": 0.5384735763072968
+    },
+    "upper_arm_external_length_m": {
+      "before": 0.20701481610181793,
+      "target": 0.24731680236861592,
+      "after": 0.24731679674296114,
+      "source_morph": "upperarm-length-incr",
+      "amount": 0.5466457307338715
+    },
+    "forearm_external_length_m": {
+      "before": 0.18255240445630752,
+      "target": 0.19143819393042194,
+      "after": 0.19143819567099868,
+      "source_morph": "lowerarm-length-incr",
+      "amount": 0.13024261593818665
+    }
+  },
+  "source_muscle_slider": 0.0,
+  "source_weight_slider": 0.25,
+  "height_m": 1.35,
+  "profile": "girl_9",
+  "source": {
+    "title": "NCHS child body dimensions, Series 11 No. 143 (1974)",
+    "url": "https://stacks.cdc.gov/view/cdc/12665/cdc_12665_DS1.pdf",
+    "note": "Authoring benchmarks from the first published age/sex series, normalized to character height. Slim-build targets use the 25th percentile. These are population references, not a claim of one mandatory child body shape. Shoulder joint spacing is not mislabeled as external biacromial breadth. Lengths use age medians; shoulder breadth uses the slim-build 25th percentile. External landmarks follow the source measurement plugin.",
+    "tables": {
+      "chest_width_m": 16,
+      "chest_depth_m": 17,
+      "upper_arm_girth_m": 19,
+      "forearm_girth_m": 20,
+      "calf_girth_m": 21,
+      "waist_girth_m": 24,
+      "hip_girth_m": 25,
+      "biacromial_breadth_m": 13,
+      "upper_arm_external_length_m": 10,
+      "forearm_external_length_m": 11
+    }
+  },
+  "surface_landmarks": {
+    "acromion": [
+      0.13474615697996248,
+      1.0612231537635894,
+      -0.0013456369298279758
+    ],
+    "olecranon": [
+      0.2963254015720067,
+      0.8741918275117757,
+      0.0008336629094111935
+    ],
+    "elbow": [
+      0.29742203535465894,
+      0.8860353120986564,
+      0.02631952750187315
+    ],
+    "wrist": [
+      0.3917993286234409,
+      0.7805097403805709,
+      0.1554808503026949
+    ]
+  },
+  "section_planes": {
+    "upper_arm_girth_m": {
+      "center": [
+        0.20980386086673938,
+        0.9474784635302796,
+        0.012693604949890292
+      ],
+      "normal": [
+        0.15131031725975358,
+        -0.1673461010181796,
+        0.0010990089471324908
+      ],
+      "limit": 0.13060630691772282,
+      "measure": "circumference"
+    },
+    "forearm_girth_m": {
+      "center": [
+        0.3195617905313326,
+        0.8305394717295363,
+        0.06261066689336982
+      ],
+      "normal": [
+        0.09743648867061844,
+        -0.09504554654758157,
+        0.14105016419975225
+      ],
+      "limit": 0.10046638993670987,
+      "measure": "circumference"
+    },
+    "calf_girth_m": {
+      "center": [
+        0.12900232787976817,
+        0.26556795482130635,
+        0.031645175941048015
+      ],
+      "normal": [
+        0.040972256811276586,
+        -0.32650106301266446,
+        -0.03113322917294731
+      ],
+      "limit": 0.10046638993670987,
+      "measure": "circumference"
+    },
+    "chest_width_m": {
+      "center": [
+        0.0,
+        0.9306851241026596,
+        0.025116597484177466
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "limit": 0.20093277987341973,
+      "measure": "width"
+    },
+    "chest_depth_m": {
+      "center": [
+        0.0,
+        0.9306851241026596,
+        0.025116597484177466
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "limit": 0.20093277987341973,
+      "measure": "depth"
+    },
+    "waist_girth_m": {
+      "center": [
+        0.0,
+        0.8279236754343503,
+        0.025116597484177466
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "limit": 0.20093277987341973,
+      "measure": "circumference"
+    },
+    "hip_girth_m": {
+      "center": [
+        0.0,
+        0.7132967472622127,
+        0.025116597484177466
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "limit": 0.2210260578607617,
+      "measure": "circumference"
+    }
+  }
+}
