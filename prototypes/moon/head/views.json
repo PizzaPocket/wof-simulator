@@ -1,0 +1,284 @@
+{
+  "structure": [
+    {
+      "label": "Official NightWing - measured crop (Joy Ang)",
+      "ref": "{refs}/tribe-head.png"
+    },
+    {
+      "label": "Reference pose - aligned scale, orthographic",
+      "cam": [
+        0.02,
+        0.04,
+        6
+      ],
+      "target": [
+        0.02,
+        0.04,
+        0
+      ],
+      "fov": 19,
+      "pose": {
+        "reference": true,
+        "ortho_scale": 2.12
+      },
+      "clay": true
+    },
+    {
+      "label": "LEVEL skull / jaw on its own local frame",
+      "cam": [
+        -0.5,
+        0,
+        6
+      ],
+      "target": [
+        -0.5,
+        0,
+        0
+      ],
+      "fov": 19,
+      "pose": {
+        "orthographic": true
+      },
+      "clay": true
+    },
+    {
+      "label": "Moon cover - oblique underside cross-check (Joy Ang)",
+      "ref": "{refs}/cover-head.png"
+    },
+    {
+      "label": "LEVEL three-quarter / provisional width",
+      "cam": [
+        -3,
+        1.3,
+        5
+      ],
+      "target": [
+        -0.5,
+        0,
+        0
+      ],
+      "fov": 20,
+      "pose": {},
+      "clay": true
+    },
+    {
+      "label": "LEVEL front / Clay-based skull width",
+      "cam": [
+        -6,
+        0,
+        0
+      ],
+      "target": [
+        -0.5,
+        0,
+        0
+      ],
+      "fov": 20,
+      "pose": {
+        "orthographic": true
+      },
+      "clay": true
+    },
+    {
+      "label": "LEVEL top / Clay-based skull width",
+      "cam": [
+        -0.5,
+        6,
+        0.001
+      ],
+      "target": [
+        -0.5,
+        0,
+        0
+      ],
+      "fov": 20,
+      "pose": {
+        "orthographic": true
+      },
+      "clay": true
+    },
+    {
+      "label": "Jaw hinge test - rigid local rotation, -10 degrees",
+      "cam": [
+        -0.5,
+        0,
+        6
+      ],
+      "target": [
+        -0.5,
+        0,
+        0
+      ],
+      "fov": 19,
+      "pose": {
+        "jaw": -10
+      },
+      "clay": true
+    },
+    {
+      "label": "Fitted lids / half blink",
+      "cam": [
+        -2,
+        0.6,
+        5
+      ],
+      "target": [
+        -0.3,
+        0,
+        0
+      ],
+      "fov": 16,
+      "pose": {
+        "blink": 0.5
+      },
+      "clay": true
+    },
+    {
+      "label": "Fitted lids / closed blink",
+      "cam": [
+        -2,
+        0.6,
+        5
+      ],
+      "target": [
+        -0.3,
+        0,
+        0
+      ],
+      "fov": 16,
+      "pose": {
+        "blink": 1
+      },
+      "clay": true
+    },
+    {
+      "label": "Eye socket / open",
+      "cam": [
+        -0.25,
+        0.43,
+        2.5
+      ],
+      "target": [
+        -0.2,
+        0.43,
+        0.38
+      ],
+      "fov": 12,
+      "pose": {},
+      "clay": true
+    },
+    {
+      "label": "Eye socket / closed",
+      "cam": [
+        -0.25,
+        0.43,
+        2.5
+      ],
+      "target": [
+        -0.2,
+        0.43,
+        0.38
+      ],
+      "fov": 12,
+      "pose": {
+        "blink": 1
+      },
+      "clay": true
+    }
+  ],
+  "eye_debug": [
+    {
+      "label": "Geometry diagnostic: blue globe, red upper, yellow lower",
+      "cam": [
+        -0.25,
+        0.43,
+        2.5
+      ],
+      "target": [
+        -0.2,
+        0.43,
+        0.38
+      ],
+      "fov": 12,
+      "pose": {
+        "debugEye": true
+      },
+      "clay": true
+    },
+    {
+      "label": "Closed blink: no blue should remain in aperture",
+      "cam": [
+        -0.25,
+        0.43,
+        2.5
+      ],
+      "target": [
+        -0.2,
+        0.43,
+        0.38
+      ],
+      "fov": 12,
+      "pose": {
+        "debugEye": true,
+        "blink": 1
+      },
+      "clay": true
+    }
+  ],
+  "foundation": [
+    {
+      "label": "Clay accepted facial mass - LEVEL side / equal length",
+      "cam": [
+        -0.5,
+        0,
+        6
+      ],
+      "target": [
+        -0.5,
+        0,
+        0
+      ],
+      "fov": 19,
+      "pose": {
+        "orthographic": true
+      },
+      "clay": true
+    },
+    {
+      "label": "Clay accepted facial mass - LEVEL front / equal length",
+      "cam": [
+        -6,
+        0,
+        0
+      ],
+      "target": [
+        -0.5,
+        0,
+        0
+      ],
+      "fov": 20,
+      "pose": {
+        "orthographic": true
+      },
+      "clay": true
+    },
+    {
+      "label": "Clay accepted facial mass - LEVEL top / equal length",
+      "cam": [
+        -0.5,
+        6,
+        0.001
+      ],
+      "target": [
+        -0.5,
+        0,
+        0
+      ],
+      "fov": 20,
+      "pose": {
+        "orthographic": true
+      },
+      "clay": true
+    }
+  ]
+}

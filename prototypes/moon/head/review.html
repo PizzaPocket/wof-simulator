@@ -1,0 +1,30 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>NightWing craniofacial study</title>
+<style>
+body{margin:0;background:#252a30;color:#ecedf0;font:16px system-ui}main{max-width:1200px;margin:auto;padding:20px}h1{font-size:24px;margin:0 0 8px}p{max-width:900px;line-height:1.5;color:#c8cdd4}button{background:#404956;color:white;border:1px solid #78828d;padding:10px 15px;border-radius:5px;cursor:pointer;margin:4px}button[aria-pressed=true]{background:#526875;border-color:#b7d7e7}#view{height:65vh;min-height:380px;width:100%;touch-action:none}#view canvas{max-width:100%}label{display:inline-block;margin:10px}a{color:#b5d8ee}.status{color:#e5c492}
+</style>
+<main>
+<h1>NightWing skull and jaw volume study</h1>
+<p class="status">Structural study for review. This is not Moon’s finished model. The skull, jaw connection, seated eyeballs and blinking lids are being fitted. Horns, ears, plating, teeth and expression muscles are not built in this study.</p>
+<div><button id="night" aria-pressed="true">NightWing study</button><button id="clay" aria-pressed="false">Clay foundation · equal head length</button></div>
+<div><button data-view="side">Level side</button><button data-view="front">Level front</button><button data-view="top">Level top</button><button data-view="quarter">Three-quarter</button><button data-view="reference">Reference pose</button></div>
+<div id="view"></div>
+<label>Jaw hinge test <input id="jaw" type="range" min="-10" max="5" step="1" value="0"> <output id="degrees">0°</output></label>
+<label>Blink <input id="blink" type="range" min="0" max="1" step="0.01" value="0"></label>
+<p>Drag to orbit; scroll to zoom. Head volume is constructed along its local axis. Reference pose tilts the entire assembly afterward. Jaw volume has its own local axis and rigid hinge. The hinge test is not a fitted bite or finished facial rig.</p>
+<p>Clay supplies the proportional skull-width envelope. NightWing muzzle taper and the drawn roof, orbit and jaw profiles supply the local differences. The broader skull remains a working hypothesis; the side drawing cannot establish its true width.</p>
+<p><a href="comparison.jpg">Clay / NightWing front and top comparison</a> · <a href="structure.jpg">Reference and articulation sheet</a> · <a href="nightwing-head-study.blend">Blender study</a></p>
+</main>
+<script src="three.min.js"></script><script src="GLTFLoader.js"></script><script src="study-viewer.js"></script>
+<script>
+let api,kind='night',view='quarter',loadId=0;
+const cameras={side:[[-.5,0,6],[-.5,0,0],19],front:[[-6,0,0],[-.5,0,0],20],top:[[-.5,6,.001],[-.5,0,0],20],quarter:[[-3,1.3,5],[-.5,0,0],20],reference:[[.02,.04,6],[.02,.04,0],19]};
+function shoot(){if(!api)return;const[c,t,f]=cameras[view];api.shot(c,t,{reference:view==='reference'&&kind==='night',orthographic:['side','front','top'].includes(view),ortho_scale:view==='reference'?2.12:undefined,jaw:Number(document.querySelector('#jaw').value),blink:Number(document.querySelector('#blink').value)},f);}
+async function mount(k){const ticket=++loadId;kind=k;if(api)api.dispose();api=null;document.querySelector('#view').replaceChildren();const loaded=await mountStudy(THREE,document.querySelector('#view'),{glbUrl:k==='night'?'nightwing-head-study.glb':'clay-foundation.glb',foundation:k==='clay',interactive:true});if(ticket!==loadId){loaded.dispose();return;}api=loaded;document.querySelector('#night').setAttribute('aria-pressed',k==='night');document.querySelector('#clay').setAttribute('aria-pressed',k==='clay');document.querySelector('#jaw').disabled=k==='clay';document.querySelector('#blink').disabled=k==='clay';shoot();}
+document.querySelector('#night').onclick=()=>mount('night');document.querySelector('#clay').onclick=()=>mount('clay');
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{view=b.dataset.view;shoot();});
+document.querySelector('#jaw').oninput=e=>{document.querySelector('#degrees').value=e.target.value+'°';shoot();};
+document.querySelector('#blink').oninput=shoot;
+mount('night').catch(e=>document.querySelector('#view').textContent=e.message);
+</script>

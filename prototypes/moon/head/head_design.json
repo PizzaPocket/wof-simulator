@@ -1,0 +1,661 @@
+{
+  "status": "Craniofacial volume study; not an approved Moon model or game asset",
+  "foundation": {
+    "source": "prototypes/clay/head/build_head.py and head_design.json",
+    "use": "Sample the actual face generator AFTER premaxilla, perspective correction and compact-head transforms. Normalize its transverse envelope by anatomical head length. Preserve that skull-width proportion, then apply explicit local tribe deltas.",
+    "skull_width_multiplier": 1.0,
+    "muzzle_width_multiplier": 0.8,
+    "muzzle_transition_fraction": [
+      0.15,
+      0.55
+    ],
+    "dentary_width_multiplier": 0.82,
+    "section_squareness": 3.6,
+    "section_why": "Clay's face uses squareness 5.0. Starflight's dorsal-oblique graphic-novel panel shows a substantial roof and a distinct lateral facial wall, not an elliptical blade. Trial 3.6 retains these planes with a softer turn; it remains a fitted hypothesis requiring camera-matched review.",
+    "why": "User correction: the successful MudWing is the anatomical prototype. NightWing skull width should remain proportionally similar; distinguish the muzzle, not collapse the entire skull into a blade. Muzzle and jaw multipliers are study hypotheses, not book measurements."
+  },
+  "local_frames": {
+    "skull": {
+      "origin_uv": [
+        532,
+        536
+      ],
+      "forward_uv": [
+        250,
+        727
+      ],
+      "why": "Upper bite-bed direction: nasal/maxillary volume is sectioned perpendicular to this axis, then the whole head is posed. It is not sectioned along image horizontal."
+    },
+    "jaw": {
+      "origin_uv": [
+        600,
+        535
+      ],
+      "forward_uv": [
+        270,
+        930
+      ],
+      "why": "Joint seated behind and below the orbit inside the cheek, following Clay's joint/ramus arrangement. The former pivot was in the exposed mouth gap. This is an anatomical reconstruction hypothesis; the outer cheek/throat outline does not directly locate the joint."
+    },
+    "units": "500 enlarged-crop pixels per unit; the reference tilt is stored only in transform nodes."
+  },
+  "additional_nightwing_views": [
+    {
+      "source": "https://kids.scholastic.com/content/dam/scholastic/kids/pdf/Book%20Excerpts/WOFGRPHX04_DrkSecret_excerpt.pdf",
+      "artist": "Mike Holmes",
+      "character": "Starflight",
+      "pdf_page": 24,
+      "printed_page": 19,
+      "view": "near frontal, slight three-quarter; both eyes and nasal cap visible",
+      "crop_original_2400_render": [
+        450,
+        180,
+        1100,
+        820
+      ],
+      "supports": "Broad posterior cranial volume, paired orbital margins, substantial muzzle front plane",
+      "limits": "Perspective and graphic-novel muzzle stylization; do not transplant its shortened snout to Joy Ang Moon"
+    },
+    {
+      "source": "same Scholastic excerpt",
+      "artist": "Mike Holmes",
+      "character": "Starflight",
+      "pdf_page": 11,
+      "printed_page": 6,
+      "view": "dorsal/front oblique, resting head",
+      "crop_original_2400_render": [
+        740,
+        1420,
+        1590,
+        2080
+      ],
+      "supports": "Visible cranial roof, separation of nasal bridge and lateral facial planes, paired horn-root region",
+      "limits": "Not a true orthographic top view; resting contact and eye closure change soft tissue"
+    },
+    {
+      "source": "same Scholastic excerpt",
+      "artist": "Mike Holmes",
+      "character": "Morrowseer",
+      "pdf_page": 11,
+      "printed_page": 6,
+      "view": "front three-quarter thought portrait",
+      "crop_original_2400_render": [
+        540,
+        1300,
+        950,
+        1630
+      ],
+      "supports": "Second NightWing with broad cranium behind tapering front planes",
+      "limits": "Adult, heavily stylized; not Moon's individual proportions"
+    },
+    {
+      "source": "https://mirror.wingsoffire.wiki/images/english/b/bf/SE_box_set_Starflight.jpg",
+      "artist": "Joy Ang",
+      "character": "Starflight",
+      "view": "oblique side",
+      "supports": "Cross-check the cover-art muzzle/cheek treatment against the graphic-novel interpretation",
+      "limits": "Does not independently measure top width"
+    }
+  ],
+  "front_view_landmark_study": {
+    "source": "Starflight, Scholastic Dark Secret GN excerpt, PDF page 24, upper panel",
+    "frame": "Pixels in starflight-front-reference.jpg, a 650x640 crop from the 1601x2400 PDF render; crop bounds are recorded above",
+    "near_orbit_outer_margin": [
+      [
+        157,
+        215
+      ],
+      [
+        164,
+        183
+      ],
+      [
+        193,
+        170
+      ],
+      [
+        225,
+        190
+      ],
+      [
+        238,
+        246
+      ],
+      [
+        212,
+        276
+      ],
+      [
+        182,
+        266
+      ],
+      [
+        157,
+        215
+      ]
+    ],
+    "far_orbit_outer_margin": [
+      [
+        432,
+        175
+      ],
+      [
+        454,
+        180
+      ],
+      [
+        472,
+        212
+      ],
+      [
+        480,
+        256
+      ],
+      [
+        460,
+        242
+      ],
+      [
+        439,
+        210
+      ],
+      [
+        432,
+        175
+      ]
+    ],
+    "front_nasal_cap_outline": [
+      [
+        455,
+        320
+      ],
+      [
+        525,
+        317
+      ],
+      [
+        583,
+        336
+      ],
+      [
+        598,
+        365
+      ],
+      [
+        611,
+        390
+      ],
+      [
+        611,
+        441
+      ],
+      [
+        600,
+        489
+      ],
+      [
+        580,
+        523
+      ],
+      [
+        544,
+        541
+      ],
+      [
+        496,
+        534
+      ],
+      [
+        449,
+        517
+      ],
+      [
+        429,
+        477
+      ],
+      [
+        421,
+        424
+      ],
+      [
+        430,
+        361
+      ],
+      [
+        455,
+        320
+      ]
+    ],
+    "reading": "The paired orbits sit on distinct lateral faces of a broad cranial mass. The nasal cap has its own front plane; its contour must not be confused with the full muzzle or cranial width.",
+    "uncertainty": "Manual projected traces, approximately 5 crop pixels. Unequal eye sizes show substantial perspective. No projected pixel ratio is promoted to an orthographic skull-width or roof-angle measurement."
+  },
+  "reference": {
+    "primary": "Joy Ang official NightWing tribe line art",
+    "url": "https://mirror.wingsoffire.wiki/images/english/4/4d/NightTransparent.png",
+    "file": "cache/protagonist-references/nightwing-lineart.png",
+    "original_size": [
+      3301,
+      1925
+    ],
+    "measurement_frame": "u=2*(original_x-130), v=2*(original_y-330). Measurements are in the enlarged head crop, not original pixels.",
+    "mapping": "model x=(u-380)/500, model z=(550-v)/500; model y is transverse width",
+    "caution": "Near side projection with some visible front cap. Profile height/length are constrained; width and cap depth remain provisional. Do not call this an orthographic reconstruction.",
+    "cross_checks": [
+      {
+        "file": "cache/protagonist-references/moon-drawing.png",
+        "artist": "Joy Ang",
+        "use": "Moon-specific roof, mouth, swept horn, silver tear; low oblique view, not a profile width measurement"
+      },
+      {
+        "file": "cache/protagonist-references/moon-htd.png",
+        "artist": "Brianna C. Walsh",
+        "url": "https://mirror.wingsoffire.wiki/images/english/f/fd/Moonwatcher_htd.png",
+        "use": "Underside taper and narrow chin; different artist and foreshortened view"
+      }
+    ]
+  },
+  "cranial_roof": {
+    "why": "Nasal/brow outline from the official crop. Behind the brow, reconstruct the supporting cranium under the visible horn-root and ear region. The previous trace stopped on the crown-plating boundary and chopped off the back of the skull. Posterior points under attachments are inferred supporting volume, not a claimed visible outline.",
+    "trace": [
+      [
+        34,
+        710
+      ],
+      [
+        60,
+        696
+      ],
+      [
+        83,
+        667
+      ],
+      [
+        103,
+        610
+      ],
+      [
+        152,
+        559
+      ],
+      [
+        188,
+        520
+      ],
+      [
+        211,
+        485
+      ],
+      [
+        213,
+        380
+      ],
+      [
+        253,
+        338
+      ],
+      [
+        294,
+        310
+      ],
+      [
+        343,
+        297
+      ],
+      [
+        405,
+        289
+      ],
+      [
+        465,
+        250
+      ],
+      [
+        520,
+        225
+      ],
+      [
+        555,
+        240
+      ],
+      [
+        578,
+        290
+      ],
+      [
+        590,
+        335
+      ],
+      [
+        610,
+        400
+      ],
+      [
+        640,
+        455
+      ],
+      [
+        665,
+        510
+      ],
+      [
+        680,
+        550
+      ]
+    ]
+  },
+  "maxilla_lip": {
+    "why": "Black outline of upper jaw beside the mouth opening, not the separate roof plate seam.",
+    "trace": [
+      [
+        34,
+        710
+      ],
+      [
+        39,
+        804
+      ],
+      [
+        70,
+        859
+      ],
+      [
+        111,
+        893
+      ],
+      [
+        151,
+        905
+      ],
+      [
+        184,
+        906
+      ],
+      [
+        175,
+        863
+      ],
+      [
+        184,
+        833
+      ],
+      [
+        230,
+        798
+      ],
+      [
+        229,
+        760
+      ],
+      [
+        250,
+        727
+      ],
+      [
+        307,
+        696
+      ],
+      [
+        342,
+        680
+      ],
+      [
+        395,
+        612
+      ],
+      [
+        430,
+        578
+      ],
+      [
+        481,
+        556
+      ],
+      [
+        532,
+        536
+      ],
+      [
+        550,
+        510
+      ],
+      [
+        585,
+        545
+      ],
+      [
+        625,
+        580
+      ],
+      [
+        655,
+        585
+      ],
+      [
+        680,
+        550
+      ]
+    ]
+  },
+  "dentary": {
+    "why": "Separate dentary, using the visible chin/underside anteriorly and Clay's hidden ramus-to-joint organization posteriorly. The previous upper trace included tooth tips, and the previous posterior lower trace continued into the cheek/throat. Neither is a rigid dentary boundary. Posterior reconstruction is explicitly inferred under the cheek.",
+    "upper": [
+      [
+        220,
+        889
+      ],
+      [
+        270,
+        835
+      ],
+      [
+        330,
+        780
+      ],
+      [
+        380,
+        730
+      ],
+      [
+        415,
+        668
+      ],
+      [
+        435,
+        610
+      ],
+      [
+        480,
+        580
+      ],
+      [
+        530,
+        551
+      ],
+      [
+        570,
+        528
+      ],
+      [
+        600,
+        510
+      ],
+      [
+        625,
+        525
+      ],
+      [
+        645,
+        565
+      ]
+    ],
+    "lower": [
+      [
+        220,
+        889
+      ],
+      [
+        239,
+        935
+      ],
+      [
+        287,
+        969
+      ],
+      [
+        337,
+        975
+      ],
+      [
+        391,
+        959
+      ],
+      [
+        417,
+        944
+      ],
+      [
+        443,
+        862
+      ],
+      [
+        470,
+        798
+      ],
+      [
+        506,
+        764
+      ],
+      [
+        548,
+        742
+      ],
+      [
+        591,
+        712
+      ],
+      [
+        630,
+        675
+      ],
+      [
+        650,
+        625
+      ],
+      [
+        648,
+        580
+      ],
+      [
+        645,
+        565
+      ]
+    ],
+    "section_squareness": 2.6,
+    "hinge_uv": [
+      600,
+      535
+    ],
+    "review_close_degrees": -10
+  },
+  "orbit": {
+    "preorbital_plane": {
+      "posterior_anchor_fraction": 0.04,
+      "forward_slope": 1.2,
+      "height_band_fraction": 0.25,
+      "maximum_reduction_fraction": 0.09,
+      "anterior_fade_fractions": [0.36,0.18],
+      "why": "The Starflight near-front view shows both apertures on forward-oblique orbital faces. A cylindrical lateral wall hid both eyes in the study's true front view. Fit an anterior bevel between nasal bridge and orbit, preserving rear cranial breadth and the side silhouette. Slope is a reconstruction parameter, not a measured orthographic angle."
+    },
+    "why": "Opening traced from heavy upper and lower eye margins, not the tear/scale below the inner corner. Recess is cut into lateral skin, not an attached eye disc.",
+    "upper": [
+      [
+        291,
+        418
+      ],
+      [
+        313,
+        400
+      ],
+      [
+        342,
+        390
+      ],
+      [
+        368,
+        385
+      ]
+    ],
+    "lower": [
+      [
+        291,
+        418
+      ],
+      [
+        303,
+        453
+      ],
+      [
+        320,
+        457
+      ],
+      [
+        345,
+        442
+      ],
+      [
+        359,
+        420
+      ],
+      [
+        368,
+        385
+      ]
+    ],
+    "socket_depth": 0.11,
+    "rim_height": 0.009,
+    "width": 0.014,
+    "globe": {
+      "centre_uv": [
+        331,
+        420
+      ],
+      "radius": 0.115,
+      "setback": 0.1,
+      "why": "Recessed spherical eye, sized to contain the traced canthi. Globe is behind the host wall; fitted upper and lower lids meet its surface. Radius/setback are structural fit parameters, not a claim that the drawing shows a full sphere."
+    },
+    "lids": {
+      "width_pixels": 12,
+      "closure_overlap_pixels": 2,
+      "samples": 81,
+      "blink_steps": [
+        0.333333,
+        0.666667,
+        1.0
+      ],
+      "why": "Heavy upper and lower eye strokes become thickness-bearing lids attached to the facial host, pinned at the canthi. The host attachment band extends past the carved socket transition; a small closing overlap seats the upper margin against the lower lid. In-between surfaces follow the globe instead of cutting across it."
+    }
+  },
+  "nasal_opening": {
+    "why": "Long vertical nostril opening on front cap of tribe crop. Cut into the cap itself.",
+    "trace": [
+      [
+        67,
+        736
+      ],
+      [
+        73,
+        760
+      ],
+      [
+        70,
+        786
+      ],
+      [
+        73,
+        808
+      ]
+    ],
+    "depth": 0.014,
+    "width": 0.009
+  }
+}
