@@ -17,7 +17,12 @@ func ray(from: Vector3, to: Vector3) -> Dictionary:
 	var query := PhysicsRayQueryParameters3D.create(from, to)
 	query.collision_mask = 1
 	if world.get("player") != null:
-		query.exclude = [world.player.get_rid()] # the player's own body must not read as floor
+		# The player and the waiting cast must not read as floor or walls.
+		var bodies: Array[RID] = [world.player.get_rid()]
+		if world.get("residents") != null:
+			for resident in world.residents:
+				bodies.append(resident.get_rid())
+		query.exclude = bodies
 	return world.get_world_3d().direct_space_state.intersect_ray(query)
 
 func capture(filename: String, from: Vector3, at: Vector3) -> void:

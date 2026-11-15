@@ -160,5 +160,6 @@
       "height": 16
     }
   ],
-  "view_distance": 20000.0
+  "view_distance": 20000.0,
+  "scene_id": "sky_palace"
 }

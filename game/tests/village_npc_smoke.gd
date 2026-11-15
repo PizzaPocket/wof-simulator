@@ -15,11 +15,12 @@ func ticks(count: int) -> void:
 
 func _run() -> void:
 	var village = load("res://scenes/mudwing_wetlands.tscn").instantiate()
+	village.install_cast = false # this test covers the original village cast
 	root.add_child(village)
 	await ticks(15)
 	var player = village.get_node("Clay")
 	var chat = village.get_node("Conversations")
-	check(chat.villagers.size() == 7, "Four original villagers plus Moon, Blue and Wren must spawn")
+	check(chat.villagers.size() == 8, "Four original villagers plus Moon, Blue, Wren and Darkstalker must spawn")
 	var umber = village.get_node("Umber")
 	check(umber.visual.model_loaded, "Umber must load the existing dragon model")
 	check(umber.visual.model_scale < player.visual.model_scale, "Umber must be smaller than Clay")

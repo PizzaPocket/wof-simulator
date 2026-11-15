@@ -12,6 +12,7 @@ func tap(action: StringName) -> void:
 func run() -> void:
 	var world = load("res://scenes/mudwing_wetlands.tscn").instantiate()
 	world.roster_save_path = ""
+	world.install_cast = false # these tests cover the older meet-to-unlock behaviour
 	root.add_child(world)
 	await ticks(10)
 	var clay = world.get_node("Clay")

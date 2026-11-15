@@ -9,6 +9,9 @@ var design: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://
 var homes: Array[Vector2] = []
 var causeways: Array[Dictionary] = []
 var roster_save_path := "user://protagonists.cfg"
+## The village's story cast (data/cast.json) stands near the arrival point; tests of the original
+## cast composition set this false before adding the scene.
+var install_cast := true
 const WALLOWS := [Vector2(-42, 14), Vector2(18, 68)]
 const VILLAGE_LEVEL := 1.1
 const DARKSTALKER_SITE := Vector2(-42, -65)
@@ -364,9 +367,6 @@ func _make_villagers() -> void:
 		{"id": "camille", "age": 9, "start": Vector2(-12, 2), "route": [Vector2(-14, 1), Vector2(-14, -3), Vector2(-11, 3)]},
 		{"id": "corinne", "age": 6, "start": Vector2(-14, 4), "route": [Vector2(-15, 3), Vector2(-16, 0), Vector2(-14, 2)]},
 	]
-	# Arc 1 Starflight (sighted) visits the village when the map's era is Arc 1.
-	if Engine.has_meta("map_era") and str(Engine.get_meta("map_era")) == "arc1":
-		cast.append({"id": "starflight", "age": 6, "start": Vector2(-27, -26), "route": [Vector2(-27, -26), Vector2(-24, -22)]})
 	for entry in cast:
 		var npc := preload("res://scripts/protagonist_factory.gd").make_actor(entry.id)
 		npc.age = entry.get("age", npc.age)
@@ -392,6 +392,10 @@ func _make_villagers() -> void:
 		for villager in conversations.villagers:
 			villager.listener = current if villager != current else null)
 	add_child(roster)
+	# The story's point-of-view characters for the current era wait along the path.
+	if install_cast:
+		preload("res://scripts/cast_manager.gd").install(self, {"scene_id": "mudwing_wetlands", "origin": player.spawn_position, "offset": Vector3(0, 0, 22),
+			"ground": func(p: Vector3) -> float: return _height(p.x, p.z) + 0.08})
 
 
 func _mud_bed(_x: float,_z: float,visible_y: float) -> float:

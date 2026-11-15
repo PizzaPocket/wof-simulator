@@ -41,6 +41,7 @@ func place(position: Vector3, yaw_degrees: float, pitch := -0.25) -> void:
 func _run() -> void:
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(output))
 	root.size = Vector2i(1280, 800)
+	Engine.set_meta("map_era", "arc2") # the academy is an Arc 2 place
 	var began := Time.get_ticks_msec()
 	world = load("res://scenes/jade_mountain.tscn").instantiate()
 	root.add_child(world)
@@ -52,7 +53,16 @@ func _run() -> void:
 	check(world.collision_ready, "Ledge collision never became ready")
 	var player_camera := world.player.get_node("CameraPivot/SpringArm3D/Camera3D") as Camera3D
 	check(player_camera.far >= 10000.0, "The mountain must be visible from afar (camera far %.0f)" % player_camera.far)
-	check(world.residents.size() == 1 and world.residents[0].character_id == "starflight_blind", "The blind Starflight must stand in the library")
+	var star_found := false
+	for resident in world.residents:
+		if resident.character_id == "starflight_blind":
+			star_found = true
+			var library: Dictionary
+			for chamber in world.design.chambers:
+				if chamber.id == "library":
+					library = chamber
+			check(Vector2(resident.position.x - world.mouth.x, resident.position.z - world.mouth.z).distance_to(Vector2(float(library.x), float(library.z))) < 12.0, "The blind Starflight must keep his post in the library")
+	check(star_found, "The blind Starflight must be present in Arc 2")
 	for i in 6: await physics_frame
 	player = world.player
 	print("Loaded in ms: ", Time.get_ticks_msec() - began)

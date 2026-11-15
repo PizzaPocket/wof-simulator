@@ -7,6 +7,7 @@ var design: Dictionary
 var era := "arc1"
 var location_label: Label
 var rng := RandomNumberGenerator.new()
+var residents: Array[Node] = [] ## Every character this site installed.
 
 
 func _design_path() -> String:
@@ -55,6 +56,9 @@ func initialize_world(progress_callback: Callable = Callable()) -> void:
 	var spawn: Array = design.spawn
 	player.spawn_position = Vector3(spawn[0], spawn[1], spawn[2])
 	player.reset_to_spawn()
+	# The story's characters for this era wait just ahead of the arrival point.
+	for actor in preload("res://scripts/cast_manager.gd").install(self, {"scene_id": str(design.get("scene_id", "")), "origin": player.spawn_position, "offset": Vector3(0, 0, -16)}):
+		residents.append(actor)
 	await _loading(progress_callback, 1.0, str(design.title) + " ready")
 
 

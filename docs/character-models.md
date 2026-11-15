@@ -20,8 +20,11 @@ Source: the wiki mirror's *Starflight* page.
 
 | Era | Profile | Where | Notes |
 | --- | --- | --- | --- |
-| Arc 1 | `starflight` (sighted) | MudWing village, when the map's era is Arc 1 | The wiki places him in the Mud Kingdom in *The Dragonet Prophecy* |
-| Arc 2 | `starflight_blind` | Jade Mountain Academy library | Head librarian and co-founder (*Moon Rising*, *Talons of Power*) |
+| Arc 1 | `starflight` (sighted) | MudWing village, Sky Kingdom palace, Summer Palace, NightWing fortress | The wiki places him in each in *The Dragonet Prophecy* to *The Dark Secret* |
+| Arc 2 and later | `starflight_blind` | Jade Mountain Academy library | Head librarian and co-founder (*Moon Rising*, *Talons of Power*) |
+
+The era picks the profile (`era_variants` in `game/data/cast.json`), and `cast.json` also says where he
+stands. See [Playing the cast](#playing-the-cast).
 
 He was blinded and burned in the volcanic eruption in *The Dark Secret*. The blind profile swaps the
 seated eye globes for clouded, pupil-less ones. **Not done:** his burn scars (the wiki describes long
@@ -214,3 +217,27 @@ stands in a broad dry clearing at (-42,-65), at world scale 10.8 with a matching
 large collision body. He remains non-collectible. Startup asset loading includes
 his model. The older notes about his absence and Blue's planning-only state are
 superseded by this pass.
+
+## Playing the cast
+
+Any point-of-view character can be played, and they stand where their story puts them.
+
+- **Placement.** `game/data/cast.json` lists who is in each scene and era (`presence`), with the
+  wiki page behind each row in `basis`. Scenes call `scripts/cast_manager.gd` once they are built.
+  Characters wait with a small group near the arrival point, or in a named room of a cave site
+  (`"chamber": "library"`). Nobody is placed where no source puts them: Glory has no scene yet.
+- **Unlocking.** Walk up to someone and press **X** (Square) to unlock and play them. This is the
+  marsh village's existing roster (`scripts/protagonist_roster.gd`), now used in every scene.
+- **One collection.** The unlocked list is saved (`user://protagonists.cfg`) and shared by every
+  scene, by base id (the blind Starflight counts as `starflight`). **Tab / D-pad left** cycles it.
+  An unlocked character who is not in the current scene joins at the player's side when you cycle to
+  them, using the era's model.
+- **Who is placed where.** Marsh village (Arc 1): Starflight, Tsunami, Glory, Sunny. Sky palace
+  (Arc 1): Starflight. Summer Palace (Arc 1): Starflight, Tsunami. NightWing fortress (Arc 1):
+  Starflight. Scorpion Den (Arc 1): Sunny. Jade Mountain Academy (Arc 2): Starflight (library),
+  Tsunami, Sunny and Moon, in stand-in rooms because the academy's offices are not built.
+- **Adding someone.** Add a row to `presence` for the scene and era (and, if their model changes, an
+  entry in `era_variants`). A scene needs to call `CastManager.install` after it is built; the site
+  base classes (`rock_site.gd`, `box_site.gd`) and the marsh village already do.
+
+Test: `godot --path game --script res://tests/cast_smoke.gd`.

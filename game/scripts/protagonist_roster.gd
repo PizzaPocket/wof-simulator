@@ -6,6 +6,9 @@ const SWITCH_RANGE := 7.0
 var save_path := "user://protagonists.cfg"
 var player: CharacterBody3D
 var protagonists: Dictionary = {}
+## Base ids (a character's model variants share one id, so the blind Starflight is "starflight").
+## The collection is saved and shared by every scene, and may include characters who are not in
+## the current scene.
 var unlocked := PackedStringArray()
 var camera: Camera3D
 var status: Label
@@ -16,15 +19,46 @@ func register(body: CharacterBody3D) -> void:
 	protagonists[body.character_id] = body
 
 
+static func _base(id: String) -> String:
+	return id.trim_suffix("_blind")
+
+
+## The body in this scene for a base id, or null when that character is not here.
+func _body_for(base: String) -> CharacterBody3D:
+	for id in protagonists:
+		if _base(str(id)) == base:
+			return protagonists[id]
+	return null
+
+
+func _display_name_for(base: String) -> String:
+	var body := _body_for(base)
+	if body:
+		return body.display_name
+	var profiles: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/protagonists.json"))
+	return str(profiles.get(base, {}).get("name", base.capitalize()))
+
+
+## An unlocked character who is not in this scene joins the player's side when cycled to.
+func _summon(base: String) -> CharacterBody3D:
+	var cast := preload("res://scripts/cast_manager.gd")
+	var id: String = cast.variant_for(base, cast.current_era())
+	var profiles: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/protagonists.json"))
+	if not profiles.has(id):
+		return null
+	var side := Basis(Vector3.UP, player.pivot.rotation.y) * Vector3(5.0, 0.4, 0.0)
+	return cast.make_actor(get_parent(), id, player.global_position + side, self)
+
+
 func _ready() -> void:
 	camera = player.arm.get_child(0)
 	var saved := ConfigFile.new()
 	if not save_path.is_empty() and saved.load(save_path) == OK:
 		for id in saved.get_value("roster", "unlocked", PackedStringArray()):
-			if protagonists.has(id) and not unlocked.has(id):
-				unlocked.append(id)
-	if not unlocked.has(player.character_id):
-		unlocked.insert(0, player.character_id)
+			if not unlocked.has(_base(str(id))):
+				unlocked.append(_base(str(id)))
+	if not unlocked.has(_base(player.character_id)):
+		unlocked.insert(0, _base(player.character_id))
 	_make_status()
 
 
@@ -35,17 +69,21 @@ func _physics_process(_delta: float) -> void:
 			_switch(target)
 			target = nearest_protagonist()
 		elif unlocked.size() > 1 and Input.is_action_just_pressed("cycle_protagonist"):
-			var next := (unlocked.find(player.character_id) + 1) % unlocked.size()
-			_switch(protagonists[unlocked[next]])
+			var next := (unlocked.find(_base(player.character_id)) + 1) % unlocked.size()
+			var body := _body_for(unlocked[next])
+			if body == null:
+				body = _summon(unlocked[next])
+			if body:
+				_switch(body)
 			target = nearest_protagonist()
 	var names := PackedStringArray()
 	for id in unlocked:
-		names.append(protagonists[id].display_name)
-	status.text = "Playing as %s  ·  Collected: %s" % [player.display_name, ", ".join(names)]
+		names.append(_display_name_for(id))
+	status.text = "Playing as %s  ·  %s: %s" % [player.display_name, "Collected", ", ".join(names)]
 	hint.visible = not player.conversation_locked and (target != null or unlocked.size() > 1)
 	var cycle_hint := "Tab / D-pad left · Switch collected character" if unlocked.size() > 1 else ""
 	if target:
-		hint.text = "X / Square · %s %s" % ["Play as" if unlocked.has(target.character_id) else "Unlock", target.display_name]
+		hint.text = "X / Square · %s %s" % ["Play as" if unlocked.has(_base(target.character_id)) else "Unlock", target.display_name]
 		if not cycle_hint.is_empty():
 			hint.text += "\n" + cycle_hint
 	else:
@@ -70,8 +108,8 @@ func nearest_protagonist() -> CharacterBody3D:
 
 
 func _switch(target: CharacterBody3D) -> void:
-	if not unlocked.has(target.character_id):
-		unlocked.append(target.character_id)
+	if not unlocked.has(_base(target.character_id)):
+		unlocked.append(_base(target.character_id))
 		if not save_path.is_empty():
 			var saved := ConfigFile.new()
 			saved.set_value("roster", "unlocked", unlocked)

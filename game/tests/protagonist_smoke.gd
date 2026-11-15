@@ -25,6 +25,7 @@ func run() -> void:
 	var save_path := OS.get_temp_dir().path_join("wof-roster-test-%d.cfg" % OS.get_process_id())
 	var world := village_scene.instantiate()
 	world.roster_save_path = save_path
+	world.install_cast = false # these tests cover the older meet-to-unlock behaviour
 	root.add_child(world)
 	await ticks(10)
 	var clay = world.get_node("Clay")
@@ -80,6 +81,7 @@ func run() -> void:
 	await process_frame
 	world = village_scene.instantiate()
 	world.roster_save_path = save_path
+	world.install_cast = false # these tests cover the older meet-to-unlock behaviour
 	root.add_child(world)
 	await ticks(10)
 	await tap(&"cycle_protagonist")

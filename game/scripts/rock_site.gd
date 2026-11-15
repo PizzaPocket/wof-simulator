@@ -29,9 +29,17 @@ func _make_solid() -> void:
 func _carve_extra() -> void:
 	pass
 
-## Called once when the carved collision is real, so residents can stand on it.
+var residents: Array[Node] = [] ## Every character this site installed.
+
+
+## Called once when the carved collision is real, so characters can stand on it. Those placed in
+## a named room (data/cast.json) stand in it; the rest wait on the arrival floor behind the player.
 func _on_site_ready() -> void:
-	pass
+	var chambers := {}
+	for chamber in design.get("chambers", []):
+		chambers[str(chamber.id)] = mouth + Vector3(float(chamber.x), 0.4, float(chamber.z))
+	for actor in preload("res://scripts/cast_manager.gd").install(self, {"scene_id": str(design.get("scene_id", "")), "origin": player.spawn_position, "offset": Vector3(0, 0, 12), "chambers": chambers}):
+		residents.append(actor)
 
 
 var era := "arc1"

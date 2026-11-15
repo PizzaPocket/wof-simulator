@@ -41,11 +41,11 @@ a mountaintop ledge with trees, glass globes hung in the tunnels, plants and sma
 the mountain itself as having twin fang-shaped peaks and as the tallest in the Claws of the Clouds.
 None of that is modelled yet.
 
-Starflight is the head librarian in this era (see [character models](character-models.md#starflight)).
+Starflight is the head librarian in this era, and Tsunami, Sunny and Moon stand in stand-in rooms (see [character models](character-models.md#playing-the-cast)); walk up to any of them and press X to play them.
 
 ## Known limits
 
-- Only Starflight stands in the library. No dialogue, doors, furniture or tribe-specific cave interiors yet.
+- A few story characters stand in rooms, but there is no dialogue, doors, furniture or tribe-specific cave interiors yet.
 - The mountain exterior is simple (cones and spires) and the foothills are a flat disc. Nothing
   beyond the ledge is detailed, and there is no weather or cloud layer.
 - CSG is fine at this size (about 2 s to build) but is not a long-term answer for web builds.

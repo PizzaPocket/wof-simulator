@@ -1,0 +1,97 @@
+{
+  "note": "Who stands where, by scene and era. Characters are placed only where their story puts them. Walking up to one and pressing X (Square) unlocks them and switches to them, exactly as in the marsh village; the unlocked collection is saved and shared by every scene, and Tab / D-pad left cycles through it. An unlocked character who is not in the current scene joins the player's side when cycled to. 'chamber' places someone in a named room of a cave site; otherwise they wait with the group near the arrival point. Era variants swap the model they have in that era.",
+  "pov": [
+    "tsunami",
+    "glory",
+    "starflight",
+    "sunny",
+    "moon",
+    "blue",
+    "umber",
+    "wren"
+  ],
+  "era_variants": {
+    "starflight": {
+      "arc2": "starflight_blind",
+      "arc3": "starflight_blind",
+      "arc4": "starflight_blind"
+    }
+  },
+  "presence": {
+    "mudwing_wetlands": {
+      "arc1": [
+        {
+          "id": "starflight"
+        },
+        {
+          "id": "tsunami"
+        },
+        {
+          "id": "glory"
+        },
+        {
+          "id": "sunny"
+        }
+      ]
+    },
+    "sky_palace": {
+      "arc1": [
+        {
+          "id": "starflight"
+        }
+      ]
+    },
+    "summer_palace": {
+      "arc1": [
+        {
+          "id": "starflight"
+        },
+        {
+          "id": "tsunami"
+        }
+      ]
+    },
+    "nightwing_volcano": {
+      "arc1": [
+        {
+          "id": "starflight"
+        }
+      ]
+    },
+    "scorpion_den": {
+      "arc1": [
+        {
+          "id": "sunny"
+        }
+      ]
+    },
+    "jade_mountain": {
+      "arc2": [
+        {
+          "id": "starflight",
+          "chamber": "library"
+        },
+        {
+          "id": "tsunami",
+          "chamber": "central"
+        },
+        {
+          "id": "sunny",
+          "chamber": "study"
+        },
+        {
+          "id": "moon",
+          "chamber": "winglet_1"
+        }
+      ]
+    }
+  },
+  "basis": {
+    "mudwing_wetlands arc1": "wiki (Starflight): in the Mud Kingdom in The Dragonet Prophecy; the other dragonets travel with him (not independently checked)",
+    "sky_palace arc1": "wiki (Starflight): held captive by Queen Scarlet's SkyWings",
+    "summer_palace arc1": "wiki (Starflight): the dragonets held in the Summer Palace's electric eel cell in The Lost Heir; Tsunami is the SeaWing among them",
+    "nightwing_volcano arc1": "wiki (Starflight): among the NightWings in The Dark Secret",
+    "scorpion_den arc1": "wiki (Scorpion Den): Sunny visits in The Brightest Night",
+    "jade_mountain arc2": "wiki (Jade Mountain Academy): Starflight is librarian, Tsunami headmistress, Sunny has an office; Moon Rising is set there. Rooms are stand-ins because the academy's offices are not built"
+  }
+}
