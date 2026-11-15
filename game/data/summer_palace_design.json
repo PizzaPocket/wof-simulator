@@ -1,0 +1,55 @@
+{
+  "note": "Authored blockout of the SeaWing Summer Palace. Metres relative to the island centre. Sources: Wings of Fire wiki mirror (Kingdom of the Sea page): a twelve-story pavilion of blue-tinted stone built by Prince Albatross in the Bay of a Thousand Scales, hidden under a plant canopy; the dragonets were held in its electric eel cell (The Lost Heir); a SkyWing and MudWing attack destroyed it, and the SeaWings moved to the Deep Palace. The page gives no footprint, shape, throne room or interior layout, so those are authored; the underwater Deep Palace is not modelled.",
+  "title": "Summer Palace",
+  "eras": [
+    "arc1",
+    "arc2"
+  ],
+  "label_by_era": {
+    "arc1": [
+      "Summer Palace \u00b7 Arc 1",
+      "Hidden under the canopy \u00b7 authored layout"
+    ],
+    "arc2": [
+      "Summer Palace ruins \u00b7 Arc 2",
+      "Destroyed in the attack \u00b7 authored layout"
+    ]
+  },
+  "env": {
+    "sky_top": "5fb0d4",
+    "sky_horizon": "e2f2ec",
+    "fog_color": "d2ebe6",
+    "fog_density": 0.00012,
+    "sun_color": "fff0d2"
+  },
+  "ground_color": "2c8aa0",
+  "ground_radius": 9000.0,
+  "boundary_radius": 1200.0,
+  "view_distance": 9000.0,
+  "seed": 12,
+  "spawn": [
+    0,
+    3.2,
+    120
+  ],
+  "island": {
+    "radius": 155.0,
+    "height": 3.0,
+    "color": "e7d6a5"
+  },
+  "pavilion": {
+    "x": 0,
+    "z": -20,
+    "stories": 12,
+    "story_height": 13.0,
+    "base_width": 66.0,
+    "top_width": 38.0,
+    "wall": 2.5,
+    "door": 15.0,
+    "color": "7aa6c4"
+  },
+  "canopy": {
+    "blobs": 70
+  },
+  "palms": 14
+}

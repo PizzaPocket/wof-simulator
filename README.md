@@ -9,7 +9,7 @@ Clay movement prototype.
 - [Clay prototype (work in progress)](prototypes/clay/README.md)
 - [Godot movement playground: setup, model build and controls](game/README.md)
 - [Jade Mountain Academy (Arc 2)](docs/jade-mountain.md)
-- [Sky Kingdom palace and Scorpion Den (rough blockouts)](docs/sites.md)
+- [Rough locations: Sky palace, Scorpion Den, stronghold, ice palace, Summer Palace, NightWing fortress](docs/sites.md)
 - [Web export and Vercel deployment](docs/web-deployment.md)
 
 Open `game/project.godot` in Godot 4.5+ and press **F5**. Move with WASD or a

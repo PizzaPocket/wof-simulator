@@ -94,6 +94,55 @@ func _run() -> void:
 		if era == "arc2":
 			await capture("den-overview", Vector3(0, 520, 380), Vector3.ZERO)
 		await unload_site()
+	# --- Rock sites (ice palace, NightWing volcano) in each era ---
+	for entry in [["res://scenes/ice_palace.tscn", ["arc1", "arc2", "arc3"]], ["res://scenes/nightwing_volcano.tscn", ["arc1", "arc2"]]]:
+		for era in entry[1]:
+			load_site(entry[0], era)
+			var limit := Time.get_ticks_msec() + 40000
+			while not (is_instance_valid(world.mountain) and world.collision_ready) and Time.get_ticks_msec() < limit:
+				await physics_frame
+			check(world.collision_ready, "%s never settled (%s)" % [entry[0], era])
+			for i in 8: await physics_frame
+			var site_camera := world.player.get_node("CameraPivot/SpringArm3D/Camera3D") as Camera3D
+			check(site_camera.far >= 10000.0, "%s must be visible from afar" % entry[0])
+			check(world.era == era, "%s must resolve era %s (got %s)" % [entry[0], era, world.era])
+			for chamber in world.chamber_floors:
+				var hit := ray(chamber.position + Vector3(0.37, 6, 0.21), chamber.position + Vector3(0.37, -6, 0.21))
+				check(not hit.is_empty() and absf(hit.position.y - world.mouth.y) < 0.6, "%s %s needs a floor (%s)" % [entry[0].get_file(), chamber.id, era])
+			var passage := ray(world.mouth + Vector3(0.4, 5, 30), world.mouth + Vector3(0.4, 5, -90))
+			check(passage.is_empty(), "%s entrance passage must be open (%s)" % [entry[0].get_file(), era])
+			if entry[0].contains("volcano"):
+				check((world.rubble.size() > 0) == (era == "arc2"), "The wrecked fortress is an Arc 2 feature (%s)" % era)
+				var through := ray(world.mouth + Vector3(0.4, 5, -100), world.mouth + Vector3(0.4, 5, -400))
+				check(through.is_empty(), "The volcano's halls must stay open end to end (%s)" % era)
+			if era == "arc1":
+				var from_ledge: Vector3 = world.mouth + Vector3(0, 40, 900)
+				await capture(entry[0].get_file().get_basename() + "-far", from_ledge, world.mouth + Vector3(0, 100, 0))
+			await unload_site()
+	# --- Box sites (stronghold, Summer Palace) in each era ---
+	for entry in [["res://scenes/burn_stronghold.tscn", ["arc1", "arc2"]], ["res://scenes/summer_palace.tscn", ["arc1", "arc2"]]]:
+		for era in entry[1]:
+			load_site(entry[0], era)
+			for i in 40: await physics_frame
+			var box_camera := world.player.get_node("CameraPivot/SpringArm3D/Camera3D") as Camera3D
+			check(box_camera.far >= 2000.0, "%s must be visible from afar" % entry[0].get_file())
+			check(world.era == era, "%s must resolve era %s" % [entry[0].get_file(), era])
+			var spawn: Vector3 = world.player.spawn_position
+			var spawn_ground := ray(spawn + Vector3(0.3, 6, 0.2), spawn + Vector3(0.3, -10, 0.2))
+			check(not spawn_ground.is_empty() and absf(spawn_ground.position.y - (spawn.y - 0.2)) < 0.8, "%s: the spawn must stand on solid ground" % entry[0].get_file())
+			if entry[0].contains("burn"):
+				check((world.find_child("WeirdlingTower", true, false) != null) == (era == "arc1"), "Burn's weirdling tower is an Arc 1 feature (%s)" % era)
+				var road := ray(Vector3(0.4, 5, 380), Vector3(0.4, 5, 20))
+				check(road.is_empty(), "The stronghold gate road must be open to the keep (%s)" % era)
+				check(world.find_child("KeepRoof", true, false) != null, "The stronghold needs a keep")
+			else:
+				check((world.rubble_count > 0) == (era == "arc2"), "The Summer Palace ruins are an Arc 2 feature (%s)" % era)
+				check(world.story_walls > 0, "The Summer Palace needs walls")
+				var door := ray(Vector3(0.4, 8, 120), Vector3(0.4, 8, -30))
+				check(door.is_empty(), "The Summer Palace door must be open (%s)" % era)
+				check((world.story_walls > 40) == (era == "arc1"), "Ruins must have fewer walls than the intact palace (%d, %s)" % [world.story_walls, era])
+			await capture(entry[0].get_file().get_basename() + "-" + era, spawn + Vector3(0, 30, 120), Vector3(0, 12, 0))
+			await unload_site()
 	if failures.is_empty():
-		print("PASS: palace and Scorpion Den build, differ by era and keep their key spaces solid and open")
+		print("PASS: all rough sites build, differ by era and keep their key spaces solid and open")
 	quit(0 if failures.is_empty() else 1)

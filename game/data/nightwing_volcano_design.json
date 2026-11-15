@@ -1,0 +1,341 @@
+{
+  "note": "Authored blockout of the NightWing island volcano and its fortress. Metres relative to the cave mouth on the black-sand slope. Sources: Wings of Fire wiki mirror (NightWing Island page): a central volcano with a jagged profile and a smashed-in smoking crater, black lava flows glowing orange through cracks, dead twisted trees, sulfur vents, a black-sand beach ring and grey ash-heavy skies; a fortress built into the volcano's side with adult quarters, a council chamber with a lava lake, a dining cave, a long dragonet dormitory (at least 50 beds), a library, Mastermind's laboratory, a throne room with a lava cauldron behind a map, and a dungeon; the volcano erupts at the end of The Dark Secret and the NightWings leave, after which the fortress is wrecked. No sizes or plan are given, so all of that is authored. The wiki does not link the smashed crater to the eruption.",
+  "title": "NightWing fortress",
+  "eras": [
+    "arc1",
+    "arc2"
+  ],
+  "label_by_era": {
+    "arc1": [
+      "NightWing island \u00b7 Arc 1",
+      "The fortress before the eruption \u00b7 authored layout"
+    ],
+    "arc2": [
+      "NightWing island \u00b7 Arc 2",
+      "After the eruption: the fortress is wrecked \u00b7 authored layout"
+    ]
+  },
+  "label": [
+    "NightWing fortress",
+    "Authored layout"
+  ],
+  "env": {
+    "sky_top": "3f3c44",
+    "sky_horizon": "8a6c60",
+    "fog_color": "625048",
+    "fog_density": 0.00035,
+    "sun_color": "ffb48a",
+    "sun_energy": 0.7,
+    "ambient": 0.4,
+    "exposure": 0.95
+  },
+  "rock": {
+    "low_color": "2b2a2e",
+    "high_color": "58555a",
+    "snow_color": "6a6666",
+    "snow_line": 99999.0,
+    "bump": 0.8
+  },
+  "lantern": "ff8a3a",
+  "ground_color": "2b292e",
+  "ground_radius": 14000.0,
+  "boundary_radius": 2800.0,
+  "view_distance": 20000.0,
+  "spawn": [
+    0,
+    0.2,
+    24
+  ],
+  "ready_probes": [
+    [
+      0.3,
+      24.2
+    ],
+    [
+      0.3,
+      -40.2
+    ]
+  ],
+  "mountain": {
+    "ledge_y": 90.0,
+    "height": 1000.0,
+    "base_radius": 900.0,
+    "seed": 404,
+    "crater": {
+      "radius": 78.0,
+      "floor_y": 840.0
+    },
+    "satellites": [
+      {
+        "x": -420,
+        "z": -120,
+        "radius": 300,
+        "height": 520
+      },
+      {
+        "x": 380,
+        "z": -260,
+        "radius": 320,
+        "height": 600
+      }
+    ],
+    "foothills": {
+      "count": 6,
+      "distance": [
+        500,
+        900
+      ],
+      "radius": [
+        90,
+        200
+      ],
+      "height": [
+        200,
+        450
+      ]
+    },
+    "spires": {
+      "count": 14,
+      "distance": [
+        40,
+        200
+      ],
+      "base": [
+        640,
+        820
+      ],
+      "radius": [
+        26,
+        60
+      ],
+      "height": [
+        150,
+        330
+      ]
+    }
+  },
+  "ledge": {
+    "width": 80.0,
+    "depth": 60.0
+  },
+  "lava_flows": [
+    {
+      "angle": 200,
+      "spheres": 22
+    },
+    {
+      "angle": 290,
+      "spheres": 20
+    },
+    {
+      "angle": 345,
+      "spheres": 18
+    }
+  ],
+  "dead_trees": 34,
+  "vents": 8,
+  "chambers": [
+    {
+      "id": "quarters",
+      "name": "Adult quarters",
+      "x": 0,
+      "z": -90,
+      "radius": 40,
+      "height": 28,
+      "dome": 0.55,
+      "source": "wiki: communal caves with rock niches for sleeping (one cave here)"
+    },
+    {
+      "id": "council",
+      "name": "Council chamber",
+      "x": 0,
+      "z": -210,
+      "radius": 50,
+      "height": 40,
+      "dome": 0.55,
+      "source": "wiki: a lava lake, a small rock spire for questioning, lava streams and a perch by the Queen's Eye"
+    },
+    {
+      "id": "dining",
+      "name": "Dining cave",
+      "x": -135,
+      "z": -210,
+      "radius": 26,
+      "height": 22,
+      "dome": 0.6,
+      "source": "wiki: a low table with bones on the floor"
+    },
+    {
+      "id": "library",
+      "name": "Library",
+      "x": 135,
+      "z": -210,
+      "radius": 30,
+      "height": 26,
+      "dome": 0.6,
+      "source": "wiki: many scrolls, some marked for NightWing eyes only"
+    },
+    {
+      "id": "lab",
+      "name": "Mastermind's laboratory",
+      "x": -150,
+      "z": -340,
+      "radius": 34,
+      "height": 28,
+      "dome": 0.55,
+      "source": "wiki: a large well-protected inner room (desalination system and RainWing prison not modelled)"
+    },
+    {
+      "id": "dungeon",
+      "name": "Dungeon",
+      "x": 150,
+      "z": -340,
+      "radius": 24,
+      "height": 20,
+      "dome": 0.6,
+      "source": "wiki: a dungeon"
+    },
+    {
+      "id": "throne",
+      "name": "Throne room",
+      "x": 0,
+      "z": -410,
+      "radius": 34,
+      "height": 32,
+      "dome": 0.55,
+      "source": "wiki: a private chamber with a large lava cauldron, reached by a secret entrance behind a map of Pyrrhia (here an ordinary passage)"
+    }
+  ],
+  "tunnels": [
+    {
+      "from": [
+        0,
+        40
+      ],
+      "to": [
+        0,
+        -90
+      ],
+      "width": 24,
+      "height": 24
+    },
+    {
+      "from": [
+        0,
+        -90
+      ],
+      "to": [
+        0,
+        -210
+      ],
+      "width": 24,
+      "height": 24
+    },
+    {
+      "from": [
+        0,
+        -210
+      ],
+      "to": [
+        -135,
+        -210
+      ],
+      "width": 16,
+      "height": 16
+    },
+    {
+      "from": [
+        0,
+        -210
+      ],
+      "to": [
+        135,
+        -210
+      ],
+      "width": 18,
+      "height": 18
+    },
+    {
+      "from": [
+        0,
+        -210
+      ],
+      "to": [
+        0,
+        -310
+      ],
+      "width": 22,
+      "height": 22
+    },
+    {
+      "from": [
+        -95,
+        -310
+      ],
+      "to": [
+        95,
+        -310
+      ],
+      "width": 18,
+      "height": 18
+    },
+    {
+      "from": [
+        -95,
+        -310
+      ],
+      "to": [
+        -150,
+        -340
+      ],
+      "width": 16,
+      "height": 16
+    },
+    {
+      "from": [
+        95,
+        -310
+      ],
+      "to": [
+        150,
+        -340
+      ],
+      "width": 16,
+      "height": 16
+    },
+    {
+      "from": [
+        0,
+        -310
+      ],
+      "to": [
+        0,
+        -410
+      ],
+      "width": 20,
+      "height": 20
+    }
+  ],
+  "dormitory": {
+    "from": [
+      -95,
+      -310
+    ],
+    "to": [
+      95,
+      -310
+    ],
+    "beds": 24,
+    "note": "The wiki gives at least 50 beds; 24 are shown at regular intervals."
+  },
+  "council_lava": {
+    "x": 0,
+    "z": -210,
+    "radius": 24.0
+  },
+  "throne_cauldron": {
+    "x": 0,
+    "z": -420,
+    "radius": 8.0
+  }
+}

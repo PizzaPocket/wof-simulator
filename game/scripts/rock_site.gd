@@ -4,7 +4,7 @@ extends "res://scripts/playground.gd"
 ## chambers and passages from data, lights them, holds the player until the carved collision
 ## is real and shows the location label. Designs are authored blockouts: every chamber says
 ## where it came from. Coordinates are metres relative to `mouth`, a point on the arrival floor.
-const LANTERN := Color("ffd9a0")
+var lantern := Color("ffd9a0")
 var design: Dictionary
 var rock: ShaderMaterial          ## Exterior stone.
 var rock_interior: ShaderMaterial ## Carved surfaces (may carry gold veins).
@@ -32,6 +32,17 @@ func _carve_extra() -> void:
 ## Called once when the carved collision is real, so residents can stand on it.
 func _on_site_ready() -> void:
 	pass
+
+
+var era := "arc1"
+
+## Resolve the era for this site and take its label; unknown eras fall back to the first listed.
+func _pick_era() -> void:
+	era = current_era()
+	if design.has("label_by_era"):
+		if not era in design.label_by_era:
+			era = str(design.label_by_era.keys()[0])
+		design.label = design.label_by_era[era]
 
 
 ## The era chosen on the world map (Arc 1 for direct runs).
@@ -119,7 +130,16 @@ func _make_rock() -> void:
 	rock = ShaderMaterial.new()
 	rock.shader = load("res://shaders/jade_rock.gdshader")
 	rock.set_shader_parameter("base_height", mouth.y)
+	# Optional palette (ice, volcanic rock) from the design file.
+	var colors: Dictionary = design.get("rock", {})
+	for key in ["low_color", "high_color", "snow_color"]:
+		if colors.has(key):
+			rock.set_shader_parameter(key, Color(colors[key]))
+	for key in ["snow_line", "bump"]:
+		if colors.has(key):
+			rock.set_shader_parameter(key, float(colors[key]))
 	rock_interior = rock.duplicate()
+	lantern = Color(design.get("lantern", "ffd9a0"))
 
 
 func _make_environment() -> void:
@@ -138,10 +158,10 @@ func _make_environment() -> void:
 	# Low ambient keeps the caves dark; lanterns and the sun do the lighting.
 	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.ambient_light_color = Color("dfe6f0")
-	environment.ambient_light_energy = 0.5
+	environment.ambient_light_energy = float(env.get("ambient", 0.5))
 	environment.reflected_light_source = Environment.REFLECTION_SOURCE_DISABLED
 	environment.tonemap_mode = Environment.TONE_MAPPER_ACES
-	environment.tonemap_exposure = 0.85
+	environment.tonemap_exposure = float(env.get("exposure", 0.85))
 	environment.tonemap_white = 6.0
 	environment.fog_enabled = true
 	environment.fog_light_color = Color(env.get("fog_color", "cfd9dc"))
@@ -153,7 +173,7 @@ func _make_environment() -> void:
 	var sun := DirectionalLight3D.new()
 	sun.rotation_degrees = Vector3(-38, 150, 0)
 	sun.light_color = Color(env.get("sun_color", "fff1dc"))
-	sun.light_energy = 1.25
+	sun.light_energy = float(env.get("sun_energy", 1.25))
 	sun.shadow_enabled = true
 	sun.directional_shadow_max_distance = 3500.0
 	add_child(sun)
@@ -230,6 +250,58 @@ func _new_mountain() -> CSGCombiner3D:
 	return mountain
 
 
+## Mouth on the face of the main cone at the ledge height, for cone-mountain sites.
+func _prepare_cone_site() -> void:
+	var settings: Dictionary = design.mountain
+	var radius_at_ledge: float = float(settings.base_radius) * (1.0 - float(settings.ledge_y) / float(settings.height))
+	mouth = Vector3(0, float(settings.ledge_y), radius_at_ledge)
+
+
+## A main cone, satellites, seeded foothills and summit spires, and a buttress ledge at the mouth.
+func _make_cone_mountain() -> void:
+	var settings: Dictionary = design.mountain
+	_new_mountain()
+	mountain.add_child(_cone(0, 0, float(settings.base_radius), float(settings.height)))
+	for satellite in settings.get("satellites", []):
+		mountain.add_child(_cone(float(satellite.x), float(satellite.z), float(satellite.radius), float(satellite.height)))
+	var foothills: Dictionary = settings.get("foothills", {"count": 22, "distance": [260, 800], "radius": [110, 270], "height": [650, 1800]})
+	var spires: Dictionary = settings.get("spires", {"count": 12, "distance": [0, 230], "base": [1150, 1450], "radius": [70, 130], "height": [520, 1050]})
+	var rng := RandomNumberGenerator.new()
+	rng.seed = int(settings.get("seed", 2600))
+	for i in int(foothills.count):
+		var angle := rng.randf() * TAU
+		var distance := rng.randf_range(foothills.distance[0], foothills.distance[1])
+		var x := cos(angle) * distance
+		var z := sin(angle) * distance
+		var radius := rng.randf_range(foothills.radius[0], foothills.radius[1])
+		var height := rng.randf_range(foothills.height[0], foothills.height[1])
+		if _crowds_mouth(x, z, radius, height, 0.0):
+			continue
+		mountain.add_child(_cone(x, z, radius, height))
+	for i in int(spires.count):
+		var angle := rng.randf() * TAU
+		var distance := rng.randf_range(spires.distance[0], spires.distance[1])
+		var base_y := rng.randf_range(spires.base[0], spires.base[1])
+		var height := rng.randf_range(spires.height[0], spires.height[1])
+		mountain.add_child(_cone(cos(angle) * distance, sin(angle) * distance, rng.randf_range(spires.radius[0], spires.radius[1]), height, base_y))
+	var ledge := CSGBox3D.new()
+	ledge.size = Vector3(design.ledge.width, 110, design.ledge.depth)
+	ledge.position = mouth + Vector3(0, -55, 10)
+	ledge.material = rock
+	mountain.add_child(ledge)
+	add_child(mountain)
+
+
+func _crowds_mouth(x: float, z: float, radius: float, height: float, base_y: float) -> bool:
+	for y: float in [mouth.y - 80.0, mouth.y, mouth.y + 80.0, mouth.y + 180.0]:
+		if y < base_y or y > base_y + height:
+			continue
+		var reach: float = radius * (1.0 - (y - base_y) / height)
+		if Vector2(x, z).distance_to(Vector2(0.0, mouth.z)) < reach + 110.0:
+			return true
+	return false
+
+
 # --- Caves ------------------------------------------------------------------
 
 func _carve(node: CSGShape3D) -> void:
@@ -304,7 +376,7 @@ func _carve_tunnel(tunnel: Dictionary) -> void:
 func _light(position: Vector3, range_m: float, energy: float, shadows: bool) -> void:
 	var light := OmniLight3D.new()
 	light.position = position
-	light.light_color = LANTERN
+	light.light_color = lantern
 	light.light_energy = energy
 	light.omni_range = range_m
 	light.omni_attenuation = 1.4
@@ -315,9 +387,9 @@ func _light(position: Vector3, range_m: float, energy: float, shadows: bool) -> 
 	mesh.radius = 0.55
 	mesh.height = 1.1
 	var glow := StandardMaterial3D.new()
-	glow.albedo_color = LANTERN
+	glow.albedo_color = lantern
 	glow.emission_enabled = true
-	glow.emission = LANTERN
+	glow.emission = lantern
 	glow.emission_energy_multiplier = 3.0
 	glow.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mesh.material = glow

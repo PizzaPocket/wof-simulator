@@ -57,7 +57,7 @@ func _run() -> void:
 	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Map must release the mouse")
 
 	# Every start location of every landmass is a pin, plus the detailed village.
-	var expected := 4 # the MudWing village, Jade Mountain Academy, Sky Kingdom palace, Scorpion Den
+	var expected := 8 # the village, academy, palace, Scorpion Den, stronghold, ice palace, Summer Palace, NightWing fortress
 	for id in ["pyrrhia", "pantala", "forgotten_isles", "nightwing_island"]:
 		var definition: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/terrain/%s.json" % id))
 		expected += definition.entries.size()

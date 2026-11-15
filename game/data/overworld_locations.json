@@ -190,6 +190,95 @@
           "Loading Clay"
         ]
       ]
+    },
+    {
+      "id": "burn_stronghold",
+      "name": "SandWing stronghold",
+      "kingdom": "Kingdom of Sand",
+      "continent": "pyrrhia",
+      "position": [
+        557,
+        855
+      ],
+      "eras": [
+        "arc1",
+        "arc2"
+      ],
+      "placement_note": "At the Burn's Stronghold label on the traced map. Authored blockout; see docs/sites.md.",
+      "scene": "res://scenes/burn_stronghold.tscn",
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
+    },
+    {
+      "id": "ice_palace",
+      "name": "IceWing palace",
+      "kingdom": "Ice Kingdom",
+      "continent": "pyrrhia",
+      "position": [
+        295,
+        117
+      ],
+      "eras": [
+        "arc1",
+        "arc2",
+        "arc3"
+      ],
+      "placement_note": "At the Queen Glacier's Palace label on the traced map. Authored blockout; see docs/sites.md.",
+      "scene": "res://scenes/ice_palace.tscn",
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
+    },
+    {
+      "id": "summer_palace",
+      "name": "Summer Palace",
+      "kingdom": "Kingdom of the Sea",
+      "continent": "pyrrhia",
+      "position": [
+        1620,
+        558
+      ],
+      "eras": [
+        "arc1",
+        "arc2"
+      ],
+      "placement_note": "On an island of the Bay of a Thousand Scales (position authored). Authored blockout; see docs/sites.md.",
+      "scene": "res://scenes/summer_palace.tscn",
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
+    },
+    {
+      "id": "nightwing_volcano",
+      "name": "NightWing fortress",
+      "kingdom": "NightWing Island",
+      "continent": "nightwing_island",
+      "position": [
+        352,
+        292
+      ],
+      "eras": [
+        "arc1",
+        "arc2"
+      ],
+      "placement_note": "On the south slope of the volcano (data/terrain/nightwing_island.json volcanoes). Authored blockout; see docs/sites.md.",
+      "scene": "res://scenes/nightwing_volcano.tscn",
+      "assets": [
+        [
+          "res://assets/clay.glb",
+          "Loading Clay"
+        ]
+      ]
     }
   ]
 }

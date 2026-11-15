@@ -1,0 +1,77 @@
+{
+  "note": "Authored blockout of the SandWing stronghold. Metres relative to the courtyard centre. Sources: Wings of Fire wiki mirror (Kingdom of Sand page, 'SandWing stronghold'): a palace built to resist attack rather than for beauty; under Burn it showed enemy heads on spikes and 'Burn's weirdling tower'; under Thorn the spikes were removed; prisoners are held there; a tunnel entrance from the Rainforest Kingdom lies hidden by sand just outside. The page states no shape, materials, throne room, courtyards, walls, entrances or sizes, so the plan and every dimension are authored.",
+  "title": "SandWing stronghold",
+  "eras": [
+    "arc1",
+    "arc2"
+  ],
+  "label_by_era": {
+    "arc1": [
+      "Burn's Stronghold \u00b7 Arc 1",
+      "Enemy heads on spikes, the weirdling tower \u00b7 authored layout"
+    ],
+    "arc2": [
+      "The SandWing stronghold \u00b7 Arc 2",
+      "Thorn's reign: the spikes are gone \u00b7 authored layout"
+    ]
+  },
+  "env": {
+    "sky_top": "7fa6c4",
+    "sky_horizon": "f0dcb4",
+    "fog_color": "ead2a8",
+    "fog_density": 0.00014,
+    "sun_color": "ffe3b8"
+  },
+  "ground_color": "d2b47a",
+  "ground_radius": 9000.0,
+  "boundary_radius": 1400.0,
+  "view_distance": 9000.0,
+  "seed": 8,
+  "spawn": [
+    0,
+    0.2,
+    380
+  ],
+  "wall": {
+    "half_w": 125.0,
+    "half_d": 100.0,
+    "height": 26.0,
+    "thickness": 7.0,
+    "gate_width": 36.0,
+    "tower": [
+      14.0,
+      42.0
+    ]
+  },
+  "keep": {
+    "x": 0,
+    "z": -25,
+    "w": 100,
+    "d": 72,
+    "height": 38,
+    "thickness": 6,
+    "door": 24
+  },
+  "spike_spacing": 15.0,
+  "weirdling_tower": {
+    "x": 88,
+    "z": -72,
+    "segments": 14,
+    "eras": [
+      "arc1"
+    ]
+  },
+  "cells": {
+    "x": -80,
+    "z": -70,
+    "size": [
+      40,
+      14,
+      16
+    ]
+  },
+  "hatch": {
+    "x": -175,
+    "z": 160
+  }
+}

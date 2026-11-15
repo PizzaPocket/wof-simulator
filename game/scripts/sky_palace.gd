@@ -5,19 +5,14 @@ extends "res://scripts/rock_site.gd"
 ## the sky at the front. The era changes the gold: Scarlet's reign (Arc 1) veins the stone
 ## with gold, and Queen Ruby (Arc 2) has had it stripped.
 ## Coordinates: the plateau centre is `mouth`; the palace sits toward -Z.
-var era := "arc1"
-
 
 func _design_path() -> String:
 	return "res://data/sky_palace_design.json"
 
 
 func _prepare_site() -> void:
-	era = current_era()
-	if not era in design.gold_by_era:
-		era = "arc1"
+	_pick_era()
 	mouth = Vector3(0, float(design.mountain.plateau_y), 0)
-	design.label = design.label_by_era[era]
 
 
 func _make_rock() -> void:

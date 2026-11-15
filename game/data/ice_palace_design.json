@@ -1,0 +1,263 @@
+{
+  "note": "Authored blockout of an IceWing palace. Metres relative to the cave mouth on a flight ledge. Sources: Wings of Fire wiki mirror (Ice Kingdom page): the best-described palace is the southern one, with ice walls and floor, ice shards on the ground, smaller cramped halls, mismatched ice carvings (a polar bear, a wolf, scavengers, an owl) and several flight ledges; the main palace at the north-west holds the moon globe tree; four palaces exist; three moons show in the sky; Snowfall's palace has a forbidden treasury. The page gives no plan, sizes or throne room, so all of that is authored. The Great Ice Cliff and the Circle Rankings are not modelled.",
+  "title": "IceWing palace",
+  "eras": [
+    "arc1",
+    "arc2",
+    "arc3"
+  ],
+  "label_by_era": {
+    "arc1": [
+      "IceWing palace \u00b7 Arc 1",
+      "Queen Glacier's palace \u00b7 authored layout"
+    ],
+    "arc2": [
+      "IceWing palace \u00b7 Arc 2",
+      "Queen Glacier's palace \u00b7 authored layout"
+    ],
+    "arc3": [
+      "IceWing palace \u00b7 Arc 3",
+      "Queen Snowfall's palace \u00b7 authored layout"
+    ]
+  },
+  "label": [
+    "IceWing palace",
+    "Authored layout"
+  ],
+  "env": {
+    "sky_top": "5d86ad",
+    "sky_horizon": "d7e6f0",
+    "fog_color": "dde9f1",
+    "fog_density": 0.00012,
+    "sun_color": "dbe8ff",
+    "ambient": 0.65,
+    "exposure": 0.95
+  },
+  "rock": {
+    "low_color": "9fc6df",
+    "high_color": "e6f2fa",
+    "snow_color": "ffffff",
+    "snow_line": -100.0,
+    "bump": 0.35
+  },
+  "lantern": "c4e4ff",
+  "ground_color": "e2edf3",
+  "ground_radius": 14000.0,
+  "boundary_radius": 2200.0,
+  "view_distance": 20000.0,
+  "spawn": [
+    0,
+    0.2,
+    24
+  ],
+  "ready_probes": [
+    [
+      0.3,
+      24.2
+    ],
+    [
+      0.3,
+      -40.2
+    ]
+  ],
+  "mountain": {
+    "ledge_y": 150.0,
+    "height": 760.0,
+    "base_radius": 520.0,
+    "seed": 77,
+    "satellites": [
+      {
+        "x": -300,
+        "z": -60,
+        "radius": 300,
+        "height": 520
+      },
+      {
+        "x": 300,
+        "z": -120,
+        "radius": 280,
+        "height": 600
+      },
+      {
+        "x": 0,
+        "z": -330,
+        "radius": 260,
+        "height": 480
+      }
+    ],
+    "foothills": {
+      "count": 14,
+      "distance": [
+        200,
+        500
+      ],
+      "radius": [
+        80,
+        180
+      ],
+      "height": [
+        300,
+        700
+      ]
+    },
+    "spires": {
+      "count": 10,
+      "distance": [
+        0,
+        140
+      ],
+      "base": [
+        560,
+        680
+      ],
+      "radius": [
+        36,
+        70
+      ],
+      "height": [
+        160,
+        340
+      ]
+    }
+  },
+  "ledge": {
+    "width": 70.0,
+    "depth": 60.0
+  },
+  "chambers": [
+    {
+      "id": "landing",
+      "name": "Flight-ledge hall",
+      "x": 0,
+      "z": -70,
+      "radius": 28,
+      "height": 24,
+      "dome": 0.55,
+      "source": "authored (the wiki mentions several flight ledges for entry and exit)"
+    },
+    {
+      "id": "great",
+      "name": "Great hall",
+      "x": 0,
+      "z": -170,
+      "radius": 46,
+      "height": 36,
+      "dome": 0.55,
+      "source": "authored"
+    },
+    {
+      "id": "carvings",
+      "name": "Carving gallery",
+      "x": -125,
+      "z": -170,
+      "radius": 26,
+      "height": 24,
+      "dome": 0.6,
+      "source": "wiki: mismatched ice carvings of a polar bear, a wolf, scavengers and an owl (carvings not yet modelled)"
+    },
+    {
+      "id": "moontree",
+      "name": "Moon globe tree",
+      "x": 125,
+      "z": -170,
+      "radius": 24,
+      "height": 30,
+      "dome": 0.6,
+      "source": "wiki: the moon globe tree stands inside the main palace"
+    },
+    {
+      "id": "throne",
+      "name": "Throne room",
+      "x": 0,
+      "z": -262,
+      "radius": 34,
+      "height": 30,
+      "dome": 0.55,
+      "source": "authored (the wiki gives no throne room)"
+    },
+    {
+      "id": "treasury",
+      "name": "Treasury",
+      "x": -95,
+      "z": -275,
+      "radius": 20,
+      "height": 20,
+      "dome": 0.6,
+      "source": "wiki: Snowfall's palace has a forbidden treasury"
+    }
+  ],
+  "tunnels": [
+    {
+      "from": [
+        0,
+        40
+      ],
+      "to": [
+        0,
+        -70
+      ],
+      "width": 22,
+      "height": 22
+    },
+    {
+      "from": [
+        0,
+        -70
+      ],
+      "to": [
+        0,
+        -170
+      ],
+      "width": 22,
+      "height": 22
+    },
+    {
+      "from": [
+        0,
+        -170
+      ],
+      "to": [
+        -125,
+        -170
+      ],
+      "width": 16,
+      "height": 16
+    },
+    {
+      "from": [
+        0,
+        -170
+      ],
+      "to": [
+        125,
+        -170
+      ],
+      "width": 16,
+      "height": 16
+    },
+    {
+      "from": [
+        0,
+        -170
+      ],
+      "to": [
+        0,
+        -262
+      ],
+      "width": 22,
+      "height": 22
+    },
+    {
+      "from": [
+        0,
+        -262
+      ],
+      "to": [
+        -95,
+        -275
+      ],
+      "width": 14,
+      "height": 14
+    }
+  ]
+}

@@ -21,8 +21,9 @@ Island at a shared metre scale. There are no separate maps or tabs.
   `game/data/eras.json`; the arc names follow the books and their dating is not established.
 
 See [bare terrain](bare-terrain.md) for scales, generation and controls. Detailed destinations:
-the MudWing village, [Jade Mountain Academy](jade-mountain.md) (Arc 2) and the rough
-[Sky Kingdom palace and Scorpion Den](sites.md) (Arc 1 and 2). Each map visit stores the chosen era
+the MudWing village, [Jade Mountain Academy](jade-mountain.md) (Arc 2) and six rough blockouts
+(the [Sky Kingdom palace, Scorpion Den, SandWing stronghold, IceWing palace, Summer Palace and
+NightWing fortress](sites.md)). Each map visit stores the chosen era
 so a destination can show its era's version.
 
 Select **MudWing village** in the Mud Kingdom to
