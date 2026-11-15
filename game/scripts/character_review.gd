@@ -190,6 +190,7 @@ func _button(text_value: String, parent: Control, action: Callable) -> Button:
 	var button := Button.new()
 	button.text = text_value
 	button.custom_minimum_size.y = 38
+	UiStyle.style_button(button, UiStyle.BLUE_TEXT, UiStyle.BLUE_TEXT, 19, true)
 	button.pressed.connect(action)
 	parent.add_child(button)
 	return button
@@ -201,12 +202,7 @@ func _make_review_ui() -> void:
 	var panel := PanelContainer.new()
 	panel.position = Vector2(20, 20)
 	panel.custom_minimum_size.x = 230
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.055, 0.085, 0.065, 0.96)
-	style.set_corner_radius_all(8)
-	for side in [SIDE_LEFT, SIDE_RIGHT, SIDE_TOP, SIDE_BOTTOM]:
-		style.set_content_margin(side, 18)
-	panel.add_theme_stylebox_override("panel", style)
+	panel.add_theme_stylebox_override("panel", UiStyle.card(16, 18, 18, 10, Color(1, 1, 1, 0.97)))
 	canvas.add_child(panel)
 	var scroll := ScrollContainer.new()
 	scroll.custom_minimum_size = Vector2(230, 0)
@@ -217,21 +213,25 @@ func _make_review_ui() -> void:
 	stack.add_theme_constant_override("separation", 10)
 	scroll.add_child(stack)
 	selector = OptionButton.new()
+	UiStyle.style_button(selector, UiStyle.INK, UiStyle.INK, 18, true)
 	for id in IDS:
 		selector.add_item("Clay" if id == "clay" else profiles[id].name)
 	selector.item_selected.connect(func(index): select_character(IDS[index]))
 	stack.add_child(selector)
 	heading = Label.new()
-	heading.add_theme_font_size_override("font_size", 27)
+	heading.add_theme_font_size_override("font_size", 24)
+	heading.add_theme_color_override("font_color", UiStyle.INK)
+	heading.add_theme_font_override("font", UiStyle.bold_font())
 	stack.add_child(heading)
 	details_label = Label.new()
 	details_label.custom_minimum_size.x = 210
 	details_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	details_label.add_theme_font_size_override("font_size", 16)
-	details_label.add_theme_color_override("font_color", Color("e1e5d5"))
+	details_label.add_theme_color_override("font_color", UiStyle.INK)
 	stack.add_child(details_label)
 	mode_button = _button("", stack, func(): inspecting = not inspecting; _set_mode())
 	pose_selector = OptionButton.new()
+	UiStyle.style_button(pose_selector, UiStyle.INK, UiStyle.INK, 18, true)
 	for value in ["Rest / folded wings", "Wings spread", "Flight pose", "Plain clay · shape review"]:
 		pose_selector.add_item(value)
 	pose_selector.item_selected.connect(func(index): pose = index; inspecting = true; _set_mode(); frame_body())
@@ -244,7 +244,7 @@ func _make_review_ui() -> void:
 	instructions = Label.new()
 	instructions.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	instructions.add_theme_font_size_override("font_size", 14)
-	instructions.add_theme_color_override("font_color", Color("d5dfc9"))
+	instructions.add_theme_color_override("font_color", UiStyle.INK_SECONDARY)
 	stack.add_child(instructions)
 	_button("Return to village · F8", stack, func(): get_tree().change_scene_to_file("res://scenes/mudwing_wetlands.tscn"))
 	reference = TextureRect.new()

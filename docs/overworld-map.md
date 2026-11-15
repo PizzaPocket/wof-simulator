@@ -53,10 +53,12 @@ lakes, biome rules and elevation remain future work in the original plan.
 ## Map assets
 
 The map is drawn entirely from native vector geometry by
-`game/scripts/world_map.gd`: extracted coastline polygons, clipped terrain
-color fields, a soft shallow-water shelf, mountain symbols, river strokes and
-lakes. Labels are real Godot text; continent names fade out and kingdom/region
-names fade in as you zoom. There is no raster map or imported SVG texture in the runtime.
+`game/scripts/world_map.gd`, in the standard Google Maps style (see the
+[design record](overworld-design.md#map-style-google-maps)): one water colour, land with
+blended climate tints (green, desert, arctic), dashed kingdom borders along land only, rivers and lakes in the water colour, and no
+mountain symbols. A **Terrain** toggle adds hillshade from `*_overview.height`. Labels are real
+Godot text; continent names fade out and kingdom/region names fade in as you zoom. The map opens
+zoomed in on Pyrrhia. There is no raster map or imported SVG texture in the runtime.
 Each landmass keeps its own source-map pixel space (Pyrrhia is **2165 × 1606**);
 `world_map.gd` places all four in one 1200 × 700 km metre space using the same
 offsets as `game/data/terrain/world.json`. The camera is a centre and a zoom

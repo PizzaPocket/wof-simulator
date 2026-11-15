@@ -112,75 +112,72 @@ func _material(color: Color) -> StandardMaterial3D:
 	return material
 
 
+const UiStyle = preload("res://scripts/ui_style.gd")
+
+
+## A readable card of text over the 3D scene (the location name and the like). Returns the label;
+## hiding it hides the card, so the help panel can cover it.
+func _add_location_label(copy: String, at := Vector2(24, 68)) -> Label:
+	var label := UiStyle.text(copy, 13, UiStyle.INK)
+	var holder := UiStyle.card_label(label)
+	holder.position = at
+	hud.add_child(holder)
+	if is_instance_valid(help_toggle):
+		help_toggle.toggled.connect(func(expanded: bool): label.visible = not expanded)
+	return label
+
+
 func _make_hud() -> void:
 	var canvas := CanvasLayer.new()
 	hud = canvas
 	add_child(canvas)
 	var panel := PanelContainer.new()
 	help_panel = panel
-	panel.position = Vector2(24, 62)
+	panel.position = Vector2(24, 68)
 	panel.visible = false
 	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.07, 0.12, 0.12, 0.88)
-	style.content_margin_left = 20
-	style.content_margin_right = 20
-	style.content_margin_top = 16
-	style.content_margin_bottom = 16
-	style.set_corner_radius_all(8)
+	var style := UiStyle.frost_style(16, 22, 18)
 	panel.add_theme_stylebox_override("panel", style)
+	panel.material = UiStyle.frost_material()
 	canvas.add_child(panel)
 	help_toggle = Button.new()
-	help_toggle.text = "(H)elp"
+	help_toggle.text = "Help"
 	help_toggle.tooltip_text = "Show controls · H / Back (Share)"
 	help_toggle.position = Vector2(24, 20)
 	help_toggle.custom_minimum_size = Vector2(64, 36)
-	help_toggle.flat = false
 	help_toggle.toggle_mode = true
 	# H / controller Back handle keyboard focus; don't steal Space from jumping.
 	help_toggle.focus_mode = Control.FOCUS_NONE
-	help_toggle.add_theme_font_size_override("font_size", 14)
-	help_toggle.add_theme_color_override("font_color", Color("d4dec9"))
-	help_toggle.add_theme_color_override("font_hover_color", Color("fff4e6"))
-	help_toggle.add_theme_color_override("font_pressed_color", Color("fff4e6"))
-	var hint_style := StyleBoxFlat.new()
-	hint_style.bg_color = Color(0.07, 0.12, 0.12, 0.72)
-	hint_style.set_corner_radius_all(4)
-	help_toggle.add_theme_stylebox_override("normal", hint_style)
 	help_toggle.toggled.connect(func(expanded: bool) -> void:
 		help_panel.visible = expanded
 		if is_instance_valid(credits_panel): credits_panel.hide())
-	canvas.add_child(help_toggle)
+	var help_card := UiStyle.frost_button(help_toggle, 18)
+	help_card.position = Vector2(24, 20)
+	canvas.add_child(help_card)
 	var map_button := Button.new()
 	map_button.name = "WorldMapButton"
-	map_button.text = "World map · M / Start"
-	map_button.position = Vector2(100, 20)
-	map_button.custom_minimum_size = Vector2(192, 36)
+	map_button.text = "World map"
+	map_button.tooltip_text = "Return to the world map · M / Start"
+	map_button.custom_minimum_size = Vector2(112, 36)
 	map_button.focus_mode = Control.FOCUS_NONE
-	map_button.add_theme_font_size_override("font_size", 14)
-	map_button.add_theme_stylebox_override("normal", hint_style)
 	map_button.pressed.connect(_return_to_map)
-	canvas.add_child(map_button)
+	var map_card := UiStyle.frost_button(map_button, 18)
+	map_card.position = Vector2(100, 20)
+	canvas.add_child(map_card)
 	var stack := VBoxContainer.new()
-	stack.add_theme_constant_override("separation", 8)
+	stack.add_theme_constant_override("separation", 10)
 	panel.add_child(stack)
-	var title := Label.new()
-	title.text = "Controls"
-	title.add_theme_font_size_override("font_size", 20)
-	stack.add_child(title)
-	var help := Label.new()
-	help.text = "Move   WASD / left stick\nLook / aim   click + mouse / right stick / Q E\nRun / faster flight   Shift / LB (L1)\nJump   Space / A (Cross)\nFly   jump again in the air\nClimb / descend in flight   aim the camera up / down\nClimb a hut   move into its side; use movement controls\nLeave a wall   jump, or Ctrl / B to let go\nLand   Ctrl / B (Circle)\nBreathe fire   hold V / RB (R1)\nWings   F · [ / ] / triggers\nTalk / reply   J / D-pad right\nSelect response   Enter / A (Cross), or click\nLeave conversation   Esc / B (Circle)\nRecenter camera   C / right-stick click\nZoom   mouse wheel\nRelease mouse   Esc / Start\nClose help   H / Back (Share)"
+	stack.add_child(UiStyle.text("Controls", 20, UiStyle.INK, true))
+	var help := UiStyle.text("Move   WASD / left stick\nLook / aim   click + mouse / right stick / Q E\nRun / faster flight   Shift / LB (L1)\nJump   Space / A (Cross)\nFly   jump again in the air\nClimb / descend in flight   aim the camera up / down\nClimb   move into any wall or steep slope\nLeave a wall   jump, or Ctrl / B to let go\nLand   Ctrl / B (Circle)\nBreathe fire   hold V / RB (R1)\nWings   F · [ / ] / triggers\nTalk / reply   J / D-pad right\nSelect response   Enter / A (Cross), or click\nLeave conversation   Esc / B (Circle)\nRecenter camera   C / right-stick click\nZoom   mouse wheel\nRelease mouse   Esc / Start\nClose help   H / Back (Share)", 15, UiStyle.INK)
 	if has_method("_make_villagers"):
 		help.text += "\nMeet and switch dragons   X / X (Square)\nSwitch collected dragons   Tab / D-pad left"
-	help.add_theme_font_size_override("font_size", 17)
-	help.add_theme_color_override("font_color", Color("d4dec9"))
 	stack.add_child(help)
 	help.text += "\n3D character review   F8 / Y (Triangle)"
 	help.text += "\nReturn to world map   M / Start"
 	var credits_link := Button.new()
 	credits_link.text = "Credits"
-	credits_link.flat = true
 	credits_link.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	UiStyle.style_button(credits_link, UiStyle.BLUE_TEXT, UiStyle.BLUE_TEXT, 8)
 	credits_link.pressed.connect(func():
 		help_panel.hide()
 		credits_panel.show())
@@ -190,26 +187,27 @@ func _make_hud() -> void:
 	credits_panel.position = panel.position
 	credits_panel.custom_minimum_size.x = 500
 	credits_panel.add_theme_stylebox_override("panel", style)
+	credits_panel.material = UiStyle.frost_material()
 	credits_panel.hide()
 	canvas.add_child(credits_panel)
 	var credit_stack := VBoxContainer.new()
-	credit_stack.add_theme_constant_override("separation", 16)
+	credit_stack.add_theme_constant_override("separation", 14)
 	credits_panel.add_child(credit_stack)
-	var credit_title := Label.new()
-	credit_title.text = "Credits"
-	credit_title.add_theme_font_size_override("font_size", 20)
-	credit_stack.add_child(credit_title)
+	credit_stack.add_child(UiStyle.text("Credits", 20, UiStyle.INK, true))
 	var credits := RichTextLabel.new()
 	credits.bbcode_enabled = true
 	credits.fit_content = true
 	credits.scroll_active = false
-	credits.add_theme_font_size_override("normal_font_size", 17)
-	credits.add_theme_color_override("default_color", Color("d4dec9"))
+	credits.add_theme_font_size_override("normal_font_size", 15)
+	credits.add_theme_color_override("default_color", UiStyle.INK)
+	credits.add_theme_color_override("meta_color", UiStyle.BLUE_TEXT)
 	credits.text = "Human base, skeleton, lip boundary and Kai hair: MakeHuman (CC0).\n\nCamille’s wavy hair: Elvaerwyn, [url=https://static.makehumancommunity.org/assets/assetpacks/hair02.html]CC BY[/url].\n\nCorinne’s curly hair: [url=https://www.makehumancommunity.org/node/477]punkduck[/url], [url=https://www.makehumancommunity.org/assets/assetpacks/hair03.html]CC BY[/url].\nFitted, recolored and weighted for this game."
 	credits.meta_clicked.connect(func(link): OS.shell_open(str(link)))
 	credit_stack.add_child(credits)
 	var back := Button.new()
 	back.text = "Back to controls"
+	back.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	UiStyle.style_button(back, UiStyle.BLUE_TEXT, UiStyle.BLUE_TEXT, 17, true)
 	back.pressed.connect(func():
 		credits_panel.hide()
 		help_panel.show())

@@ -32,8 +32,13 @@ func setup(character: CharacterBody3D) -> void:
 func ray(a: Vector3, b: Vector3) -> Dictionary:
 	return body.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(a, b, 1, [body.get_rid()]))
 
+## Any solid surface can be climbed: walls, slopes, rock and huts alike. Characters cannot, and a
+## body can opt out with the "unclimbable" group.
 func climbable(hit: Dictionary) -> bool:
-	return not hit.is_empty() and hit.collider.is_in_group("climbable")
+	if hit.is_empty():
+		return false
+	var surface = hit.collider
+	return not (surface is CharacterBody3D) and not surface.is_in_group("unclimbable")
 
 func can_grip(n: Vector3) -> bool:
 	return n.dot(Vector3.UP) >= cos(deg_to_rad(float(settings.maximum_slope_degrees)))
@@ -46,7 +51,7 @@ func try_attach(stick: Vector2) -> bool:
 	if not climbable(hit):
 		for i in body.get_slide_collision_count():
 			var contact := body.get_slide_collision(i)
-			if contact.get_collider().is_in_group("climbable"):
+			if climbable({"collider": contact.get_collider()}):
 				hit = {"normal":contact.get_normal(),"position":contact.get_position(),"collider":contact.get_collider()}
 				break
 	if not climbable(hit): return false
@@ -155,7 +160,7 @@ func update(delta: float, stick: Vector2) -> bool:
 		return true
 	last_contact = hit.position
 	normal = normal.lerp(next_normal, 1-exp(-delta*12)).normalized()
-	if normal.dot(Vector3.UP) > .78:
+	if normal.dot(Vector3.UP) > cos(deg_to_rad(float(settings.release_slope_degrees))):
 		if stick.y<-.1 and _begin_mantle():return true
 		release()
 		body.velocity = forward * 1.2
@@ -183,10 +188,11 @@ func _begin_mantle() -> bool:
 	# Find a real upward-facing sill behind the opening before committing.
 	var inward := Vector3(-normal.x, 0, -normal.z).normalized()
 	var sill: Dictionary = {}
-	for depth in [.25,.65,1.1]:
+	var reach := float(settings.mantle_reach_m)
+	for depth in [.25,.65,1.1,1.6]:
 		var over: Vector3 = body.global_position + inward * float(depth)
-		var hit := ray(over + Vector3.UP * 2.0, over - Vector3.UP * 1.5)
-		if climbable(hit) and hit.normal.dot(Vector3.UP) > .3 and hit.position.y-body.position.y < 1.6:
+		var hit := ray(over + Vector3.UP * (reach + .4), over - Vector3.UP * 1.5)
+		if climbable(hit) and hit.normal.dot(Vector3.UP) > .3 and hit.position.y-body.position.y < reach:
 			sill = hit
 			break
 	if sill.is_empty():

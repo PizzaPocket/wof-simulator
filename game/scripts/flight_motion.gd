@@ -10,6 +10,7 @@ var flap_blend: float = 0.0
 var recovery: float = 0.0
 var stroke: float = 0.0
 var launch_effort: float = 0.0
+var turn_effort: float = 0.0
 var was_flying: bool = false
 var recovery_joints: Array[Dictionary] = []
 var stroke_bones: Array[Dictionary] = []
@@ -78,14 +79,18 @@ func update(delta: float) -> void:
 	was_flying = flying
 	var launch_seconds := float(settings.get("launch_seconds", 1.7))
 	launch_effort = 1.0 - smoothstep(launch_seconds - 0.6, launch_seconds, body.state_time) if flying else 0.0
-	flap_blend = lerpf(flap_blend, maxf(launch_effort, 1.0 if climbing else 0.0), 1.0 - exp(-float(settings.flap_response) * delta))
+	# Hard turns and air-braking make the wings work: beat faster and wider, as a bat or bird does
+	# when it changes direction at speed.
+	turn_effort = body.flight_turn_effort if flying else 0.0
+	var wanted_blend := maxf(maxf(launch_effort, 1.0 if climbing else 0.0), turn_effort)
+	flap_blend = lerpf(flap_blend, wanted_blend, 1.0 - exp(-float(settings.flap_response) * (1.0 + 1.6 * turn_effort) * delta))
 	if flap_blend > 0.001:
-		phase = fposmod(phase + delta * float(settings.flap_frequency_hz) * lerpf(1.0, 1.12, launch_effort), 1.0)
+		phase = fposmod(phase + delta * float(settings.flap_frequency_hz) * lerpf(1.0, 1.12, launch_effort) * (1.0 + 1.1 * turn_effort), 1.0)
 	var split := float(settings.downstroke_fraction)
 	var fraction := smoothstep(0.0, split, phase) if phase < split else smoothstep(split, 1.0, phase)
 	var up := deg_to_rad(float(settings.flap_up_degrees))
 	var down := deg_to_rad(float(settings.flap_down_degrees))
-	stroke = (lerpf(up, down, fraction) if phase < split else lerpf(down, up, fraction)) * lerpf(1.0, 1.35, launch_effort)
+	stroke = (lerpf(up, down, fraction) if phase < split else lerpf(down, up, fraction)) * lerpf(1.0, 1.35, launch_effort) * (1.0 + 0.4 * turn_effort)
 	recovery = sin(PI * clampf((phase - split) / (1.0 - split), 0, 1)) if phase >= split else 0.0
 
 
@@ -99,10 +104,14 @@ func apply_stroke(deployment: float, pose_solver: RefCounted) -> void:
 		return
 	# Avoid a ground-scraping downstroke during deployment or a low landing.
 	var clearance: float = smoothstep(0.8, 2.5, body.ground_distance)
-	var angle := deg_to_rad(float(settings.glide_dihedral_degrees)) * deployment
-	angle += stroke * flap_blend * deployment * clearance
+	var glide := deg_to_rad(float(settings.glide_dihedral_degrees)) * deployment
+	var turning_left: bool = body.flight_turn_rate > 0.0
 	for item in stroke_bones:
 		var sign_side := 1.0 if item.side == "L" else -1.0
+		# The wing on the inside of the turn beats wider; the outside wing drives the yaw.
+		var inside: bool = (item.side == "L") == turning_left
+		var side_scale := 1.0 + turn_effort * (0.45 if inside else 0.12)
+		var angle := glide + stroke * flap_blend * deployment * clearance * side_scale
 		var index: int = item.index
 		var pose := rig.get_bone_global_pose(index)
 		pose.basis = Basis(Vector3.BACK, angle * sign_side * float(item.share)) * pose.basis
@@ -121,4 +130,5 @@ func reset() -> void:
 	recovery = 0.0
 	stroke = 0.0
 	launch_effort = 0.0
+	turn_effort = 0.0
 	was_flying = false

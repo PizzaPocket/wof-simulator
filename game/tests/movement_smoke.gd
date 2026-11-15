@@ -87,7 +87,8 @@ func _run() -> void:
 	player.position = Vector3(57, 0.05, 10)
 	Input.action_press("move_right")
 	await _ticks(60)
-	_check(player.position.x < 59.0 and player.is_on_wall(), "Collision prevents walking through walls")
+	# Any solid surface can be climbed, so walking into a wall either stops against it or grips it.
+	_check(player.position.x < 59.5 and (player.is_on_wall() or player.locomotion_state == &"climbing"), "Collision prevents walking through walls (the claws may grip it)")
 	_release()
 	player.position.y = -25
 	await _ticks(2)

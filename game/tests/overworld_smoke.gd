@@ -70,7 +70,19 @@ func _run() -> void:
 	check(academy >= 0, "Jade Mountain Academy needs a pin")
 	check(not atlas._open_in_era(atlas.pins[academy]), "The academy must be closed in Arc 1")
 	check(atlas._open_in_era(atlas.pins[pin_named(atlas, "Mud Kingdom")]), "Ordinary terrain starts are open in every era")
-	check(map.zoom == map.min_zoom, "The map opens on the whole world")
+	check(map.zoom > map.min_zoom * 1.5, "The map opens zoomed in, not on the whole world")
+	var pyrrhia_centre: Vector2 = map.world_to_screen(Vector2(map.continent("pyrrhia").origin) + Vector2(map.continent("pyrrhia").extent) * 0.5)
+	check(Rect2(Vector2.ZERO, map.size).has_point(pyrrhia_centre), "The map opens centred on Pyrrhia")
+	check(atlas.hover_tip.visible == false, "No tooltip on arrival")
+	await capture("start")
+	if atlas.terrain_toggle.visible:
+		atlas.terrain_toggle.button_pressed = true
+		check(map.relief_on, "The Terrain toggle must show the relief layer")
+		await capture("terrain")
+		atlas.terrain_toggle.button_pressed = false
+		check(not map.relief_on, "The Terrain toggle must hide the relief layer")
+	map.fit_world(true)
+	atlas._update_pins()
 	check(not atlas.hover_tip.visible, "Destination details must be hidden on arrival")
 	var visible_at_world := 0
 	for button in atlas.hotspots:
@@ -122,7 +134,7 @@ func _run() -> void:
 	map.set_view(atlas.pins[academy].world, 1.0 / 200.0, true)
 	atlas._update_pins()
 	atlas.hotspots[academy].mouse_entered.emit()
-	check(atlas.tip_copy.text.contains("Opens in Arc 2"), "A closed pin's tip must name its era")
+	check(atlas.tip_action.text.contains("Opens in Arc 2"), "A closed pin's tip must name its era")
 	atlas.hotspots[academy].mouse_exited.emit()
 	atlas.hotspots[academy].pressed.emit()
 	await process_frame
@@ -139,6 +151,12 @@ func _run() -> void:
 	await capture("hover-desktop")
 	atlas.hotspots[village].mouse_exited.emit()
 	check(not atlas.hover_tip.visible, "Pointer exit must hide the destination")
+	# Hovering a pin's name does the same as hovering the pin itself.
+	check(atlas.pin_labels[village].visible, "The village name should be showing")
+	atlas.pin_labels[village].mouse_entered.emit()
+	check(atlas.hover_tip.visible and atlas.tip_title.text == "MudWing village", "Hovering the name must reveal the destination")
+	atlas.pin_labels[village].mouse_exited.emit()
+	check(not atlas.hover_tip.visible, "Leaving the name must hide the destination")
 	atlas.hotspots[village].grab_focus()
 	check(atlas.hover_tip.visible, "Keyboard/controller focus must reveal the destination")
 	atlas.hotspots[village].release_focus()

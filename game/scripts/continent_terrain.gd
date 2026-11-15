@@ -152,28 +152,30 @@ func _make_water() -> void:
 
 func _make_terrain_hud() -> void:
 	var panel := HBoxContainer.new()
-	panel.position = Vector2(24, 66)
+	panel.position = Vector2(24, 68)
+	panel.add_theme_constant_override("separation", 8)
 	hud.add_child(panel)
 	destination_menu = OptionButton.new()
-	destination_menu.custom_minimum_size = Vector2(210,36)
+	destination_menu.custom_minimum_size = Vector2(210, 36)
 	for entry in terrain_data.definition.entries: destination_menu.add_item(entry.name)
 	destination_menu.item_selected.connect(travel_to)
-	panel.add_child(destination_menu)
+	var popup := destination_menu.get_popup()
+	popup.add_theme_stylebox_override("panel", UiStyle.card(10, 6, 8, 10))
+	popup.add_theme_stylebox_override("hover", UiStyle.fill(UiStyle.HOVER_GRAY, 6))
+	popup.add_theme_color_override("font_color", UiStyle.INK)
+	popup.add_theme_color_override("font_hover_color", UiStyle.INK)
+	popup.add_theme_font_size_override("font_size", 14)
+	panel.add_child(UiStyle.frost_button(destination_menu, 18))
 	village_button = Button.new()
 	village_button.text = "Enter MudWing village"
 	village_button.visible = continent_id == "pyrrhia"
+	UiStyle.primary_button(village_button, 18)
+	village_button.custom_minimum_size.y = 36
 	village_button.pressed.connect(_enter_village)
 	panel.add_child(village_button)
-	location_label = Label.new()
-	location_label.position = Vector2(24,110)
-	location_label.add_theme_color_override("font_color", Color("f3e5c4"))
-	location_label.add_theme_color_override("font_shadow_color", Color("172c28"))
-	location_label.add_theme_constant_override("shadow_offset_x", 1)
-	location_label.add_theme_constant_override("shadow_offset_y", 1)
-	hud.add_child(location_label)
+	location_label = _add_location_label("", Vector2(24, 116))
 	help_toggle.toggled.connect(func(expanded: bool):
-		panel.visible = not expanded
-		location_label.visible = not expanded)
+		panel.visible = not expanded)
 
 func travel_to(index: int) -> void:
 	if shifting: return
@@ -205,7 +207,7 @@ func travel_to(index: int) -> void:
 	waiting_for_ground = false
 	player.set_physics_process(true)
 	destination_menu.select(index)
-	location_label.text = terrain_data.definition.name + " · " + entry.name + "\nBare terrain · Choose another starting point above"
+	location_label.text = terrain_data.definition.name + " · " + entry.name + "\nBare terrain"
 	player.process_mode = Node.PROCESS_MODE_INHERIT
 	shifting = false
 

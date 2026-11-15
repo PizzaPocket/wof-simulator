@@ -1,15 +1,17 @@
 {
-  "speed_m_s": 3.1,
+  "speed_m_s": 3.6,
   "stride_m": 2.4,
   "grip_lead_m": 0.9,
   "paw_clearance_m": 0.32,
-  "minimum_slope_degrees": 48,
+  "minimum_slope_degrees": 46,
   "maximum_slope_degrees": 115,
   "surface_probe_m": 2.2,
   "adhesion_m_s": 1.4,
   "jump_up_m_s": 8.0,
   "jump_out_m_s": 5.0,
-  "mantle_seconds": 0.95,
+  "mantle_seconds": 0.8,
   "wing_half_span_m": 7.2,
-  "note": "Claws support steep mud walls up to vertical and a limited overhang. Beyond 115 degrees there is no grip. W/S climbs vertically; A/D traverses. Jump leaves the surface; forward movement over a reachable lip mantles with collision checks."
+  "note": "Claws and long arms: any solid surface can be climbed (characters excluded). The pull phase of each step now carries most of the body travel, so the climb reads as a continuous scramble at close to a jog rather than small bursts. Walking (up to 45 degrees) hands over to climbing at 46 degrees and a climber lets go below 38.7 degrees. Beyond 115 degrees there is no grip. W/S climbs vertically; A/D traverses. Jump leaves the surface; forward movement over a reachable lip mantles with collision checks.",
+  "release_slope_degrees": 38.7,
+  "mantle_reach_m": 2.4
 }

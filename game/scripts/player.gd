@@ -36,6 +36,11 @@ var flight_mode: StringName = &"gliding"
 var flight_pitch: float = 0.0
 var flight_body_pitch: float = 0.0
 var flight_bank: float = 0.0
+var flight_turn_rate := 0.0 ## Signed yaw rate in flight (rad/s); positive turns left.
+var flight_turn_effort := 0.0 ## 0..1: how hard the wings must work to turn or brake.
+var flight_airbrake := 0.0 ## 0..1: speed being shed to make a tight turn.
+var bounding := false ## True during a high-speed landing's brace-and-hop sequence.
+var bound_count := 0
 var ground_distance: float = 0.0
 var takeoff_horizontal_speed: float = 0.0
 var jump_settings: Dictionary
@@ -61,6 +66,9 @@ func _setup_locomotion() -> void:
 	flight_settings = config.flight
 	climb = preload("res://scripts/surface_climb.gd").new()
 	climb.setup(self)
+	# Walking (up to the default 45 degrees) hands over to climbing just beyond it, and a climber
+	# lets go on a slope shallower than 38.7 degrees, so the two never flicker on one slope.
+	floor_max_angle = deg_to_rad(45.0)
 	arm.add_excluded_object(get_rid())
 
 
@@ -122,9 +130,18 @@ func _physics_process(delta: float) -> void:
 			if queued_flight:
 				_activate_flight()
 	elif locomotion_state == &"landing" and state_time >= landing_duration:
-		_set_state(&"grounded")
-		if visual.motion:
-			visual.motion.resume_ground_motion()
+		var landing_speed := Vector2(velocity.x, velocity.z).length()
+		if bounding and landing_speed > float(jump_settings.bound_run_limit_m_s):
+			# Spring off the braced legs: a hop proportional to the speed still to lose.
+			velocity.y = clampf(landing_speed * float(jump_settings.bound_hop_ratio), 4.0, 9.5)
+			bound_count += 1
+			_set_state(&"airborne")
+			air_time = 0.0
+		else:
+			bounding = false
+			_set_state(&"grounded")
+			if visual.motion:
+				visual.motion.resume_ground_motion()
 	if not _supported() and locomotion_state == &"grounded":
 		_set_state(&"airborne")
 		air_time = 0.0
@@ -151,6 +168,18 @@ func _physics_process(delta: float) -> void:
 	if _supported() and (locomotion_state == &"airborne" or locomotion_state == &"flying"):
 		landing_strength = clampf(absf(incoming_vertical) / jump_speed, 0.35, 1.0)
 		landing_duration = float(jump_settings.moving_landing_seconds) if Vector2(velocity.x, velocity.z).length() > walk_speed * 0.4 else float(jump_settings.landing_seconds)
+		var impact_speed := Vector2(velocity.x, velocity.z).length()
+		if impact_speed > float(jump_settings.bound_speed_m_s):
+			# Too fast to run out: brace on the legs, shed speed on impact and hop again.
+			if not bounding:
+				bound_count = 0
+			bounding = true
+			landing_strength = 1.6
+			landing_duration = float(jump_settings.bound_brace_seconds)
+			velocity.x *= float(jump_settings.bound_keep)
+			velocity.z *= float(jump_settings.bound_keep)
+		else:
+			bounding = false
 		_set_state(&"landing")
 		queued_flight = false
 		flight_mode = &"gliding"
@@ -267,32 +296,60 @@ func _fly(delta: float, stick: Vector2) -> void:
 	if stick.length() > 0.15:
 		desired_yaw += atan2(-stick.x, -stick.y)
 	var heading_error := wrapf(desired_yaw - visual.rotation.y, -PI, PI)
-	visual.rotation.y = lerp_angle(visual.rotation.y, desired_yaw, 1.0 - exp(-float(flight_settings.turn_response) * delta))
 	var boosting := Input.is_action_pressed("sprint")
 	var speed: float = flight_settings.boost_speed_m_s if boosting else flight_settings.speed_m_s
 	var max_climb: float = flight_settings.boost_max_climb_m_s if boosting else flight_settings.max_climb_m_s
 	var max_descent: float = flight_settings.boost_max_descent_m_s if boosting else flight_settings.max_descent_m_s
+	# Turning is limited by a lateral-acceleration budget (lift), so the faster the dragon flies the
+	# wider its turn. The body follows its heading; it never slides sideways or flies backwards.
+	var turn_cap := float(flight_settings.max_turn_rate_rad_s)
+	var lateral := float(flight_settings.lateral_accel_m_s2)
+	var current_speed := Vector2(velocity.x, velocity.z).length()
+	var wanted_rate := clampf(heading_error * float(flight_settings.turn_response), -turn_cap, turn_cap)
+	var allowed_rate := minf(turn_cap, lateral / maxf(current_speed, 8.0))
+	flight_turn_rate = move_toward(flight_turn_rate, clampf(wanted_rate, -allowed_rate, allowed_rate), float(flight_settings.turn_accel_rad_s2) * delta)
+	visual.rotation.y = wrapf(visual.rotation.y + flight_turn_rate * delta, -PI, PI)
 	var forward := Vector3(-sin(visual.rotation.y), 0, -cos(visual.rotation.y))
-	var target := forward * speed * cos(flight_pitch)
-	target.y = clampf(speed * sin(flight_pitch), -max_descent, max_climb)
-	var current_horizontal := Vector2(velocity.x, velocity.z)
-	var target_horizontal := Vector2(target.x, target.z)
+	var cruise := speed * cos(flight_pitch)
+	var target_speed := cruise
+	var braking_turn := 0.0
+	if absf(wanted_rate) > allowed_rate + 0.05:
+		# A tighter turn than this speed allows is flown by shedding speed with flared wings.
+		var needed := lateral / maxf(absf(wanted_rate), 0.1)
+		target_speed = minf(cruise, maxf(needed, float(flight_settings.min_turn_speed_m_s)))
+		braking_turn = clampf((current_speed - target_speed) / maxf(current_speed, 1.0) * 3.0, 0.0, 1.0)
 	var rate: float = flight_settings.boost_acceleration_m_s2 if boosting else flight_settings.acceleration_m_s2
-	if current_horizontal.length() > target_horizontal.length():
-		# Releasing Shift carries momentum and eases back to cruise.
-		rate = float(flight_settings.deceleration_m_s2)
-	var horizontal := current_horizontal.move_toward(target_horizontal, rate * delta)
-	velocity.x = horizontal.x
-	velocity.z = horizontal.y
+	if current_speed > target_speed:
+		# Releasing Shift carries momentum and eases back to cruise; a hard turn brakes much harder.
+		rate = float(flight_settings.turn_brake_m_s2) if braking_turn > 0.0 else float(flight_settings.deceleration_m_s2)
+	var new_speed := move_toward(current_speed, target_speed, rate * delta)
+	# Aerodynamic sideslip damping: velocity swings onto the heading within a fraction of a second.
+	var along := Vector2(forward.x, forward.z) * new_speed
+	var slipped := Vector2(velocity.x, velocity.z).lerp(along, 1.0 - exp(-float(flight_settings.align_rate) * delta))
+	if slipped.length() > 0.01:
+		slipped = slipped.normalized() * new_speed
+	velocity.x = slipped.x
+	velocity.z = slipped.y
+	var target_y := clampf(speed * sin(flight_pitch), -max_descent, max_climb)
 	var vertical_rate: float = flight_settings.boost_vertical_acceleration_m_s2 if boosting else flight_settings.vertical_acceleration_m_s2
-	velocity.y = move_toward(velocity.y, target.y, vertical_rate * delta)
+	velocity.y = move_toward(velocity.y, target_y, vertical_rate * delta)
 	flight_body_pitch = clampf(atan2(velocity.y, maxf(1.0, Vector2(velocity.x, velocity.z).length())), -0.7, 0.7)
-	flight_bank = clampf(-heading_error * 0.35, -0.3, 0.3)
+	# The body rolls into the turn (up to about 55 degrees) and the wings react to the effort.
+	flight_bank = clampf(-flight_turn_rate * 0.42, -0.95, 0.95)
+	flight_airbrake = move_toward(flight_airbrake, braking_turn, delta * 4.0)
+	var demand := absf(flight_turn_rate) / turn_cap if absf(flight_turn_rate) > 0.25 else 0.0
+	flight_turn_effort = move_toward(flight_turn_effort, maxf(demand, flight_airbrake), delta * 5.0)
 
 
 func _set_state(next: StringName) -> void:
 	if next == &"airborne":
 		takeoff_horizontal_speed = Vector2(velocity.x, velocity.z).length()
+	if next != &"flying":
+		flight_turn_rate = 0.0
+		flight_turn_effort = 0.0
+		flight_airbrake = 0.0
+	if next == &"flying":
+		bounding = false
 	locomotion_state = next
 	state_time = 0.0
 

@@ -434,12 +434,4 @@ func _light_interior() -> void:
 
 
 func _make_location_label() -> void:
-	location_label = Label.new()
-	location_label.position = Vector2(24, 66)
-	location_label.text = "\n".join(PackedStringArray(design.label))
-	location_label.add_theme_color_override("font_color", Color("f3e5c4"))
-	location_label.add_theme_color_override("font_shadow_color", Color("172c28"))
-	location_label.add_theme_constant_override("shadow_offset_x", 1)
-	location_label.add_theme_constant_override("shadow_offset_y", 1)
-	hud.add_child(location_label)
-	help_toggle.toggled.connect(func(expanded: bool): location_label.visible = not expanded)
+	location_label = _add_location_label("\n".join(PackedStringArray(design.label)))

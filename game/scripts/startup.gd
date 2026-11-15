@@ -39,9 +39,12 @@ func _ready() -> void:
 	_build_ui()
 	_start.call_deferred()
 
+const UiStyle = preload("res://scripts/ui_style.gd")
+var logo_height := 0.0
+
 func _build_ui() -> void:
 	var background := ColorRect.new()
-	background.color = Color("172c28")
+	background.color = UiStyle.BACKDROP
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(background)
 	var margin := MarginContainer.new()
@@ -51,70 +54,75 @@ func _build_ui() -> void:
 	add_child(margin)
 	var center := CenterContainer.new()
 	margin.add_child(center)
+	var panel := PanelContainer.new()
+	panel.add_theme_stylebox_override("panel", UiStyle.card(20, 40, 32, 14))
+	center.add_child(panel)
 	column = VBoxContainer.new()
-	column.custom_minimum_size.x = 580
-	column.add_theme_constant_override("separation", 18)
-	center.add_child(column)
+	column.custom_minimum_size.x = 500
+	column.add_theme_constant_override("separation", 16)
+	panel.add_child(column)
 	logo = TextureRect.new()
-	logo.texture = preload("res://assets/branding/wings-of-fire.svg")
-	logo.self_modulate = Color("edce91")
-	logo.custom_minimum_size = Vector2(0, 300)
+	logo.self_modulate = UiStyle.INK
+	logo.custom_minimum_size = Vector2(0, 220)
 	logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	logo.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	column.add_child(logo)
-	var title := _label("WOF Simulator", 25)
+	var title := _label("WOF Simulator", 22, UiStyle.INK, true)
 	column.add_child(title)
-	column.add_child(_label("A fan-made tribute • Private playtest • Not for sale", 16))
+	column.add_child(_label("A fan-made tribute · Private playtest · Not for sale", 13, UiStyle.INK_SECONDARY))
 	var gap := Control.new()
-	gap.custom_minimum_size.y = 22
+	gap.custom_minimum_size.y = 10
 	column.add_child(gap)
 	var row := HBoxContainer.new()
 	column.add_child(row)
-	status = _label("Preparing to load…", 16)
+	status = _label("Preparing to load…", 14, UiStyle.INK)
 	status.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	status.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(status)
-	percentage = _label("0%", 16)
+	percentage = _label("0%", 14, UiStyle.BLUE_TEXT, true)
 	row.add_child(percentage)
 	bar = ProgressBar.new()
 	bar.custom_minimum_size.y = 6
 	bar.show_percentage = false
-	var track := StyleBoxFlat.new()
-	track.bg_color = Color("435b50")
-	bar.add_theme_stylebox_override("background", track)
-	var fill := StyleBoxFlat.new()
-	fill.bg_color = Color("edce91")
-	bar.add_theme_stylebox_override("fill", fill)
+	bar.add_theme_stylebox_override("background", UiStyle.fill(Color("e8eaed"), 3))
+	bar.add_theme_stylebox_override("fill", UiStyle.fill(UiStyle.BLUE, 3))
 	column.add_child(bar)
-	column.add_child(_label("Progress measures completed loading stages", 14))
 	retry = Button.new()
 	retry.text = "Retry loading"
 	retry.visible = false
+	UiStyle.primary_button(retry)
 	retry.pressed.connect(_restart)
 	column.add_child(retry)
 	back_to_map = Button.new()
 	back_to_map.text = "Back to world map"
 	back_to_map.hide()
+	back_to_map.custom_minimum_size.y = 40
+	UiStyle.style_button(back_to_map, UiStyle.BLUE_TEXT, UiStyle.BLUE_TEXT, 20, true)
 	back_to_map.pressed.connect(func(): get_tree().change_scene_to_file("res://scenes/overworld.tscn"))
 	column.add_child(back_to_map)
-	credit = _label("Inspired by the books by Tui T. Sutherland.\nAn unofficial homage, made with love.\nNot affiliated with or endorsed by the author or Scholastic.", 14)
+	credit = _label("Inspired by the books by Tui T. Sutherland. An unofficial homage, made with love.\nNot affiliated with or endorsed by the author or Scholastic.", 12, UiStyle.INK_SECONDARY)
 	credit.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	credit.offset_top = -92
-	credit.offset_bottom = -24
+	credit.offset_top = -72
+	credit.offset_bottom = -20
 	add_child(credit)
 	resized.connect(_resize_layout)
+	get_window().size_changed.connect(_resize_layout)
 	_resize_layout()
 
 func _resize_layout() -> void:
-	logo.custom_minimum_size.y = clampf(110 + (size.y - 500) * 0.56, 110, 300)
-	column.add_theme_constant_override("separation", 8 if size.y < 650 else 18)
+	var height := clampf(100 + (size.y - 500) * 0.45, 100, 230)
+	logo.custom_minimum_size.y = height
+	column.add_theme_constant_override("separation", 8 if size.y < 650 else 16)
+	# Draw the vector logo at the pixel size it is shown, so it is sharp on any display.
+	var density := float(get_window().size.y) / maxf(size.y, 1.0)
+	if absf(height * density - logo_height) > 4.0 or logo.texture == null:
+		logo_height = height * density
+		logo.texture = UiStyle.logo_texture(self, height)
 
-func _label(copy: String, size: int) -> Label:
-	var label := Label.new()
-	label.text = copy
+func _label(copy: String, font_size: int, color := UiStyle.INK, bold := false) -> Label:
+	var label := UiStyle.text(copy, font_size, color, bold)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", size)
-	label.add_theme_color_override("font_color", Color("e8e4cf"))
 	return label
 
 func _start() -> void:

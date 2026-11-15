@@ -9,6 +9,7 @@ Clay movement prototype.
 - [Clay prototype (work in progress)](prototypes/clay/README.md)
 - [Godot movement playground: setup, model build and controls](game/README.md)
 - [Jade Mountain Academy (Arc 2)](docs/jade-mountain.md)
+- [Flight turns, high-speed landings and climbing](docs/flight-landing-climbing.md)
 - [Rough locations: Sky palace, Scorpion Den, stronghold, ice palace, Summer Palace, NightWing fortress](docs/sites.md)
 - [Web export and Vercel deployment](docs/web-deployment.md)
 

@@ -27,6 +27,29 @@ The world map is one continuous chart of **Pyrrhia**, **Pantala**, the **Forgott
 
 The terrain extension is deliberately a foundation: colored ground, mountains, hills, shores and water with collision. New vegetation, buildings, settlement scenery and NPCs are outside this pass. The existing village remains available. Geographic and implementation details, provisional sizes and verification commands are in [Bare playable world terrain](bare-terrain.md).
 
+## Map style: Google Maps
+
+The world map matches the standard Google Maps look, which replaced the earlier marsh-green and gold palette on the map itself (the loader and terrain HUD keep their own look). Colours are from memory of Google's default style, not sampled from the product.
+
+| Element | Treatment |
+| --- | --- |
+| Water | one flat `#AADAFF`, also used for lakes and rivers |
+| Land | `#F2EFE9` base with broad climate tints blended into soft swaths, like Google Maps' parks, desert and arctic areas: pale blue-white `#DCEAF4` for arctic, sand `#F4DFAE` for arid, `#E6E8B8` for dry grass, green `#CDE8B8` and deeper green `#A9D6A0` for vegetation, warm grey for bare rock. A region's authored ground colour picks its class, and the regions are blurred together over about 14 km, so edges are gradients, not borders |
+| Kingdom borders | thin dashed `#9AA0A6` lines drawn only where they cross land, never along the shore |
+| Labels | grey text with a white halo, uppercase for continents (dark) and regions (light) |
+| Elevation | no peak symbols. An optional **Terrain** toggle adds soft hillshade built from the coarse overview heightfield (hidden when that file is not baked) |
+| UI | white cards with soft shadows and rounded corners; dark grey text, Google blue `#1A73E8` for actions and the selected era |
+| Pins | circular place markers like Google Maps' points of interest: a coloured disc with a white rim and centre. Red `#EA4335` for detailed destinations, smaller blue `#4285F4` for bare-terrain starts, grey `#9AA0A6` when closed in the chosen era. Hover enlarges the pin |
+| Hover card | a white card above the pin (it never hides the pin's name), with the title, region and the action in blue |
+| Labels as pins | a pin's name is part of its target: hovering or clicking it behaves like hovering or clicking the pin |
+| Opening view | zoomed in on Pyrrhia, not the whole world; the home button shows the whole world |
+
+The colour sections below describe the earlier palette and now apply only to the loader and terrain HUD.
+
+## One interface style
+
+The splash, HUD, terrain controls, roster status, dialogue and character review all use the same light style, built from `scripts/ui_style.gd`: white cards with soft shadows over 3D scenes, rounded pills for buttons, grey on hover, blue-tinted when selected, a blue focus ring and a blue primary action. The splash is a white card on a light backdrop with the logo drawn from its vector source at the pixel size it is shown (an imported SVG is rasterized once and goes soft when scaled), a blue progress bar and a gentle credit line. Scene text that has no card of its own (location names) sits on a small white card so it stays readable.
+
 ## Colors
 
 ### Primary
@@ -45,13 +68,13 @@ Muted biome fields distinguish land regions; blue-green water separates coastlin
 
 ## Typography
 
-The map uses Godot's default theme font. Its title uses the title token (28 px); hint, region labels, pin names, tooltip and controls use the body token (14-16 px). Native buttons, the Jump to a place menu, terrain starting-point selector and existing Help/map controls retain their theme typography. Startup retains its existing title (25 px), status (16 px) and supporting copy (14 px).
+Every screen uses Godot's default theme font through the shared style in `scripts/ui_style.gd`: titles 18-22 px bold, body and controls 13-15 px, map labels 12-20 px. Text colours keep at least 4.5:1 contrast on the surface they sit on (map water, land and each climate tint, white cards), checked by `tests/ui_contrast_smoke.gd`: body `#202124`, secondary `#5F6368`, blue text `#185ABC`, and `#3C4043` for map labels.
 
 No custom typeface, new display style or project-wide type scale is established by this extension. The native font is an incumbent implementation choice, not a newly selected brand face.
 
 ## Layout
 
-The map fills the window. A translucent marsh card at (20, 16) holds the title, a one-line hint and the **Jump to a place** menu; zoom in, zoom out and show-whole-world buttons (44 px) sit at the bottom right. The view opens on the whole world and is clamped between that and 80 m per pixel; resizing keeps the same camera and recomputes labels and pins from it.
+The map fills the window. A white card at (16, 16) holds the title, the **Jump to a place** menu and the **Terrain** toggle; the map has no instruction text, since its controls are the familiar ones; zoom in, zoom out and show-whole-world buttons (44 px) sit at the bottom right. The view opens on Pyrrhia and is clamped between that and 80 m per pixel; resizing keeps the same camera and recomputes labels and pins from it.
 
 Pins keep a 26 px minimum separation and yield to higher-priority neighbours (the village, then the first start of each landmass), so zooming in reveals more pins. Names appear beside a pin only when they would not overlap another name or marker, and flip left near the right edge. Continent names fade out and kingdom/region names fade in as a landmass grows past about 700 px on screen.
 
@@ -81,13 +104,13 @@ The map draws native Godot polygons and strokes through `world_map.gd`: coastlin
 
 ### Era timeline
 
-A native bottom-center card holds an **Era** caption and one toggle button per era (Legends, Arc 1 to Arc 4; 72 × 34 px, hover text gives the arc's title). Selecting an era keeps the map in place and dims pins that are closed in it (40% gold). A closed pin's tooltip reads "Opens in Arc N (see the timeline)", and activating it leaves the player on the map with a footer message. The Jump to a place menu appends the era to closed entries. The chosen era is held for the session and restored on return.
+A native bottom-center card holds an **Era** caption and one toggle button per era (Legends, Arc 1 to Arc 4; 72 × 34 px, hover text gives the arc's title). Selecting an era keeps the map in place and greys out pins that are closed in it. A closed pin's card reads "Opens in Arc N (see the timeline)", and activating it leaves the player on the map with a short toast. The Jump to a place menu appends the era to closed entries. The chosen era is held for the session and restored on return.
 
 ### Destinations and tooltip
 
 Terrain pin names and positions come from each landmass's `entries`; scenes and preload assets come from the template locations in `game/data/overworld_locations.json`, which also holds the detailed village. The village position (1480, 1080) is authored, not a canonical settlement.
 
-The initial map has no focused destination or visible tooltip. Hover or keyboard/controller focus reveals the name, location context and “Click / Enter / A to travel”. Tab or D-pad selects (the map pans to keep the pin in view); click, Enter or controller A travels. A missing scene produces a footer error. Hover and focus share the same visible pin treatment. Returning from a scene restores the view the player left.
+The initial map has no focused destination or visible tooltip. Hover or keyboard/controller focus reveals the name, location context and “Click / Enter / A to travel”. Tab or D-pad selects (the map pans to keep the pin in view); click, Enter or controller A travels. A missing scene produces a short toast. Hover and focus share the same visible pin treatment. Returning from a scene restores the view the player left.
 
 ### Playable terrain and travel
 

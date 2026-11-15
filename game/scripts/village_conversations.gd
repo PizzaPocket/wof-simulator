@@ -175,31 +175,32 @@ func _fit_width() -> void:
 	# Logical canvas units, independent of the Retina framebuffer's pixel density.
 	column.custom_minimum_size.x = minf(960, maxf(240, screen.size.x - 64))
 
-func _button_style(color: Color) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = color
-	style.set_corner_radius_all(24)
-	style.content_margin_left = 22
-	style.content_margin_right = 22
-	style.content_margin_top = 12
-	style.content_margin_bottom = 12
+const UiStyle = preload("res://scripts/ui_style.gd")
+
+func _button_style(color: Color, shadow := 6) -> StyleBoxFlat:
+	var style := UiStyle.card(24, 22, 12, shadow, color)
 	return style
 
+## Light, rounded buttons in the shared style, readable over the 3D scene.
 func _style_button(button: Button, is_reply := false) -> void:
 	button.add_theme_font_size_override("font_size", 20 if is_reply else 18)
-	button.add_theme_color_override("font_color", Color("f5efdf"))
-	button.add_theme_color_override("font_hover_color", Color("fff4d7"))
-	button.add_theme_color_override("font_focus_color", Color("fff4d7"))
-	button.add_theme_color_override("font_pressed_color", Color("fff4d7"))
-	button.add_theme_stylebox_override("normal", _button_style(Color(0.055, 0.085, 0.065, 0.84)))
-	button.add_theme_stylebox_override("hover", _button_style(Color(0.17, 0.22, 0.15, 0.94)))
-	button.add_theme_stylebox_override("pressed", _button_style(Color(0.24, 0.29, 0.18, 0.96)))
-	var focus := StyleBoxFlat.new()
-	focus.bg_color = Color.TRANSPARENT
-	focus.border_color = Color("f5efdf")
-	focus.set_border_width_all(2)
-	focus.set_corner_radius_all(24)
-	button.add_theme_stylebox_override("focus", focus)
+	for key in ["font_color", "font_hover_color", "font_focus_color"]:
+		button.add_theme_color_override(key, UiStyle.INK)
+	button.add_theme_color_override("font_pressed_color", UiStyle.BLUE_TEXT)
+	button.add_theme_stylebox_override("normal", _button_style(Color(1, 1, 1, 0.95)))
+	button.add_theme_stylebox_override("hover", _button_style(UiStyle.HOVER_GRAY))
+	button.add_theme_stylebox_override("pressed", _button_style(UiStyle.BLUE_TINT))
+	button.add_theme_stylebox_override("focus", UiStyle.fill(Color(0, 0, 0, 0), 24, UiStyle.BLUE, 2))
+
+## Dialogue buttons are frosted cards; the holder (the card) is what goes into the layout.
+var holders: Dictionary = {}
+
+func _frost(button: Button, is_reply := false) -> void:
+	button.add_theme_font_size_override("font_size", 20 if is_reply else 18)
+	holders[button] = UiStyle.frost_button(button, 24)
+
+func _holder(button: Button) -> Control:
+	return holders[button]
 
 func _build_ui() -> void:
 	screen = Control.new()
@@ -229,11 +230,11 @@ func _build_ui() -> void:
 	prompt = Button.new()
 	prompt.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	prompt.custom_minimum_size.y = 48
-	_style_button(prompt)
+	_frost(prompt)
 	prompt.pressed.connect(func():
 		if nearest:
 			start_conversation(nearest))
-	column.add_child(prompt)
+	column.add_child(_holder(prompt))
 	# Separate the person speaking from the player's actions, as in the reference.
 	panel = HBoxContainer.new()
 	panel.add_theme_constant_override("separation", 32)
@@ -246,17 +247,11 @@ func _build_ui() -> void:
 	speech.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	panel.add_child(speech)
 	speaker = Label.new()
-	speaker.add_theme_font_size_override("font_size", 17)
-	speaker.add_theme_color_override("font_color", Color("f5efdf"))
+	speaker.add_theme_font_size_override("font_size", 15)
+	speaker.add_theme_color_override("font_color", UiStyle.INK_SECONDARY)
+	speaker.add_theme_font_override("font", UiStyle.bold_font())
 	speech_box = PanelContainer.new()
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.045, 0.075, 0.05, 0.87)
-	style.content_margin_left = 34
-	style.content_margin_right = 34
-	style.content_margin_top = 24
-	style.content_margin_bottom = 24
-	style.set_corner_radius_all(44)
-	speech_box.add_theme_stylebox_override("panel", style)
+	UiStyle.frost_panel(speech_box, 28, 30, 22)
 	speech_box.custom_minimum_size.y = 112
 	speech.add_child(speech_box)
 	var speech_content := VBoxContainer.new()
@@ -265,8 +260,8 @@ func _build_ui() -> void:
 	speech_content.add_child(speaker)
 	words = Label.new()
 	words.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	words.add_theme_font_size_override("font_size", 24)
-	words.add_theme_color_override("font_color", Color("f5efdf"))
+	words.add_theme_font_size_override("font_size", 22)
+	words.add_theme_color_override("font_color", UiStyle.INK)
 	speech_content.add_child(words)
 	choices = VBoxContainer.new()
 	choices.custom_minimum_size.x = 300
@@ -278,26 +273,26 @@ func _build_ui() -> void:
 	response.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	response.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	response.custom_minimum_size.y = 48
-	_style_button(response, true)
+	_frost(response, true)
 	response.pressed.connect(choose_response)
-	choices.add_child(response)
+	choices.add_child(_holder(response))
 	advance = Button.new()
 	advance.text = "Continue"
 	advance.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_style_button(advance)
+	_frost(advance)
 	advance.pressed.connect(next_line)
-	choices.add_child(advance)
+	choices.add_child(_holder(advance))
 	goodbye = Button.new()
 	goodbye.text = "Goodbye"
 	goodbye.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_style_button(goodbye)
+	_frost(goodbye)
 	goodbye.pressed.connect(close_conversation)
-	choices.add_child(goodbye)
+	choices.add_child(_holder(goodbye))
 	input_hint = Label.new()
 	input_hint.add_theme_font_size_override("font_size", 13)
-	input_hint.add_theme_color_override("font_color", Color("f5efdf"))
-	input_hint.add_theme_constant_override("outline_size", 3)
-	input_hint.add_theme_color_override("font_outline_color", Color(0.04, 0.07, 0.045, 0.9))
+	input_hint.add_theme_color_override("font_color", UiStyle.INK)
+	input_hint.add_theme_constant_override("outline_size", 5)
+	input_hint.add_theme_color_override("font_outline_color", Color(1, 1, 1, 0.95))
 	input_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	choices.add_child(input_hint)
 	panel.hide()

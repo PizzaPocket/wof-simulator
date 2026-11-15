@@ -71,7 +71,13 @@
     "pose_response": 28.0,
     "horizontal_speed_multiplier": 1.15,
     "air_steering_m_s2": 5.5,
-    "moving_landing_seconds": 0.1
+    "moving_landing_seconds": 0.1,
+    "bound_speed_m_s": 20.0,
+    "bound_keep": 0.6,
+    "bound_brace_seconds": 0.15,
+    "bound_run_limit_m_s": 17.0,
+    "bound_hop_ratio": 0.2,
+    "bound_note": "A landing faster than bound_speed braces with the legs, loses speed at each impact (bound_keep), and hops again with a hop proportional to speed until slower than bound_run_limit, after which it runs out and stops normally."
   },
   "flight": {
     "speed_m_s": 60.0,
@@ -95,7 +101,14 @@
     "deceleration_m_s2": 10.0,
     "boost_vertical_acceleration_m_s2": 30.0,
     "boost_max_climb_m_s": 110.0,
-    "boost_max_descent_m_s": 130.0
+    "boost_max_descent_m_s": 130.0,
+    "lateral_accel_m_s2": 42.0,
+    "max_turn_rate_rad_s": 2.6,
+    "turn_accel_rad_s2": 10.0,
+    "turn_brake_m_s2": 30.0,
+    "min_turn_speed_m_s": 14.0,
+    "align_rate": 7.0,
+    "turn_note": "Flight follows the body's heading: a turn is limited by a lateral acceleration budget (lift), so a fast dragon cannot turn tighter than speed allows. A tighter turn is flown by shedding speed with flared wings (as bats slow for a U-turn) and by hard flapping, with the inside wing beating wider. The body banks into the turn; sideslip is damped so it never travels backwards or sideways."
   },
   "sources": [
     "https://pmc.ncbi.nlm.nih.gov/articles/PMC11737544/",

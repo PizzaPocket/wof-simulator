@@ -130,22 +130,29 @@ func _switch(target: CharacterBody3D) -> void:
 
 
 func _make_status() -> void:
+	var UiStyle := preload("res://scripts/ui_style.gd")
 	var margin := MarginContainer.new()
 	add_child(margin)
 	margin.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
 	margin.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	margin.add_theme_constant_override("margin_right", 24)
-	margin.add_theme_constant_override("margin_top", 22)
+	margin.add_theme_constant_override("margin_top", 20)
 	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# One light card keeps the status and the prompt readable over the scene.
+	var card := PanelContainer.new()
+	card.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	UiStyle.frost_panel(card, 12, 14, 9)
+	margin.add_child(card)
 	var stack := VBoxContainer.new()
+	stack.add_theme_constant_override("separation", 2)
 	stack.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	margin.add_child(stack)
+	card.add_child(stack)
 	status = Label.new()
 	hint = Label.new()
+	status.add_theme_font_size_override("font_size", 14)
+	status.add_theme_color_override("font_color", UiStyle.INK)
+	hint.add_theme_font_size_override("font_size", 13)
+	hint.add_theme_color_override("font_color", UiStyle.BLUE_TEXT)
 	for label in [status, hint]:
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		label.add_theme_font_size_override("font_size", 15)
-		label.add_theme_color_override("font_color", Color("f5efdf"))
-		label.add_theme_color_override("font_outline_color", Color("18251c"))
-		label.add_theme_constant_override("outline_size", 5)
 		stack.add_child(label)
